@@ -1,0 +1,29 @@
+.ur-form-container,
+.ur-form-container * {
+    pointer-events: auto !important
+}
+
+.ur-submit-button {
+    position: relative;
+    z-index: 1001
+}
+
+.ur-submit-button span {
+    pointer-events: none !important
+}
+
+.elementor-location-header::before {
+    pointer-events: none !important
+}
+
+.elementor-location-header::after {
+    pointer-events: none !important
+}
+
+.elementor elementor-23175 elementor-location-header::before {
+    pointer-events: none !important
+}
+
+.user-registration-Button button ur-submit-button {
+    pointer-events: none !important
+}

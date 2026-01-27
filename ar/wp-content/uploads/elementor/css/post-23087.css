@@ -1,0 +1,17 @@
+.elementor-23087 .elementor-element.elementor-element-c55cf06 {
+    --display: flex;
+    --flex-direction: column;
+    --container-widget-width: calc( ( 1 - var( --container-widget-flex-grow)) * 100%);
+    --container-widget-height: initial;
+    --container-widget-flex-grow: 0;
+    --container-widget-align-self: initial;
+    --flex-wrap-mobile: wrap;
+    --justify-content: space-evenly;
+    --align-items: center;
+    --flex-wrap: wrap;
+    --align-content: center;
+}
+
+.elementor-23087 .elementor-element.elementor-element-c55cf06.e-con {
+    --align-self: center;
+}
