@@ -3,6 +3,7 @@
 }
 
 .HP_supported-brans-icons {
+
     float: left;
 }
 
@@ -18,7 +19,7 @@
     text-align: -webkit-right !important;
 }
 
-.wpwl-brand-ZOODPAY {
+.wpwl-brand-ZOODPAY{
     background: url(../images/continue-button-ar.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -34,9 +35,9 @@
 
 .close {
     float: left;
-}
+  }
 
-.wpwl-wrapper-cardNumber::after {
+  .wpwl-wrapper-cardNumber::after{
     left: 10px !important;
     right: unset !important;
-}
+    }

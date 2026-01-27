@@ -1,16 +1,9 @@
 /* Variables */
 
-@set horizontalPadding 20;
-/* Paddings */
-
-@set gutterWidth 1200;
-/* Gutter */
-
-@set softBorderRadius 5px;
-/* Soft border radius */
-
-@set hardBorderRadius 20px;
-/* Hard border radius */
+@set horizontalPadding 20; /* Paddings */
+@set gutterWidth 1200; /* Gutter */
+@set softBorderRadius 5px; /* Soft border radius */
+@set hardBorderRadius 20px; /* Hard border radius */
 
 /* Selectors */
 
@@ -18,14 +11,14 @@
 @selector rightAlignSelector :any(.bt_bb_align_left .bt_bb_align_right&, .bt_bb_align_center .bt_bb_align_right&, .bt_bb_align_left .bt_bb_align_right &, .bt_bb_align_center .bt_bb_align_right &, .bt_bb_align_right&, .bt_bb_align_right &);
 @selector centerAlignSelector :any(.bt_bb_align_left .bt_bb_align_center&, .bt_bb_align_right .bt_bb_align_center&, .bt_bb_align_left .bt_bb_align_center &, .bt_bb_align_right .bt_bb_align_center &, .bt_bb_align_center&, .bt_bb_align_center &);
 @selector centerAlignSelectorFix :any(.bt_bb_column_inner.bt_bb_align_center .bt_bb_align_center&, .bt_bb_column_inner.bt_bb_align_center .bt_bb_align_inherit&, .bt_bb_column.bt_bb_align_center .bt_bb_align_inherit&, .bt_bb_column.bt_bb_align_center .bt_bb_align_center&);
+
 /* Base classes */
-
 @import url("base.css");
+
 /* Sections, rows and columns */
-
 @import url("grid.css");
-/* Content elements */
 
+/* Content elements */
 @import url("sections.css");
 @import url("icons.css");
 @import url("buttons.css");
@@ -44,7 +37,6 @@
 @import url("custom_menu.css");
 @import url("progress_bar.css");
 /*@import url("google_map.css");*/
-
 @import url("open_map.css");
 @import url("cost_calculator.css");
 @import url("animations.css");
@@ -57,6 +49,6 @@
 @import url("css_image_grid.css");
 @import url("css_post_grid.css");
 @import url("ie.css");
-/* External libs override */
 
+/* External libs override */
 @import url("magnific-popup.css");

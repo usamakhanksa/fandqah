@@ -1,1 +1,1 @@
-No Content: https://usamakhanksa.github.io/fandqah/en/wp-content/plugins/content-views-query-and-display-post-page/public/assets/js/cv.js?ver=4.1
+No Content: https://beta.fandaqah.com/wp-content/plugins/content-views-query-and-display-post-page/public/assets/js/cv.js?ver=4.1
