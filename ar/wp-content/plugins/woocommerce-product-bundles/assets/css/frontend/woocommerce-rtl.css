@@ -1,7 +1,7 @@
 @font-face {
     font-family: "FontAwesomePB";
-    src: url("../../fonts/fa-pb-615.eot");
-    src: url("../../fonts/fa-pb-615.eot?#iefix") format("embedded-opentype"), url("../../fonts/fa-pb-615.woff2") format("woff2"), url("../../fonts/fa-pb-615.woff2") format("woff"), url("../../fonts/fa-pb-615.ttf") format("truetype"), url("../../fonts/fa-pb-615.svg#fapbregular") format("svg");
+    src: url("https://usamakhanksa.github.io/fonts/fa-pb-615.eot");
+    src: url("https://usamakhanksa.github.io/fonts/fa-pb-615.eot?#iefix") format("embedded-opentype"), url("https://usamakhanksa.github.io/fonts/fa-pb-615.woff2") format("woff2"), url("https://usamakhanksa.github.io/fonts/fa-pb-615.woff2") format("woff"), url("https://usamakhanksa.github.io/fonts/fa-pb-615.ttf") format("truetype"), url("https://usamakhanksa.github.io/fonts/fa-pb-615.svg#fapbregular") format("svg");
     font-weight: normal;
     font-style: normal
 }

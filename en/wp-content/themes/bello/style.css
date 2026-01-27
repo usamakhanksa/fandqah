@@ -216,7 +216,7 @@ body {
 
 @font-face {
     font-family: 'SaudiRiyalSymbol';
-    src: url("https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.ttf") format('truetype'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff2') format('woff2'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff') format('woff'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.otf') format('opentype');
+    src: url("https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.ttf") format('truetype'), url('https://usamakhanksa.github.io/https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff2') format('woff2'), url('https://usamakhanksa.github.io/https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff') format('woff'), url('https://usamakhanksa.github.io/https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.otf') format('opentype');
 }
 
 /*    <span style="font-family: 'SaudiRiyalSymbol'">&#xea;</span>
@@ -26567,7 +26567,7 @@ form .form-row:-ms-input-placeholder {
     -webkit-animation: spin 1s ease-in-out infinite;
     -moz-animation: spin 1s ease-in-out infinite;
     animation: spin 1s ease-in-out infinite;
-    background: url(../../plugins/woocommerce/assets/images/icons/loader.svg) center center;
+    background: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/loader.svg) center center;
     background-size: cover;
     line-height: 1;
     text-align: center;
@@ -26795,49 +26795,49 @@ small.note {
 .wc-credit-card-form-card-cvc.visa,
 .wc-credit-card-form-card-expiry.visa,
 .wc-credit-card-form-card-number.visa {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/visa.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/visa.png);
 }
 
 .wc-credit-card-form-card-cvc.mastercard,
 .wc-credit-card-form-card-expiry.mastercard,
 .wc-credit-card-form-card-number.mastercard {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/mastercard.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/mastercard.png);
 }
 
 .wc-credit-card-form-card-cvc.laser,
 .wc-credit-card-form-card-expiry.laser,
 .wc-credit-card-form-card-number.laser {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/laser.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/laser.png);
 }
 
 .wc-credit-card-form-card-cvc.dinersclub,
 .wc-credit-card-form-card-expiry.dinersclub,
 .wc-credit-card-form-card-number.dinersclub {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/diners.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/diners.png);
 }
 
 .wc-credit-card-form-card-cvc.maestro,
 .wc-credit-card-form-card-expiry.maestro,
 .wc-credit-card-form-card-number.maestro {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/maestro.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/maestro.png);
 }
 
 .wc-credit-card-form-card-cvc.jcb,
 .wc-credit-card-form-card-expiry.jcb,
 .wc-credit-card-form-card-number.jcb {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/jcb.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/jcb.png);
 }
 
 .wc-credit-card-form-card-cvc.amex,
 .wc-credit-card-form-card-expiry.amex,
 .wc-credit-card-form-card-number.amex {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/amex.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/amex.png);
 }
 
 .wc-credit-card-form-card-cvc.discover,
 .wc-credit-card-form-card-expiry.discover,
 .wc-credit-card-form-card-number.discover {
-    background-image: url(../../plugins/woocommerce/assets/images/icons/credit-cards/discover.png);
+    background-image: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/images/icons/credit-cards/discover.png);
 }
 
 /* Inpage headlines */
@@ -29638,16 +29638,16 @@ p.stars a.star-5:after {
 
 @font-face {
     font-family: star;
-    src: url(../../plugins/woocommerce/assets/fonts/star.eot);
-    src: url(../../plugins/woocommerce/assets/fonts/star.eot?#iefix) format("embedded-opentype"), url(../../plugins/woocommerce/assets/fonts/star.woff) format("woff"), url(../../plugins/woocommerce/assets/fonts/star.ttf) format("truetype"), url(../../plugins/woocommerce/assets/fonts/star.svg#star) format("svg");
+    src: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/star.eot);
+    src: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/star.eot?#iefix) format("embedded-opentype"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/star.woff) format("woff"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/star.ttf) format("truetype"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/star.svg#star) format("svg");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: WooCommerce;
-    src: url(../../plugins/woocommerce/assets/fonts/WooCommerce.eot);
-    src: url(../../plugins/woocommerce/assets/fonts/WooCommerce.eot?#iefix) format("embedded-opentype"), url(../../plugins/woocommerce/assets/fonts/WooCommerce.woff) format("woff"), url(../../plugins/woocommerce/assets/fonts/WooCommerce.ttf) format("truetype"), url(../../plugins/woocommerce/assets/fonts/WooCommerce.svg#WooCommerce) format("svg");
+    src: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/WooCommerce.eot);
+    src: url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/WooCommerce.eot?#iefix) format("embedded-opentype"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/WooCommerce.woff) format("woff"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/WooCommerce.ttf) format("truetype"), url(https://usamakhanksa.github.io/plugins/woocommerce/assets/fonts/WooCommerce.svg#WooCommerce) format("svg");
     font-weight: 400;
     font-style: normal;
 }
