@@ -216,7 +216,7 @@ body {
 
 @font-face {
     font-family: 'SaudiRiyalSymbol';
-    src: url("wp-content/themes/bello/fonts/saudiriyalsymbol.ttf") format('truetype'), url('../../wp-content/themes/bello/fonts/saudiriyalsymbol.woff2') format('woff2'), url('../../wp-content/themes/bello/fonts/saudiriyalsymbol.woff') format('woff'), url('../../wp-content/themes/bello/fonts/saudiriyalsymbol.otf') format('opentype');
+    src: url("https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.ttf") format('truetype'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff2') format('woff2'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.woff') format('woff'), url('../../https://usamakhanksa.github.io/fandqah/en/wp-content/themes/bello/fonts/saudiriyalsymbol.otf') format('opentype');
 }
 
 /*    <span style="font-family: 'SaudiRiyalSymbol'">&#xea;</span>

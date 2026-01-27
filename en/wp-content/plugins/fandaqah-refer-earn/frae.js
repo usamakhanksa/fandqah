@@ -1,1 +1,1 @@
-No Content: wp-content/plugins/fandaqah-refer-earn/frae.js?ver=1.0.0
+No Content: https://usamakhanksa.github.io/fandqah/en/wp-content/plugins/fandaqah-refer-earn/frae.js?ver=1.0.0
