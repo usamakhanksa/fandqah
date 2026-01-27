@@ -2,48 +2,50 @@
 Simple Custom CSS and JS - by Silkypress.com
 Saved: Aug 13 2025 | 09:28:46 */
 jQuery(document).ready(function($) {
-    if ($(window).width() < 1023) {
-        $(".icon-block").on("click", function() {
-            var $this = $(this);
-            if ($this.attr("data-target")) {
-                $(`#${$this.data("target")}`).addClass("mobile-side-active");
+  if ($(window).width() < 1023) {
+    $(".icon-block").on("click", function () {
+      var $this = $(this);
+      if ($this.attr("data-target")) {
+        $(`#${$this.data("target")}`).addClass("mobile-side-active");
 
-                $(".icon-block")
-                    .not(`#${$this.data("target")}`)
-                    .addClass("opacity-block");
-            }
-        });
+        $(".icon-block")
+          .not(`#${$this.data("target")}`)
+          .addClass("opacity-block");
+      }
+    });
 
-        $(".icon-block").on("mouseleave", function() {
-            var $this = $(this);
-            if ($this.attr("data-target")) {
-                $(`#${$this.data("target")}`).removeClass("mobile-side-active");
-                $(".icon-block")
-                    .not(`#${$this.data("target")}`)
-                    .removeClass("opacity-block");
-            }
-        });
-    } else {
-        $(".icon-block").hover(
-            function() {
-                var $this = $(this);
-                if ($this.attr("data-target")) {
-                    $(`#${$this.data("target")}`).addClass("hover-block");
+    $(".icon-block").on("mouseleave", function () {
+      var $this = $(this);
+      if ($this.attr("data-target")) {
+        $(`#${$this.data("target")}`).removeClass("mobile-side-active");
+        $(".icon-block")
+          .not(`#${$this.data("target")}`)
+          .removeClass("opacity-block");
+      }
+    });
+  } else {
+    $(".icon-block").hover(
+      function () {
+        var $this = $(this);
+        if ($this.attr("data-target")) {
+          $(`#${$this.data("target")}`).addClass("hover-block");
 
-                    $(".icon-block")
-                        .not(`#${$this.data("target")}`)
-                        .addClass("opacity-block");
-                }
-            },
-            function() {
-                var $this = $(this);
-                if ($this.attr("data-target")) {
-                    $(`#${$this.data("target")}`).removeClass("hover-block");
-                    $(".icon-block")
-                        .not(`#${$this.data("target")}`)
-                        .removeClass("opacity-block");
-                }
-            }
-        );
-    }
+          $(".icon-block")
+            .not(`#${$this.data("target")}`)
+            .addClass("opacity-block");
+        }
+      },
+      function () {
+        var $this = $(this);
+        if ($this.attr("data-target")) {
+          $(`#${$this.data("target")}`).removeClass("hover-block");
+          $(".icon-block")
+            .not(`#${$this.data("target")}`)
+            .removeClass("opacity-block");
+        }
+      }
+    );
+  }
 });
+  
+

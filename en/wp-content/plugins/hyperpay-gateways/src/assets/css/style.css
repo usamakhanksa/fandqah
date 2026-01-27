@@ -36,6 +36,7 @@
     border-radius: 3px;
     border: #0000001e 1px solid !important;
     margin: 0px !important;
+
 }
 
 .wpwl-button-brand {
@@ -77,7 +78,6 @@
 }
 
 /* Modal Content/Box */
-
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
@@ -91,7 +91,6 @@
 }
 
 /* The Close Button */
-
 .close {
     color: #aaa;
     float: right;
@@ -114,7 +113,7 @@
     direction: ltr !important;
 }
 
-#payment .payment_methods li img {
+#payment .payment_methods li img{
     height: 2em !important;
     max-height: 2.5em !important;
 }
@@ -123,6 +122,7 @@
     .hyperpay_custom_style {
         width: 100% !important;
     }
+
     .hyperpay_custom_style~.CodeMirror {
         width: 100% !important;
     }
