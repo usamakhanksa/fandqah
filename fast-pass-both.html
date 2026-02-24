@@ -13,6 +13,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=El+Messiri:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 body {
   box-sizing: border-box;
@@ -20,7 +21,9 @@ body {
 * {
   /* font-family: 'Plus Jakarta Sans', 'Noto Sans Arabic', sans-serif; */
     /* font-family: "Almarai", sans-serif;
-    font-family: "El Messiri", sans-serif; */
+    font-family: "El Messiri", sans-serif;
+    font-family: "Playfair Display", serif;
+*/
 
 
 }
@@ -836,7 +839,7 @@ function updateLanguage() {
   
   // Update font family based on language
   if (currentLang === 'ar') {
-    document.documentElement.style.fontFamily = "'Almarai', sans-serif";
+    document.documentElement.style.fontFamily = "'Playfair Display', sans-serif";
   } else {
     document.documentElement.style.fontFamily = "'El Messiri', sans-serif";
   }
