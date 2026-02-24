@@ -1,0 +1,1208 @@
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Stay | توقيع الإقامة</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #B48E49;
+            --gold-light: #D4AF37;
+            --emerald-dark: #1B4332;
+            --emerald: #2D6A4F;
+            --emerald-light: #40916C;
+            --dark: #0D1F17;
+            --cream: #FDFBF7;
+        }
+
+        [dir="rtl"] {
+            font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+        }
+
+        [dir="ltr"] {
+            font-family: 'Inter', 'Noto Kufi Arabic', sans-serif;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(180, 142, 73, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(180, 142, 73, 0.6); }
+        }
+
+        @keyframes draw-signature {
+            0% { stroke-dashoffset: 200; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes checkmark {
+            0% { stroke-dashoffset: 50; opacity: 0; }
+            50% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-slide-left { animation: slideInLeft 0.8s ease-out forwards; }
+        .animate-slide-right { animation: slideInRight 0.8s ease-out forwards; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .animate-signature { animation: draw-signature 2s ease-out forwards; stroke-dasharray: 200; stroke-dashoffset: 200; }
+        .animate-checkmark { animation: checkmark 0.5s ease-out forwards 2s; stroke-dasharray: 50; stroke-dashoffset: 50; }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        .gradient-gold {
+            background: linear-gradient(135deg, #B48E49 0%, #D4AF37 50%, #B48E49 100%);
+        }
+
+        .gradient-green {
+            background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #B48E49 0%, #D4AF37 50%, #B48E49 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .shimmer-gold {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .lang-toggle {
+            position: relative;
+            width: 80px;
+            height: 36px;
+            background: rgba(180, 142, 73, 0.2);
+            border-radius: 18px;
+            cursor: pointer;
+            border: 1px solid rgba(180, 142, 73, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle:hover {
+            border-color: var(--gold);
+        }
+
+        .lang-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--emerald-dark);
+        }
+
+        [dir="rtl"] .lang-toggle-slider {
+            left: auto;
+            right: 3px;
+        }
+
+        .lang-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .lang-label-en {
+            left: 10px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .lang-label-ar {
+            right: 10px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        [dir="rtl"] .lang-label-en {
+            left: auto;
+            right: 10px;
+        }
+
+        [dir="rtl"] .lang-label-ar {
+            right: auto;
+            left: 10px;
+        }
+
+        .lang-label.active {
+            color: white;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .phone-mockup {
+            position: relative;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at center, rgba(180, 142, 73, 0.2), transparent 70%);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .footer-link {
+            position: relative;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* RTL specific adjustments */
+        [dir="rtl"] .hero-visual {
+            order: -1;
+        }
+
+        [dir="rtl"] .feature-icon {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        [dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
+        }
+
+        /* Smooth transitions for language switch */
+        .translatable {
+            transition: opacity 0.3s ease;
+        }
+
+        .language-switching .translatable {
+            opacity: 0;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 31, 23, 0.98);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            padding: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#B48E49',
+                            light: '#D4AF37',
+                            dark: '#8B7355'
+                        },
+                        emerald: {
+                            DEFAULT: '#2D6A4F',
+                            dark: '#1B4332',
+                            light: '#40916C'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full w-full m-0 p-0 overflow-x-hidden">
+    <div id="app-wrapper" class="w-full h-full overflow-auto" style="background: linear-gradient(180deg, #0D1F17 0%, #1B4332 50%, #0D1F17 100%);">
+        
+        <!-- Navigation -->
+        <nav class="w-full px-4 md:px-6 py-4 flex justify-between items-center fixed top-0 left-0 z-50 backdrop-blur-md" style="background: rgba(13, 31, 23, 0.95);">
+            <div class="flex items-center gap-3">
+                <img style="width: 140px;" src="https://usamakhanksa.github.io/fandqah/en/wp-content/uploads/2025/07/fandaqah-hotel-white.png" alt="Fandaqah Logo">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#features" class="text-white opacity-80 hover:opacity-100 transition-opacity text-sm translatable" data-en="Features" data-ar="المميزات">Features</a>
+                <a href="#benefits" class="text-white opacity-80 hover:opacity-100 transition-opacity text-sm translatable" data-en="Benefits" data-ar="الفوائد">Benefits</a>
+                <a href="#audience" class="text-white opacity-80 hover:opacity-100 transition-opacity text-sm translatable" data-en="Solutions" data-ar="الحلول">Solutions</a>
+                <a href="#contact" class="text-white opacity-80 hover:opacity-100 transition-opacity text-sm translatable" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <!-- Language Toggle -->
+                <div class="lang-toggle" id="langToggle" title="Switch Language">
+                    <span class="lang-label lang-label-en active">EN</span>
+                    <span class="lang-label lang-label-ar">ع</span>
+                    <div class="lang-toggle-slider">EN</div>
+                </div>
+                
+                <button class="gradient-gold px-4 md:px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform hidden md:block" style="color: #1B4332;">
+                    <span class="translatable" data-en="Get Started" data-ar="ابدأ الآن">Get Started</span>
+                </button>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white text-2xl" id="mobileMenuBtn">☰</button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="absolute top-4 right-4 text-white text-3xl" id="closeMobileMenu">✕</button>
+            <a href="#features" class="translatable" data-en="Features" data-ar="المميزات">Features</a>
+            <a href="#benefits" class="translatable" data-en="Benefits" data-ar="الفوائد">Benefits</a>
+            <a href="#audience" class="translatable" data-en="Solutions" data-ar="الحلول">Solutions</a>
+            <a href="#contact" class="translatable" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+            <button class="gradient-gold px-8 py-3 rounded-full font-semibold mt-4" style="color: #1B4332;">
+                <span class="translatable" data-en="Get Started" data-ar="ابدأ الآن">Get Started</span>
+            </button>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="w-full min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-6 pt-24 pb-16 gap-8 md:gap-12">
+            <div class="flex-1 max-w-xl animate-fade-in-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(180, 142, 73, 0.2); border: 1px solid rgba(180, 142, 73, 0.3);">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-white text-sm opacity-90 translatable" data-en="The Future of Hotel Check-In" data-ar="مستقبل تسجيل دخول الفنادق">The Future of Hotel Check-In</span>
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight" style="font-family: 'Playfair Display', serif;">
+                    <span class="translatable" data-en="Seamless Digital" data-ar="تجربة رقمية">Seamless Digital</span>
+                    <span class="text-gradient-gold translatable" data-en="Check-In" data-ar="تسجيل دخول"> Check-In</span>
+                    <span class="translatable" data-en="Experience" data-ar="سلسة"> Experience</span>
+                </h1>
+                
+                <p class="text-xl mb-2 text-gradient-gold font-medium" style="font-family: 'Noto Kufi Arabic', sans-serif;">
+                    تجربة تسجيل دخول رقمية سلسة
+                </p>
+                
+                <p class="text-base md:text-lg text-white opacity-80 mb-8 leading-relaxed translatable" data-en="Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality." data-ar="حوّل تجربة ضيوفك مع حل التوقيع الرقمي وتسجيل الدخول الحديث. ألغِ النماذج الورقية، وقلل أوقات الانتظار، وقدم ضيافة استثنائية.">
+                    Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="cta-button gradient-gold px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg hover:scale-105 transition-transform animate-pulse-glow" style="color: #1B4332;">
+                        <span class="translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span>
+                    </button>
+                    <button class="px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg border-2 text-white hover:bg-white hover:bg-opacity-10 transition-all flex items-center gap-2" style="border-color: rgba(180, 142, 73, 0.5);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M10 8L16 12L10 16V8Z" fill="currentColor"/>
+                        </svg>
+                        <span class="translatable" data-en="Watch Demo" data-ar="شاهد العرض">Watch Demo</span>
+                    </button>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-4 md:gap-6 text-white opacity-70 text-sm">
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="translatable" data-en="No credit card required" data-ar="لا حاجة لبطاقة ائتمان">No credit card required</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="translatable" data-en="Setup in minutes" data-ar="إعداد في دقائق">Setup in minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual - Animated Phone Mockup -->
+            <div class="flex-1 max-w-lg animate-slide-right relative hero-visual">
+                <div class="relative animate-float">
+                    <!-- Phone Frame -->
+                    <div class="w-64 md:w-72 h-auto mx-auto rounded-3xl p-3 md:p-4 relative phone-mockup" style="background: linear-gradient(145deg, #2D6A4F 0%, #1B4332 100%); box-shadow: 0 25px 50px rgba(0,0,0,0.4);">
+                        <div class="w-full rounded-2xl p-3 md:p-4 relative overflow-hidden" style="background: linear-gradient(180deg, #FDFBF7 0%, #F5F0E6 100%);">
+                            <!-- App Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-lg gradient-gold flex items-center justify-center">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                            <path d="M4 20C4 20 6 18 10 18C14 18 16 20 20 20" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <span class="font-semibold text-sm" style="color: #1B4332;">Sign Stay</span>
+                                </div>
+                                <span class="text-xs opacity-60" style="color: #1B4332;">EN | ع</span>
+                            </div>
+
+                            <!-- Form Preview -->
+                            <div class="space-y-3">
+                                <div class="text-center mb-4">
+                                    <p class="font-medium text-sm" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Guest Check-In" data-ar="تسجيل دخول الضيف">Guest Check-In</span>
+                                    </p>
+                                    <p class="text-xs opacity-60" style="color: #1B4332; font-family: 'Noto Kufi Arabic', sans-serif;">تسجيل دخول الضيف</p>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="p-2 rounded-lg bg-white">
+                                        <p class="text-xs opacity-50 mb-1" style="color: #1B4332;">
+                                            <span class="translatable" data-en="Full Name" data-ar="الاسم الكامل">Full Name</span>
+                                        </p>
+                                        <p class="text-sm font-medium" style="color: #1B4332;">أحمد الراشد / Ahmed Al-Rashid</p>
+                                    </div>
+                                    <div class="p-2 rounded-lg bg-white">
+                                        <p class="text-xs opacity-50 mb-1" style="color: #1B4332;">
+                                            <span class="translatable" data-en="Room Number" data-ar="رقم الغرفة">Room Number</span>
+                                        </p>
+                                        <p class="text-sm font-medium" style="color: #1B4332;">Suite 502</p>
+                                    </div>
+                                    <div class="p-2 rounded-lg bg-white">
+                                        <p class="text-xs opacity-50 mb-1" style="color: #1B4332;">
+                                            <span class="translatable" data-en="Check-In Date" data-ar="تاريخ الوصول">Check-In Date</span>
+                                        </p>
+                                        <p class="text-sm font-medium" style="color: #1B4332;"><span class="translatable" data-en="Dec 15, 2024" data-ar="١٥ ديسمبر ٢٠٢٤">Dec 15, 2024</span></p>
+                                    </div>
+                                </div>
+
+                                <!-- Signature Area -->
+                                <div class="p-3 rounded-xl bg-white border-2 border-dashed mt-4" style="border-color: rgba(180, 142, 73, 0.5);">
+                                    <p class="text-xs opacity-50 text-center mb-2" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Your Signature" data-ar="توقيعك">Your Signature</span> | توقيعك
+                                    </p>
+                                    <svg width="100%" height="40" viewBox="0 0 150 40" class="mx-auto">
+                                        <path d="M10 30 Q30 10 50 25 T90 20 Q110 15 130 25" stroke="#B48E49" stroke-width="2" fill="none" stroke-linecap="round" class="animate-signature"/>
+                                        <path d="M125 15 L130 25 L140 20" stroke="#4ADE80" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="animate-checkmark"/>
+                                    </svg>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button class="w-full gradient-gold py-3 rounded-xl font-semibold text-sm mt-2" style="color: #1B4332;">
+                                    <span class="translatable" data-en="Complete Check-In ✓" data-ar="إتمام تسجيل الدخول ✓">Complete Check-In ✓</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -right-4 px-3 py-2 rounded-xl shadow-lg animate-float bg-white" style="animation-delay: 0.5s;">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M9 12L11 14L15 10" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium" style="color: #1B4332;">
+                                    <span class="translatable" data-en="Verified" data-ar="موثق">Verified</span>
+                                </p>
+                                <p class="text-xs opacity-60" style="color: #1B4332;">
+                                    <span class="translatable" data-en="Secure" data-ar="آمن">Secure</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -bottom-4 -left-4 px-3 py-2 rounded-xl shadow-lg animate-float bg-white" style="animation-delay: 1s;">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: rgba(180, 142, 73, 0.2);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#B48E49"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium" style="color: #1B4332;">5.0 <span class="translatable" data-en="Rating" data-ar="تقييم">Rating</span></p>
+                                <p class="text-xs opacity-60" style="color: #1B4332;">2,500+ <span class="translatable" data-en="Hotels" data-ar="فندق">Hotels</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="w-full py-12 px-4 md:px-6" style="background: rgba(255,255,255,0.03);">
+            <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="text-center stat-card p-4">
+                    <p class="text-2xl md:text-4xl font-bold text-gradient-gold mb-2">85%</p>
+                    <p class="text-white opacity-70 text-sm translatable" data-en="Faster Check-In" data-ar="تسجيل أسرع">Faster Check-In</p>
+                    <p class="text-xs opacity-50 text-white mt-1" style="font-family: 'Noto Kufi Arabic', sans-serif;">تسجيل دخول أسرع</p>
+                </div>
+                <div class="text-center stat-card p-4">
+                    <p class="text-2xl md:text-4xl font-bold text-gradient-gold mb-2">2,500+</p>
+                    <p class="text-white opacity-70 text-sm translatable" data-en="Hotels Trust Us" data-ar="فندق يثق بنا">Hotels Trust Us</p>
+                    <p class="text-xs opacity-50 text-white mt-1" style="font-family: 'Noto Kufi Arabic', sans-serif;">فنادق تثق بنا</p>
+                </div>
+                <div class="text-center stat-card p-4">
+                    <p class="text-2xl md:text-4xl font-bold text-gradient-gold mb-2">500K+</p>
+                    <p class="text-white opacity-70 text-sm translatable" data-en="Guest Check-Ins" data-ar="تسجيل ضيوف">Guest Check-Ins</p>
+                    <p class="text-xs opacity-50 text-white mt-1" style="font-family: 'Noto Kufi Arabic', sans-serif;">تسجيلات الضيوف</p>
+                </div>
+                <div class="text-center stat-card p-4">
+                    <p class="text-2xl md:text-4xl font-bold text-gradient-gold mb-2">99.9%</p>
+                    <p class="text-white opacity-70 text-sm translatable" data-en="Uptime Reliability" data-ar="موثوقية التشغيل">Uptime Reliability</p>
+                    <p class="text-xs opacity-50 text-white mt-1" style="font-family: 'Noto Kufi Arabic', sans-serif;">موثوقية التشغيل</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="w-full py-16 md:py-20 px-4 md:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 md:mb-16">
+                    <span class="inline-block px-4 py-2 rounded-full text-sm mb-4" style="background: rgba(180, 142, 73, 0.2); color: #D4AF37;">
+                        <span class="translatable" data-en="Powerful Features" data-ar="مميزات قوية">Powerful Features</span>
+                    </span>
+                    <h2 class="text-2xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                        <span class="translatable" data-en="Everything You Need for" data-ar="كل ما تحتاجه لـ">Everything You Need for</span>
+                        <span class="text-gradient-gold translatable" data-en="Modern Hospitality" data-ar="الضيافة الحديثة"> Modern Hospitality</span>
+                    </h2>
+                    <p class="text-white opacity-70 max-w-2xl mx-auto text-sm md:text-base translatable" data-en="Comprehensive tools designed specifically for hotels and accommodations to streamline operations and enhance guest satisfaction." data-ar="أدوات شاملة مصممة خصيصًا للفنادق وأماكن الإقامة لتبسيط العمليات وتعزيز رضا الضيوف.">
+                        Comprehensive tools designed specifically for hotels and accommodations to streamline operations and enhance guest satisfaction.
+                    </p>
+                    <p class="text-base md:text-lg mt-2 opacity-80" style="font-family: 'Noto Kufi Arabic', serif; color: #D4AF37;">كل ما تحتاجه للضيافة الحديثة</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Feature 1 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 11L12 14L22 4M21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Digital Check-In" data-ar="تسجيل الدخول الرقمي">Digital Check-In</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">تسجيل الدخول الرقمي</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Seamless guest check-in without queues. All forms completed electronically in minutes." data-ar="تسجيل دخول سلس للضيوف بدون طوابير. جميع النماذج تكتمل إلكترونيًا في دقائق.">
+                            Seamless guest check-in without queues. All forms completed electronically in minutes.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 15V17M6 21H18C19.1046 21 20 20.1046 20 19V13C20 11.8954 19.1046 11 18 11H6C4.89543 11 4 11.8954 4 13V19C4 20.1046 4.89543 21 6 21ZM16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11H16Z" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Secure E-Signatures" data-ar="توقيعات إلكترونية آمنة">Secure E-Signatures</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">توقيعات إلكترونية آمنة</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Legally binding signatures, securely stored for guest and hotel protection." data-ar="توقيعات ملزمة قانونيًا، محفوظة بأمان لحماية الضيف والفندق.">
+                            Legally binding signatures, securely stored for guest and hotel protection.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#1B4332" stroke-width="2"/>
+                                <path d="M2 12H22M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="#1B4332" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Multilingual Support" data-ar="دعم متعدد اللغات">Multilingual Support</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">دعم متعدد اللغات</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="English and Arabic interfaces designed for international guests and local staff." data-ar="واجهات بالإنجليزية والعربية مصممة للضيوف الدوليين والموظفين المحليين.">
+                            English and Arabic interfaces designed for international guests and local staff.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6H20M4 12H20M4 18H12" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 16L18 18L22 14" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Easy Integration" data-ar="تكامل سهل">Easy Integration</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">تكامل سهل</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Compatible with existing hotel management systems. Simple API integration." data-ar="متوافق مع أنظمة إدارة الفنادق الحالية. تكامل API بسيط.">
+                            Compatible with existing hotel management systems. Simple API integration.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Data Security" data-ar="أمان البيانات">Data Security</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">أمان البيانات</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Encrypted storage of all guest information, compliant with modern standards." data-ar="تخزين مشفر لجميع معلومات الضيوف، متوافق مع المعايير الحديثة.">
+                            Encrypted storage of all guest information, compliant with modern standards.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card group p-5 md:p-6 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.3) 0%, rgba(27, 67, 50, 0.5) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-12 md:w-14 h-12 md:h-14 rounded-xl gradient-gold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke="#1B4332" stroke-width="2"/>
+                                <path d="M7 8H17M7 12H13M7 16H10" stroke="#1B4332" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Customizable Forms" data-ar="نماذج قابلة للتخصيص">Customizable Forms</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">نماذج قابلة للتخصيص</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Create and manage your own check-in forms and agreements tailored to your needs." data-ar="أنشئ وأدر نماذج تسجيل الدخول والاتفاقيات الخاصة بك حسب احتياجاتك.">
+                            Create and manage your own check-in forms and agreements tailored to your needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="w-full py-16 md:py-20 px-4 md:px-6" style="background: rgba(255,255,255,0.02);">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div>
+                        <span class="inline-block px-4 py-2 rounded-full text-sm mb-4" style="background: rgba(180, 142, 73, 0.2); color: #D4AF37;">
+                            <span class="translatable" data-en="Why Choose Sign Stay" data-ar="لماذا توقيع الإقامة">Why Choose Sign Stay</span>
+                        </span>
+                        <h2 class="text-2xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                            <span class="translatable" data-en="Transform Your" data-ar="حوّل تجربة">Transform Your</span>
+                            <span class="text-gradient-gold translatable" data-en="Guest Experience" data-ar="ضيوفك"> Guest Experience</span>
+                        </h2>
+                        <p class="text-lg md:text-xl mb-2" style="font-family: 'Noto Kufi Arabic', serif; color: #D4AF37;">حوّل تجربة ضيوفك</p>
+
+                        <div class="space-y-4 md:space-y-6 mt-6 md:mt-8">
+                            <div class="flex gap-4">
+                                <div class="w-10 md:w-12 h-10 md:h-12 rounded-xl flex-shrink-0 flex items-center justify-center" style="background: rgba(74, 222, 128, 0.2);">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-semibold text-white mb-1 translatable" data-en="Save Valuable Time" data-ar="وفّر وقتًا ثمينًا">Save Valuable Time</h4>
+                                    <p class="text-white opacity-70 text-sm translatable" data-en="Reduce check-in time from 15+ minutes to under 3 minutes. No more paper forms or manual data entry." data-ar="قلل وقت تسجيل الدخول من أكثر من ١٥ دقيقة إلى أقل من ٣ دقائق. لا مزيد من النماذج الورقية أو إدخال البيانات يدويًا.">
+                                        Reduce check-in time from 15+ minutes to under 3 minutes. No more paper forms or manual data entry.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="w-10 md:w-12 h-10 md:h-12 rounded-xl flex-shrink-0 flex items-center justify-center" style="background: rgba(180, 142, 73, 0.2);">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-semibold text-white mb-1 translatable" data-en="Reduce Operational Costs" data-ar="قلل التكاليف التشغيلية">Reduce Operational Costs</h4>
+                                    <p class="text-white opacity-70 text-sm translatable" data-en="Eliminate printing, storage, and manual processing costs. Go completely paperless." data-ar="ألغِ تكاليف الطباعة والتخزين والمعالجة اليدوية. انتقل إلى نظام خالٍ من الورق تمامًا.">
+                                        Eliminate printing, storage, and manual processing costs. Go completely paperless.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="w-10 md:w-12 h-10 md:h-12 rounded-xl flex-shrink-0 flex items-center justify-center" style="background: rgba(74, 222, 128, 0.2);">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 2V8H20M16 13H8M16 17H8M10 9H8" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-semibold text-white mb-1 translatable" data-en="Improve Accuracy" data-ar="حسّن الدقة">Improve Accuracy</h4>
+                                    <p class="text-white opacity-70 text-sm translatable" data-en="Digital forms eliminate handwriting errors and ensure complete, accurate guest information every time." data-ar="النماذج الرقمية ت eliminate أخطاء الكتابة اليدوية وتضمن معلومات ضيوف كاملة ودقيقة في كل مرة.">
+                                        Digital forms eliminate handwriting errors and ensure complete, accurate guest information every time.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="w-10 md:w-12 h-10 md:h-12 rounded-xl flex-shrink-0 flex items-center justify-center" style="background: rgba(180, 142, 73, 0.2);">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-base md:text-lg font-semibold text-white mb-1 translatable" data-en="Enhance Guest Satisfaction" data-ar="عزّز رضا الضيوف">Enhance Guest Satisfaction</h4>
+                                    <p class="text-white opacity-70 text-sm translatable" data-en="Modern, seamless experience that today's travelers expect from premium hospitality." data-ar="تجربة حديثة وسلسة يتوقعها مسافرو اليوم من الضيافة الفاخرة.">
+                                        Modern, seamless experience that today's travelers expect from premium hospitality.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Preview -->
+                    <div class="relative">
+                        <div class="rounded-2xl p-4 md:p-6 shadow-2xl" style="background: linear-gradient(145deg, #FDFBF7 0%, #F5F0E6 100%);">
+                            <div class="flex items-center justify-between mb-4 md:mb-6">
+                                <div>
+                                    <h3 class="font-semibold text-sm md:text-base" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Real-Time Dashboard" data-ar="لوحة المتابعة المباشرة">Real-Time Dashboard</span>
+                                    </h3>
+                                    <p class="text-xs opacity-60" style="color: #1B4332; font-family: 'Noto Kufi Arabic', sans-serif;">لوحة المتابعة المباشرة</p>
+                                </div>
+                                <div class="flex items-center gap-2 text-xs" style="color: #1B4332;">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    <span class="translatable" data-en="Live" data-ar="مباشر">Live</span>
+                                </div>
+                            </div>
+
+                            <!-- Mini Stats -->
+                            <div class="grid grid-cols-3 gap-2 md:gap-3 mb-4 md:mb-6">
+                                <div class="p-2 md:p-3 rounded-xl text-center" style="background: rgba(27, 67, 50, 0.1);">
+                                    <p class="text-xl md:text-2xl font-bold" style="color: #1B4332;">24</p>
+                                    <p class="text-xs opacity-60" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Today" data-ar="اليوم">Today</span>
+                                    </p>
+                                </div>
+                                <div class="p-2 md:p-3 rounded-xl text-center" style="background: rgba(180, 142, 73, 0.1);">
+                                    <p class="text-xl md:text-2xl font-bold" style="color: #B48E49;">3</p>
+                                    <p class="text-xs opacity-60" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Pending" data-ar="معلق">Pending</span>
+                                    </p>
+                                </div>
+                                <div class="p-2 md:p-3 rounded-xl text-center" style="background: rgba(74, 222, 128, 0.1);">
+                                    <p class="text-xl md:text-2xl font-bold" style="color: #22C55E;">98%</p>
+                                    <p class="text-xs opacity-60" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Done" data-ar="مكتمل">Done</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="space-y-2 md:space-y-3">
+                                <p class="text-xs md:text-sm font-medium" style="color: #1B4332;">
+                                    <span class="translatable" data-en="Recent Activity" data-ar="النشاط الأخير">Recent Activity</span>
+                                </p>
+                                <div class="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl bg-white">
+                                    <div class="w-8 md:w-10 h-8 md:h-10 rounded-full gradient-gold flex items-center justify-center text-xs md:text-sm font-semibold" style="color: #1B4332;">AR</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs md:text-sm font-medium truncate" style="color: #1B4332;">أحمد الراشد / Ahmed Al-Rashid</p>
+                                        <p class="text-xs opacity-60" style="color: #1B4332;">Suite 502 • <span class="translatable" data-en="Just now" data-ar="الآن">Just now</span></p>
+                                    </div>
+                                    <span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-600 whitespace-nowrap">
+                                        <span class="translatable" data-en="Completed" data-ar="مكتمل">Completed</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl bg-white">
+                                    <div class="w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-semibold" style="background: rgba(45, 106, 79, 0.2); color: #1B4332;">SM</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs md:text-sm font-medium truncate" style="color: #1B4332;">Sarah Mitchell / سارة ميتشل</p>
+                                        <p class="text-xs opacity-60" style="color: #1B4332;">Room 305 • 2 <span class="translatable" data-en="min ago" data-ar="دقائق">min ago</span></p>
+                                    </div>
+                                    <span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-600 whitespace-nowrap">
+                                        <span class="translatable" data-en="Completed" data-ar="مكتمل">Completed</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl bg-white">
+                                    <div class="w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-semibold" style="background: rgba(180, 142, 73, 0.2); color: #1B4332;">خ ت</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs md:text-sm font-medium truncate" style="color: #1B4332;">خالد تاناكا / Khalid Tanaka</p>
+                                        <p class="text-xs opacity-60" style="color: #1B4332;">Room 412 • <span class="translatable" data-en="In Progress" data-ar="قيد التنفيذ">In Progress</span></p>
+                                    </div>
+                                    <span class="px-2 py-1 rounded-full text-xs whitespace-nowrap" style="background: rgba(180, 142, 73, 0.2); color: #B48E49;">
+                                        <span class="translatable" data-en="Pending" data-ar="معلق">Pending</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating notification -->
+                        <div class="absolute -top-4 -right-4 px-3 md:px-4 py-2 md:py-3 rounded-xl shadow-lg animate-float bg-white">
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <svg width="16 md:20" height="16 md:20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 12L11 14L15 10" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs md:text-sm font-medium" style="color: #1B4332;">
+                                        <span class="translatable" data-en="New Check-In!" data-ar="تسجيل دخول جديد!">New Check-In!</span>
+                                    </p>
+                                    <p class="text-xs opacity-60" style="color: #1B4332;">
+                                        <span class="translatable" data-en="Room 502 confirmed" data-ar="الغرفة ٥٠٢ مؤكدة">Room 502 confirmed</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Audience Section -->
+        <section id="audience" class="w-full py-16 md:py-20 px-4 md:px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <span class="inline-block px-4 py-2 rounded-full text-sm mb-4" style="background: rgba(180, 142, 73, 0.2); color: #D4AF37;">
+                    <span class="translatable" data-en="Perfect For" data-ar="مثالي لـ">Perfect For</span>
+                </span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                    <span class="translatable" data-en="Designed for" data-ar="مصمم لـ">Designed for</span>
+                    <span class="text-gradient-gold translatable" data-en="Every Property" data-ar="كل عقار"> Every Property</span>
+                </h2>
+                <p class="text-lg md:text-xl mb-8" style="font-family: 'Noto Kufi Arabic', serif; color: #D4AF37;">مصمم لكل عقار</p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 21H21M5 21V7L13 3V21M19 21V11L13 7" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Hotels & Resorts" data-ar="الفنادق والمنتجعات">Hotels & Resorts</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">الفنادق والمنتجعات</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="From boutique hotels to luxury resorts, streamline your front desk operations." data-ar="من الفنادق البوتيك إلى المنتجعات الفاخرة، بسّط عمليات الاستقبال.">
+                            From boutique hotels to luxury resorts, streamline your front desk operations.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Serviced Apartments" data-ar="الشقق المخدومة">Serviced Apartments</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">الشقق المخدومة</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Perfect for extended stays with comprehensive agreement management." data-ar="مثالي للإقامات الطويلة مع إدارة شاملة للاتفاقيات.">
+                            Perfect for extended stays with comprehensive agreement management.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Hotel Chains" data-ar="سلاسل الفنادق">Hotel Chains</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">سلاسل الفنادق</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Centralized management across multiple properties with unified branding." data-ar="إدارة مركزية عبر عقارات متعددة مع علامة تجارية موحدة.">
+                            Centralized management across multiple properties with unified branding.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#1B4332" stroke-width="2"/>
+                                <path d="M2 12H22M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="#1B4332" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Vacation Rentals" data-ar="إيجارات العطلات">Vacation Rentals</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">إيجارات العطلات</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Self-service check-in for vacation properties and short-term rentals." data-ar="تسجيل دخول ذاتي لعقارات العطلات والإيجارات قصيرة المدى.">
+                            Self-service check-in for vacation properties and short-term rentals.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21M4 21H20M10 7H14M10 11H14M10 15H14" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Single Properties" data-ar="العقارات الفردية">Single Properties</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">العقارات الفردية</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Affordable solution for independent property owners and managers." data-ar="حل ميسور التكلفة لأصحاب ومديري العقارات المستقلين.">
+                            Affordable solution for independent property owners and managers.
+                        </p>
+                    </div>
+
+                    <div class="feature-card p-5 md:p-6 rounded-2xl text-center" style="background: linear-gradient(145deg, rgba(45, 106, 79, 0.2) 0%, rgba(27, 67, 50, 0.4) 100%); border: 1px solid rgba(180, 142, 73, 0.2);">
+                        <div class="w-14 md:w-16 h-14 md:h-16 mx-auto rounded-2xl gradient-gold flex items-center justify-center mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 translatable" data-en="Property Managers" data-ar="مديرو العقارات">Property Managers</h3>
+                        <p class="text-sm mb-1" style="font-family: 'Noto Kufi Arabic', sans-serif; color: #D4AF37;">مديرو العقارات</p>
+                        <p class="text-white opacity-70 text-sm translatable" data-en="Manage multiple properties from a single dashboard with ease." data-ar="أدر عقارات متعددة من لوحة تحكم واحدة بسهولة.">
+                            Manage multiple properties from a single dashboard with ease.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="w-full py-16 md:py-20 px-4 md:px-6" style="background: linear-gradient(135deg, rgba(180, 142, 73, 0.1) 0%, rgba(45, 106, 79, 0.2) 100%);">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">
+                    <span class="translatable" data-en="Ready to" data-ar="هل أنت مستعد">Ready to</span>
+                    <span class="text-gradient-gold translatable" data-en="Transform" data-ar="لتحويل"> Transform</span>
+                    <span class="translatable" data-en="Your Check-In Experience?" data-ar="تجربة تسجيل الدخول؟"> Your Check-In Experience?</span>
+                </h2>
+                <p class="text-lg md:text-xl mb-2" style="font-family: 'Noto Kufi Arabic', serif; color: #D4AF37;">هل أنت مستعد لتحويل تجربة تسجيل الدخول؟</p>
+                <p class="text-white opacity-80 mb-6 md:mb-8 max-w-2xl mx-auto text-sm md:text-base translatable" data-en="Join thousands of hotels already using Sign Stay to deliver exceptional guest experiences. Start your free trial today — no credit card required." data-ar="انضم إلى آلاف الفنادق التي تستخدم توقيع الإقامة بالفعل لتقديم تجارب ضيوف استثنائية. ابدأ تجربتك المجانية اليوم — لا حاجة لبطاقة ائتمان.">
+                    Join thousands of hotels already using Sign Stay to deliver exceptional guest experiences. Start your free trial today — no credit card required.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6 md:mb-8">
+                    <button class="cta-button gradient-gold px-8 md:px-10 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg hover:scale-105 transition-transform animate-pulse-glow" style="color: #1B4332;">
+                        <span class="translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span>
+                    </button>
+                    <button class="px-8 md:px-10 py-3 md:py-4 rounded-full font-semibold text-base md:text-lg border-2 text-white hover:bg-white hover:bg-opacity-10 transition-all" style="border-color: rgba(180, 142, 73, 0.5);">
+                        <span class="translatable" data-en="Schedule Demo" data-ar="احجز عرضًا توضيحيًا">Schedule Demo</span>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-white opacity-70 text-sm">
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="translatable" data-en="14-day free trial" data-ar="تجربة مجانية ١٤ يوم">14-day free trial</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="translatable" data-en="No credit card required" data-ar="لا حاجة لبطاقة ائتمان">No credit card required</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="translatable" data-en="24/7 Support" data-ar="دعم على مدار الساعة">24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full py-10 md:py-12 px-4 md:px-6" style="background: rgba(0,0,0,0.3);">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+                    <div class="col-span-2 md:col-span-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img style="width: 120px;" src="https://usamakhanksa.github.io/fandqah/en/wp-content/uploads/2025/07/fandaqah-hotel-white.png" alt="Fandaqah Logo">
+                        </div>
+                        <p class="text-white opacity-60 text-sm translatable" data-en="Modern digital signature and check-in solution for the hospitality industry." data-ar="حل التوقيع الرقمي وتسجيل الدخول الحديث لصناعة الضيافة.">
+                            Modern digital signature and check-in solution for the hospitality industry.
+                        </p>
+                        <p class="text-white opacity-40 text-xs mt-2" style="font-family: 'Noto Kufi Arabic', sans-serif;">حل التوقيع الرقمي الحديث لصناعة الضيافة</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base translatable" data-en="Product" data-ar="المنتج">Product</h4>
+                        <ul class="space-y-2 text-white opacity-60 text-xs md:text-sm">
+                            <li><a href="#features" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Features" data-ar="المميزات">Features</a></li>
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Pricing" data-ar="الأسعار">Pricing</a></li>
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Integrations" data-ar="التكاملات">Integrations</a></li>
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="API" data-ar="واجهة برمجة التطبيقات">API</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base translatable" data-en="Company" data-ar="الشركة">Company</h4>
+                        <ul class="space-y-2 text-white opacity-60 text-xs md:text-sm">
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="About Us" data-ar="من نحن">About Us</a></li>
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Careers" data-ar="الوظائف">Careers</a></li>
+                            <li><a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Blog" data-ar="المدونة">Blog</a></li>
+                            <li><a href="#contact" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base translatable" data-en="Contact" data-ar="التواصل">Contact</h4>
+                        <ul class="space-y-2 text-white opacity-60 text-xs md:text-sm">
+                            <li class="translatable" data-en="info@signstay.com" data-ar="info@signstay.com">info@signstay.com</li>
+                            <li class="translatable" data-en="+966 XX XXX XXXX" data-ar="+٩٦٦ XX XXX XXXX">+966 XX XXX XXXX</li>
+                            <li class="translatable" data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-6 md:pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4" style="border-color: rgba(255,255,255,0.1);">
+                    <p class="text-white opacity-40 text-xs md:text-sm">© 2024 Sign Stay | توقيع الإقامة. <span class="translatable" data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+                    <div class="flex gap-4 md:gap-6 text-white opacity-40 text-xs md:text-sm">
+                        <a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                        <a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+                        <a href="#" class="footer-link hover:opacity-100 transition-opacity translatable" data-en="Cookie Policy" data-ar="سياسة ملفات تعريف الارتباط">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLang = 'en';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+            
+            // Set direction
+            if (lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+            }
+
+            // Update all translatable elements
+            document.querySelectorAll('.translatable').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+
+            // Update toggle slider
+            const slider = document.querySelector('.lang-toggle-slider');
+            const labelEn = document.querySelector('.lang-label-en');
+            const labelAr = document.querySelector('.lang-label-ar');
+            
+            if (lang === 'ar') {
+                slider.textContent = 'ع';
+                labelEn.classList.remove('active');
+                labelAr.classList.add('active');
+            } else {
+                slider.textContent = 'EN';
+                labelEn.classList.add('active');
+                labelAr.classList.remove('active');
+            }
+
+            // Save preference
+            try {
+                localStorage.setItem('signstay-lang', lang);
+            } catch (e) {}
+        }
+
+        // Language toggle click handler
+        document.getElementById('langToggle').addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            switchLanguage(newLang);
+        });
+
+        // Check for saved language preference
+        try {
+            const savedLang = localStorage.getItem('signstay-lang');
+            if (savedLang) {
+                switchLanguage(savedLang);
+            }
+        } catch (e) {}
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        if (mobileMenuBtn && mobileMenu && closeMobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+            });
+
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+
+            // Close menu when clicking links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(13, 31, 23, 0.98)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(13, 31, 23, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .stat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target, suffix = '') {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + suffix;
+            }, 30);
+        }
+
+        // Initialize counters when visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const text = entry.target.textContent;
+                    if (text.includes('%')) {
+                        const num = parseInt(text);
+                        animateCounter(entry.target, num, '%');
+                    } else if (text.includes('+')) {
+                        const num = parseInt(text.replace(/[^0-9]/g, ''));
+                        if (num >= 1000) {
+                            animateCounter(entry.target, num / 1000, 'K+');
+                        } else {
+                            animateCounter(entry.target, num, '+');
+                        }
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-card .text-gradient-gold').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>
