@@ -1046,64 +1046,112 @@
 
     <script>
         // Language Toggle Functionality
-        let currentLang = 'en';
+        // let currentLang = 'en';
 
-        function switchLanguage(lang) {
-            currentLang = lang;
-            const html = document.documentElement;
+        // function switchLanguage(lang) {
+        //     currentLang = lang;
+        //     const html = document.documentElement;
             
-            // Set direction
-            if (lang === 'ar') {
-                html.setAttribute('dir', 'rtl');
-                html.setAttribute('lang', 'ar');
-            } else {
-                html.setAttribute('dir', 'ltr');
-                html.setAttribute('lang', 'en');
-            }
+        //     // Set direction
+        //     if (lang === 'ar') {
+        //         html.setAttribute('dir', 'rtl');
+        //         html.setAttribute('lang', 'ar');
+        //     } else {
+        //         html.setAttribute('dir', 'ltr');
+        //         html.setAttribute('lang', 'en');
+        //     }
 
-            // Update all translatable elements
-            document.querySelectorAll('.translatable').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) {
-                    el.textContent = text;
-                }
-            });
+        //     // Update all translatable elements
+        //     document.querySelectorAll('.translatable').forEach(el => {
+        //         const text = el.getAttribute(`data-${lang}`);
+        //         if (text) {
+        //             el.textContent = text;
+        //         }
+        //     });
 
-            // Update toggle slider
-            const slider = document.querySelector('.lang-toggle-slider');
-            const labelEn = document.querySelector('.lang-label-en');
-            const labelAr = document.querySelector('.lang-label-ar');
+        //     // Update toggle slider
+        //     const slider = document.querySelector('.lang-toggle-slider');
+        //     const labelEn = document.querySelector('.lang-label-en');
+        //     const labelAr = document.querySelector('.lang-label-ar');
             
-            if (lang === 'ar') {
-                slider.textContent = 'AR';
-                labelEn.classList.remove('active');
-                labelAr.classList.add('active');
-            } else {
-                slider.textContent = 'EN';
-                labelEn.classList.add('active');
-                labelAr.classList.remove('active');
-            }
+        //     if (lang === 'ar') {
+        //         slider.textContent = 'AR';
+        //         labelEn.classList.remove('active');
+        //         labelAr.classList.add('active');
+        //     } else {
+        //         slider.textContent = 'EN';
+        //         labelEn.classList.add('active');
+        //         labelAr.classList.remove('active');
+        //     }
 
-            // Save preference
-            try {
-                localStorage.setItem('signstay-lang', lang);
-            } catch (e) {}
-        }
+        //     // Save preference
+        //     try {
+        //         localStorage.setItem('signstay-lang', lang);
+        //     } catch (e) {}
+        // }
 
-        // Language toggle click handler
-        document.getElementById('langToggle').addEventListener('click', () => {
-            const newLang = currentLang === 'en' ? 'ar' : 'en';
-            switchLanguage(newLang);
-        });
+        // // Language toggle click handler
+        // document.getElementById('langToggle').addEventListener('click', () => {
+        //     const newLang = currentLang === 'en' ? 'ar' : 'en';
+        //     switchLanguage(newLang);
+        // });
 
-        // Check for saved language preference
-        try {
-            const savedLang = localStorage.getItem('signstay-lang');
-            if (savedLang) {
-                switchLanguage(savedLang);
-            }
-        } catch (e) {}
+        // // Check for saved language preference
+        // try {
+        //     const savedLang = localStorage.getItem('signstay-lang');
+        //     if (savedLang) {
+        //         switchLanguage(savedLang);
+        //     }
+        // } catch (e) {}
+let currentLang = 'en';
 
+function switchLanguage(lang) {
+    currentLang = lang;
+    const html = document.documentElement;
+    const toggle = document.getElementById('langToggle');
+    const labelEn = document.querySelector('.lang-label-en');
+    const labelAr = document.querySelector('.lang-label-ar');
+
+    // Direction
+    if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        toggle.classList.add('ar');
+
+        labelEn.classList.remove('active');
+        labelAr.classList.add('active');
+    } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        toggle.classList.remove('ar');
+
+        labelEn.classList.add('active');
+        labelAr.classList.remove('active');
+    }
+
+    // Translate text
+    document.querySelectorAll('.translatable').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.textContent = text;
+    });
+
+    // Save
+    try {
+        localStorage.setItem('signstay-lang', lang);
+    } catch (e) {}
+}
+
+// Toggle click
+document.getElementById('langToggle').addEventListener('click', () => {
+    const newLang = currentLang === 'en' ? 'ar' : 'en';
+    switchLanguage(newLang);
+});
+
+// Load saved
+try {
+    const savedLang = localStorage.getItem('signstay-lang');
+    if (savedLang) switchLanguage(savedLang);
+} catch (e) {}
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
