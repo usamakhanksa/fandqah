@@ -1508,7 +1508,7 @@ try {
      <!-- ✅ WHATSAPP FLOATING BUTTON — Copy this block into your project -->
     <div class="wa-float" id="waFloat">
         <div class="wa-label" id="waLabel">
-            <span id="waText">Chat with us on WhatsApp</span>
+            <span class="translatable" data-en="Chat with us on WhatsApp" data-ar="تواصل معنا عن طريق الواتس اب" id="waText">Chat with us on WhatsApp</span>
         </div>
         <a class="wa-btn" href="https://wa.me/966555947522" target="_blank" rel="noopener" 
            onmouseenter="showLabel()" onmouseleave="hideLabel()"
@@ -1519,46 +1519,6 @@ try {
             <span class="wa-dot"></span>
         </a>
     </div>
-    <!-- ✅ END WHATSAPP BUTTON -->
-      <script>
-        const labels = {
-            en: 'Chat with us on WhatsApp',
-            ar: 'تواصل معنا على واتساب'
-        };
-
-        const arFontStack = "'Noto Kufi Arabic', 'Arial', sans-serif";
-        const enFontStack = "'Segoe UI', sans-serif";
-
-        let labelVisible = false;
-
-        function showLabel() {
-            document.getElementById('waLabel').classList.add('show');
-            labelVisible = true;
-        }
-
-        function hideLabel() {
-            document.getElementById('waLabel').classList.remove('show');
-            labelVisible = false;
-        }
-
-        function setLang(lang) {
-            const html = document.documentElement;
-            const waText = document.getElementById('waText');
-            const btns = document.querySelectorAll('.demo-toggle button');
-
-            // Update active button
-            btns.forEach((b, i) => {
-                b.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'ar'));
-            });
-
-            // Update label text & font
-            waText.textContent = labels[lang];
-            waText.style.fontFamily = lang === 'ar' ? arFontStack : enFontStack;
-
-            // Update page direction
-            html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-            html.setAttribute('lang', lang);
-        }
-    </script>
+  
 </body>
 </html>
