@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Phone Validation Library -->
+    <script src="https://unpkg.com/libphonenumber-js@1.10.48/bundle/libphonenumber-min.js" async></script>
+     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap');
 
@@ -879,7 +887,7 @@ function clearError(form, name) {
     <span class="lang-label lang-label-ar">AR</span>
     <div class="lang-toggle-slider"></div>
 </div>
-                <button class="gradient-gold px-4 md:px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform hidden md:block" style="color: #1B4332;" onclick="openPopup()">
+                <button class="trigger-btn gradient-gold px-4 md:px-5 py-2 rounded-full text-sm font-semibold hover:scale-105 transition-transform hidden md:block" style="color: #1B4332;" onclick="openPopup()">
                     <span class="translatable" data-en="Get Started" data-ar="ابدأ الآن">Get Started</span>
                 </button>
                 
@@ -1824,56 +1832,54 @@ try {
         </a>
     </div>
    <!-- Popup Form -->
+<!-- Popup Form -->
     <div class="popup-overlay" id="popupForm">
         <div class="popup-form">
             <button class="popup-close" onclick="closePopup()">
                 <i class="ri-close-line"></i>
             </button>
             <div class="popup-header">
-                <h3 class="text-2xl font-bold" data-en="Welcome to Fandaqah PMS" data-ar="مرحبا بك في فندقة  ">Welcome to Fandaqah PMS</h3>
+                <h3 class="text-2xl font-bold" data-en="Welcome to Fandaqah PMS" data-ar="مرحبا بك في فندقة">Welcome to Fandaqah PMS</h3>
                 <p class="mt-2" data-en="Get a free 30-day trial and personalized demo" data-ar="احصل على نسخة تجريبية مجانية وعرض توضيحي مخصص">Get a free 30-day trial and personalized demo</p>
             </div>
             <div class="popup-body">
-               
-        <form id="quickForm">
-            <div class="form-group">
-                <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
-                <input type="text" name="full_name" class="form-control" required>
-                <span class="error-message"></span>
+                <form id="quickForm">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                        <input type="text" name="full_name" class="form-control" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+                        <input type="email" name="email" class="form-control" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                        <div class="phone-input-wrapper">
+                            <select name="country_code" class="form-control country-select" required>
+                                <!-- Populated by JS -->
+                            </select>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Property Type" data-ar="نوع العقار">Property Type</label>
+                        <select name="property_type" class="form-control" required>
+                            <option value="" data-en="Select property type" data-ar="اختر نوع العقار">Select property type</option>
+                            <option value="hotel" data-en="Hotel" data-ar="فندق">Hotel</option>
+                            <option value="serviced-apartments" data-en="Serviced Apartments" data-ar="شقق مفروشة">Serviced Apartments</option>
+                            <option value="resort" data-en="Resort" data-ar="منتجع">Resort</option>
+                            <option value="boutique-hotel" data-en="Boutique Hotel" data-ar="فندق بوتيك">Boutique Hotel</option>
+                            <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
+                </form>
             </div>
-
-            <div class="form-group">
-                <label data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
-                <input type="email" name="email" class="form-control" required>
-                <span class="error-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
-                <div class="phone-input-wrapper">
-                    <select name="country_code" class="form-control country-select" required>
-                        <!-- Populated by JS -->
-                    </select>
-                    <input type="tel" name="phone" class="form-control" required>
-                </div>
-                <span class="error-message"></span>
-            </div>
-
-            <div class="form-group">
-                <label data-en="Property Type" data-ar="نوع العقار">Property Type</label>
-                <select name="property_type" class="form-control" required>
-                    <option value="" data-en="Select property type" data-ar="اختر نوع العقار">Select property type</option>
-                    <option value="hotel" data-en="Hotel" data-ar="فندق">Hotel</option>
-                    <option value="serviced-apartments" data-en="Serviced Apartments" data-ar="شقق مفروشة">Serviced Apartments</option>
-                    <option value="resort" data-en="Resort" data-ar="منتجع">Resort</option>
-                    <option value="boutique-hotel" data-en="Boutique Hotel" data-ar="فندق بوتيك">Boutique Hotel</option>
-                    <option value="other" data-en="Other" data-ar="أخرى">Other</option>
-                </select>
-                <span class="error-message"></span>
-            </div>
-
-            <button type="submit" class="submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
-        </form>
-           
+        </div>
+    </div>
 </body>
 </html>
