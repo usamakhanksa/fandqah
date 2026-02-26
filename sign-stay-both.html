@@ -842,26 +842,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // --- Language Switching ---
-// function changeLanguage(lang) {
-//     currentLang = lang;
-//     document.documentElement.lang = lang;
-//     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+function changeLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
-//     // Update toggle button
-//     document.querySelectorAll('.lang-toggle button').forEach(btn => {
-//         btn.classList.remove('active');
-//     });
-//     const activeBtn = document.querySelector(`.lang-toggle button[onclick="changeLanguage('${lang}')"]`);
-//     if(activeBtn) activeBtn.classList.add('active');
+    // Update toggle button
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector(`.lang-toggle button[onclick="changeLanguage('${lang}')"]`);
+    if(activeBtn) activeBtn.classList.add('active');
 
-//     // Update text content
-//     document.querySelectorAll('[data-en]').forEach(element => {
-//         if (lang === 'ar') {
-//             element.textContent = element.getAttribute('data-ar');
-//         } else {
-//             element.textContent = element.getAttribute('data-en');
-//         }
-//     });
+    // Update text content
+    document.querySelectorAll('[data-en]').forEach(element => {
+        if (lang === 'ar') {
+            element.textContent = element.getAttribute('data-ar');
+        } else {
+            element.textContent = element.getAttribute('data-en');
+        }
+    });
 
     // Update placeholders (if defined)
     document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
