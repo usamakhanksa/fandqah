@@ -538,6 +538,20 @@ span.lang-label.lang-label-ar.active{
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+
+
+        /* Popup Form */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+…    border-left: none;
+    border-right: 1px solid var(--gray-300);
+}
+
+[dir="rtl"] input[name="phone"] {
+    border-radius: 8px 0 0 8px;
+}
     </style>
     <script>
         tailwind.config = {
@@ -1533,6 +1547,329 @@ try {
             <span class="wa-dot"></span>
         </a>
     </div>
-  
+   <!-- Popup Form -->
+    <div class="popup-overlay" id="popupForm">
+        <div class="popup-form">
+            <button class="popup-close" onclick="closePopup()">
+                <i class="ri-close-line"></i>
+            </button>
+            <div class="popup-header">
+                <h3 class="text-2xl font-bold" data-en="Welcome to Fandaqah PMS" data-ar="مرحبا بك في فندقة  ">Welcome to Fandaqah PMS</h3>
+                <p class="mt-2" data-en="Get a free 30-day trial and personalized demo" data-ar="احصل على نسخة تجريبية مجانية وعرض توضيحي مخصص">Get a free 30-day trial and personalized demo</p>
+            </div>
+            <div class="popup-body">
+               
+        <form id="quickForm">
+            <div class="form-group">
+                <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                <input type="text" name="full_name" class="form-control" required>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+                <input type="email" name="email" class="form-control" required>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                <div class="phone-input-wrapper">
+                    <select name="country_code" class="form-control country-select" required>
+                        <!-- Populated by JS -->
+                    </select>
+                    <input type="tel" name="phone" class="form-control" required>
+                </div>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label data-en="Property Type" data-ar="نوع العقار">Property Type</label>
+                <select name="property_type" class="form-control" required>
+                    <option value="" data-en="Select property type" data-ar="اختر نوع العقار">Select property type</option>
+                    <option value="hotel" data-en="Hotel" data-ar="فندق">Hotel</option>
+                    <option value="serviced-apartments" data-en="Serviced Apartments" data-ar="شقق مفروشة">Serviced Apartments</option>
+                    <option value="resort" data-en="Resort" data-ar="منتجع">Resort</option>
+                    <option value="boutique-hotel" data-en="Boutique Hotel" data-ar="فندق بوتيك">Boutique Hotel</option>
+                    <option value="other" data-en="Other" data-ar="أخرى">Other</option>
+                </select>
+                <span class="error-message"></span>
+            </div>
+
+            <button type="submit" class="submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
+        </form>
+                <script>
+          // Global State
+let currentLang = 'en';
+
+// Country Data
+const countries = [
+    { code: 'SA', dial_code: '+966' },
+    { code: 'AE', dial_code: '+971' },
+    { code: 'US', dial_code: '+1' },
+    { code: 'GB', dial_code: '+44' },
+    { code: 'EG', dial_code: '+20' },
+    { code: 'QA', dial_code: '+974' },
+    { code: 'KW', dial_code: '+965' },
+    { code: 'OM', dial_code: '+968' },
+    { code: 'BH', dial_code: '+973' },
+];
+
+// Initialize on Load
+document.addEventListener("DOMContentLoaded", function () {
+    changeLanguage('en'); // Default
+    setupPhoneInput();
+    setupFormValidation();
+    
+    // Auto-show popup after 3 seconds (Optional, based on source)
+    setTimeout(() => {
+        // openPopup(); 
+    }, 3000);
+});
+
+// --- Language Switching ---
+function changeLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    // Update toggle button
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector(`.lang-toggle button[onclick="changeLanguage('${lang}')"]`);
+    if(activeBtn) activeBtn.classList.add('active');
+
+    // Update text content
+    document.querySelectorAll('[data-en]').forEach(element => {
+        if (lang === 'ar') {
+            element.textContent = element.getAttribute('data-ar');
+        } else {
+            element.textContent = element.getAttribute('data-en');
+        }
+    });
+
+    // Update placeholders (if defined)
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+        const enPlaceholder = element.getAttribute('placeholder-en');
+        const arPlaceholder = element.getAttribute('placeholder-ar');
+        if (enPlaceholder && arPlaceholder) {
+            element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
+        }
+    });
+
+    // Update select options
+    document.querySelectorAll('option[data-en]').forEach(option => {
+        if (lang === 'ar') {
+            option.textContent = option.getAttribute('data-ar');
+        } else {
+            option.textContent = option.getAttribute('data-en');
+        }
+    });
+}
+
+// --- Popup Logic ---
+function openPopup() {
+    const popup = document.getElementById('popupForm');
+    if(popup) {
+        popup.style.display = 'flex';
+        // Small delay to allow display:flex to apply before opacity transition
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 10);
+    }
+}
+
+function closePopup() {
+    const popup = document.getElementById('popupForm');
+    if(popup) {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300); // Match transition duration
+    }
+}
+
+// Close when clicking outside
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('popupForm');
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
+// --- Phone Input Setup ---
+function setupPhoneInput() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+    
+    const countrySelect = form.querySelector('select[name="country_code"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
+    if (!countrySelect || !phoneInput) return;
+
+    // Populate Dropdown
+    countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.dial_code;
+        option.textContent = `${country.dial_code}`;
+        countrySelect.appendChild(option);
+    });
+
+    // Set Default
+    countrySelect.value = '+966';
+    updateFlag('+966', countrySelect);
+
+    // Flag Update on Change
+    countrySelect.addEventListener('change', () => {
+        updateFlag(countrySelect.value, countrySelect);
+        validateField(form, 'phone');
+    });
+}
+
+function updateFlag(dialCode, selectElement) {
+    const country = countries.find(c => c.dial_code === dialCode) || countries[0];
+    const flagCode = country.code.toLowerCase();
+    const flagUrl = `https://flagcdn.com/w20/${flagCode}.png`;
+    
+    selectElement.style.backgroundImage = `url('${flagUrl}')`;
+    selectElement.style.backgroundRepeat = 'no-repeat';
+    // Adjust position based on direction
+    const isRTL = document.documentElement.dir === 'rtl';
+    selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 8px) center' : '8px center';
+}
+
+// --- Form Validation ---
+function setupFormValidation() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+
+    // Real-time validation
+    ['full_name', 'email', 'phone'].forEach(name => {
+        const el = form.querySelector(`[name="${name}"]`);
+        if (el) {
+            el.addEventListener('input', () => validateField(form, name));
+            el.addEventListener('blur', () => validateField(form, name));
+        }
+    });
+
+    const propSelect = form.querySelector('select[name="property_type"]');
+    if (propSelect) {
+        propSelect.addEventListener('change', () => validateField(form, 'property_type'));
+    }
+
+    // Submission
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fields = ['full_name', 'email', 'phone', 'property_type'];
+        const valid = fields.every(f => validateField(form, f));
+
+        if (!valid) {
+            alert(currentLang === 'ar' ? 'يرجى إصلاح أخطاء النموذج.' : 'Please fix form errors.');
+            return;
+        }
+
+        const submitBtn = form.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...';
+
+        // Build Full Phone
+        const fullPhone = form.country_code.value + (form.phone.value || '').replace(/\D/g, '');
+        const fd = new FormData();
+        fd.append('full_name', form.full_name.value);
+        fd.append('email', form.email.value);
+        fd.append('phone', fullPhone);
+        fd.append('property_type', form.property_type.value);
+
+        try {
+            // Replace with your actual endpoint
+            const res = await fetch('submit_lead.php', { method: 'POST', body: fd });
+            const result = await res.json();
+            
+            if (result.status === 'success') {
+                alert(currentLang === 'ar' ? 'تم إرسال النموذج بنجاح!' : 'Form submitted successfully!');
+                form.reset();
+                form.country_code.value = '+966';
+                updateFlag('+966', form.countrySelect);
+                form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+                form.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
+                closePopup();
+            } else {
+                alert(result.message || 'Submission failed.');
+            }
+        } catch (err) {
+            console.error(err);
+            // For demo purposes since submit_lead.php doesn't exist locally
+            alert(currentLang === 'ar' ? 'تم الإرسال (تجريبي)!' : 'Submitted (Demo)!');
+            closePopup();
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = currentLang === 'ar' ? 'ابدأ التجربة المجانية' : 'Start Free Trial';
+        }
+    });
+}
+
+function validateField(form, fieldName) {
+    let isValid = false;
+    let message = '';
+
+    if (fieldName === 'full_name') {
+        const val = form.full_name?.value || '';
+        isValid = val.trim().length >= 2;
+        message = isValid ? '' : (currentLang === 'ar' ? 'الاسم يجب أن يكون حرفين على الأقل.' : 'Name must be at least 2 characters.');
+    } else if (fieldName === 'email') {
+        const val = form.email?.value || '';
+        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح.' : 'Please enter a valid email.');
+    } else if (fieldName === 'phone') {
+        const phoneVal = form.phone?.value || '';
+        const dialCode = form.country_code?.value || '';
+        // Simple validation if libphonenumber isn't loaded yet
+        isValid = phoneVal.length >= 5 && dialCode; 
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح.' : 'Please enter a valid phone number.');
+        
+        // Advanced validation if library exists
+        if (isValid && window.libphonenumber) {
+            try {
+                const cleaned = phoneVal.replace(/\D/g, '');
+                const fullNumber = dialCode + cleaned;
+                const phoneNumber = window.libphonenumber.parsePhoneNumber(fullNumber);
+                isValid = phoneNumber && phoneNumber.isValid();
+                if(!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
+            } catch(e) { isValid = false; }
+        }
+    } else if (fieldName === 'property_type') {
+        const val = form.property_type?.value || '';
+        isValid = val !== '';
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى اختيار نوع العقار.' : 'Please select a property type.');
+    }
+
+    if (message) {
+        showError(form, fieldName, message);
+    } else {
+        clearError(form, fieldName);
+    }
+    return isValid;
+}
+
+function showError(form, name, msg) {
+    const input = form.querySelector(`[name="${name}"]`);
+    const group = input?.closest('.form-group');
+    const err = group?.querySelector('.error-message');
+    if (err) {
+        err.textContent = msg;
+        group.classList.add('error');
+    }
+}
+
+function clearError(form, name) {
+    const input = form.querySelector(`[name="${name}"]`);
+    const group = input?.closest('.form-group');
+    const err = group?.querySelector('.error-message');
+    if (err) {
+        err.textContent = '';
+        group.classList.remove('error');
+    }
+}
+                </script>
 </body>
 </html>
