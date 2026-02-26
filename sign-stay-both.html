@@ -813,8 +813,8 @@ input[name="phone"] {
 
 
 
-          // Global State
-// let currentLang = 'en';
+       // Global State
+let currentLang = 'en';
 
 // Country Data
 const countries = [
@@ -863,24 +863,24 @@ document.addEventListener("DOMContentLoaded", function () {
 //         }
 //     });
 
-//     // Update placeholders (if defined)
-//     document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
-//         const enPlaceholder = element.getAttribute('placeholder-en');
-//         const arPlaceholder = element.getAttribute('placeholder-ar');
-//         if (enPlaceholder && arPlaceholder) {
-//             element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
-//         }
-//     });
+    // Update placeholders (if defined)
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+        const enPlaceholder = element.getAttribute('placeholder-en');
+        const arPlaceholder = element.getAttribute('placeholder-ar');
+        if (enPlaceholder && arPlaceholder) {
+            element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
+        }
+    });
 
-//     // Update select options
-//     document.querySelectorAll('option[data-en]').forEach(option => {
-//         if (lang === 'ar') {
-//             option.textContent = option.getAttribute('data-ar');
-//         } else {
-//             option.textContent = option.getAttribute('data-en');
-//         }
-//     });
-// }
+    // Update select options
+    document.querySelectorAll('option[data-en]').forEach(option => {
+        if (lang === 'ar') {
+            option.textContent = option.getAttribute('data-ar');
+        } else {
+            option.textContent = option.getAttribute('data-en');
+        }
+    });
+}
 
 // --- Popup Logic ---
 function openPopup() {
@@ -2104,7 +2104,7 @@ try {
                         </select>
                         <span class="error-message"></span>
                     </div>
-                    <button class="translatable" type="submit" class="submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
+                    <button type="submit" class="translatable submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
                 </form>
             </div>
         </div>
