@@ -558,7 +558,7 @@ span.lang-label.lang-label-ar.active{
 
 
 :root {
-    /* --primary-color: #e95a54;
+    --primary-color: #e95a54;
     --primary-dark: #d14a44;
     --secondary-color: #fbcdab;
     --tertiary-color: #8f9793;
@@ -568,13 +568,13 @@ span.lang-label.lang-label-ar.active{
     --white: #ffffff;
     --gray-200: #e5e7eb;
     --gray-300: #d1d5db;
-    --gray-400: #9ca3af; */
+    --gray-400: #9ca3af;
 }
 
 
 
 /* Utility Classes (Extracted from source for popup support) */
-/* .w-full { width: 100%; }
+.w-full { width: 100%; }
 .text-2xl { font-size: 1.5rem; line-height: 2rem; }
 .font-bold { font-weight: 700; }
 .mt-2 { margin-top: 0.5rem; }
@@ -584,7 +584,7 @@ span.lang-label.lang-label-ar.active{
 .text-white { color: var(--white); }
 .text-center { text-align: center; }
 .hidden { display: none; }
-.block { display: block; } */
+.block { display: block; }
 
 
 /* Popup Form */
@@ -1889,49 +1889,49 @@ function clearError(form, name) {
         //         switchLanguage(savedLang);
         //     }
         // } catch (e) {}
-let currentLang = 'en';
+// let currentLang = 'en';
 
-function switchLanguage(lang) {
-    currentLang = lang;
-    const html = document.documentElement;
-    const toggle = document.getElementById('langToggle');
-    const labelEn = document.querySelector('.lang-label-en');
-    const labelAr = document.querySelector('.lang-label-ar');
+// function switchLanguage(lang) {
+//     currentLang = lang;
+//     const html = document.documentElement;
+//     const toggle = document.getElementById('langToggle');
+//     const labelEn = document.querySelector('.lang-label-en');
+//     const labelAr = document.querySelector('.lang-label-ar');
 
-    // Direction
-    if (lang === 'ar') {
-        html.setAttribute('dir', 'rtl');
-        html.setAttribute('lang', 'ar');
-        toggle.classList.add('ar');
+//     // Direction
+//     if (lang === 'ar') {
+//         html.setAttribute('dir', 'rtl');
+//         html.setAttribute('lang', 'ar');
+//         toggle.classList.add('ar');
 
-        labelEn.classList.remove('active');
-        labelAr.classList.add('active');
-    } else {
-        html.setAttribute('dir', 'ltr');
-        html.setAttribute('lang', 'en');
-        toggle.classList.remove('ar');
+//         labelEn.classList.remove('active');
+//         labelAr.classList.add('active');
+//     } else {
+//         html.setAttribute('dir', 'ltr');
+//         html.setAttribute('lang', 'en');
+//         toggle.classList.remove('ar');
 
-        labelEn.classList.add('active');
-        labelAr.classList.remove('active');
-    }
+//         labelEn.classList.add('active');
+//         labelAr.classList.remove('active');
+//     }
 
-    // Translate text
-    document.querySelectorAll('.translatable').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (text) el.textContent = text;
-    });
+//     // Translate text
+//     document.querySelectorAll('.translatable').forEach(el => {
+//         const text = el.getAttribute(`data-${lang}`);
+//         if (text) el.textContent = text;
+//     });
 
-    // Save
-    try {
-        localStorage.setItem('signstay-lang', lang);
-    } catch (e) {}
-}
+//     // Save
+//     try {
+//         localStorage.setItem('signstay-lang', lang);
+//     } catch (e) {}
+// }
 
-// Toggle click
-document.getElementById('langToggle').addEventListener('click', () => {
-    const newLang = currentLang === 'en' ? 'ar' : 'en';
-    switchLanguage(newLang);
-});
+// // Toggle click
+// document.getElementById('langToggle').addEventListener('click', () => {
+//     const newLang = currentLang === 'en' ? 'ar' : 'en';
+//     switchLanguage(newLang);
+// });
 
 // Load saved
 try {
