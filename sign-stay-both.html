@@ -814,9 +814,12 @@ input[name="phone"] {
 
 
        // Global State
+// ===== FIXED LANGUAGE TRANSLATION JAVASCRIPT =====
+
+// Global State
 let currentLang = 'en';
 
-// Country Data
+// Country Data (for phone input)
 const countries = [
     { code: 'SA', dial_code: '+966' },
     { code: 'AE', dial_code: '+971' },
@@ -831,39 +834,43 @@ const countries = [
 
 // Initialize on Load
 document.addEventListener("DOMContentLoaded", function () {
-    changeLanguage('en'); // Default
+    // Load saved language preference
+    const savedLang = localStorage.getItem('fandaqah-lang');
+    if (savedLang) {
+        changeLanguage(savedLang);
+    } else {
+        changeLanguage('en');
+    }
+    
     setupPhoneInput();
     setupFormValidation();
-    
-    // Auto-show popup after 3 seconds (Optional, based on source)
-    setTimeout(() => {
-        // openPopup(); 
-    }, 3000);
+    setupLanguageToggle();
 });
 
-// --- Language Switching ---
+// ===== LANGUAGE SWITCHING FUNCTION (FIXED) =====
 function changeLanguage(lang) {
     currentLang = lang;
+    
+    // Set HTML attributes
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-    // Update toggle button
-    document.querySelectorAll('.lang-toggle button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    const activeBtn = document.querySelector(`.lang-toggle button[onclick="changeLanguage('${lang}')"]`);
-    if(activeBtn) activeBtn.classList.add('active');
-
-    // Update text content
-    document.querySelectorAll('[data-en]').forEach(element => {
-        if (lang === 'ar') {
-            element.textContent = element.getAttribute('data-ar');
-        } else {
-            element.textContent = element.getAttribute('data-en');
+    
+    // Save preference
+    try {
+        localStorage.setItem('fandaqah-lang', lang);
+    } catch (e) {}
+    
+    // Update ALL translatable elements (both data-en and .translatable)
+    document.querySelectorAll('[data-en], .translatable').forEach(element => {
+        const enText = element.getAttribute('data-en');
+        const arText = element.getAttribute('data-ar');
+        
+        if (enText && arText) {
+            element.textContent = lang === 'ar' ? arText : enText;
         }
     });
-
-    // Update placeholders (if defined)
+    
+    // Update placeholders
     document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
         const enPlaceholder = element.getAttribute('placeholder-en');
         const arPlaceholder = element.getAttribute('placeholder-ar');
@@ -871,23 +878,80 @@ function changeLanguage(lang) {
             element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
         }
     });
-
+    
     // Update select options
     document.querySelectorAll('option[data-en]').forEach(option => {
-        if (lang === 'ar') {
-            option.textContent = option.getAttribute('data-ar');
-        } else {
-            option.textContent = option.getAttribute('data-en');
+        const enText = option.getAttribute('data-en');
+        const arText = option.getAttribute('data-ar');
+        if (enText && arText) {
+            option.textContent = lang === 'ar' ? arText : enText;
         }
     });
+    
+    // Update language toggle button styles
+    updateLanguageToggleUI(lang);
+    
+    // Update phone flag if exists
+    const countrySelect = document.querySelector('select[name="country_code"]');
+    if (countrySelect) {
+        updateFlag(countrySelect.value, countrySelect);
+    }
 }
 
-// --- Popup Logic ---
+// Update Language Toggle UI
+function updateLanguageToggleUI(lang) {
+    // For button-style toggle
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector(`.lang-toggle button[onclick*="'${lang}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+    
+    // For slider-style toggle
+    const toggle = document.getElementById('langToggle');
+    const labelEn = document.querySelector('.lang-label-en');
+    const labelAr = document.querySelector('.lang-label-ar');
+    
+    if (toggle && labelEn && labelAr) {
+        if (lang === 'ar') {
+            toggle.classList.add('ar');
+            labelEn.classList.remove('active');
+            labelAr.classList.add('active');
+        } else {
+            toggle.classList.remove('ar');
+            labelEn.classList.add('active');
+            labelAr.classList.remove('active');
+        }
+    }
+}
+
+// Setup Language Toggle Click Handler
+function setupLanguageToggle() {
+    // Button-style toggle
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            changeLanguage(lang);
+        });
+    });
+    
+    // Slider-style toggle
+    const toggle = document.getElementById('langToggle');
+    if (toggle) {
+        toggle.addEventListener('click', function() {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            changeLanguage(newLang);
+        });
+    }
+}
+
+// ===== POPUP FORM FUNCTIONS =====
 function openPopup() {
     const popup = document.getElementById('popupForm');
-    if(popup) {
+    if (popup) {
         popup.style.display = 'flex';
-        // Small delay to allow display:flex to apply before opacity transition
         setTimeout(() => {
             popup.classList.add('active');
         }, 10);
@@ -896,11 +960,11 @@ function openPopup() {
 
 function closePopup() {
     const popup = document.getElementById('popupForm');
-    if(popup) {
+    if (popup) {
         popup.classList.remove('active');
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 300); // Match transition duration
+        }, 300);
     }
 }
 
@@ -912,7 +976,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// --- Phone Input Setup ---
+// ===== PHONE INPUT SETUP =====
 function setupPhoneInput() {
     const form = document.getElementById('quickForm');
     if (!form) return;
@@ -920,7 +984,7 @@ function setupPhoneInput() {
     const countrySelect = form.querySelector('select[name="country_code"]');
     const phoneInput = form.querySelector('input[name="phone"]');
     if (!countrySelect || !phoneInput) return;
-
+    
     // Populate Dropdown
     countries.forEach(country => {
         const option = document.createElement('option');
@@ -928,11 +992,11 @@ function setupPhoneInput() {
         option.textContent = `${country.dial_code}`;
         countrySelect.appendChild(option);
     });
-
+    
     // Set Default
     countrySelect.value = '+966';
     updateFlag('+966', countrySelect);
-
+    
     // Flag Update on Change
     countrySelect.addEventListener('change', () => {
         updateFlag(countrySelect.value, countrySelect);
@@ -947,16 +1011,16 @@ function updateFlag(dialCode, selectElement) {
     
     selectElement.style.backgroundImage = `url('${flagUrl}')`;
     selectElement.style.backgroundRepeat = 'no-repeat';
-    // Adjust position based on direction
+    
     const isRTL = document.documentElement.dir === 'rtl';
     selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 8px) center' : '8px center';
 }
 
-// --- Form Validation ---
+// ===== FORM VALIDATION =====
 function setupFormValidation() {
     const form = document.getElementById('quickForm');
     if (!form) return;
-
+    
     // Real-time validation
     ['full_name', 'email', 'phone'].forEach(name => {
         const el = form.querySelector(`[name="${name}"]`);
@@ -965,37 +1029,35 @@ function setupFormValidation() {
             el.addEventListener('blur', () => validateField(form, name));
         }
     });
-
+    
     const propSelect = form.querySelector('select[name="property_type"]');
     if (propSelect) {
         propSelect.addEventListener('change', () => validateField(form, 'property_type'));
     }
-
+    
     // Submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const fields = ['full_name', 'email', 'phone', 'property_type'];
         const valid = fields.every(f => validateField(form, f));
-
+        
         if (!valid) {
             alert(currentLang === 'ar' ? 'يرجى إصلاح أخطاء النموذج.' : 'Please fix form errors.');
             return;
         }
-
+        
         const submitBtn = form.querySelector('.submit-btn');
         submitBtn.disabled = true;
         submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...';
-
-        // Build Full Phone
+        
         const fullPhone = form.country_code.value + (form.phone.value || '').replace(/\D/g, '');
         const fd = new FormData();
         fd.append('full_name', form.full_name.value);
         fd.append('email', form.email.value);
         fd.append('phone', fullPhone);
         fd.append('property_type', form.property_type.value);
-
+        
         try {
-            // Replace with your actual endpoint
             const res = await fetch('submit_lead.php', { method: 'POST', body: fd });
             const result = await res.json();
             
@@ -1012,7 +1074,6 @@ function setupFormValidation() {
             }
         } catch (err) {
             console.error(err);
-            // For demo purposes since submit_lead.php doesn't exist locally
             alert(currentLang === 'ar' ? 'تم الإرسال (تجريبي)!' : 'Submitted (Demo)!');
             closePopup();
         } finally {
@@ -1025,7 +1086,7 @@ function setupFormValidation() {
 function validateField(form, fieldName) {
     let isValid = false;
     let message = '';
-
+    
     if (fieldName === 'full_name') {
         const val = form.full_name?.value || '';
         isValid = val.trim().length >= 2;
@@ -1037,26 +1098,24 @@ function validateField(form, fieldName) {
     } else if (fieldName === 'phone') {
         const phoneVal = form.phone?.value || '';
         const dialCode = form.country_code?.value || '';
-        // Simple validation if libphonenumber isn't loaded yet
-        isValid = phoneVal.length >= 5 && dialCode; 
+        isValid = phoneVal.length >= 5 && dialCode;
         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح.' : 'Please enter a valid phone number.');
         
-        // Advanced validation if library exists
         if (isValid && window.libphonenumber) {
             try {
                 const cleaned = phoneVal.replace(/\D/g, '');
                 const fullNumber = dialCode + cleaned;
                 const phoneNumber = window.libphonenumber.parsePhoneNumber(fullNumber);
                 isValid = phoneNumber && phoneNumber.isValid();
-                if(!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
-            } catch(e) { isValid = false; }
+                if (!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
+            } catch (e) { isValid = false; }
         }
     } else if (fieldName === 'property_type') {
         const val = form.property_type?.value || '';
         isValid = val !== '';
         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى اختيار نوع العقار.' : 'Please select a property type.');
     }
-
+    
     if (message) {
         showError(form, fieldName, message);
     } else {
@@ -1889,49 +1948,49 @@ function clearError(form, name) {
         //         switchLanguage(savedLang);
         //     }
         // } catch (e) {}
-// let currentLang = 'en';
+let currentLang = 'en';
 
-// function switchLanguage(lang) {
-//     currentLang = lang;
-//     const html = document.documentElement;
-//     const toggle = document.getElementById('langToggle');
-//     const labelEn = document.querySelector('.lang-label-en');
-//     const labelAr = document.querySelector('.lang-label-ar');
+function switchLanguage(lang) {
+    currentLang = lang;
+    const html = document.documentElement;
+    const toggle = document.getElementById('langToggle');
+    const labelEn = document.querySelector('.lang-label-en');
+    const labelAr = document.querySelector('.lang-label-ar');
 
-//     // Direction
-//     if (lang === 'ar') {
-//         html.setAttribute('dir', 'rtl');
-//         html.setAttribute('lang', 'ar');
-//         toggle.classList.add('ar');
+    // Direction
+    if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        toggle.classList.add('ar');
 
-//         labelEn.classList.remove('active');
-//         labelAr.classList.add('active');
-//     } else {
-//         html.setAttribute('dir', 'ltr');
-//         html.setAttribute('lang', 'en');
-//         toggle.classList.remove('ar');
+        labelEn.classList.remove('active');
+        labelAr.classList.add('active');
+    } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        toggle.classList.remove('ar');
 
-//         labelEn.classList.add('active');
-//         labelAr.classList.remove('active');
-//     }
+        labelEn.classList.add('active');
+        labelAr.classList.remove('active');
+    }
 
-//     // Translate text
-//     document.querySelectorAll('.translatable').forEach(el => {
-//         const text = el.getAttribute(`data-${lang}`);
-//         if (text) el.textContent = text;
-//     });
+    // Translate text
+    document.querySelectorAll('.translatable').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.textContent = text;
+    });
 
-//     // Save
-//     try {
-//         localStorage.setItem('signstay-lang', lang);
-//     } catch (e) {}
-// }
+    // Save
+    try {
+        localStorage.setItem('signstay-lang', lang);
+    } catch (e) {}
+}
 
-// // Toggle click
-// document.getElementById('langToggle').addEventListener('click', () => {
-//     const newLang = currentLang === 'en' ? 'ar' : 'en';
-//     switchLanguage(newLang);
-// });
+// Toggle click
+document.getElementById('langToggle').addEventListener('click', () => {
+    const newLang = currentLang === 'en' ? 'ar' : 'en';
+    switchLanguage(newLang);
+});
 
 // Load saved
 try {
