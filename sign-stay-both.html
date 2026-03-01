@@ -804,43 +804,87 @@ section#audience {
 
 
 
+  
+
+
+
+
+
+
       /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 45%;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: none;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
 }
 
 /* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal .close {
+    color: #ffffff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(0,0,0,0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.modal .close:hover,
+.modal .close:focus {
+    color: #fff;
+    background: rgba(233, 90, 84, 0.9);
+    transform: rotate(90deg);
+}
+
+/* RTL Support for Modal */
+[dir="rtl"] .modal .close {
+    right: auto;
+    left: 15px;
+}
+
+/* Responsive iframe */
+.modal-content iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9/16;
+    max-height: 80vh;
+}
+
+@media (min-width: 768px) {
+    .modal-content iframe {
+        aspect-ratio: 16/9;
+    }
 }
     </style>
     <script>
