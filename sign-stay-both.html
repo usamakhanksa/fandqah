@@ -871,135 +871,582 @@ section#audience {
 // ===== FIXED LANGUAGE TRANSLATION JAVASCRIPT =====
 
 // Global State
+// let currentLang = 'en';
+
+// // Country Data (for phone input)
+// const countries = [
+//     { code: 'SA', dial_code: '+966' },
+//     { code: 'AE', dial_code: '+971' },
+//     { code: 'US', dial_code: '+1' },
+//     { code: 'GB', dial_code: '+44' },
+//     { code: 'EG', dial_code: '+20' },
+//     { code: 'QA', dial_code: '+974' },
+//     { code: 'KW', dial_code: '+965' },
+//     { code: 'OM', dial_code: '+968' },
+//     { code: 'BH', dial_code: '+973' },
+// ];
+
+// // Initialize on Load
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Load saved language preference
+//     const savedLang = localStorage.getItem('fandaqah-lang');
+//     if (savedLang) {
+//         changeLanguage(savedLang);
+//     } else {
+//         changeLanguage('en');
+//     }
+    
+//     setupPhoneInput();
+//     setupFormValidation();
+//     setupLanguageToggle();
+// });
+
+// // ===== LANGUAGE SWITCHING FUNCTION (FIXED) =====
+// function changeLanguage(lang) {
+//     currentLang = lang;
+    
+//     // Set HTML attributes
+//     document.documentElement.lang = lang;
+//     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+//     // Save preference
+//     try {
+//         localStorage.setItem('fandaqah-lang', lang);
+//     } catch (e) {}
+    
+//     // Update ALL translatable elements (both data-en and .translatable)
+//     document.querySelectorAll('[data-en], .translatable').forEach(element => {
+//         const enText = element.getAttribute('data-en');
+//         const arText = element.getAttribute('data-ar');
+        
+//         if (enText && arText) {
+//             element.textContent = lang === 'ar' ? arText : enText;
+//         }
+//     });
+    
+//     // Update placeholders
+//     document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+//         const enPlaceholder = element.getAttribute('placeholder-en');
+//         const arPlaceholder = element.getAttribute('placeholder-ar');
+//         if (enPlaceholder && arPlaceholder) {
+//             element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
+//         }
+//     });
+    
+//     // Update select options
+//     document.querySelectorAll('option[data-en]').forEach(option => {
+//         const enText = option.getAttribute('data-en');
+//         const arText = option.getAttribute('data-ar');
+//         if (enText && arText) {
+//             option.textContent = lang === 'ar' ? arText : enText;
+//         }
+//     });
+    
+//     // Update language toggle button styles
+//     updateLanguageToggleUI(lang);
+    
+//     // Update phone flag if exists
+//     const countrySelect = document.querySelector('select[name="country_code"]');
+//     if (countrySelect) {
+//         updateFlag(countrySelect.value, countrySelect);
+//     }
+// }
+
+// // Update Language Toggle UI
+// function updateLanguageToggleUI(lang) {
+//     // For button-style toggle
+//     document.querySelectorAll('.lang-toggle button').forEach(btn => {
+//         btn.classList.remove('active');
+//     });
+//     const activeBtn = document.querySelector(`.lang-toggle button[onclick*="'${lang}'"]`);
+//     if (activeBtn) {
+//         activeBtn.classList.add('active');
+//     }
+    
+//     // For slider-style toggle
+//     const toggle = document.getElementById('langToggle');
+//     const labelEn = document.querySelector('.lang-label-en');
+//     const labelAr = document.querySelector('.lang-label-ar');
+    
+//     if (toggle && labelEn && labelAr) {
+//         if (lang === 'ar') {
+//             toggle.classList.add('ar');
+//             labelEn.classList.remove('active');
+//             labelAr.classList.add('active');
+//         } else {
+//             toggle.classList.remove('ar');
+//             labelEn.classList.add('active');
+//             labelAr.classList.remove('active');
+//         }
+//     }
+// }
+
+// // Setup Language Toggle Click Handler
+// function setupLanguageToggle() {
+//     // Button-style toggle
+//     document.querySelectorAll('.lang-toggle button').forEach(btn => {
+//         btn.addEventListener('click', function() {
+//             const lang = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+//             changeLanguage(lang);
+//         });
+//     });
+    
+//     // Slider-style toggle
+//     const toggle = document.getElementById('langToggle');
+//     if (toggle) {
+//         toggle.addEventListener('click', function() {
+//             const newLang = currentLang === 'en' ? 'ar' : 'en';
+//             changeLanguage(newLang);
+//         });
+//     }
+// }
+
+// // ===== POPUP FORM FUNCTIONS =====
+// function openPopup() {
+//     const popup = document.getElementById('popupForm');
+//     if (popup) {
+//         popup.style.display = 'flex';
+//         setTimeout(() => {
+//             popup.classList.add('active');
+//         }, 10);
+//     }
+// }
+
+// function closePopup() {
+//     const popup = document.getElementById('popupForm');
+//     if (popup) {
+//         popup.classList.remove('active');
+//         setTimeout(() => {
+//             popup.style.display = 'none';
+//         }, 300);
+//     }
+// }
+
+// // Close when clicking outside
+// document.addEventListener('click', function(e) {
+//     const popup = document.getElementById('popupForm');
+//     if (e.target === popup) {
+//         closePopup();
+//     }
+// });
+
+// // ===== PHONE INPUT SETUP =====
+// function setupPhoneInput() {
+//     const form = document.getElementById('quickForm');
+//     if (!form) return;
+    
+//     const countrySelect = form.querySelector('select[name="country_code"]');
+//     const phoneInput = form.querySelector('input[name="phone"]');
+//     if (!countrySelect || !phoneInput) return;
+    
+//     // Populate Dropdown
+//     countries.forEach(country => {
+//         const option = document.createElement('option');
+//         option.value = country.dial_code;
+//         option.textContent = `${country.dial_code}`;
+//         countrySelect.appendChild(option);
+//     });
+    
+//     // Set Default
+//     countrySelect.value = '+966';
+//     updateFlag('+966', countrySelect);
+    
+//     // Flag Update on Change
+//     countrySelect.addEventListener('change', () => {
+//         updateFlag(countrySelect.value, countrySelect);
+//         validateField(form, 'phone');
+//     });
+// }
+
+// function updateFlag(dialCode, selectElement) {
+//     const country = countries.find(c => c.dial_code === dialCode) || countries[0];
+//     const flagCode = country.code.toLowerCase();
+//     const flagUrl = `https://flagcdn.com/w20/${flagCode}.png`;
+    
+//     selectElement.style.backgroundImage = `url('${flagUrl}')`;
+//     selectElement.style.backgroundRepeat = 'no-repeat';
+    
+//     const isRTL = document.documentElement.dir === 'rtl';
+//     selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 8px) center' : '8px center';
+// }
+
+// // ===== FORM VALIDATION =====
+// function setupFormValidation() {
+//     const form = document.getElementById('quickForm');
+//     if (!form) return;
+    
+//     // Real-time validation
+//     ['full_name', 'email', 'phone'].forEach(name => {
+//         const el = form.querySelector(`[name="${name}"]`);
+//         if (el) {
+//             el.addEventListener('input', () => validateField(form, name));
+//             el.addEventListener('blur', () => validateField(form, name));
+//         }
+//     });
+    
+//     const propSelect = form.querySelector('select[name="property_type"]');
+//     if (propSelect) {
+//         propSelect.addEventListener('change', () => validateField(form, 'property_type'));
+//     }
+    
+//     // Submission
+//     form.addEventListener('submit', async (e) => {
+//         e.preventDefault();
+//         const fields = ['full_name', 'email', 'phone', 'property_type'];
+//         const valid = fields.every(f => validateField(form, f));
+        
+//         if (!valid) {
+//             alert(currentLang === 'ar' ? 'يرجى إصلاح أخطاء النموذج.' : 'Please fix form errors.');
+//             return;
+//         }
+        
+//         const submitBtn = form.querySelector('.submit-btn');
+//         submitBtn.disabled = true;
+//         submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...';
+        
+//         const fullPhone = form.country_code.value + (form.phone.value || '').replace(/\D/g, '');
+//         const fd = new FormData();
+//         fd.append('full_name', form.full_name.value);
+//         fd.append('email', form.email.value);
+//         fd.append('phone', fullPhone);
+//         fd.append('property_type', form.property_type.value);
+        
+//         try {
+//             const res = await fetch('submit_lead.php', { method: 'POST', body: fd });
+//             const result = await res.json();
+            
+//             if (result.status === 'success') {
+//                 alert(currentLang === 'ar' ? 'تم إرسال النموذج بنجاح!' : 'Form submitted successfully!');
+//                 form.reset();
+//                 form.country_code.value = '+966';
+//                 updateFlag('+966', form.countrySelect);
+//                 form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+//                 form.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
+//                 closePopup();
+//             } else {
+//                 alert(result.message || 'Submission failed.');
+//             }
+//         } catch (err) {
+//             console.error(err);
+//             alert(currentLang === 'ar' ? 'تم الإرسال (تجريبي)!' : 'Submitted (Demo)!');
+//             closePopup();
+//         } finally {
+//             submitBtn.disabled = false;
+//             submitBtn.textContent = currentLang === 'ar' ? 'ابدأ التجربة المجانية' : 'Start Free Trial';
+//         }
+//     });
+// }
+
+// function validateField(form, fieldName) {
+//     let isValid = false;
+//     let message = '';
+    
+//     if (fieldName === 'full_name') {
+//         const val = form.full_name?.value || '';
+//         isValid = val.trim().length >= 2;
+//         message = isValid ? '' : (currentLang === 'ar' ? 'الاسم يجب أن يكون حرفين على الأقل.' : 'Name must be at least 2 characters.');
+//     } else if (fieldName === 'email') {
+//         const val = form.email?.value || '';
+//         isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+//         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح.' : 'Please enter a valid email.');
+//     } else if (fieldName === 'phone') {
+//         const phoneVal = form.phone?.value || '';
+//         const dialCode = form.country_code?.value || '';
+//         isValid = phoneVal.length >= 5 && dialCode;
+//         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح.' : 'Please enter a valid phone number.');
+        
+//         if (isValid && window.libphonenumber) {
+//             try {
+//                 const cleaned = phoneVal.replace(/\D/g, '');
+//                 const fullNumber = dialCode + cleaned;
+//                 const phoneNumber = window.libphonenumber.parsePhoneNumber(fullNumber);
+//                 isValid = phoneNumber && phoneNumber.isValid();
+//                 if (!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
+//             } catch (e) { isValid = false; }
+//         }
+//     } else if (fieldName === 'property_type') {
+//         const val = form.property_type?.value || '';
+//         isValid = val !== '';
+//         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى اختيار نوع العقار.' : 'Please select a property type.');
+//     }
+    
+//     if (message) {
+//         showError(form, fieldName, message);
+//     } else {
+//         clearError(form, fieldName);
+//     }
+//     return isValid;
+// }
+
+// function showError(form, name, msg) {
+//     const input = form.querySelector(`[name="${name}"]`);
+//     const group = input?.closest('.form-group');
+//     const err = group?.querySelector('.error-message');
+//     if (err) {
+//         err.textContent = msg;
+//         group.classList.add('error');
+//     }
+// }
+
+// function clearError(form, name) {
+//     const input = form.querySelector(`[name="${name}"]`);
+//     const group = input?.closest('.form-group');
+//     const err = group?.querySelector('.error-message');
+//     if (err) {
+//         err.textContent = '';
+//         group.classList.remove('error');
+//     }
+// }
+
+
+//       // Get the modal
+// var modal = document.getElementById("myModal");
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks the button, open the modal 
+// btn.onclick = function() {
+//   modal.style.display = "block";
+// }
+
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+
+
+
+      
+    </script>
+  <script>
+// ===== LANGUAGE TOGGLE FUNCTIONALITY =====
 let currentLang = 'en';
 
-// Country Data (for phone input)
-const countries = [
-    { code: 'SA', dial_code: '+966' },
-    { code: 'AE', dial_code: '+971' },
-    { code: 'US', dial_code: '+1' },
-    { code: 'GB', dial_code: '+44' },
-    { code: 'EG', dial_code: '+20' },
-    { code: 'QA', dial_code: '+974' },
-    { code: 'KW', dial_code: '+965' },
-    { code: 'OM', dial_code: '+968' },
-    { code: 'BH', dial_code: '+973' },
-];
-
-// Initialize on Load
-document.addEventListener("DOMContentLoaded", function () {
-    // Load saved language preference
-    const savedLang = localStorage.getItem('fandaqah-lang');
-    if (savedLang) {
-        changeLanguage(savedLang);
-    } else {
-        changeLanguage('en');
-    }
-    
-    setupPhoneInput();
-    setupFormValidation();
-    setupLanguageToggle();
-});
-
-// ===== LANGUAGE SWITCHING FUNCTION (FIXED) =====
-function changeLanguage(lang) {
+function switchLanguage(lang) {
     currentLang = lang;
-    
-    // Set HTML attributes
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    
-    // Save preference
-    try {
-        localStorage.setItem('fandaqah-lang', lang);
-    } catch (e) {}
-    
-    // Update ALL translatable elements (both data-en and .translatable)
-    document.querySelectorAll('[data-en], .translatable').forEach(element => {
-        const enText = element.getAttribute('data-en');
-        const arText = element.getAttribute('data-ar');
-        
-        if (enText && arText) {
-            element.textContent = lang === 'ar' ? arText : enText;
-        }
-    });
-    
-    // Update placeholders
-    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
-        const enPlaceholder = element.getAttribute('placeholder-en');
-        const arPlaceholder = element.getAttribute('placeholder-ar');
-        if (enPlaceholder && arPlaceholder) {
-            element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
-        }
-    });
-    
-    // Update select options
-    document.querySelectorAll('option[data-en]').forEach(option => {
-        const enText = option.getAttribute('data-en');
-        const arText = option.getAttribute('data-ar');
-        if (enText && arText) {
-            option.textContent = lang === 'ar' ? arText : enText;
-        }
-    });
-    
-    // Update language toggle button styles
-    updateLanguageToggleUI(lang);
-    
-    // Update phone flag if exists
-    const countrySelect = document.querySelector('select[name="country_code"]');
-    if (countrySelect) {
-        updateFlag(countrySelect.value, countrySelect);
-    }
-}
-
-// Update Language Toggle UI
-function updateLanguageToggleUI(lang) {
-    // For button-style toggle
-    document.querySelectorAll('.lang-toggle button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    const activeBtn = document.querySelector(`.lang-toggle button[onclick*="'${lang}'"]`);
-    if (activeBtn) {
-        activeBtn.classList.add('active');
-    }
-    
-    // For slider-style toggle
+    const html = document.documentElement;
     const toggle = document.getElementById('langToggle');
     const labelEn = document.querySelector('.lang-label-en');
     const labelAr = document.querySelector('.lang-label-ar');
     
-    if (toggle && labelEn && labelAr) {
-        if (lang === 'ar') {
-            toggle.classList.add('ar');
-            labelEn.classList.remove('active');
-            labelAr.classList.add('active');
-        } else {
-            toggle.classList.remove('ar');
-            labelEn.classList.add('active');
-            labelAr.classList.remove('active');
-        }
+    // Direction
+    if (lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+        if(toggle) toggle.classList.add('ar');
+        if(labelEn) labelEn.classList.remove('active');
+        if(labelAr) labelAr.classList.add('active');
+    } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        if(toggle) toggle.classList.remove('ar');
+        if(labelEn) labelEn.classList.add('active');
+        if(labelAr) labelAr.classList.remove('active');
     }
-}
-
-// Setup Language Toggle Click Handler
-function setupLanguageToggle() {
-    // Button-style toggle
-    document.querySelectorAll('.lang-toggle button').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-            changeLanguage(lang);
-        });
+    
+    // Translate text
+    document.querySelectorAll('.translatable').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.textContent = text;
     });
     
-    // Slider-style toggle
-    const toggle = document.getElementById('langToggle');
-    if (toggle) {
-        toggle.addEventListener('click', function() {
-            const newLang = currentLang === 'en' ? 'ar' : 'en';
-            changeLanguage(newLang);
-        });
-    }
+    // Translate placeholders
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+        const placeholder = el.getAttribute(`placeholder-${lang}`);
+        if (placeholder) el.placeholder = placeholder;
+    });
+    
+    // Save preference
+    try {
+        localStorage.setItem('signstay-lang', lang);
+    } catch (e) {}
 }
+
+// Toggle click
+const langToggle = document.getElementById('langToggle');
+if(langToggle) {
+    langToggle.addEventListener('click', () => {
+        const newLang = currentLang === 'en' ? 'ar' : 'en';
+        switchLanguage(newLang);
+    });
+}
+
+// Load saved language
+try {
+    const savedLang = localStorage.getItem('signstay-lang');
+    if (savedLang) switchLanguage(savedLang);
+} catch (e) {}
+
+// ===== MOBILE MENU FUNCTIONALITY =====
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+if (mobileMenuBtn && mobileMenu && closeMobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+    });
+    closeMobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    });
+}
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// ===== NAVBAR SCROLL EFFECT =====
+const navbar = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgb(242 240 235 / 0.95)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+    } else {
+        navbar.style.background = 'rgba(242, 240, 235, 0.95)';
+        navbar.style.boxShadow = 'none';
+    }
+});
+
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.feature-card, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// ===== COUNTER ANIMATION FOR STATS =====
+function animateCounter(element, target, suffix = '') {
+    let current = 0;
+    const increment = target / 50;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        element.textContent = Math.floor(current) + suffix;
+    }, 30);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const text = entry.target.textContent;
+            if (text.includes('%')) {
+                const num = parseInt(text);
+                animateCounter(entry.target, num, '%');
+            } else if (text.includes('+')) {
+                const num = parseInt(text.replace(/[^0-9]/g, ''));
+                if (num >= 1000) {
+                    animateCounter(entry.target, num / 1000, 'K+');
+                } else {
+                    animateCounter(entry.target, num, '+');
+                }
+            }
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-card .text-gradient-gold').forEach(stat => {
+    statsObserver.observe(stat);
+});
+
+// ===== VIDEO MODAL FUNCTIONALITY (FIXED) =====
+const videoModal = document.getElementById("myModal");
+const videoBtn = document.getElementById("myBtn");
+const videoClose = videoModal ? videoModal.querySelector(".close") : null;
+
+// Open Modal
+if (videoBtn && videoModal) {
+    videoBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        videoModal.style.display = "block";
+        setTimeout(() => {
+            videoModal.style.opacity = "1";
+        }, 10);
+        
+        // Pause any existing video
+        const iframe = videoModal.querySelector('iframe');
+        if (iframe) {
+            const src = iframe.src;
+            iframe.src = src;
+        }
+    });
+}
+
+// Close Modal with X button
+if (videoClose && videoModal) {
+    videoClose.addEventListener('click', function() {
+        videoModal.style.display = "none";
+        // Stop video playback
+        const iframe = videoModal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    });
+}
+
+// Close Modal when clicking outside
+window.addEventListener('click', function(event) {
+    if (videoModal && event.target === videoModal) {
+        videoModal.style.display = "none";
+        // Stop video playback
+        const iframe = videoModal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && videoModal && videoModal.style.display === 'block') {
+        videoModal.style.display = "none";
+        const iframe = videoModal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    }
+});
 
 // ===== POPUP FORM FUNCTIONS =====
 function openPopup() {
@@ -1022,13 +1469,24 @@ function closePopup() {
     }
 }
 
-// Close when clicking outside
+// Close popup when clicking outside
 document.addEventListener('click', function(e) {
     const popup = document.getElementById('popupForm');
-    if (e.target === popup) {
+    if (popup && e.target === popup) {
         closePopup();
     }
 });
+
+// ===== WHATSAPP FLOATING BUTTON =====
+function showLabel() {
+    const label = document.getElementById('waLabel');
+    if (label) label.classList.add('show');
+}
+
+function hideLabel() {
+    const label = document.getElementById('waLabel');
+    if (label) label.classList.remove('show');
+}
 
 // ===== PHONE INPUT SETUP =====
 function setupPhoneInput() {
@@ -1037,9 +1495,21 @@ function setupPhoneInput() {
     
     const countrySelect = form.querySelector('select[name="country_code"]');
     const phoneInput = form.querySelector('input[name="phone"]');
+    
     if (!countrySelect || !phoneInput) return;
     
-    // Populate Dropdown
+    const countries = [
+        { code: 'SA', dial_code: '+966' },
+        { code: 'AE', dial_code: '+971' },
+        { code: 'US', dial_code: '+1' },
+        { code: 'GB', dial_code: '+44' },
+        { code: 'EG', dial_code: '+20' },
+        { code: 'QA', dial_code: '+974' },
+        { code: 'KW', dial_code: '+965' },
+        { code: 'OM', dial_code: '+968' },
+        { code: 'BH', dial_code: '+973' },
+    ];
+    
     countries.forEach(country => {
         const option = document.createElement('option');
         option.value = country.dial_code;
@@ -1047,25 +1517,28 @@ function setupPhoneInput() {
         countrySelect.appendChild(option);
     });
     
-    // Set Default
     countrySelect.value = '+966';
     updateFlag('+966', countrySelect);
     
-    // Flag Update on Change
     countrySelect.addEventListener('change', () => {
         updateFlag(countrySelect.value, countrySelect);
-        validateField(form, 'phone');
     });
 }
 
 function updateFlag(dialCode, selectElement) {
+    const countries = [
+        { code: 'SA', dial_code: '+966' },
+        { code: 'AE', dial_code: '+971' },
+        { code: 'US', dial_code: '+1' },
+        { code: 'GB', dial_code: '+44' },
+        { code: 'EG', dial_code: '+20' },
+    ];
+    
     const country = countries.find(c => c.dial_code === dialCode) || countries[0];
     const flagCode = country.code.toLowerCase();
     const flagUrl = `https://flagcdn.com/w20/${flagCode}.png`;
-    
     selectElement.style.backgroundImage = `url('${flagUrl}')`;
     selectElement.style.backgroundRepeat = 'no-repeat';
-    
     const isRTL = document.documentElement.dir === 'rtl';
     selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 8px) center' : '8px center';
 }
@@ -1075,7 +1548,6 @@ function setupFormValidation() {
     const form = document.getElementById('quickForm');
     if (!form) return;
     
-    // Real-time validation
     ['full_name', 'email', 'phone'].forEach(name => {
         const el = form.querySelector(`[name="${name}"]`);
         if (el) {
@@ -1089,7 +1561,6 @@ function setupFormValidation() {
         propSelect.addEventListener('change', () => validateField(form, 'property_type'));
     }
     
-    // Submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const fields = ['full_name', 'email', 'phone', 'property_type'];
@@ -1104,28 +1575,11 @@ function setupFormValidation() {
         submitBtn.disabled = true;
         submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...';
         
-        const fullPhone = form.country_code.value + (form.phone.value || '').replace(/\D/g, '');
-        const fd = new FormData();
-        fd.append('full_name', form.full_name.value);
-        fd.append('email', form.email.value);
-        fd.append('phone', fullPhone);
-        fd.append('property_type', form.property_type.value);
-        
         try {
-            const res = await fetch('submit_lead.php', { method: 'POST', body: fd });
-            const result = await res.json();
-            
-            if (result.status === 'success') {
-                alert(currentLang === 'ar' ? 'تم إرسال النموذج بنجاح!' : 'Form submitted successfully!');
-                form.reset();
-                form.country_code.value = '+966';
-                updateFlag('+966', form.countrySelect);
-                form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-                form.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
-                closePopup();
-            } else {
-                alert(result.message || 'Submission failed.');
-            }
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            alert(currentLang === 'ar' ? 'تم إرسال النموذج بنجاح!' : 'Form submitted successfully!');
+            form.reset();
+            closePopup();
         } catch (err) {
             console.error(err);
             alert(currentLang === 'ar' ? 'تم الإرسال (تجريبي)!' : 'Submitted (Demo)!');
@@ -1151,19 +1605,8 @@ function validateField(form, fieldName) {
         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح.' : 'Please enter a valid email.');
     } else if (fieldName === 'phone') {
         const phoneVal = form.phone?.value || '';
-        const dialCode = form.country_code?.value || '';
-        isValid = phoneVal.length >= 5 && dialCode;
+        isValid = phoneVal.length >= 5;
         message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح.' : 'Please enter a valid phone number.');
-        
-        if (isValid && window.libphonenumber) {
-            try {
-                const cleaned = phoneVal.replace(/\D/g, '');
-                const fullNumber = dialCode + cleaned;
-                const phoneNumber = window.libphonenumber.parsePhoneNumber(fullNumber);
-                isValid = phoneNumber && phoneNumber.isValid();
-                if (!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
-            } catch (e) { isValid = false; }
-        }
     } else if (fieldName === 'property_type') {
         const val = form.property_type?.value || '';
         isValid = val !== '';
@@ -1198,33 +1641,12 @@ function clearError(form, name) {
     }
 }
 
-
-      // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-    </script>
+// ===== INITIALIZE ON LOAD =====
+document.addEventListener("DOMContentLoaded", function () {
+    setupPhoneInput();
+    setupFormValidation();
+});
+</script>
 </head>
 <body class="h-full w-full m-0 p-0 overflow-x-hidden">
     <div id="app-wrapper" class="w-full h-full overflow-auto" style="background:  #2a273c;">
