@@ -97,7 +97,7 @@ body {
   justify-content: flex-end;
 }
 .lang-switch {
-  position: fixed;
+  /* position: fixed; */
   top: 100px;
   right: 20px;
   z-index: 100;
@@ -290,13 +290,7 @@ body {
 </head>
 <body class="h-full bg-[#f2f0eb] overflow-auto scroll-smooth">
 
-<!-- Language Switcher -->
-<button id="lang-switch" class="lang-switch">
-  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.148" />
-  </svg>
-  <span id="lang-text">العربية</span>
-</button>
+
 
 <div id="app-wrapper" class="w-full h-full">
 <!-- Navigation -->
@@ -319,7 +313,13 @@ body {
   <a href="#compatibility" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium" data-en="Compatibility" data-ar="التكامل">Compatibility</a>
   <a href="#contact" class="coral-gradient text-white px-5 py-2.5 rounded-full font-semibold btn-primary" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</a>
 </div>
-
+<!-- Language Switcher -->
+<button id="lang-switch" class="lang-switch">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.148" />
+  </svg>
+  <span id="lang-text">العربية</span>
+</button>
 <!-- Mobile Menu Button -->
 <button id="mobile-menu-btn" class="md:hidden p-2 text-[#2a273c]">
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
