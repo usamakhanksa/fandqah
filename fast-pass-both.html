@@ -286,6 +286,283 @@ body {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+/* Popup Form */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+}
+
+.popup-form {
+    background-color: var(--white);
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.popup-overlay.active .popup-form {
+    transform: scale(1);
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(255 255 255);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--dark-color);
+    font-size: 20px;
+}
+
+.popup-close:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.popup-header {
+    background: linear-gradient(135deg, var(--dark-color), var(--dark-light));
+    color: var(--white);
+    padding: 20px;
+    border-radius: 16px 16px 0 0;
+    text-align: center;
+}
+
+.popup-body {
+    padding: 20px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    font-family: "El Messiri", sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(233, 90, 84, 0.1);
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    font-size: 16px;
+    font-family: "El Messiri", sans-serif;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 90, 84, 0.3);
+}
+
+/* Error States */
+.form-group.error input,
+.form-group.error select {
+    border-color: #e74c3c;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.875em;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Phone Input Wrapper */
+.phone-input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+select.country-select,
+input[name="phone"] {
+    padding: 10px 12px;
+    border: 1px solid var(--gray-300);
+    font-size: 16px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: "El Messiri", sans-serif;
+}
+
+select.country-select {
+    width: auto;
+    min-width: 120px;
+    border-radius: 8px 0 0 8px;
+    padding-left: 36px;
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 20px auto;
+    appearance: none;
+    cursor: pointer;
+    border-right: none;
+}
+
+input[name="phone"] {
+    flex: 1;
+    border-radius: 0 8px 8px 0;
+}
+
+/* RTL Support */
+[dir="rtl"] .lang-toggle {
+    right: auto;
+    left: 20px;
+}
+
+[dir="rtl"] .popup-close {
+    right: auto;
+    left: 15px;
+}
+
+[dir="rtl"] select.country-select {
+    border-radius: 0 8px 8px 0;
+    padding-right: 36px;
+    padding-left: 12px;
+    background-position: calc(100% - 8px) center;
+    border-left: none;
+    border-right: 1px solid var(--gray-300);
+}
+
+[dir="rtl"] input[name="phone"] {
+    border-radius: 8px 0 0 8px;
+}
+
+
+
+     section#features {
+    background: #2a273c;
+}
+
+section#audience {
+    background: #2a273c;
+}
+
+
+
+      /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 45%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 </head>
 <body class="h-full bg-[#f2f0eb] overflow-auto scroll-smooth">
@@ -843,7 +1120,9 @@ body {
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
-      <span data-en="Activate FAST PASS" data-ar="تفعيل الدخول السريع">Activate FAST PASS</span>
+                              <!-- <span class="translatable" data-en="Watch Demo" data-ar="شاهد العرض">Watch Demo</span> -->
+
+      <span data-en="Watch Demo" data-ar="شاهد العرض">Watch Demo</span>
     </button>
     <button class="bg-[#2a273c] text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -855,7 +1134,9 @@ body {
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
-      <span data-en="Contact Fandaqah Team" data-ar="اتصل بالدعم الفني">Contact Fandaqah Team</span>
+                              <!-- <span onclick="openPopup()" class="trigger-btn translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span> -->
+
+      <span onclick="openPopup()" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span>
     </button>
   </div>
 </div>
@@ -1047,8 +1328,385 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+
+
+
+
+
+
+
+  
+       // Global State
+// ===== FIXED LANGUAGE TRANSLATION JAVASCRIPT =====
+
+// Global State
+let currentLang = 'en';
+
+// Country Data (for phone input)
+const countries = [
+    { code: 'SA', dial_code: '+966' },
+    { code: 'AE', dial_code: '+971' },
+    { code: 'US', dial_code: '+1' },
+    { code: 'GB', dial_code: '+44' },
+    { code: 'EG', dial_code: '+20' },
+    { code: 'QA', dial_code: '+974' },
+    { code: 'KW', dial_code: '+965' },
+    { code: 'OM', dial_code: '+968' },
+    { code: 'BH', dial_code: '+973' },
+];
+
+// Initialize on Load
+document.addEventListener("DOMContentLoaded", function () {
+    // Load saved language preference
+    const savedLang = localStorage.getItem('fandaqah-lang');
+    if (savedLang) {
+        changeLanguage(savedLang);
+    } else {
+        changeLanguage('en');
+    }
+    
+    setupPhoneInput();
+    setupFormValidation();
+    setupLanguageToggle();
+});
+
+// ===== LANGUAGE SWITCHING FUNCTION (FIXED) =====
+function changeLanguage(lang) {
+    currentLang = lang;
+    
+    // Set HTML attributes
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    // Save preference
+    try {
+        localStorage.setItem('fandaqah-lang', lang);
+    } catch (e) {}
+    
+    // Update ALL translatable elements (both data-en and .translatable)
+    document.querySelectorAll('[data-en], .translatable').forEach(element => {
+        const enText = element.getAttribute('data-en');
+        const arText = element.getAttribute('data-ar');
+        
+        if (enText && arText) {
+            element.textContent = lang === 'ar' ? arText : enText;
+        }
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+        const enPlaceholder = element.getAttribute('placeholder-en');
+        const arPlaceholder = element.getAttribute('placeholder-ar');
+        if (enPlaceholder && arPlaceholder) {
+            element.placeholder = lang === 'ar' ? arPlaceholder : enPlaceholder;
+        }
+    });
+    
+    // Update select options
+    document.querySelectorAll('option[data-en]').forEach(option => {
+        const enText = option.getAttribute('data-en');
+        const arText = option.getAttribute('data-ar');
+        if (enText && arText) {
+            option.textContent = lang === 'ar' ? arText : enText;
+        }
+    });
+    
+    // Update language toggle button styles
+    updateLanguageToggleUI(lang);
+    
+    // Update phone flag if exists
+    const countrySelect = document.querySelector('select[name="country_code"]');
+    if (countrySelect) {
+        updateFlag(countrySelect.value, countrySelect);
+    }
+}
+
+// Update Language Toggle UI
+function updateLanguageToggleUI(lang) {
+    // For button-style toggle
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector(`.lang-toggle button[onclick*="'${lang}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+    
+    // For slider-style toggle
+    const toggle = document.getElementById('langToggle');
+    const labelEn = document.querySelector('.lang-label-en');
+    const labelAr = document.querySelector('.lang-label-ar');
+    
+    if (toggle && labelEn && labelAr) {
+        if (lang === 'ar') {
+            toggle.classList.add('ar');
+            labelEn.classList.remove('active');
+            labelAr.classList.add('active');
+        } else {
+            toggle.classList.remove('ar');
+            labelEn.classList.add('active');
+            labelAr.classList.remove('active');
+        }
+    }
+}
+
+// Setup Language Toggle Click Handler
+function setupLanguageToggle() {
+    // Button-style toggle
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            changeLanguage(lang);
+        });
+    });
+    
+    // Slider-style toggle
+    const toggle = document.getElementById('langToggle');
+    if (toggle) {
+        toggle.addEventListener('click', function() {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            changeLanguage(newLang);
+        });
+    }
+}
+
+// ===== POPUP FORM FUNCTIONS =====
+function openPopup() {
+    const popup = document.getElementById('popupForm');
+    if (popup) {
+        popup.style.display = 'flex';
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 10);
+    }
+}
+
+function closePopup() {
+    const popup = document.getElementById('popupForm');
+    if (popup) {
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300);
+    }
+}
+
+// Close when clicking outside
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('popupForm');
+    if (e.target === popup) {
+        closePopup();
+    }
+});
+
+// ===== PHONE INPUT SETUP =====
+function setupPhoneInput() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+    
+    const countrySelect = form.querySelector('select[name="country_code"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
+    if (!countrySelect || !phoneInput) return;
+    
+    // Populate Dropdown
+    countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.dial_code;
+        option.textContent = `${country.dial_code}`;
+        countrySelect.appendChild(option);
+    });
+    
+    // Set Default
+    countrySelect.value = '+966';
+    updateFlag('+966', countrySelect);
+    
+    // Flag Update on Change
+    countrySelect.addEventListener('change', () => {
+        updateFlag(countrySelect.value, countrySelect);
+        validateField(form, 'phone');
+    });
+}
+
+function updateFlag(dialCode, selectElement) {
+    const country = countries.find(c => c.dial_code === dialCode) || countries[0];
+    const flagCode = country.code.toLowerCase();
+    const flagUrl = `https://flagcdn.com/w20/${flagCode}.png`;
+    
+    selectElement.style.backgroundImage = `url('${flagUrl}')`;
+    selectElement.style.backgroundRepeat = 'no-repeat';
+    
+    const isRTL = document.documentElement.dir === 'rtl';
+    selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 8px) center' : '8px center';
+}
+
+// ===== FORM VALIDATION =====
+function setupFormValidation() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+    
+    // Real-time validation
+    ['full_name', 'email', 'phone'].forEach(name => {
+        const el = form.querySelector(`[name="${name}"]`);
+        if (el) {
+            el.addEventListener('input', () => validateField(form, name));
+            el.addEventListener('blur', () => validateField(form, name));
+        }
+    });
+    
+    const propSelect = form.querySelector('select[name="property_type"]');
+    if (propSelect) {
+        propSelect.addEventListener('change', () => validateField(form, 'property_type'));
+    }
+    
+    // Submission
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fields = ['full_name', 'email', 'phone', 'property_type'];
+        const valid = fields.every(f => validateField(form, f));
+        
+        if (!valid) {
+            alert(currentLang === 'ar' ? 'يرجى إصلاح أخطاء النموذج.' : 'Please fix form errors.');
+            return;
+        }
+        
+        const submitBtn = form.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Submitting...';
+        
+        const fullPhone = form.country_code.value + (form.phone.value || '').replace(/\D/g, '');
+        const fd = new FormData();
+        fd.append('full_name', form.full_name.value);
+        fd.append('email', form.email.value);
+        fd.append('phone', fullPhone);
+        fd.append('property_type', form.property_type.value);
+        
+        try {
+            const res = await fetch('submit_lead.php', { method: 'POST', body: fd });
+            const result = await res.json();
+            
+            if (result.status === 'success') {
+                alert(currentLang === 'ar' ? 'تم إرسال النموذج بنجاح!' : 'Form submitted successfully!');
+                form.reset();
+                form.country_code.value = '+966';
+                updateFlag('+966', form.countrySelect);
+                form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+                form.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
+                closePopup();
+            } else {
+                alert(result.message || 'Submission failed.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert(currentLang === 'ar' ? 'تم الإرسال (تجريبي)!' : 'Submitted (Demo)!');
+            closePopup();
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = currentLang === 'ar' ? 'ابدأ التجربة المجانية' : 'Start Free Trial';
+        }
+    });
+}
+
+function validateField(form, fieldName) {
+    let isValid = false;
+    let message = '';
+    
+    if (fieldName === 'full_name') {
+        const val = form.full_name?.value || '';
+        isValid = val.trim().length >= 2;
+        message = isValid ? '' : (currentLang === 'ar' ? 'الاسم يجب أن يكون حرفين على الأقل.' : 'Name must be at least 2 characters.');
+    } else if (fieldName === 'email') {
+        const val = form.email?.value || '';
+        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح.' : 'Please enter a valid email.');
+    } else if (fieldName === 'phone') {
+        const phoneVal = form.phone?.value || '';
+        const dialCode = form.country_code?.value || '';
+        isValid = phoneVal.length >= 5 && dialCode;
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى إدخال رقم هاتف صحيح.' : 'Please enter a valid phone number.');
+        
+        if (isValid && window.libphonenumber) {
+            try {
+                const cleaned = phoneVal.replace(/\D/g, '');
+                const fullNumber = dialCode + cleaned;
+                const phoneNumber = window.libphonenumber.parsePhoneNumber(fullNumber);
+                isValid = phoneNumber && phoneNumber.isValid();
+                if (!isValid) message = currentLang === 'ar' ? 'رقم الهاتف غير صحيح.' : 'Invalid phone number.';
+            } catch (e) { isValid = false; }
+        }
+    } else if (fieldName === 'property_type') {
+        const val = form.property_type?.value || '';
+        isValid = val !== '';
+        message = isValid ? '' : (currentLang === 'ar' ? 'يرجى اختيار نوع العقار.' : 'Please select a property type.');
+    }
+    
+    if (message) {
+        showError(form, fieldName, message);
+    } else {
+        clearError(form, fieldName);
+    }
+    return isValid;
+}
+
+function showError(form, name, msg) {
+    const input = form.querySelector(`[name="${name}"]`);
+    const group = input?.closest('.form-group');
+    const err = group?.querySelector('.error-message');
+    if (err) {
+        err.textContent = msg;
+        group.classList.add('error');
+    }
+}
+
+function clearError(form, name) {
+    const input = form.querySelector(`[name="${name}"]`);
+    const group = input?.closest('.form-group');
+    const err = group?.querySelector('.error-message');
+    if (err) {
+        err.textContent = '';
+        group.classList.remove('error');
+    }
+}
+
+
+      // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 </script>
 
+
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <iframe width="479" height="852" src="https://www.youtube.com/embed/F4bOyxecv30" title="توقيع الاقامة الالكتروني على جهاز التابلت في فندقة" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+
+</div>
      <!-- ✅ WHATSAPP FLOATING BUTTON — Copy this block into your project -->
     <div class="wa-float" id="waFloat">
         <div class="wa-label" id="waLabel">
@@ -1062,6 +1720,57 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             </svg>
             <span class="wa-dot"></span>
         </a>
+    </div>
+
+     <!-- Popup Form -->
+<!-- Popup Form -->
+    <div class="popup-overlay" id="popupForm">
+        <div class="popup-form">
+            <button class="popup-close" onclick="closePopup()">
+                <i class="ri-close-line"></i>
+            </button>
+            <div class="popup-header">
+                <h3 class="text-2xl font-bold" data-en="Welcome to Fandaqah PMS" data-ar="مرحبا بك في فندقة">Welcome to Fandaqah PMS</h3>
+                <p class="mt-2" data-en="Get a free 30-day trial and personalized demo" data-ar="احصل على نسخة تجريبية مجانية وعرض توضيحي مخصص">Get a free 30-day trial and personalized demo</p>
+            </div>
+            <div class="popup-body">
+                <form id="quickForm">
+                    <div class="form-group">
+                        <label class="translatable" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+                        <input type="text" name="full_name" class="form-control" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="translatable" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+                        <input type="email" name="email" class="form-control" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="translatable" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                        <div class="phone-input-wrapper">
+                            <select name="country_code" class="form-control country-select" required>
+                                <!-- Populated by JS -->
+                            </select>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="translatable" data-en="Property Type" data-ar="نوع العقار">Property Type</label>
+                        <select name="property_type" class="form-control" required>
+                            <option class="translatable" value="" data-en="Select property type" data-ar="اختر نوع العقار">Select property type</option>
+                            <option class="translatable" value="hotel" data-en="Hotel" data-ar="فندق">Hotel</option>
+                            <option class="translatable" value="serviced-apartments" data-en="Serviced Apartments" data-ar="شقق مفروشة">Serviced Apartments</option>
+                            <option class="translatable" value="resort" data-en="Resort" data-ar="منتجع">Resort</option>
+                            <option class="translatable" value="boutique-hotel" data-en="Boutique Hotel" data-ar="فندق بوتيك">Boutique Hotel</option>
+                            <option class="translatable" value="other" data-en="Other" data-ar="أخرى">Other</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="translatable submit-btn" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
