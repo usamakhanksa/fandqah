@@ -2172,6 +2172,30 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize first product
   switchProduct('fastpass');
 });
+
+
+  // ===== DROPDOWN HANDLING =====
+const productsDropdown = document.getElementById('productsDropdown');
+
+// For touch devices - toggle on click
+productsDropdown.querySelector('.nav-dropdown-trigger').addEventListener('click', (e) => {
+  e.preventDefault();
+  productsDropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!productsDropdown.contains(e.target)) {
+    productsDropdown.classList.remove('active');
+  }
+});
+
+// Close dropdown on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    productsDropdown.classList.remove('active');
+  }
+});
 </script>
 </body>
 </html>
