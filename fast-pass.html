@@ -583,10 +583,12 @@ opacity: 0;
 
 <div class="flex items-center gap-3">
 <button id="lang-switch" class="lang-switch">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.148" />
-</svg>
-<span id="lang-text">العربية</span>
+</svg> -->
+    <span id="lang-text">AR</span>
+
+<!-- <span id="lang-text">العربية</span> -->
 </button>
 
 <button id="mobile-menu-btn" class="md:hidden p-2 text-[#2a273c]">
@@ -1133,7 +1135,7 @@ document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
 const langText = document.getElementById('lang-text');
 if (langText) {
-langText.textContent = lang === 'ar' ? 'English' : 'العربية';
+langText.textContent = lang === 'ar' ? 'EN' : 'AR';
 }
 
 document.querySelectorAll('.translatable').forEach(el => {
