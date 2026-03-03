@@ -784,11 +784,343 @@ input[name="phone"] {
 [dir="rtl"] .text-left { text-align: right; }
 [dir="rtl"] .ml-auto { margin-left: 0; margin-right: auto; }
 [dir="rtl"] .mr-auto { margin-right: 0; margin-left: auto; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Dropdown Styles */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dropdown-trigger:hover {
+  color: var(--primary-color);
+}
+
+.nav-dropdown-trigger .dropdown-arrow {
+  transition: transform 0.3s ease;
+  font-size: 12px;
+}
+
+.nav-dropdown:hover .dropdown-arrow,
+.nav-dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Mega Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  min-width: 480px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(42, 39, 60, 0.15), 0 0 0 1px rgba(143, 151, 147, 0.1);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(10px);
+}
+
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+[dir="rtl"] .nav-dropdown:hover .dropdown-menu,
+[dir="rtl"] .nav-dropdown.active .dropdown-menu {
+  transform: translateX(50%) translateY(0);
+}
+
+/* Dropdown Arrow/Pointer */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--white);
+  border-radius: 4px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.03);
+}
+
+/* Product Cards in Dropdown */
+.dropdown-product-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(233, 90, 84, 0.05) 0%, rgba(251, 205, 171, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-product-card:hover::before {
+  opacity: 1;
+}
+
+.dropdown-product-card:hover {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .dropdown-product-card:hover {
+  transform: translateX(-4px);
+}
+
+.dropdown-product-card .product-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.dropdown-product-card:hover .product-icon {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(233, 90, 84, 0.3);
+}
+
+.dropdown-product-card .product-icon.fastpass-icon {
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+}
+
+.dropdown-product-card .product-icon.signstay-icon {
+  background: linear-gradient(135deg, #2a273c 0%, #3d3952 100%);
+}
+
+.dropdown-product-card .product-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown-product-card .product-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-product-card .product-title .badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.dropdown-product-card .product-title .badge.new {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.dropdown-product-card .product-title .badge.popular {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.dropdown-product-card .product-desc {
+  font-size: 13px;
+  color: var(--tertiary-color);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.dropdown-product-card .product-features {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dropdown-product-card .feature-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--dark-color);
+  background: rgba(143, 151, 147, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.dropdown-product-card .feature-tag i {
+  color: #10b981;
+  font-size: 12px;
+}
+
+.dropdown-product-card .arrow-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+}
+
+[dir="rtl"] .dropdown-product-card .arrow-icon {
+  right: auto;
+  left: 20px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdown-product-card:hover .arrow-icon {
+  opacity: 1;
+  right: 16px;
+}
+
+[dir="rtl"] .dropdown-product-card:hover .arrow-icon {
+  right: auto;
+  left: 16px;
+}
+
+/* Divider */
+.dropdown-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(143, 151, 147, 0.2), transparent);
+  margin: 4px 20px;
+}
+
+/* Bottom Link */
+.dropdown-footer {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  margin: 4px;
+  background: rgba(233, 90, 84, 0.05);
+}
+
+.dropdown-footer:hover {
+  background: rgba(233, 90, 84, 0.1);
+}
+
+.dropdown-footer i {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-footer:hover i {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .dropdown-footer:hover i {
+  transform: translateX(-4px) rotate(180deg);
+}
+
+[dir="rtl"] .dropdown-footer i {
+  transform: rotate(180deg);
+}
+
+/* Mobile Dropdown */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+    min-width: 100%;
+    border-radius: 24px 24px 0 0;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown.active .dropdown-menu {
+    transform: translateY(0);
+  }
+  
+  .dropdown-menu::before {
+    display: none;
+  }
+  
+  .dropdown-product-card {
+    padding: 16px;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
 </style>
 </head>
 <body class="h-full">
 <div id="app-wrapper" class="w-full min-h-full">
 
+<!-- Navigation -->
 <!-- Navigation -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[#f2f0eb]/95 backdrop-blur-md border-b border-[#8f9793]/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -799,7 +1131,86 @@ input[name="phone"] {
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center gap-8">
-        <a href="#products" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium translatable" data-en="Products" data-ar="المنتجات">Products</a>
+        
+        <!-- Products Dropdown -->
+        <div class="nav-dropdown" id="productsDropdown">
+          <div class="nav-dropdown-trigger text-[#2a273c] font-medium">
+            <span class="translatable" data-en="Products" data-ar="المنتجات">Products</span>
+            <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+          </div>
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu">
+            <!-- FAST PASS Card -->
+            <div class="dropdown-product-card" onclick="switchProduct('fastpass')">
+              <div class="product-icon fastpass-icon">
+                <i class="ri-passport-line text-2xl text-white"></i>
+              </div>
+              <div class="product-content">
+                <div class="product-title">
+                  FAST PASS
+                  <span class="badge popular translatable" data-en="Popular" data-ar="شائع">Popular</span>
+                </div>
+                <p class="product-desc translatable" data-en="Instant passport scanning. Auto-fill guest data directly into your PMS in under 2 seconds." data-ar="مسح فوري للوثائق. ملء بيانات النزلاء تلقائياً في نظامك خلال أقل من ثانيتين.">Instant passport scanning. Auto-fill guest data directly into your PMS in under 2 seconds.</p>
+                <div class="product-features">
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="< 2 sec scan" data-ar="أقل من ثانيتين">< 2 sec scan</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Plug & Play" data-ar="جاهز للاستخدام">Plug & Play</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Error-Free" data-ar="بدون أخطاء">Error-Free</span>
+                  </span>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line arrow-icon text-xl"></i>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <!-- Sign Stay Card -->
+            <div class="dropdown-product-card" onclick="switchProduct('signstay')">
+              <div class="product-icon signstay-icon">
+                <i class="ri-edit-line text-2xl text-[#fbcdab]"></i>
+              </div>
+              <div class="product-content">
+                <div class="product-title">
+                  Sign Stay
+                  <span class="badge new translatable" data-en="New" data-ar="جديد">New</span>
+                </div>
+                <p class="product-desc translatable" data-en="Digital signature solution via tablets. Go 100% paperless with modern check-in experience." data-ar="التوقيع الإلكتروني عبر الأجهزة اللوحية. تجربة تسجيل وصول حديثة بدون ورق.">Digital signature solution via tablets. Go 100% paperless with modern check-in experience.</p>
+                <div class="product-features">
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="100% Paperless" data-ar="بدون ورق">100% Paperless</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Eco-Friendly" data-ar="صديق للبيئة">Eco-Friendly</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Tablet Ready" data-ar="جاهز للتابلت">Tablet Ready</span>
+                  </span>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line arrow-icon text-xl"></i>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <!-- View All Products -->
+            <div class="dropdown-footer" onclick="scrollToProducts()">
+              <span class="translatable" data-en="Compare All Products" data-ar="مقارنة جميع المنتجات">Compare All Products</span>
+              <i class="ri-arrow-right-line"></i>
+            </div>
+          </div>
+        </div>
+
         <a href="#features" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium translatable" data-en="Features" data-ar="المميزات">Features</a>
         <a href="#how-it-works" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium translatable" data-en="How It Works" data-ar="كيفية الاستخدام">How It Works</a>
         <a href="#contact" class="btn-primary text-sm translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</a>
@@ -820,6 +1231,7 @@ input[name="phone"] {
     </div>
   </div>
 </nav>
+
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
