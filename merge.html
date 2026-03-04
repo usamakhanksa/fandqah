@@ -1142,7 +1142,7 @@ input[name="phone"] {
           <!-- Dropdown Menu -->
           <div class="dropdown-menu">
             <!-- FAST PASS Card -->
-            <div class="dropdown-product-card" onclick="switchProduct('fastpass', true)">
+            <div class="dropdown-product-card" onclick="switchProduct('fastpass')">
               <div class="product-icon fastpass-icon">
                 <i class="ri-passport-line text-2xl text-white"></i>
               </div>
@@ -1173,7 +1173,7 @@ input[name="phone"] {
             <div class="dropdown-divider"></div>
 
             <!-- Sign Stay Card -->
-            <div class="dropdown-product-card" onclick="switchProduct('fastpass', true)">
+            <div class="dropdown-product-card" onclick="switchProduct('fastpass')">
               <div class="product-icon signstay-icon">
                 <i class="ri-edit-line text-2xl text-[#fbcdab]"></i>
               </div>
@@ -1270,7 +1270,7 @@ input[name="phone"] {
     <!-- Product Selector Cards -->
     <div id="products" class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
       <!-- FAST PASS Card -->
-      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="fastpass" onclick="switchProduct('fastpass', true)">
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="fastpass" onclick="switchProduct('fastpass')">
         <div class="flex items-start gap-4 mb-4">
           <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
             <i class="ri-passport-line text-2xl text-[#2a273c]"></i>
@@ -1296,7 +1296,7 @@ input[name="phone"] {
       </div>
 
       <!-- Sign Stay Card -->
-      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="signstay" onclick="switchProduct('fastpass', true)">
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="signstay" onclick="switchProduct('fastpass')">
         <div class="flex items-start gap-4 mb-4">
           <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
             <i class="ri-edit-line text-2xl text-[#2a273c]"></i>
@@ -1383,7 +1383,7 @@ input[name="phone"] {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-center">
       <div class="product-tabs">
-        <button class="product-tab active" data-product="fastpass" onclick="switchProduct('fastpass', true)">
+        <button class="product-tab active" data-product="fastpass" onclick="switchProduct('fastpass')">
           <span class="tab-icon"><i class="ri-passport-line"></i></span>
           <span>FAST PASS</span>
         </button>
@@ -1801,8 +1801,8 @@ input[name="phone"] {
       <div>
         <h4 class="text-white font-bold mb-4 translatable" data-en="Products" data-ar="المنتجات">Products</h4>
         <ul class="space-y-3">
-          <li><a href="#" onclick="switchProduct('fastpass', true)" class="text-white/70 hover:text-[#e95a54] transition-colors">FAST PASS</a></li>
-          <li><a href="#" onclick="switchProduct('fastpass', true)" class="text-white/70 hover:text-[#e95a54] transition-colors">Sign Stay</a></li>
+          <li><a href="#" onclick="switchProduct('fastpass')" class="text-white/70 hover:text-[#e95a54] transition-colors">FAST PASS</a></li>
+          <li><a href="#" onclick="switchProduct('fastpass')" class="text-white/70 hover:text-[#e95a54] transition-colors">Sign Stay</a></li>
           <li><a href="https://fandaqah.com" class="text-white/70 hover:text-[#e95a54] transition-colors translatable" data-en="Fandaqah PMS" data-ar="نظام فندقة">Fandaqah PMS</a></li>
         </ul>
       </div>
