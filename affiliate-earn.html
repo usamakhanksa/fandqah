@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="en" style="height: 100%; margin: 0; padding: 0;">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Lifetime Affiliate Program | Hotel Management Software</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background-color: #f2f0eb;
+      color: #2a273c;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    body.rtl {
+      direction: rtl;
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    }
+    
+    .page-wrapper {
+      width: 100%;
+      min-height: 100%;
+      overflow-y: auto;
+      background-color: #f2f0eb;
+    }
+    
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 10px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(42,39,60,0.1);
+    }
+    
+    body.rtl .lang-toggle {
+      right: auto;
+      left: 20px;
+    }
+    
+    .lang-btn {
+      background: none;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #8f9793;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+    
+    .lang-btn.active {
+      background: #e95a54;
+      color: #ffffff;
+    }
+    
+    .lang-btn:hover {
+      color: #2a273c;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.15); opacity: 0.8; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px rgba(233,90,84,0.3), 0 0 20px rgba(233,90,84,0.1); }
+      50% { text-shadow: 0 0 20px rgba(233,90,84,0.5), 0 0 40px rgba(233,90,84,0.2); }
+      100% { text-shadow: 0 0 10px rgba(233,90,84,0.3), 0 0 20px rgba(233,90,84,0.1); }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #2a273c 0%, #3d3a52 100%);
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(251,205,171,0.15) 0%, transparent 60%);
+      animation: pulse 25s ease-in-out infinite;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 0;
+      right: 0;
+      height: 300px;
+      background: linear-gradient(180deg, transparent 0%, rgba(42,39,60,0.08) 100%);
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: rgba(251,205,171,0.18);
+      color: #fbcdab;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      border: 2px solid rgba(251,205,171,0.5);
+      animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+    
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 72px);
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 28px;
+      line-height: 1.1;
+      letter-spacing: -2.5px;
+      animation: slideInLeft 1s ease-out 0.3s both;
+      background: linear-gradient(135deg, #ffffff 0%, #fbcdab 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subheadline {
+      font-size: clamp(20px, 4vw, 32px);
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 60px;
+      font-weight: 400;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: slideInRight 1s ease-out 0.4s both;
+      line-height: 1.6;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #e95a54, #eb6d66);
+      color: #ffffff;
+      padding: 22px 52px;
+      font-size: 18px;
+      font-weight: 800;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 16px 50px rgba(233,90,84,0.45);
+      animation: fadeInUp 1s ease-out 0.5s both;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #fbcdab, #fdd5bb);
+      color: #2a273c;
+      transform: translateY(-5px);
+      box-shadow: 0 28px 70px rgba(251,205,171,0.55);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(-2px);
+    }
+    
+    .btn-primary svg {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.4s ease;
+    }
+    
+    .btn-primary:hover svg {
+      transform: translateX(6px);
+    }
+    
+    /* Introduction Section */
+    .intro {
+      padding: 120px 24px;
+      text-align: center;
+      background: #f2f0eb;
+      position: relative;
+    }
+    
+    .intro::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e95a54, #fbcdab, transparent);
+    }
+    
+    .intro-container {
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .section-title {
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 900;
+      color: #2a273c;
+      margin-bottom: 32px;
+      letter-spacing: -1.5px;
+      line-height: 1.2;
+    }
+    
+    .intro-text {
+      font-size: 19px;
+      color: #8f9793;
+      line-height: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .intro-text strong {
+      color: #2a273c;
+      font-weight: 800;
+    }
+    
+    .accent-line {
+      width: 100px;
+      height: 6px;
+      background: linear-gradient(90deg, #e95a54, #fbcdab);
+      margin: 0 auto 45px;
+      border-radius: 3px;
+      animation: scaleIn 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* Commission Section */
+    .commission {
+      padding: 120px 24px;
+      background: #ffffff;
+      position: relative;
+    }
+    
+    .commission::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(251,205,171,0.08) 0%, transparent 80%);
+      pointer-events: none;
+    }
+    
+    .commission-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .commission-header {
+      text-align: center;
+      margin-bottom: 70px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 18px;
+      box-shadow: 0 25px 80px rgba(42,39,60,0.15);
+      animation: fadeInUp 1.2s ease-out;
+    }
+    
+    .commission-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      min-width: 600px;
+    }
+    
+    .commission-table thead {
+      background: linear-gradient(135deg, #2a273c 0%, #3d3a52 100%);
+    }
+    
+    .commission-table th {
+      padding: 32px 36px;
+      text-align: left;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.8px;
+    }
+    
+    .commission-table th:first-child {
+      border-radius: 18px 0 0 0;
+    }
+    
+    .commission-table th:last-child {
+      border-radius: 0 18px 0 0;
+      background: linear-gradient(135deg, #3d3a52 0%, #2a273c 100%);
+      position: relative;
+    }
+    
+    .commission-table th:last-child::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #fbcdab, #e95a54, #fbcdab);
+      border-radius: 0 18px 0 0;
+    }
+    
+    .commission-table td {
+      padding: 32px 36px;
+      border-bottom: 1px solid rgba(143,151,147,0.15);
+      color: #2a273c;
+      font-size: 17px;
+      transition: all 0.5s ease;
+    }
+    
+    .commission-table tbody tr {
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .commission-table tbody tr:hover {
+      background: linear-gradient(90deg, rgba(251,205,171,0.12) 0%, rgba(233,90,84,0.06) 100%);
+      transform: scale(1.025);
+      box-shadow: inset 0 6px 20px rgba(233,90,84,0.12);
+    }
+    
+    .commission-table tbody tr:hover td {
+      color: #2a273c;
+    }
+    
+    .commission-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .commission-table tbody tr:last-child td:first-child {
+      border-radius: 0 0 0 18px;
+    }
+    
+    .commission-table tbody tr:last-child td:last-child {
+      border-radius: 0 0 18px 0;
+    }
+    
+    .plan-name {
+      font-weight: 800;
+      color: #2a273c;
+      font-size: 19px;
+    }
+    
+    .plan-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(251,205,171,0.5), rgba(233,90,84,0.25));
+      color: #2a273c;
+      padding: 7px 16px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-left: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .price {
+      font-weight: 700;
+      color: #8f9793;
+      font-size: 16px;
+    }
+    
+    .commission-amount {
+      font-size: 30px;
+      font-weight: 900;
+      color: #e95a54;
+      animation: glow 3s ease-in-out infinite;
+    }
+    
+    /* Benefits Section */
+    .benefits {
+      padding: 120px 24px;
+      background: #f2f0eb;
+      position: relative;
+    }
+    
+    .benefits-container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    .benefits-header {
+      text-align: center;
+      margin-bottom: 80px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 36px;
+    }
+    
+    .benefit-card {
+      background: #ffffff;
+      padding: 50px 40px;
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(42,39,60,0.09);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(143,151,147,0.12);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+    .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+    .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+    .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+    
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #e95a54, #fbcdab);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .benefit-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(251,205,171,0.08) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 40px 80px rgba(251,205,171,0.25);
+    }
+    
+    .benefit-card:hover::before {
+      opacity: 1;
+    }
+    
+    .benefit-card:hover::after {
+      opacity: 1;
+    }
+    
+    .benefit-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(233,90,84,0.18), rgba(251,205,171,0.12));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      transition: all 0.5s ease;
+    }
+    
+    .benefit-card:hover .benefit-icon {
+      background: linear-gradient(135deg, rgba(233,90,84,0.3), rgba(251,205,171,0.2));
+      transform: scale(1.15) rotate(8deg);
+    }
+    
+    .benefit-icon svg {
+      width: 42px;
+      height: 42px;
+      color: #e95a54;
+      transition: transform 0.5s ease;
+    }
+    
+    .benefit-card:hover .benefit-icon svg {
+      transform: scale(1.2);
+    }
+    
+    .benefit-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2a273c;
+      margin-bottom: 18px;
+      line-height: 1.3;
+    }
+    
+    .benefit-card p {
+      font-size: 17px;
+      color: #8f9793;
+      line-height: 1.85;
+    }
+    
+    /* How It Works Section */
+    .how-it-works {
+      padding: 120px 24px;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .how-it-works::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e95a54, #fbcdab, transparent);
+    }
+    
+    .how-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .how-header {
+      text-align: center;
+      margin-bottom: 90px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    
+    @media (max-width: 1024px) {
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+    }
+    
+    .step {
+      text-align: center;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .step:nth-child(1) { animation-delay: 0.1s; }
+    .step:nth-child(2) { animation-delay: 0.2s; }
+    .step:nth-child(3) { animation-delay: 0.3s; }
+    .step:nth-child(4) { animation-delay: 0.4s; }
+    
+    .step-number {
+      width: 85px;
+      height: 85px;
+      background: linear-gradient(135deg, #e95a54, #fbcdab);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 900;
+      margin: 0 auto 32px;
+      box-shadow: 0 20px 60px rgba(233,90,84,0.4);
+      position: relative;
+      z-index: 2;
+      transition: all 0.5s ease;
+    }
+    
+    .step:hover .step-number {
+      transform: scale(1.18) rotate(5deg);
+      box-shadow: 0 30px 80px rgba(233,90,84,0.55);
+    }
+    
+    @media (min-width: 1025px) {
+      .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 42px;
+        left: calc(50% + 52px);
+        width: calc(100% - 104px);
+        height: 4px;
+        background: linear-gradient(90deg, #e95a54, rgba(251,205,171,0.6), rgba(233,90,84,0.3));
+        z-index: 1;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 60px;
+        background: linear-gradient(180deg, #e95a54, rgba(251,205,171,0.6));
+        z-index: 1;
+      }
+    }
+    
+    .step h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #2a273c;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    
+    .step p {
+      font-size: 16px;
+      color: #8f9793;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+    
+    /* Final CTA Section */
+    .final-cta {
+      padding: 140px 24px;
+      background: linear-gradient(135deg, #2a273c 0%, #3d3a52 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbcdab' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      animation: float 30s ease-in-out infinite;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .final-cta h2 {
+      font-size: clamp(40px, 7vw, 60px);
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 32px;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #ffffff 0%, #fbcdab 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .final-cta p {
+      font-size: 22px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.85;
+    }
+    
+    .cta-features {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fbcdab;
+      font-size: 17px;
+      font-weight: 700;
+      transition: all 0.4s ease;
+      animation: slideInLeft 0.8s ease-out;
+    }
+    
+    .cta-feature:nth-child(2) { animation-delay: 0.1s; }
+    .cta-feature:nth-child(3) { animation-delay: 0.2s; }
+    
+    .cta-feature:hover {
+      transform: translateX(12px);
+      color: #ffffff;
+    }
+    
+    body.rtl .cta-feature:hover {
+      transform: translateX(-12px);
+    }
+    
+    .cta-feature svg {
+      width: 28px;
+      height: 28px;
+      color: #e95a54;
+      flex-shrink: 0;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #2a273c;
+      padding: 60px 24px;
+      text-align: center;
+      border-top: 2px solid rgba(143,151,147,0.2);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .footer p {
+      color: #8f9793;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .lang-toggle {
+        top: 15px;
+        right: 15px;
+        gap: 8px;
+        padding: 6px 10px;
+      }
+      
+      body.rtl .lang-toggle {
+        right: auto;
+        left: 15px;
+      }
+      
+      .lang-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      
+      .hero {
+        padding: 70px 20px;
+        min-height: auto;
+      }
+      
+      .intro, .commission, .benefits, .how-it-works {
+        padding: 80px 20px;
+      }
+      
+      .final-cta {
+        padding: 90px 20px;
+      }
+      
+      .btn-primary {
+        padding: 18px 40px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 340px;
+        justify-content: center;
+      }
+      
+      .commission-table th,
+      .commission-table td {
+        padding: 22px 18px;
+        font-size: 15px;
+      }
+      
+      .commission-amount {
+        font-size: 26px;
+      }
+      
+      .benefit-card {
+        padding: 36px 28px;
+      }
+      
+      .cta-features {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+      }
+      
+      .cta-feature {
+        justify-content: center;
+      }
+      
+      .section-title {
+        font-size: clamp(32px, 7vw, 48px);
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+ </head>
+ <body style="height: 100%; width: 100%; margin: 0; padding: 0;">
+  <div class="lang-toggle"><button class="lang-btn active" data-lang="en">English</button> <button class="lang-btn" data-lang="ar">العربية</button>
+  </div>
+  <div class="page-wrapper"><!-- Hero Section -->
+   <section class="hero">
+    <div class="hero-content"><span class="hero-badge" data-i18n="badge">Exclusive Partnership Opportunity</span>
+     <h1 id="hero-headline" data-i18n="heroHeadline">Free Lifetime Affiliate Membership</h1>
+     <p class="hero-subheadline" id="hero-subheadline" data-i18n="heroSubheadline">Refer Hotels. Earn Commission. Grow Your Income.</p><a href="https://fandaqah.com/register" class="btn-primary" id="hero-button"> <span id="hero-button-text" data-i18n="heroButtonText">Join Affiliate Program</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg></a>
+    </div>
+   </section><!-- Introduction Section -->
+   <section class="intro">
+    <div class="intro-container">
+     <div class="accent-line"></div>
+     <h2 class="section-title" id="intro-title" data-i18n="introTitle">Your Gateway to Passive Income</h2>
+     <p class="intro-text" id="intro-text" data-i18n="introText">Join our <strong>Free Lifetime Affiliate Partnership</strong> and unlock unlimited earning potential. Every hotel or property manager you refer becomes a source of recurring commission. No investment required—just share our industry-leading Hotel Management Software with your network and watch your income grow with each successful subscription.</p>
+    </div>
+   </section><!-- Commission Section -->
+   <section class="commission">
+    <div class="commission-container">
+     <div class="commission-header">
+      <div class="accent-line"></div>
+      <h2 class="section-title" data-i18n="commissionTitle">Transparent Commission Structure</h2>
+      <p style="color: #8f9793; font-size: 18px; margin-top: 16px; font-weight: 500;" data-i18n="commissionDesc">Earn generous rewards for every successful referral</p>
+     </div>
+     <div class="table-wrapper">
+      <table class="commission-table">
+       <thead>
+        <tr>
+         <th data-i18n="planColumn">Subscription Plan</th>
+         <th data-i18n="priceColumn">Annual Price</th>
+         <th data-i18n="commissionColumn">Your Commission</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td><span class="plan-name" data-i18n="corePlan">Core</span> <span class="plan-badge" data-i18n="essentialBadge">Essential</span></td>
+         <td class="price">1,200 SAR / year</td>
+         <td><span class="commission-amount">100 SAR</span></td>
+        </tr>
+        <tr>
+         <td><span class="plan-name" data-i18n="connectPlan">Connect</span> <span class="plan-badge" data-i18n="popularBadge">Popular</span></td>
+         <td class="price">1,980 SAR / year</td>
+         <td><span class="commission-amount">150 SAR</span></td>
+        </tr>
+        <tr>
+         <td><span class="plan-name" data-i18n="proPlan">Pro</span> <span class="plan-badge" data-i18n="premiumBadge">Premium</span></td>
+         <td class="price">3,000 SAR / year</td>
+         <td><span class="commission-amount">200 SAR</span></td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section><!-- Benefits Section -->
+   <section class="benefits">
+    <div class="benefits-container">
+     <div class="benefits-header">
+      <div class="accent-line"></div>
+      <h2 class="section-title" data-i18n="benefitsTitle">Why Join Our Affiliate Program?</h2>
+     </div>
+     <div class="benefits-grid">
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+       </div>
+       <h3 data-i18n="benefit1Title">Free Lifetime Access</h3>
+       <p data-i18n="benefit1Desc">Zero registration fees, no hidden charges, and no expiration. Your affiliate status remains active forever.</p>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 data-i18n="benefit2Title">High Commission</h3>
+       <p data-i18n="benefit2Desc">Earn up to <strong style="color: #e95a54;">200 SAR</strong> per referral. Our industry-leading rates maximize your earning potential.</p>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+       </div>
+       <h3 data-i18n="benefit3Title">Real-Time Tracking</h3>
+       <p data-i18n="benefit3Desc">Monitor your referrals, conversions, and earnings through our intuitive dashboard—updated in real-time.</p>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+       </div>
+       <h3 data-i18n="benefit4Title">Fast Payouts</h3>
+       <p data-i18n="benefit4Desc">Receive your earnings quickly via Bank Transfer or STC Pay. Choose your preferred payment method.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- How It Works Section -->
+   <section class="how-it-works">
+    <div class="how-container">
+     <div class="how-header">
+      <div class="accent-line"></div>
+      <h2 class="section-title" data-i18n="howTitle">How It Works</h2>
+      <p style="color: #8f9793; font-size: 18px; margin-top: 16px; font-weight: 500;" data-i18n="howDesc">Four simple steps to start earning</p>
+     </div>
+     <div class="steps">
+      <div class="step">
+       <div class="step-number">
+        1
+       </div>
+       <h3 data-i18n="step1Title">Register</h3>
+       <p data-i18n="step1Desc">Complete our simple free registration form in under 2 minutes</p>
+      </div>
+      <div class="step">
+       <div class="step-number">
+        2
+       </div>
+       <h3 data-i18n="step2Title">Share</h3>
+       <p data-i18n="step2Desc">Promote our PMS to hotels and property managers in your network</p>
+      </div>
+      <div class="step">
+       <div class="step-number">
+        3
+       </div>
+       <h3 data-i18n="step3Title">Earn</h3>
+       <p data-i18n="step3Desc">Receive commission for every successful subscription referral</p>
+      </div>
+      <div class="step">
+       <div class="step-number">
+        4
+       </div>
+       <h3 data-i18n="step4Title">Withdraw</h3>
+       <p data-i18n="step4Desc">Request payout anytime via Bank Transfer or STC Pay</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Final CTA Section -->
+   <section class="final-cta" id="apply">
+    <div class="cta-content">
+     <h2 id="cta-headline" data-i18n="ctaHeadline">Start Earning Today</h2>
+     <p data-i18n="ctaDesc">Join hundreds of successful affiliates already growing their income with our Hotel Management Software partnership.</p>
+     <div class="cta-features">
+      <div class="cta-feature">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+       </svg><span data-i18n="ctaFeature1">100% Free Forever</span>
+      </div>
+      <div class="cta-feature">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+       </svg><span data-i18n="ctaFeature2">No Minimum Payouts</span>
+      </div>
+      <div class="cta-feature">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+       </svg><span data-i18n="ctaFeature3">Instant Approval</span>
+      </div>
+     </div><a href="https://fandaqah.com/register" class="btn-primary" id="cta-button"> <span id="cta-button-text" data-i18n="ctaButtonText">Apply Now – Free Registration</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg></a>
+    </div>
+   </section><!-- Footer -->
+   <footer class="footer">
+    <p id="footer-text"><span data-i18n="footerCopyright">© 2026</span> <span id="company-name">Fandaqah</span> • <span data-i18n="footerRights">All Rights Reserved</span></p>
+   </footer>
+  </div>
+  <script>
+    // Bilingual translations
+    const translations = {
+      en: {
+        badge: "Exclusive Partnership Opportunity",
+        heroHeadline: "Free Lifetime Affiliate Membership",
+        heroSubheadline: "Refer Hotels. Earn Commission. Grow Your Income.",
+        heroButtonText: "Join Affiliate Program",
+        introTitle: "Your Gateway to Passive Income",
+        introText: "Join our Free Lifetime Affiliate Partnership and unlock unlimited earning potential. Every hotel or property manager you refer becomes a source of recurring commission. No investment required—just share our industry-leading Hotel Management Software with your network and watch your income grow with each successful subscription.",
+        commissionTitle: "Transparent Commission Structure",
+        commissionDesc: "Earn generous rewards for every successful referral",
+        planColumn: "Subscription Plan",
+        priceColumn: "Annual Price",
+        commissionColumn: "Your Commission",
+        corePlan: "Core",
+        essentialBadge: "Essential",
+        connectPlan: "Connect",
+        popularBadge: "Popular",
+        proPlan: "Pro",
+        premiumBadge: "Premium",
+        benefitsTitle: "Why Join Our Affiliate Program?",
+        benefit1Title: "Free Lifetime Access",
+        benefit1Desc: "Zero registration fees, no hidden charges, and no expiration. Your affiliate status remains active forever.",
+        benefit2Title: "High Commission",
+        benefit2Desc: "Earn up to 200 SAR per referral. Our industry-leading rates maximize your earning potential.",
+        benefit3Title: "Real-Time Tracking",
+        benefit3Desc: "Monitor your referrals, conversions, and earnings through our intuitive dashboard—updated in real-time.",
+        benefit4Title: "Fast Payouts",
+        benefit4Desc: "Receive your earnings quickly via Bank Transfer or STC Pay. Choose your preferred payment method.",
+        howTitle: "How It Works",
+        howDesc: "Four simple steps to start earning",
+        step1Title: "Register",
+        step1Desc: "Complete our simple free registration form in under 2 minutes",
+        step2Title: "Share",
+        step2Desc: "Promote our PMS to hotels and property managers in your network",
+        step3Title: "Earn",
+        step3Desc: "Receive commission for every successful subscription referral",
+        step4Title: "Withdraw",
+        step4Desc: "Request payout anytime via Bank Transfer or STC Pay",
+        ctaHeadline: "Start Earning Today",
+        ctaDesc: "Join hundreds of successful affiliates already growing their income with our Hotel Management Software partnership.",
+        ctaFeature1: "100% Free Forever",
+        ctaFeature2: "No Minimum Payouts",
+        ctaFeature3: "Instant Approval",
+        ctaButtonText: "Apply Now – Free Registration",
+        footerCopyright: "© 2026",
+        footerRights: "All Rights Reserved"
+      },
+      ar: {
+        badge: "فرصة شراكة حصرية",
+        heroHeadline: "عضوية برنامج الشراكة الدائمة المجانية",
+        heroSubheadline: "اجذب الفنادق. اكسب العمولة. طور دخلك.",
+        heroButtonText: "انضم إلى برنامج الشراكة",
+        introTitle: "بوابتك إلى دخل سلبي",
+        introText: "انضم إلى شراكتنا المجانية الدائمة وافتح الإمكانات اللامحدودة. كل فندق أو مدير عقار تشير إليه يصبح مصدر عمولة متكررة. لا استثمار مطلوب—فقط شارك برنامج إدارة الفنادق الرائد في الصناعة مع شبكتك وشاهد دخلك ينمو مع كل اشتراك ناجح.",
+        commissionTitle: "هيكل العمولة الشفاف",
+        commissionDesc: "احصل على مكافآت سخية لكل إحالة ناجحة",
+        planColumn: "خطة الاشتراك",
+        priceColumn: "السعر السنوي",
+        commissionColumn: "عمولتك",
+        corePlan: "أساسي",
+        essentialBadge: "أساسي",
+        connectPlan: "الاتصال",
+        popularBadge: "شهير",
+        proPlan: "احترافي",
+        premiumBadge: "متميز",
+        benefitsTitle: "لماذا تنضم إلى برنامج الشراكة الخاص بنا؟",
+        benefit1Title: "الوصول الدائم المجاني",
+        benefit1Desc: "رسوم تسجيل صفر، بدون رسوم مخفية، وبدون انتهاء الصلاحية. تبقى حالة الشراكة الخاصة بك نشطة إلى الأبد.",
+        benefit2Title: "عمولة عالية",
+        benefit2Desc: "احصل على ما يصل إلى 200 ريال سعودي لكل إحالة. معدلات الصناعة الرائدة لدينا تزيد من إمكانات أرباحك.",
+        benefit3Title: "التتبع في الوقت الفعلي",
+        benefit3Desc: "راقب إحالاتك وتحويلاتك وأرباحك من خلال لوحة المعلومات الحدسية الخاصة بنا—محدثة في الوقت الفعلي.",
+        benefit4Title: "الدفع السريع",
+        benefit4Desc: "احصل على أرباحك بسرعة عن طريق التحويل البنكي أو STC Pay. اختر طريقة الدفع المفضلة لديك.",
+        howTitle: "كيف يعمل",
+        howDesc: "أربع خطوات بسيطة لبدء كسب المال",
+        step1Title: "سجل",
+        step1Desc: "أكمل نموذج التسجيل المجاني والبسيط الخاص بنا في أقل من دقيقتين",
+        step2Title: "شارك",
+        step2Desc: "روج لبرنامج إدارة الفنادق الخاص بنا لدى الفنادق ومديري الممتلكات في شبكتك",
+        step3Title: "احصل على المال",
+        step3Desc: "احصل على عمولة لكل إحالة اشتراك ناجحة",
+        step4Title: "اسحب أموالك",
+        step4Desc: "اطلب الدفع في أي وقت عن طريق التحويل البنكي أو STC Pay",
+        ctaHeadline: "ابدأ في الكسب اليوم",
+        ctaDesc: "انضم إلى مئات الشركاء الناجحين الذين يطورون دخلهم بالفعل من خلال شراكة برنامج إدارة الفنادق الخاص بنا.",
+        ctaFeature1: "100% مجاني إلى الأبد",
+        ctaFeature2: "لا توجد حدود دنيا للدفع",
+        ctaFeature3: "الموافقة الفورية",
+        ctaButtonText: "تقدم الآن – التسجيل المجاني",
+        footerCopyright: "© 2026",
+        footerRights: "جميع الحقوق محفوظة"
+      }
+    };
+
+    let currentLang = 'en';
+
+    // Language switching
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        switchLanguage(lang);
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      const isRTL = lang === 'ar';
+      document.documentElement.lang = lang;
+      document.body.classList.toggle('rtl', isRTL);
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = translations[lang][key] || el.textContent;
+      });
+
+      // Update intro text with strong tag
+      const introText = document.getElementById('intro-text');
+      if (introText) {
+        const text = translations[lang].introText;
+        if (isRTL) {
+          introText.innerHTML = text.replace(/شراكتنا المجانية الدائمة/g, '<strong>شراكتنا المجانية الدائمة</strong>');
+        } else {
+          introText.innerHTML = text.replace(/Free Lifetime Affiliate Partnership/g, '<strong>Free Lifetime Affiliate Partnership</strong>');
+        }
+      }
+    }
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = entry.target.style.animation || 'fadeInUp 1s ease-out forwards';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-title, .benefit-card, .step').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9da095567536a6d3',t:'MTc3MzEyNzUwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
