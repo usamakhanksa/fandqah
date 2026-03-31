@@ -21,8 +21,23 @@ tailwind.config = {
 }
 </script>
   <style>
-html, body { height: 100%; margin: 0; }
 
+
+   :root {
+--primary-color: #e95a54;
+--primary-dark: #d14a44;
+--secondary-color: #fbcdab;
+--tertiary-color: #8f9793;
+--dark-color: #2a273c;
+--dark-light: #3a3650;
+--light-color: #f2f0eb;
+--white: #ffffff;
+--gray-300: #d1d5db;
+}
+html, body { height: 100%; margin: 0; }
+.coral-gradient {
+background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+}
 /* Gradient orbs */
 .orb {
   position: absolute;
