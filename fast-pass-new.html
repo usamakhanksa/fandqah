@@ -38,9 +38,7 @@ html, body { height: 100%; margin: 0; }
 .coral-gradient {
 background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
 }
-.via-cyan-300{
-   background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%) !important;
-}
+
    .text-sky-400 {
     --tw-text-opacity: 1;
     color: #e95a54 !important;
@@ -48,15 +46,23 @@ background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
    .text-sky-300{
     color: #e95a54 !important;
    }
-   .to-cyan-500{
-    background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%) !important;
-   }
-   .to-sky-400{
-        background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%) !important;
-   }
-.from-sky-500{
-    background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%) !important;
+ 
+   .to-cyan-500 {
+    --tw-gradient-to: #e95a54 var(--tw-gradient-to-position) !important;
 }
+ .via-cyan-300 {
+    --tw-gradient-to: #e95a54 var(--tw-gradient-to-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), #e95a54 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+   .to-sky-400 {
+    --tw-gradient-to: #e95a54 var(--tw-gradient-to-position)  !important;
+}
+   .from-sky-300 {
+    --tw-gradient-from: #e95a54 var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: #e95a54 var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 /* Gradient orbs */
 .orb {
   position: absolute;
