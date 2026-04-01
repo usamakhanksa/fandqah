@@ -1875,7 +1875,7 @@ window.onclick = function(event) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAST PASS – Instant Guest Check-In | تسجيل وصول فوري للضيوف</title>
+<title>Swift Checkin – Instant Guest Check-In | تسجيل وصول فوري للضيوف</title>
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2157,7 +2157,7 @@ h1,h2,h3,h4,h5{font-family:'El Messiri',sans-serif}
       </div>
 
       <h1 class="text-4xl md:text-3xl lg:text-3xl font-bold leading-tight mb-6 rv d1">
-        <span class="translatable" data-en="FAST PASS" data-ar="الدخول السريع">FAST PASS</span><br>
+        <span class="translatable" data-en="Swift Checkin" data-ar="الدخول السريع">Swift Checkin</span><br>
         <span class="gradient-text">
           <span class="translatable" data-en="Instant Passport & National ID Scanning" data-ar="(تسجيل وصول فوري للنزلاء)">Instant Passport & National ID Scanning</span>
         </span>
@@ -2202,7 +2202,7 @@ h1,h2,h3,h4,h5{font-family:'El Messiri',sans-serif}
       <div style="animation:fl1 5s ease-in-out infinite">
         <div class="scanner-frame">
           <div class="scanner-inner">
-            <img src="https://usamakhanksa.github.io/fandqah/ocr.png" alt="FAST PASS Scanner">
+            <img src="https://usamakhanksa.github.io/fandqah/ocr.png" alt="Swift Checkin Scanner">
           </div>
         </div>
 
@@ -2268,7 +2268,7 @@ h1,h2,h3,h4,h5{font-family:'El Messiri',sans-serif}
       </div>
       <h2 class="sec-title rv d1">
         <span class="translatable" data-en="Why Choose " data-ar="لماذا تختار ">Why Choose </span>
-        <span class="gradient-text translatable" data-en="FAST PASS" data-ar="الدخول السريع">FAST PASS</span>
+        <span class="gradient-text translatable" data-en="Swift Checkin" data-ar="الدخول السريع">Swift Checkin</span>
       </h2>
       <p class="sec-desc mx-auto rv d2 translatable"
          data-en="Streamline check-in operations and deliver exceptional guest experiences with cutting-edge passports and national ID cards  scanning technology."
@@ -2382,9 +2382,9 @@ h1,h2,h3,h4,h5{font-family:'El Messiri',sans-serif}
           <span class="gradient-text translatable" data-en="Any Scanner" data-ar="أي ماسح ضوئي">Any Scanner</span>
         </h2>
         <p class="text-white/50 leading-relaxed mb-8 translatable"
-           data-en="FAST PASS is designed to work with any Fandaqah or machine-readable passport and national ID cards scanner available in the market."
+           data-en="Swift Checkin is designed to work with any Fandaqah or machine-readable passport and national ID cards scanner available in the market."
            data-ar="استمتع بسهولة التكامل مع أي ماسح ضوئي للوثائق الرسمية بفضل تصميم الدخول السريع الذكي.">
-          FAST PASS is designed to work with any Fandaqah or machine-readable passport and national ID cards scanner available in the market.
+          Swift Checkin is designed to work with any Fandaqah or machine-readable passport and national ID cards scanner available in the market.
         </p>
 
         <div class="space-y-2">
@@ -2558,9 +2558,9 @@ h1,h2,h3,h4,h5{font-family:'El Messiri',sans-serif}
       <span class="translatable" data-en="Check‑In?" data-ar="تسجيل الوصول؟">Check‑In?</span>
     </h2>
     <p class="text-lg text-white/80 mb-10 max-w-2xl mx-auto rv d1 translatable"
-       data-en="Transform your hotel reception today with FAST PASS instant passports and national ID cards  scanning technology."
+       data-en="Transform your hotel reception today with Swift Checkin instant passports and national ID cards  scanning technology."
        data-ar="ارتقِ باستقبال فندقك عبر تقنية الدخول السريع للمسح الفوري للوثائق الرسمية.">
-      Transform your hotel reception today with FAST PASS instant passports and national ID cards  scanning technology.
+      Transform your hotel reception today with Swift Checkin instant passports and national ID cards  scanning technology.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center rv d2">
       <button class="btn-w" id="ctaVideoBtn">
@@ -2718,7 +2718,7 @@ function setLang(l){
   document.querySelector('.lang-ar').classList.toggle('on',l==='ar');
   document.querySelectorAll('.translatable').forEach(el=>{const t=el.getAttribute('data-'+l);if(t)el.textContent=t});
   document.querySelectorAll('option[data-en]').forEach(o=>{const t=o.getAttribute('data-'+l);if(t)o.textContent=t});
-  document.title=l==='ar'?'الدخول السريع – تسجيل وصول فوري | FAST PASS':'FAST PASS – Instant Guest Check-In';
+  document.title=l==='ar'?'الدخول السريع – تسجيل وصول فوري | Swift Checkin':'Swift Checkin – Instant Guest Check-In';
   const cs=document.querySelector('select[name="country_code"]');
   if(cs)updFlag(cs.value,cs);
   try{localStorage.setItem('fp-lang',l)}catch(e){}
