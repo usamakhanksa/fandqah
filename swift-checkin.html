@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fandaqah Hotel Solutions | FAST PASS & Sign Stay & Swift Checkin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>
+<style>
+:root {
+  --primary-color: #e95a54;
+  --primary-dark: #d14a44;
+  --secondary-color: #fbcdab;
+  --tertiary-color: #8f9793;
+  --dark-color: #2a273c;
+  --dark-light: #3a3650;
+  --light-color: #f2f0eb;
+  --white: #ffffff;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "El Messiri", sans-serif;
+  background: var(--light-color);
+  overflow-x: hidden;
+}
+[dir="rtl"] {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+select.country-select {
+    width: 10% !important;
+}
+/* Gradient Backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #2a273c 0%, #3d3952 50%, #2a273c 100%);
+}
+.coral-gradient {
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+}
+.gold-gradient {
+  background: linear-gradient(135deg, #e95a54 0%, #fbcdab 100%);
+}
+/* Product Tab Styles */
+.product-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: rgba(42, 39, 60, 0.1);
+  border-radius: 50px;
+  padding: 6px;
+  backdrop-filter: blur(10px);
+}
+.product-tab {
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  color: var(--dark-color);
+  border: none;
+  background: transparent;
+  font-size: 15px;
+}
+.product-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50px;
+  z-index: -1;
+}
+.product-tab.active {
+  color: white;
+  box-shadow: 0 4px 20px rgba(233, 90, 84, 0.4);
+}
+.product-tab.active::before {
+  opacity: 1;
+}
+.product-tab:hover:not(.active) {
+  background: rgba(233, 90, 84, 0.1);
+}
+.product-tab .tab-icon {
+  display: inline-block;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+[dir="rtl"] .product-tab .tab-icon {
+  margin-right: 0;
+  margin-left: 8px;
+}
+.product-tab:hover .tab-icon {
+  transform: scale(1.1);
+}
+/* Product Content Panels */
+.product-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.product-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Card Styles */
+.feature-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(143, 151, 147, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(42, 39, 60, 0.15);
+}
+.dark-card {
+  background: linear-gradient(145deg, rgba(143, 151, 147, 0.1) 0%, rgba(42, 39, 60, 0.5) 100%);
+  border: 1px solid rgba(233, 90, 84, 0.2);
+}
+.dark-card:hover {
+  border-color: rgba(233, 90, 84, 0.5);
+  box-shadow: 0 20px 40px rgba(233, 90, 84, 0.1);
+}
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+.btn-primary:hover::before {
+  left: 100%;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(233, 90, 84, 0.4);
+}
+.btn-secondary {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(233, 90, 84, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(233, 90, 84, 0.6); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-slide-in { animation: slideIn 0.8s ease-out forwards; }
+/* Step Number Gradient */
+.step-number {
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* Stat Card */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #e95a54 0%, #fbcdab 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* Language Toggle */
+.lang-toggle {
+  position: relative;
+  width: 70px;
+  height: 36px;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.lang-label {
+  z-index: 2;
+  width: 50%;
+  text-align: center;
+  color: var(--dark-color);
+  transition: all 0.3s ease;
+  padding: 6px 0;
+  border-radius: 15px;
+}
+.lang-label.active {
+  background: var(--primary-color);
+  color: white;
+}
+/* WhatsApp Floating Button */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+[dir="rtl"] .wa-float {
+  right: auto;
+  left: 24px;
+}
+.wa-label {
+  background: var(--dark-color);
+  color: var(--light-color);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(42, 39, 60, 0.3);
+  opacity: 0;
+  transform: translateY(6px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.wa-float:hover .wa-label,
+.wa-float .wa-label.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.wa-btn {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  position: relative;
+}
+.wa-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.55);
+}
+.wa-btn::before,
+.wa-btn::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.4);
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+.wa-btn::before { inset: -4px; }
+.wa-btn::after { inset: -10px; animation-delay: 0.4s; }
+.wa-icon {
+  width: 32px;
+  height: 32px;
+  fill: white;
+  z-index: 1;
+}
+.wa-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 2;
+  animation: dot-blink 2s ease-in-out infinite;
+}
+/* Popup Form */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+}
+.popup-form {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.popup-overlay.active .popup-form {
+  transform: scale(1);
+}
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--dark-color);
+  font-size: 22px;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.popup-close:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: rotate(90deg);
+}
+[dir="rtl"] .popup-close {
+  right: auto;
+  left: 15px;
+}
+.popup-header {
+  background: linear-gradient(135deg, var(--dark-color), var(--dark-light));
+  color: white;
+  padding: 28px;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
+}
+.popup-body {
+  padding: 28px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark-color);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(233, 90, 84, 0.1);
+}
+.submit-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+  font-family: inherit;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233, 90, 84, 0.4);
+}
+.form-group.error input,
+.form-group.error select {
+  border-color: #ef4444;
+}
+.error-message {
+  color: #ef4444;
+  font-size: 0.875em;
+  margin-top: 6px;
+  display: block;
+}
+.phone-input-wrapper {
+  display: flex;
+  gap: 0;
+}
+select.country-select {
+  min-width: 110px;
+  border-radius: 12px 0 0 12px;
+  padding-left: 36px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px auto;
+  appearance: none;
+  cursor: pointer;
+  border-right: none;
+}
+input[name="phone"] {
+  flex: 1;
+  border-radius: 0 12px 12px 0;
+}
+[dir="rtl"] select.country-select {
+  border-radius: 0 12px 12px 0;
+  padding-right: 36px;
+  padding-left: 12px;
+  background-position: calc(100% - 10px) center;
+  border-left: none;
+  border-right: 2px solid #e5e7eb;
+}
+[dir="rtl"] input[name="phone"] {
+  border-radius: 12px 0 0 12px;
+}
+/* Video Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10001;
+  padding-top: 50px;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal.show {
+  opacity: 1;
+}
+.modal-content {
+  background: #000;
+  margin: auto;
+  border: none;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+.modal .close {
+  color: white;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.modal .close:hover {
+  background: var(--primary-color);
+  transform: rotate(90deg);
+}
+[dir="rtl"] .modal .close {
+  right: auto;
+  left: 15px;
+}
+.modal-content iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+/* Translatable transition */
+.translatable {
+  transition: opacity 0.3s ease;
+}
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #2a273c 0%, #3d3952 100%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.mobile-menu.active {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu a {
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.mobile-menu a:hover {
+  color: var(--primary-color);
+}
+/* Product Selector Hero */
+.hero-product-selector {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.product-choice {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.product-choice-btn {
+  flex: 1;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.product-choice-btn:hover {
+  border-color: var(--primary-color);
+  background: rgba(233, 90, 84, 0.1);
+}
+.product-choice-btn.active {
+  border-color: var(--primary-color);
+  background: rgba(233, 90, 84, 0.2);
+}
+.product-choice-btn .icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.product-choice-btn .title {
+  font-weight: 700;
+  color: white;
+  font-size: 16px;
+}
+.product-choice-btn .desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+}
+/* Intersection Observer Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+ 
+  .bento-large {
+    grid-column: span 2;
+  }
+ 
+  .bento-tall {
+    grid-row: span 2;
+  }
+}
+/* Sticky Product Nav */
+.sticky-product-nav {
+  position: sticky;
+  top: 80px;
+  z-index: 40;
+  background: rgba(242, 240, 235, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(143, 151, 147, 0.2);
+}
+/* RTL Support */
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .ml-auto { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .mr-auto { margin-right: 0; margin-left: auto; }
+  /* Dropdown Styles */
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.nav-dropdown-trigger:hover {
+  color: var(--primary-color);
+}
+.nav-dropdown-trigger .dropdown-arrow {
+  transition: transform 0.3s ease;
+  font-size: 12px;
+}
+.nav-dropdown:hover .dropdown-arrow,
+.nav-dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+/* Mega Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  min-width: 480px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(42, 39, 60, 0.15), 0 0 0 1px rgba(143, 151, 147, 0.1);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  pointer-events: none;
+}
+[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(10px);
+}
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+[dir="rtl"] .nav-dropdown:hover .dropdown-menu,
+[dir="rtl"] .nav-dropdown.active .dropdown-menu {
+  transform: translateX(50%) translateY(0);
+}
+/* Dropdown Arrow/Pointer */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--white);
+  border-radius: 4px;
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.03);
+}
+/* Product Cards in Dropdown */
+.dropdown-product-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.dropdown-product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(233, 90, 84, 0.05) 0%, rgba(251, 205, 171, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.dropdown-product-card:hover::before {
+  opacity: 1;
+}
+.dropdown-product-card:hover {
+  transform: translateX(4px);
+}
+[dir="rtl"] .dropdown-product-card:hover {
+  transform: translateX(-4px);
+}
+.dropdown-product-card .product-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.dropdown-product-card:hover .product-icon {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(233, 90, 84, 0.3);
+}
+.dropdown-product-card .product-icon.fastpass-icon {
+  background: linear-gradient(135deg, #e95a54 0%, #ff7b75 100%);
+}
+.dropdown-product-card .product-icon.signstay-icon {
+  background: linear-gradient(135deg, #2a273c 0%, #3d3952 100%);
+}
+.dropdown-product-card .product-icon.swiftcheckin-icon {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+.dropdown-product-card .product-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.dropdown-product-card .product-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dropdown-product-card .product-title .badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.dropdown-product-card .product-title .badge.new {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+.dropdown-product-card .product-title .badge.popular {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+.dropdown-product-card .product-desc {
+  font-size: 13px;
+  color: var(--tertiary-color);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.dropdown-product-card .product-features {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dropdown-product-card .feature-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--dark-color);
+  background: rgba(143, 151, 147, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.dropdown-product-card .feature-tag i {
+  color: #10b981;
+  font-size: 12px;
+}
+.dropdown-product-card .arrow-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+}
+[dir="rtl"] .dropdown-product-card .arrow-icon {
+  right: auto;
+  left: 20px;
+  transform: translateY(-50%) rotate(180deg);
+}
+.dropdown-product-card:hover .arrow-icon {
+  opacity: 1;
+  right: 16px;
+}
+[dir="rtl"] .dropdown-product-card:hover .arrow-icon {
+  right: auto;
+  left: 16px;
+}
+/* Divider */
+.dropdown-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(143, 151, 147, 0.2), transparent);
+  margin: 4px 20px;
+}
+/* Bottom Link */
+.dropdown-footer {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  margin: 4px;
+  background: rgba(233, 90, 84, 0.05);
+}
+.dropdown-footer:hover {
+  background: rgba(233, 90, 84, 0.1);
+}
+.dropdown-footer i {
+  transition: transform 0.3s ease;
+}
+.dropdown-footer:hover i {
+  transform: translateX(4px);
+}
+[dir="rtl"] .dropdown-footer:hover i {
+  transform: translateX(-4px) rotate(180deg);
+}
+[dir="rtl"] .dropdown-footer i {
+  transform: rotate(180deg);
+}
+/* Mobile Dropdown */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+    min-width: 100%;
+    border-radius: 24px 24px 0 0;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+ 
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown.active .dropdown-menu {
+    transform: translateY(0);
+  }
+ 
+  .dropdown-menu::before {
+    display: none;
+  }
+ 
+  .dropdown-product-card {
+    padding: 16px;
+  }
+}
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+  /* Force hide dropdown when .force-close class is present, even on hover */
+/* Force-hide dropdown even on hover after selection */
+.nav-dropdown.force-close .dropdown-menu,
+.nav-dropdown.force-close:hover .dropdown-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(10px) !important;
+}
+[dir="rtl"] .nav-dropdown.force-close .dropdown-menu,
+[dir="rtl"] .nav-dropdown.force-close:hover .dropdown-menu {
+    transform: translateX(50%) translateY(10px) !important;
+}
+/* Mobile: force hide */
+@media (max-width: 768px) {
+    .nav-dropdown.force-close .dropdown-menu {
+        transform: translateY(100%) !important;
+    }
+}
+</style>
+</head>
+<body class="h-full">
+<div id="app-wrapper" class="w-full min-h-full">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#f2f0eb]/95 backdrop-blur-md border-b border-[#8f9793]/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <a href="#" class="flex items-center">
+        <img style="width: 140px;" src="https://usamakhanksa.github.io/fandqah/en/wp-content/uploads/2025/07/fandaqah-simple.png" alt="Fandaqah Logo">
+      </a>
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+       
+        <!-- Products Dropdown -->
+        <div class="nav-dropdown" id="productsDropdown">
+          <div class="nav-dropdown-trigger text-[#2a273c] font-medium">
+            <span class="translatable" data-en="Products" data-ar="المنتجات">Products</span>
+            <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+          </div>
+         
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu">
+            <!-- FAST PASS Card -->
+            <div class="dropdown-product-card" onclick="switchProduct('fastpass', true)">
+              <div class="product-icon fastpass-icon">
+                <i class="ri-passport-line text-2xl text-white"></i>
+              </div>
+              <div class="product-content">
+                <div class="product-title">
+                  FAST PASS
+                  <span class="badge popular translatable" data-en="Popular" data-ar="شائع">Popular</span>
+                </div>
+                <p class="product-desc translatable" data-en="Instant Passport & National ID Scanning. Auto-fill guest data directly into your PMS in under 2 seconds – for passports and national ID cards from ALL countries." data-ar="مسح فوري للوثائق. ملء بيانات النزلاء تلقائياً في نظامك خلال أقل من ثانيتين.">Instant Passport & National ID Scanning. Auto-fill guest data directly into your PMS in under 2 seconds – for passports and national ID cards from ALL countries.</p>
+                <div class="product-features">
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="< 2 sec scan" data-ar="أقل من ثانيتين">< 2 sec scan</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Plug & Play" data-ar="جاهز للاستخدام">Plug & Play</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Error-Free" data-ar="بدون أخطاء">Error-Free</span>
+                  </span>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line arrow-icon text-xl"></i>
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- Sign Stay Card -->
+            <div class="dropdown-product-card" onclick="switchProduct('signstay', true)">
+              <div class="product-icon signstay-icon">
+                <i class="ri-edit-line text-2xl text-[#fbcdab]"></i>
+              </div>
+              <div class="product-content">
+                <div class="product-title">
+                  Sign Stay
+                  <span class="badge new translatable" data-en="New" data-ar="جديد">New</span>
+                </div>
+                <p class="product-desc translatable" data-en="Digital signature solution via tablets. Go 100% paperless with modern check-in experience." data-ar="التوقيع الإلكتروني عبر الأجهزة اللوحية. تجربة تسجيل وصول حديثة بدون ورق.">Digital signature solution via tablets. Go 100% paperless with modern check-in experience.</p>
+                <div class="product-features">
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="100% Paperless" data-ar="بدون ورق">100% Paperless</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Eco-Friendly" data-ar="صديق للبيئة">Eco-Friendly</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="Tablet Ready" data-ar="جاهز للتابلت">Tablet Ready</span>
+                  </span>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line arrow-icon text-xl"></i>
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- Swift Checkin Card -->
+            <div class="dropdown-product-card" onclick="switchProduct('swiftcheckin', true)">
+              <div class="product-icon swiftcheckin-icon">
+                <i class="ri-speed-up-line text-2xl text-white"></i>
+              </div>
+              <div class="product-content">
+                <div class="product-title">
+                  Swift Checkin
+                  <span class="badge popular translatable" data-en="New" data-ar="جديد">New</span>
+                </div>
+                <p class="product-desc translatable" data-en="Instant all passports & Saudi (National ID Cards & Iqamas) scanning. Auto-fill guest data into PMS in under 2 seconds – without taking or saving any ID photos." data-ar="مسح فوري لجميع الجوازات والهويات والإقامات السعودية. تعبئة بيانات النزيل تلقائياً في أقل من ثانيتين – بدون التقاط أو حفظ أي صور للهوية.">Instant all passports & Saudi (National ID Cards & Iqamas) scanning. Auto-fill guest data into PMS in under 2 seconds – without taking or saving any ID photos.</p>
+                <div class="product-features">
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="< 2 sec scan" data-ar="أقل من ثانيتين">< 2 sec scan</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="No Photos Saved" data-ar="بدون حفظ صور">No Photos Saved</span>
+                  </span>
+                  <span class="feature-tag">
+                    <i class="ri-check-line"></i>
+                    <span class="translatable" data-en="PMS Auto-Fill" data-ar="تعبئة تلقائية">PMS Auto-Fill</span>
+                  </span>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line arrow-icon text-xl"></i>
+            </div>
+            <div class="dropdown-divider"></div>
+          </div>
+        </div>
+        <a href="#features" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium translatable" data-en="Features" data-ar="المميزات">Features</a>
+        <a href="#how-it-works" class="text-[#2a273c] hover:text-[#e95a54] transition-colors font-medium translatable" data-en="How It Works" data-ar="كيفية الاستخدام">How It Works</a>
+        <a href="#contact" class="btn-primary text-sm translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Language Toggle -->
+        <div class="lang-toggle" id="langToggle">
+          <span class="lang-label active" id="langEn">EN</span>
+          <span class="lang-label" id="langAr">AR</span>
+        </div>
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-[#2a273c] text-2xl" id="mobileMenuBtn">
+          <i class="ri-menu-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="absolute top-6 right-6 text-white text-3xl" id="closeMobileMenu">
+    <i class="ri-close-line"></i>
+  </button>
+  <a href="#products" class="translatable" data-en="Products" data-ar="المنتجات">Products</a>
+  <a href="#features" class="translatable" data-en="Features" data-ar="المميزات">Features</a>
+  <a href="#how-it-works" class="translatable" data-en="How It Works" data-ar="كيفية الاستخدام">How It Works</a>
+  <a href="#contact" class="translatable" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+</div>
+<!-- Hero Section -->
+<section class="gradient-bg pt-28 pb-20 md:pt-36 md:pb-28 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute top-20 right-10 w-80 h-80 bg-[#fbcdab]/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-60 h-60 bg-[#e95a54]/10 rounded-full blur-3xl"></div>
+ 
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-4xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 bg-[#fbcdab]/20 text-[#fbcdab] px-5 py-2 rounded-full text-sm font-medium mb-6">
+        <i class="ri-hotel-line"></i>
+        <span class="translatable" data-en="Integrated Technical Solutions For Hotels" data-ar="حلول تقنية متكاملة للفنادق">Integrated Technical Solutions For Hotels</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+        <span class="translatable" data-en="Transform Your " data-ar="حوّل ">Transform Your </span>
+        <span class="text-gradient translatable" data-en="Hotel Experience" data-ar="تجربة فندقك">Hotel Experience</span>
+      </h1>
+      <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto translatable" data-en="Three powerful solutions to streamline check-in, eliminate paperwork, and deliver exceptional guest experiences." data-ar="ثلاث حلول قوية لتسريع تسجيل الوصول، والتخلص من الأوراق، وتقديم تجربة استثنائية للنزلاء.">
+        Three powerful solutions to streamline check-in, eliminate paperwork, and deliver exceptional guest experiences.
+      </p>
+    </div>
+    <!-- Product Selector Cards - NOW THREE COLUMNS -->
+    <div id="products" class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <!-- FAST PASS Card -->
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="fastpass" onclick="switchProduct('fastpass', true)">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+            <i class="ri-passport-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-1">FAST PASS</h3>
+            <p class="text-white/70 text-sm translatable" data-en="Instant Passport & National ID Scanning" data-ar="ماسح الهويات">Instant Passport & National ID Scanning</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mb-4 translatable" data-en="Smart scanning technology instantly reads passports, visas, and national ID cards from every country in the world and converts registration procedures into one quick step" data-ar="مسح ذكي للجوازات السفر و التأشيرات يحول إجراءات التسجيل إلى خطوة واحدة سريعة">
+         Smart scanning technology instantly reads passports, visas, and national ID cards from every country in the world and converts registration procedures into one quick step.
+        </p>
+        <div class="flex items-center gap-4 text-sm">
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="< 2 sec scan" data-ar="أقل من ثانيتين">< 2 sec scan</span>
+          </span>
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="Plug & Play" data-ar="جاهز للاستخدام">Plug & Play</span>
+          </span>
+            <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="All Countries" data-ar="جميع البلدان">All Countries</span>
+          </span>
+        </div>
+      </div>
+      <!-- Sign Stay Card -->
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="signstay" onclick="switchProduct('signstay', true)">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+            <i class="ri-edit-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-1">Sign Stay</h3>
+            <p class="text-white/70 text-sm translatable" data-en="Digital Signature Solution" data-ar="التوقيع الإلكتروني">Digital Signature Solution</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mb-4 translatable" data-en="Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality." data-ar="تقدم فندقة ميزة التوقيع الإلكتروني عبر الأجهزة اللوحية ( التابلت ) لتجربة افضل لتسجيل الوصول والمغادرة للضيوف">
+         Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality.
+        </p>
+        <div class="flex items-center gap-4 text-sm">
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="100% Paperless" data-ar="بدون ورق">100% Paperless</span>
+          </span>
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="Eco-Friendly" data-ar="صديق للبيئة">Eco-Friendly</span>
+          </span>
+        </div>
+      </div>
+      <!-- Swift Checkin Card (NEW) -->
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="swiftcheckin" onclick="switchProduct('swiftcheckin', true)">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+            <i class="ri-speed-up-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-1">Swift Checkin</h3>
+            <p class="text-white/70 text-sm translatable" data-en="Instant Scanner for All Passports & Saudi IDs" data-ar="ماسح فوري لجميع الجوازات والهويات السعودية">Instant Scanner for All Passports & Saudi IDs</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mb-4 translatable" data-en="Auto-fill guest data directly into your PMS in under 2 seconds for all passports and Saudi (National ID Cards & Iqamas) – without taking or saving any ID photos." data-ar="تعبئة بيانات النزيل تلقائياً في أقل من ثانيتين لجميع الجوازات والهويات والإقامات السعودية – بدون التقاط أو حفظ أي صور للهوية.">
+         Auto-fill guest data directly into your PMS in under 2 seconds for all passports and Saudi (National ID Cards & Iqamas) – without taking or saving any ID photos.
+        </p>
+        <div class="flex items-center gap-4 text-sm">
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="< 2 sec scan" data-ar="أقل من ثانيتين">< 2 sec scan</span>
+          </span>
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="No Photos Saved" data-ar="بدون حفظ صور">No Photos Saved</span>
+          </span>
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="PMS Auto-Fill" data-ar="تعبئة تلقائية">PMS Auto-Fill</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+      <button class="btn-primary flex items-center justify-center gap-2 animate-pulse-glow" onclick="openPopup()">
+        <i class="ri-rocket-line"></i>
+        <span class="translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span>
+      </button>
+      <button id="heroVideoBtn" class="btn-secondary flex items-center justify-center gap-2">
+        <i class="ri-play-circle-line"></i>
+        <span class="translatable" data-en="Watch Demo" data-ar="شاهد العرض">Watch Demo</span>
+      </button>
+    </div>
+    <!-- Trust Badges -->
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm">
+      <div class="flex items-center gap-2">
+        <i class="ri-checkbox-circle-fill text-green-400"></i>
+        <span class="translatable" data-en="800+ Hotels Trust Us" data-ar="أكثر من 800 فندق يثقون بنا">800+ Hotels Trust Us</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="ri-checkbox-circle-fill text-green-400"></i>
+        <span class="translatable" data-en="Government Compliant" data-ar="متوافق مع الأنظمة الحكومية">Government Compliant</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="ri-checkbox-circle-fill text-green-400"></i>
+        <span class="translatable" data-en="24/7 Support" data-ar="دعم على مدار الساعة">24/7 Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Stats Section -->
+<section class="py-12 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="text-center stat-card p-6 reveal">
+        <p class="text-3xl md:text-4xl font-bold text-gradient mb-2">85%</p>
+        <p class="text-[#8f9793] text-sm translatable" data-en="Faster Check-In" data-ar="تسجيل أسرع">Faster Check-In</p>
+      </div>
+      <div class="text-center stat-card p-6 reveal">
+        <p class="text-3xl md:text-4xl font-bold text-gradient mb-2">800+</p>
+        <p class="text-[#8f9793] text-sm translatable" data-en="Hotels Trust Us" data-ar="فنادق تثق بنا">Hotels Trust Us</p>
+      </div>
+      <div class="text-center stat-card p-6 reveal">
+        <p class="text-3xl md:text-4xl font-bold text-gradient mb-2">500K+</p>
+        <p class="text-[#8f9793] text-sm translatable" data-en="Guest Check-Ins" data-ar="تسجيل وصول النزلاء">Guest Check-Ins</p>
+      </div>
+      <div class="text-center stat-card p-6 reveal">
+        <p class="text-3xl md:text-4xl font-bold text-gradient mb-2">99.9%</p>
+        <p class="text-[#8f9793] text-sm translatable" data-en="Operational Efficiency" data-ar="كفاءة التشغيل">Operational Efficiency</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Tabs Navigation - NOW THREE TABS -->
+<section class="sticky-product-nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-center">
+      <div class="product-tabs">
+        <button class="product-tab active" data-product="fastpass" onclick="switchProduct('fastpass', true)">
+          <span class="tab-icon"><i class="ri-passport-line"></i></span>
+          <span>FAST PASS</span>
+        </button>
+        <button class="product-tab" data-product="signstay" onclick="switchProduct('signstay', true)">
+          <span class="tab-icon"><i class="ri-edit-line"></i></span>
+          <span>Sign Stay</span>
+        </button>
+        <button class="product-tab" data-product="swiftcheckin" onclick="switchProduct('swiftcheckin', true)">
+          <span class="tab-icon"><i class="ri-speed-up-line"></i></span>
+          <span>Swift Checkin</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ==================== FAST PASS CONTENT ==================== -->
+<div id="fastpass-panel" class="product-panel active">
+  <!-- FAST PASS Features -->
+  <section id="features" class="py-16 md:py-24 bg-[#f2f0eb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2a273c] mb-4 translatable" data-en="Why Choose FAST PASS" data-ar="لماذا تختار الدخول السريع">Why Choose FAST PASS</h2>
+        <p class="text-lg text-[#8f9793] max-w-2xl mx-auto translatable" data-en="Transform your reception with instant passport & national ID scanning technology from ALL" data-ar="حوّل استقبالك مع تقنية مسح الوثائق الفورية">Transform your reception with instant passport & national ID scanning technology from ALL</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 coral-gradient rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-flashlight-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Fast Check‑In" data-ar="تسجيل وصول سريع">Fast Check‑In</h3>
+          <p class="text-[#8f9793] translatable" data-en="Reduce guest waiting time from minutes to seconds with instant scanning of passports and national ID cards from every country." data-ar="قلل وقت انتظار النزلاء من دقائق إلى ثوان مع تقنية مسح الوثائق الرسمية الفورية.">Reduce guest waiting time from minutes to seconds with instant scanning of passports and national ID cards from every country.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#2a273c] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-group-line text-2xl text-[#fbcdab]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="No Waiting" data-ar="لا إنتظار">No Waiting</h3>
+          <p class="text-[#8f9793] translatable" data-en="Organized arrival and a more comfortable guest experience for international and domestic guests alike." data-ar="وصول منظم وتجربة أكثر راحة للنزلاء">Organized arrival and a more comfortable guest experience for international and domestic guests alike.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-checkbox-circle-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Error‑Free Data Entry" data-ar="إدخال بيانات بدون أخطاء">Error‑Free Data Entry</h3>
+          <p class="text-[#8f9793] translatable" data-en="No spelling mistakes or manual entry errors. Data is captured directly from the document passport or national ID." data-ar="لا أخطاء إملائية او ادخال يدوي،يتم مسح البيانات مباشرة من الوثيقة">No spelling mistakes or manual entry errors. Data is captured directly from the document passport or national ID.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#fbcdab] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-file-chart-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Government Reporting" data-ar="التقارير الحكومية">Government Reporting</h3>
+          <p class="text-[#8f9793] translatable" data-en="Fully compatible with Shamoos, SCTH, ZATCA, and NTMP for accurate compliance reporting." data-ar="التكامل مع شموس والسياحة و زاتكا لضمان دقة التقارير">Fully compatible with Shamoos, SCTH, ZATCA, and NTMP for accurate compliance reporting.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 coral-gradient rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-time-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Save Time" data-ar="توفير الوقت">Save Time</h3>
+          <p class="text-[#8f9793] translatable" data-en="Automate manual data entry and free up your staff to focus on guest service excellence." data-ar="وفّر الوقت لموظفيك عبر التخلص من المهام اليدوية و ركّز جهودهم على تعزيز تجربة النزلاء">Automate manual data entry and free up your staff to focus on guest service excellence.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#2a273c] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-line-chart-line text-2xl text-[#fbcdab]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Increase Productivity" data-ar="زيادة الإنتاجية">Increase Productivity</h3>
+          <p class="text-[#8f9793] translatable" data-en="Boost reception efficiency and handle more guests with the same team size." data-ar="عزز كفاءة الاستقبال لتمكين فريقك من خدمة المزيد من النزلاء بسلاسة">Boost reception efficiency and handle more guests with the same team size.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAST PASS How It Works -->
+  <section id="how-it-works" class="py-16 md:py-24 bg-[#2a273c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 translatable" data-en="How FAST PASS Works" data-ar="كيفية عمل الدخول السريع">How FAST PASS Works</h2>
+        <p class="text-lg text-white/70 max-w-2xl mx-auto translatable" data-en="Get started in minutes with our plug-and-play solution" data-ar="ابدأ في دقائق مع حلنا الجاهز للاستخدام">Get started in minutes with our plug-and-play solution</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">01</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Connect Scanner" data-ar="توصيل الماسح الضوئي">Connect Scanner</h3>
+            <p class="text-white/70 translatable" data-en="Connect the official document scanner to the computer via USB." data-ar="قم بأيصال ماسح الوثائق الرسمية بالكمبيوتر عبر USB.">Connect the official document scanner to the computer via USB.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">02</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Open PMS" data-ar="فتح نظام إدارة الممتلكات">Open PMS</h3>
+            <p class="text-white/70 translatable" data-en="Open the reservation or check‑in page in your Fandaqah Hotel PMS system." data-ar="افتح صفحة الحجز او التسجيل في نظام فندقة الخاص بك">Open the reservation or check‑in page in your Fandaqah Hotel PMS system.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">03</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Click Scan" data-ar="انقر فوق مسح">Click Scan</h3>
+            <p class="text-white/70 translatable" data-en="Simply click the Scan button and place the passport or national ID card on the scanner." data-ar="ما عليك سوى النقر فوق زر المسح ووضع الوثيقة الرسمية على الماسح الضوئي.">Simply click the Scan button and place the passport or national ID card on the scanner.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="coral-gradient rounded-3xl p-8 h-full">
+            <span class="text-6xl font-extrabold text-white/30">04</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Auto‑Fill Complete" data-ar="الإكمال التلقائي">Auto‑Fill Complete</h3>
+            <p class="text-white/80 translatable" data-en="Guest details are filled automatically and instantly in the PMS." data-ar="تُملأ تفاصيل العميل تلقائياً وفورياً في نظام PMS">Guest details are filled automatically and instantly in the PMS.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Data Captured -->
+      <div class="mt-16 bg-[#3d3952] rounded-3xl p-8 md:p-12 reveal">
+        <h3 class="text-2xl font-bold text-white text-center mb-8 translatable" data-en="Data Captured Automatically" data-ar="البيانات التي يتم مسحها تلقائياً">Data Captured Automatically</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Full Name" data-ar="الاسم الكامل">Full Name</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Nationality" data-ar="الجنسية">Nationality</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Gender" data-ar="الجنس">Gender</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Date of Birth" data-ar="تاريخ الميلاد">Date of Birth</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Passport Number" data-ar="رقم جواز السفر">Passport Number</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Issue Date" data-ar="تاريخ الإصدار">Issue Date</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="Expiry Date" data-ar="تاريخ الانتهاء">Expiry Date</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="ri-check-line text-[#e95a54]"></i>
+            <span class="text-white translatable" data-en="National ID Number" data-ar="رقم الوثيقة الرسمية">National ID Number</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAST PASS Device Compatibility -->
+  <section class="py-16 md:py-24 bg-[#f2f0eb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 bg-[#e95a54]/10 text-[#e95a54] px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <i class="ri-plug-line"></i>
+            <span class="translatable" data-en="Universal Compatibility" data-ar="توافق عالمي">Universal Compatibility</span>
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold text-[#2a273c] mb-6 translatable" data-en="Works With Any Scanner" data-ar="يعمل مع أي ماسح ضوئي">Works With Any Scanner</h2>
+          <p class="text-lg text-[#8f9793] mb-8 translatable" data-en="Enjoy seamless integration with any official document scanner." data-ar="استمتع بسهولة التكامل مع أي ماسح ضوئي للوثائق الرسمية">Enjoy seamless integration with any official document scanner.</p>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="Plug-and-Play via USB" data-ar="جاهز للاستخدام عبر USB">Plug-and-Play via USB</h4>
+                <p class="text-[#8f9793] translatable" data-en="Simply connect your scanner to the reception PC and start scanning immediately." data-ar="ما عليك سوى توصيل الماسح الضوئي بجهاز كمبيوتر الاستقبال والبدء في المسح فورًا.">Simply connect your scanner to the reception PC and start scanning immediately.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="Fandaqah Technology" data-ar="تقنية فندقة">Fandaqah Technology</h4>
+                <p class="text-[#8f9793] translatable" data-en="Supports all machine-readable zone formats for accurate data extraction." data-ar="يدعم جميع صيغ القراءة الآلية لاستخراج دقيق للبيانات.">Supports all machine-readable zone formats for accurate data extraction.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="Expert Technical Support" data-ar="الدعم الفني">Expert Technical Support</h4>
+                <p class="text-[#8f9793] translatable" data-en="Contact Fandaqah support for recommended reader brands and models." data-ar="اتصل بدعم فندقة للحصول على ماركات وموديلات الماسحات الموصى بها.">Contact Fandaqah support for recommended reader brands and models.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="bg-white rounded-3xl p-8 shadow-2xl">
+            <img src="https://usamakhanksa.github.io/fandqah/fast-pass.png" alt="FAST PASS Scanner" class="w-full h-auto rounded-xl animate-float">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==================== SIGN STAY CONTENT ==================== -->
+<div id="signstay-panel" class="product-panel">
+  <!-- Sign Stay Features -->
+  <section class="py-16 md:py-24 bg-[#2a273c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <span class="translatable" data-en="Everything You Need for " data-ar="كل ما تحتاجه لـ ">Everything You Need for </span>
+          <span class="text-gradient translatable" data-en="Modern Hospitality" data-ar="الضيافة الحديثة">Modern Hospitality</span>
+        </h2>
+        <p class="text-lg text-white/70 max-w-2xl mx-auto translatable" data-en="Comprehensive tools designed specifically for hotels to streamline operations and enhance guest satisfaction." data-ar="حلول متكاملة مصممة خصيصًا للفنادق لتسهيل إدارة العمليات وتحسين تجربة الضيوف">Comprehensive tools designed specifically for hotels to streamline operations and enhance guest satisfaction.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-timer-flash-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Speed Up Check-in/Check-out" data-ar="تسريع إجراءات تسجيل الوصول والمغادرة">Speed Up Check-in/Check-out</h3>
+          <p class="text-white/70 translatable" data-en="Streamline guest processes and improve operational efficiency." data-ar="تبسيط عمليات الضيوف وتحسين الكفاءة التشغيلية">Streamline guest processes and improve operational efficiency.</p>
+        </div>
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-wallet-3-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Reduce Costs & Save Paper" data-ar="تقليل التكاليف و توفير الورق">Reduce Costs & Save Paper</h3>
+          <p class="text-white/70 translatable" data-en="Eliminate printing expenses and contribute to environmental sustainability." data-ar="التخلص من نفقات الطباعة و المساهمة في الاستدامة البيئية">Eliminate printing expenses and contribute to environmental sustainability.</p>
+        </div>
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-star-smile-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Enhance Guest Experience" data-ar="تحسين تجربة الضيوف">Enhance Guest Experience</h3>
+          <p class="text-white/70 translatable" data-en="Modern, eco-friendly solution that impresses guests." data-ar="حلول حديثة وعصرية">Modern, eco-friendly solution that impresses guests.</p>
+        </div>
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-customer-service-2-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Streamline Front Desk Operations" data-ar="تسهيل عمليات مكتب الاستقبال">Streamline Front Desk Operations</h3>
+          <p class="text-white/70 translatable" data-en="Reduce manual paperwork and improve staff productivity." data-ar="تقليل الأعمال الورقية اليومية وتحسين الأداء">Reduce manual paperwork and improve staff productivity.</p>
+        </div>
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-file-shield-2-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Digital Contract Management" data-ar="إدارة العقود الرقمية">Digital Contract Management</h3>
+          <p class="text-white/70 translatable" data-en="Access signed contracts digitally without physical archiving." data-ar="تجنب أرشفة العقود والأوراق الموقعة، والوصول إليها بسهولة">Access signed contracts digitally without physical archiving.</p>
+        </div>
+        <div class="feature-card dark-card p-6 rounded-2xl reveal">
+          <div class="w-14 h-14 gold-gradient rounded-xl flex items-center justify-center mb-4">
+            <i class="ri-cloud-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Seamless PMS Integration" data-ar="تكامل سلس مع نظام إدارة الفنادق">Seamless PMS Integration</h3>
+          <p class="text-white/70 translatable" data-en="Real-time updates with Fandaqah PMS for efficient workflow." data-ar="تحديثات فورية و مستمرة مع نظام فندقة">Real-time updates with Fandaqah PMS for efficient workflow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="how-it-works" class="py-16 md:py-24 bg-[#2a273c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 translatable" data-en="Steps for using electronic signature" data-ar="خطوات استخدام التوقيع الإلكتروني">Steps for using electronic signature</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">01</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Download the electronic signature application on a tablet device" data-ar="تحميل تطبيق التوقيع الإلكتروني على جهاز التابلت">Download the electronic signature application on a tablet device</h3>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">02</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Open the application on the tablet device and enter the activation code" data-ar="فتح التطبيق من خلال جهاز التابلت وادخال كود التفعيل">Open the application on the tablet device and enter the activation code</h3>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">03</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Review the booking contract and send it to the tablet" data-ar="استعراض عقد الحجز وإرساله إلى جهاز التابلت">Review the booking contract and send it to the tablet</h3>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="coral-gradient rounded-3xl p-8 h-full">
+            <span class="text-6xl font-extrabold text-white/30">04</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Approve the electronic signature to save and archive" data-ar="اعتماد التوقيع الإلكتروني ليتم حفظه وأرشفة العقد">Approve the electronic signature to save and archive</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Sign Stay Benefits -->
+  <section class="py-16 md:py-24 bg-[#f2f0eb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#2a273c] mb-6">
+            <span class="translatable" data-en="Transform Your " data-ar="حول تجربة ">Transform Your </span>
+            <span class="text-gradient translatable" data-en="Guest Experience" data-ar="ضيوفك">Guest Experience</span>
+          </h2>
+         
+          <div class="space-y-6 mt-8">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center bg-amber-100">
+                <i class="ri-money-dollar-circle-line text-xl text-amber-600"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-[#2a273c] mb-1 translatable" data-en="Reduce Operational Costs" data-ar="وفر وقتا ثمينا">Reduce Operational Costs</h4>
+                <p class="text-[#8f9793] translatable" data-en="Eliminate printing, storage, and manual processing costs. Go completely paperless." data-ar="اجعل تسجيل الدخول سريع لنزلائك دون ورق">Eliminate printing, storage, and manual processing costs.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center bg-green-100">
+                <i class="ri-time-line text-xl text-green-600"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-[#2a273c] mb-1 translatable" data-en="Save Valuable Time" data-ar="قلل التكاليف التشغيلية">Save Valuable Time</h4>
+                <p class="text-[#8f9793] translatable" data-en="Reduce check-in time from 15+ minutes to under 3 minutes." data-ar="استغن عن الطباعة والتخزين والمعالجة اليدوية">Reduce check-in time from 15+ minutes to under 3 minutes.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center bg-green-100">
+                <i class="ri-file-check-line text-xl text-green-600"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-[#2a273c] mb-1 translatable" data-en="Improve Accuracy" data-ar="حسن الدقة">Improve Accuracy</h4>
+                <p class="text-[#8f9793] translatable" data-en="Digital forms eliminate handwriting errors and ensure complete, accurate guest information." data-ar="النماذج الرقمية تقلل اخطاء الكتابة">Digital forms eliminate handwriting errors.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center bg-amber-100">
+                <i class="ri-emotion-happy-line text-xl text-amber-600"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-[#2a273c] mb-1 translatable" data-en="Enhance Guest Satisfaction" data-ar="عزز رضا النزلاء">Enhance Guest Satisfaction</h4>
+                <p class="text-[#8f9793] translatable" data-en="Modern, seamless experience that today's travelers expect." data-ar="قدم تجربة حديثة تواكب توقعات الضيوف">Modern, seamless experience that travelers expect.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="bg-white rounded-3xl p-6 shadow-2xl">
+            <img src="https://usamakhanksa.github.io/fandqah/sign-stay.png" alt="Sign Stay App" class="w-full h-auto rounded-xl animate-float">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Sign Stay Target Audience -->
+  <section class="py-16 md:py-24 bg-[#2a273c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 reveal">
+        <span class="translatable" data-en="Designed for " data-ar="مصمم لـ ">Designed for </span>
+        <span class="text-gradient translatable" data-en="Every Property" data-ar="كل عقار">Every Property</span>
+      </h2>
+     
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="feature-card dark-card p-8 rounded-2xl text-center reveal">
+          <div class="w-16 h-16 mx-auto gold-gradient rounded-2xl flex items-center justify-center mb-4">
+            <i class="ri-home-4-line text-3xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Serviced Apartments" data-ar="الشقق المخدومة">Serviced Apartments</h3>
+          <p class="text-white/70 translatable" data-en="Perfect for extended stays with comprehensive agreement management." data-ar="مثالي للإقامات الطويلة مع إدارة كاملة لكل التفاصيل">Perfect for extended stays with comprehensive agreement management.</p>
+        </div>
+        <div class="feature-card dark-card p-8 rounded-2xl text-center reveal">
+          <div class="w-16 h-16 mx-auto gold-gradient rounded-2xl flex items-center justify-center mb-4">
+            <i class="ri-building-4-line text-3xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Hotel Chains" data-ar="سلاسل الفنادق">Hotel Chains</h3>
+          <p class="text-white/70 translatable" data-en="Centralized management across multiple properties with unified branding." data-ar="إدارة مركزية عبر عقارات متعددة مع علامة تجارية موحدة.">Centralized management across multiple properties.</p>
+        </div>
+        <div class="feature-card dark-card p-8 rounded-2xl text-center reveal">
+          <div class="w-16 h-16 mx-auto gold-gradient rounded-2xl flex items-center justify-center mb-4">
+            <i class="ri-sun-line text-3xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2 translatable" data-en="Vacation Rentals" data-ar="إيجارات العطلات">Vacation Rentals</h3>
+          <p class="text-white/70 translatable" data-en="Self-service check-in for vacation properties and short-term rentals." data-ar="تسجيل دخول ذاتي لعقارات العطلات والإيجارات قصيرة المدى.">Self-service check-in for vacation properties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== SWIFT CHECKIN CONTENT (NEW) ==================== -->
+<div id="swiftcheckin-panel" class="product-panel">
+  <!-- Swift Checkin Features -->
+  <section id="features" class="py-16 md:py-24 bg-[#f2f0eb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2a273c] mb-4 translatable" data-en="Why Choose Swift Checkin" data-ar="لماذا تختار سويفت تشيك إن">Why Choose Swift Checkin</h2>
+        <p class="text-lg text-[#8f9793] max-w-2xl mx-auto translatable" data-en="Instant all passports & Saudi (National ID Cards & Iqamas) scanning – no photos saved" data-ar="مسح فوري لجميع الجوازات والهويات والإقامات السعودية – بدون حفظ أي صور">Instant all passports & Saudi (National ID Cards & Iqamas) scanning – no photos saved</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 coral-gradient rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-speed-up-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Ultra-Fast Scan" data-ar="مسح فائق السرعة">Ultra-Fast Scan</h3>
+          <p class="text-[#8f9793] translatable" data-en="Auto-fill guest data in under 2 seconds for every passport and Saudi ID without saving any photos." data-ar="تعبئة بيانات النزيل تلقائياً في أقل من ثانيتين دون حفظ أي صور.">Auto-fill guest data in under 2 seconds for every passport and Saudi ID without saving any photos.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#2a273c] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-shield-check-line text-2xl text-[#fbcdab]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Privacy First" data-ar="خصوصية أولاً">Privacy First</h3>
+          <p class="text-[#8f9793] translatable" data-en="No ID photos are taken or stored – only OCR data is captured and sent to your PMS." data-ar="لا يتم التقاط أو حفظ أي صور للهوية – فقط البيانات النصية يتم إرسالها.">No ID photos are taken or stored – only OCR data is captured and sent to your PMS.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-checkbox-circle-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Error-Free Entry" data-ar="إدخال بدون أخطاء">Error-Free Entry</h3>
+          <p class="text-[#8f9793] translatable" data-en="Direct OCR extraction from machine-readable zones – zero manual typing." data-ar="استخراج تلقائي من المناطق القابلة للقراءة الآلية – بدون كتابة يدوية.">Direct OCR extraction from machine-readable zones – zero manual typing.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#fbcdab] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-file-chart-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Government Compliant" data-ar="متوافق مع الجهات الحكومية">Government Compliant</h3>
+          <p class="text-[#8f9793] translatable" data-en="Fully compatible with Shamoos, SCTH, ZATCA & NTMP – accurate reporting guaranteed." data-ar="متوافق تماماً مع شموس والسياحة وزاتكا – تقارير دقيقة مضمونة.">Fully compatible with Shamoos, SCTH, ZATCA & NTMP – accurate reporting guaranteed.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 coral-gradient rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-time-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Save Time & Boost Efficiency" data-ar="توفير الوقت وزيادة الكفاءة">Save Time & Boost Efficiency</h3>
+          <p class="text-[#8f9793] translatable" data-en="Reception staff can process more guests with the same team size." data-ar="موظفو الاستقبال يستطيعون خدمة المزيد من النزلاء بنفس حجم الفريق.">Reception staff can process more guests with the same team size.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="w-14 h-14 bg-[#2a273c] rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+            <i class="ri-emotion-happy-line text-2xl text-[#fbcdab]"></i>
+          </div>
+          <h3 class="text-xl font-bold text-[#2a273c] mb-3 translatable" data-en="Modern Guest Experience" data-ar="تجربة ضيوف حديثة">Modern Guest Experience</h3>
+          <p class="text-[#8f9793] translatable" data-en="Fast, seamless, and privacy-conscious check-in that impresses every guest." data-ar="تسجيل وصول سريع وسلس ويحترم خصوصية النزلاء.">Fast, seamless, and privacy-conscious check-in that impresses every guest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Swift Checkin How It Works -->
+  <section id="how-it-works" class="py-16 md:py-24 bg-[#2a273c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 translatable" data-en="How Swift Checkin Works" data-ar="كيفية عمل سويفت تشيك إن">How Swift Checkin Works</h2>
+        <p class="text-lg text-white/70 max-w-2xl mx-auto translatable" data-en="Complete setup & ready to scan in minutes" data-ar="تثبيت كامل وجاهز للمسح في دقائق">Complete setup & ready to scan in minutes</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">01</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Connect Scanner" data-ar="توصيل الماسح">Connect Scanner</h3>
+            <p class="text-white/70 translatable" data-en="Plug the Fandaqah-certified passport reader into any Windows PC via USB." data-ar="قم بتوصيل ماسح الجوازات المعتمد من فندقة بأي جهاز ويندوز عبر USB.">Plug the Fandaqah-certified passport reader into any Windows PC via USB.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">02</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Activate in PMS" data-ar="تفعيل في النظام">Activate in PMS</h3>
+            <p class="text-white/70 translatable" data-en="Fandaqah support activates the Swift Checkin add-on in your PMS." data-ar="يدعم فندقة تفعيل إضافة سويفت تشيك إن في نظامك.">Fandaqah support activates the Swift Checkin add-on in your PMS.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="bg-[#3d3952] rounded-3xl p-8 h-full">
+            <span class="step-number text-6xl font-extrabold">03</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Place Document" data-ar="ضع الوثيقة">Place Document</h3>
+            <p class="text-white/70 translatable" data-en="Open any reservation page and simply place the passport or Saudi ID on the scanner." data-ar="افتح صفحة أي حجز وضع الجواز أو الهوية السعودية على الماسح.">Open any reservation page and simply place the passport or Saudi ID on the scanner.</p>
+          </div>
+          <div class="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#e95a54]"></div>
+        </div>
+        <div class="relative reveal">
+          <div class="coral-gradient rounded-3xl p-8 h-full">
+            <span class="text-6xl font-extrabold text-white/30">04</span>
+            <h3 class="text-xl font-bold text-white mt-4 mb-3 translatable" data-en="Instant Auto-Fill" data-ar="تعبئة تلقائية فورية">Instant Auto-Fill</h3>
+            <p class="text-white/80 translatable" data-en="All guest data appears instantly in the PMS – no photos saved, no manual entry." data-ar="تظهر جميع بيانات النزيل فوراً في النظام – بدون حفظ صور أو إدخال يدوي.">All guest data appears instantly in the PMS – no photos saved, no manual entry.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Swift Checkin Device -->
+  <section class="py-16 md:py-24 bg-[#f2f0eb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 bg-[#e95a54]/10 text-[#e95a54] px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <i class="ri-plug-line"></i>
+            <span class="translatable" data-en="Universal Compatibility" data-ar="توافق عالمي">Universal Compatibility</span>
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold text-[#2a273c] mb-6 translatable" data-en="Works With Fandaqah Certified Scanners" data-ar="يعمل مع ماسحات فندقة المعتمدة">Works With Fandaqah Certified Scanners</h2>
+          <p class="text-lg text-[#8f9793] mb-8 translatable" data-en="Plug-and-play with any Fandaqah-certified passport reader." data-ar="جاهز للاستخدام مع أي ماسح جوازات معتمد من فندقة.">Plug-and-play with any Fandaqah-certified passport reader.</p>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="Windows 10 / 11 Only" data-ar="ويندوز 10 / 11 فقط">Windows 10 / 11 Only</h4>
+                <p class="text-[#8f9793] translatable" data-en="Fully compatible with 64-bit Windows operating systems." data-ar="متوافق تماماً مع أنظمة ويندوز 64 بت.">Fully compatible with 64-bit Windows operating systems.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="No Photo Storage" data-ar="بدون حفظ صور">No Photo Storage</h4>
+                <p class="text-[#8f9793] translatable" data-en="OCR only – privacy compliant by design." data-ar="OCR فقط – متوافق مع الخصوصية.">OCR only – privacy compliant by design.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 coral-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="ri-check-line text-xl text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#2a273c] translatable" data-en="Instant PMS Integration" data-ar="تكامل فوري مع النظام">Instant PMS Integration</h4>
+                <p class="text-[#8f9793] translatable" data-en="Direct auto-fill into Fandaqah Hotel PMS." data-ar="تعبئة تلقائية مباشرة في نظام فندقة.">Direct auto-fill into Fandaqah Hotel PMS.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="bg-white rounded-3xl p-8 shadow-2xl">
+            <img src="https://usamakhanksa.github.io/fandqah/ocr.png" alt="Swift Checkin Scanner" class="w-full h-auto rounded-xl animate-float">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CTA Section (Shared) -->
+<section id="contact" class="py-16 md:py-24 coral-gradient relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-64 h-64 bg-[#2a273c]/10 rounded-full blur-3xl"></div>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 reveal translatable" data-en="Ready to Transform Your Hotel?" data-ar="هل أنت مستعد لتحويل فندقك؟">Ready to Transform Your Hotel?</h2>
+    <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto reveal translatable" data-en="Join 800+ hotels already using Fandaqah solutions – FAST PASS, Sign Stay & Swift Checkin." data-ar="انضم إلى أكثر من 800 فندق يستخدمون حلول فندقة – FAST PASS و Sign Stay و Swift Checkin.">Join 800+ hotels already using Fandaqah solutions – FAST PASS, Sign Stay & Swift Checkin.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+      <button class="bg-white text-[#e95a54] px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2" onclick="openPopup()">
+        <i class="ri-rocket-line"></i>
+        <span class="translatable" data-en="Start Free Trial" data-ar="ابدأ تجربة مجانية">Start Free Trial</span>
+      </button>
+      <button id="ctaVideoBtn" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+        <i class="ri-play-circle-line"></i>
+        <span class="translatable" data-en="Watch Demo" data-ar="شاهد العرض">Watch Demo</span>
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#2a273c] py-12 md:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-12">
+      <div class="md:col-span-2">
+        <img style="width: 140px;" src="https://usamakhanksa.github.io/fandqah/en/wp-content/uploads/2025/07/fandaqah-hotel-white.png" alt="Fandaqah Logo" class="mb-6">
+        <p class="text-white/70 max-w-md mb-6 translatable" data-en="Empowering hotels across the region with innovative technology solutions for better guest experiences and operational excellence." data-ar="تمكين الفنادق في جميع أنحاء المملكة بحلول تكنولوجية مبتكرة لتحسين تجارب النزلاء والتميز التشغيلي.">Empowering hotels across the region with innovative technology solutions.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-4 translatable" data-en="Products" data-ar="المنتجات">Products</h4>
+        <ul class="space-y-3">
+          <li><a href="#" onclick="switchProduct('fastpass', true)" class="text-white/70 hover:text-[#e95a54] transition-colors">FAST PASS</a></li>
+          <li><a href="#" onclick="switchProduct('signstay', true)" class="text-white/70 hover:text-[#e95a54] transition-colors">Sign Stay</a></li>
+          <li><a href="#" onclick="switchProduct('swiftcheckin', true)" class="text-white/70 hover:text-[#e95a54] transition-colors">Swift Checkin</a></li>
+          <li><a href="https://fandaqah.com" class="text-white/70 hover:text-[#e95a54] transition-colors translatable" data-en="Fandaqah PMS" data-ar="نظام فندقة">Fandaqah PMS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-4 translatable" data-en="Contact" data-ar="تواصل معنا">Contact</h4>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-white/70">
+            <i class="ri-mail-line text-[#e95a54]"></i>
+            <a href="/cdn-cgi/l/email-protection#dcafa9acacb3aea89cbabdb2b8bdadbdb4f2bfb3b1"><span class="__cf_email__" data-cfemail="8dfef8fdfde2fff9cdebece3e9ecfcece5a3eee2e0">[email&#160;protected]</span></a>
+          </li>
+          <li class="flex items-center gap-3 text-white/70">
+            <i class="ri-phone-line text-[#e95a54]"></i>
+            <a href="tel:966920066456">920066456</a>
+          </li>
+          <li class="flex items-center gap-3 text-white/70">
+            <i class="ri-whatsapp-line text-[#e95a54]"></i>
+            <a href="tel:966555947522">0555947522</a>
+          </li>
+          <li class="flex items-center gap-3 text-white/70">
+            <i class="ri-global-line text-[#e95a54]"></i>
+            <a href="https://fandaqah.com">www.fandaqah.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-[#3d3952] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-white/50 text-sm translatable" data-en="© 2026 Fandaqah. All rights reserved." data-ar="© 2026 فندقة. جميع الحقوق محفوظة.">© 2026 Fandaqah. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="videoClose">&times;</span>
+    <iframe id="videoFrame" src="" title="Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Popup Form -->
+<div class="popup-overlay" id="popupForm">
+  <div class="popup-form">
+    <button class="popup-close" onclick="closePopup()">
+      <i class="ri-close-line"></i>
+    </button>
+    <div class="popup-header">
+      <h3 class="text-2xl font-bold translatable" data-en="Welcome to Fandaqah" data-ar="مرحبا بك في فندقة">Welcome to Fandaqah</h3>
+      <p class="mt-2 text-white/80 translatable" data-en="Get a free 30-day trial and personalized demo" data-ar="احصل على نسخة تجريبية مجانية وعرض توضيحي مخصص">Get a free 30-day trial and personalized demo</p>
+    </div>
+    <div class="popup-body">
+      <form id="quickForm">
+        <div class="form-group">
+          <label class="translatable" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+          <input type="text" name="full_name" required>
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label class="translatable" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+          <input type="email" name="email" required>
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label class="translatable" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+          <div class="phone-input-wrapper">
+            <select name="country_code" class="country-select" required></select>
+            <input type="tel" name="phone" required>
+          </div>
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label class="translatable" data-en="Property Type" data-ar="نوع العقار">Property Type</label>
+          <select name="property_type" required>
+            <option value="" class="translatable" data-en="Select property type" data-ar="اختر نوع العقار">Select property type</option>
+            <option value="hotel" class="translatable" data-en="Hotel" data-ar="فندق">Hotel</option>
+            <option value="serviced-apartments" class="translatable" data-en="Serviced Apartments" data-ar="شقق مفروشة">Serviced Apartments</option>
+            <option value="resort" class="translatable" data-en="Resort" data-ar="منتجع">Resort</option>
+            <option value="boutique-hotel" class="translatable" data-en="Boutique Hotel" data-ar="فندق بوتيك">Boutique Hotel</option>
+            <option value="other" class="translatable" data-en="Other" data-ar="أخرى">Other</option>
+          </select>
+          <span class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label class="translatable" data-en="Interested In" data-ar="مهتم بـ">Interested In</label>
+          <select name="product_interest" required>
+            <option value="" class="translatable" data-en="Select product" data-ar="اختر المنتج">Select product</option>
+            <option value="fastpass">FAST PASS</option>
+            <option value="signstay">Sign Stay</option>
+            <option value="swiftcheckin">Swift Checkin</option>
+            <option value="both" class="translatable" data-en="All Products" data-ar="جميع المنتجات">All Products</option>
+          </select>
+          <span class="error-message"></span>
+        </div>
+        <button type="submit" class="submit-btn translatable" data-en="Start Free Trial" data-ar="ابدأ التجربة المجانية">Start Free Trial</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp Floating Button -->
+<div class="wa-float" id="waFloat">
+  <div class="wa-label" id="waLabel">
+    <span class="translatable" data-en="Chat with us on WhatsApp" data-ar="تواصل معنا على الواتس اب">Chat with us on WhatsApp</span>
+  </div>
+  <a class="wa-btn" href="https://wa.me/966555947522" target="_blank" rel="noopener" aria-label="WhatsApp" onmouseenter="showLabel()" onmouseleave="hideLabel()">
+    <svg class="wa-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.002 3.2C9.003 3.2 3.336 8.867 3.333 15.867a12.6 12.6 0 0 0 1.69 6.318L3.2 28.8l6.795-1.783a12.64 12.64 0 0 0 6.004 1.527h.005c6.998 0 12.666-5.667 12.669-12.668.002-3.384-1.316-6.566-3.707-8.96A12.6 12.6 0 0 0 16.002 3.2zm0 23.16a10.5 10.5 0 0 1-5.35-1.462l-.384-.228-3.977 1.043 1.062-3.875-.25-.398a10.49 10.49 0 0 1-1.608-5.573c.002-5.792 4.714-10.502 10.51-10.502a10.44 10.44 0 0 1 7.43 3.08 10.44 10.44 0 0 1 3.073 7.435c-.003 5.793-4.714 10.48-10.506 10.48zm5.76-7.856c-.314-.158-1.861-.918-2.148-1.022-.287-.105-.497-.158-.706.157-.209.315-.81 1.022-.994 1.232-.183.21-.366.236-.68.078-.314-.157-1.327-.489-2.528-1.558-.934-.833-1.565-1.86-1.748-2.174-.183-.315-.02-.485.138-.641.14-.14.314-.367.472-.55.157-.184.21-.315.314-.525.104-.21.052-.394-.027-.55-.078-.158-.706-1.703-.967-2.332-.255-.612-.514-.53-.706-.54-.183-.009-.393-.01-.602-.01-.21 0-.55.078-.838.393-.288.314-1.1 1.074-1.1 2.619 0 1.545 1.127 3.038 1.285 3.248.157.21 2.22 3.39 5.376 4.754.75.324 1.336.517 1.793.662.753.24 1.44.206 1.981.125.604-.09 1.861-.761 2.123-1.496.262-.734.262-1.363.183-1.495-.078-.13-.287-.21-.602-.367z"/>
+    </svg>
+    <span class="wa-dot"></span>
+  </a>
+</div>
+
+<script>
+// ===== GLOBAL STATE =====
+let currentLang = 'en';
+let currentProduct = 'fastpass';
+const countries = [
+    { code: 'SA', dial_code: '+966' },
+    { code: 'AE', dial_code: '+971' },
+    { code: 'US', dial_code: '+1' },
+    { code: 'GB', dial_code: '+44' },
+    { code: 'EG', dial_code: '+20' },
+    { code: 'QA', dial_code: '+974' },
+    { code: 'KW', dial_code: '+965' },
+    { code: 'OM', dial_code: '+968' },
+    { code: 'BH', dial_code: '+973' },
+];
+const videoUrls = {
+    fastpass: 'https://www.youtube.com/embed/eZZClQh3gwM?autoplay=1',
+    signstay: 'https://www.youtube.com/embed/hNz793Hs2FY?autoplay=1',
+    swiftcheckin: 'https://www.youtube.com/embed/LWDZ88Ojj3o?autoplay=1'  // Demo video for Swift Checkin
+};
+// ===== TRANSLATIONS (unchanged) =====
+const translations = {
+    en: {
+        nameRequired: 'Name is required (min 2 characters)',
+        emailInvalid: 'Please enter a valid email',
+        phoneRequired: 'Phone number is required',
+        phoneInvalid: 'Please enter a valid phone number',
+        propertyRequired: 'Please select property type',
+        submitting: 'Submitting...',
+        submitted: 'Form submitted successfully! We will contact you soon.',
+        error: 'Submission failed. Please try again.',
+        networkError: 'Network error. Please check your connection.'
+    },
+    ar: {
+        nameRequired: 'الاسم مطلوب (حرفين على الأقل)',
+        emailInvalid: 'البريد الإلكتروني غير صحيح',
+        phoneRequired: 'رقم الهاتف مطلوب',
+        phoneInvalid: 'يرجى إدخال رقم هاتف صحيح',
+        propertyRequired: 'اختر نوع العقار',
+        submitting: 'جاري الإرسال...',
+        submitted: 'تم إرسال النموذج بنجاح! سنتواصل معك قريباً.',
+        error: 'فشل الإرسال. يرجى المحاولة مرة أخرى.',
+        networkError: 'خطأ في الشبكة. يرجى التحقق من اتصالك.'
+    }
+};
+// ===== PRODUCT SWITCHING (UPDATED FOR 3 PRODUCTS) =====
+function switchProduct(product, shouldScroll = false) {
+    currentProduct = product;
+   
+    // Close dropdown instantly
+    const dropdown = document.getElementById('productsDropdown');
+    if (dropdown) {
+        dropdown.classList.remove('active');
+        dropdown.classList.add('force-close');
+        setTimeout(() => dropdown.classList.remove('force-close'), 400);
+    }
+   
+    // Update tabs
+    document.querySelectorAll('.product-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.product === product);
+    });
+   
+    // Update hero cards
+    document.querySelectorAll('.product-choice-card').forEach(card => {
+        const isActive = card.dataset.product === product;
+        card.style.borderColor = isActive ? 'var(--primary-color)' : 'rgba(255, 255, 255, 0.2)';
+        card.style.background = isActive ? 'rgba(233, 90, 84, 0.15)' : 'rgba(255, 255, 255, 0.1)';
+    });
+   
+    // Switch panels
+    document.querySelectorAll('.product-panel').forEach(panel => {
+        if (panel.id === `${product}-panel`) {
+            panel.classList.add('active');
+            setTimeout(() => {
+                panel.style.opacity = '1';
+                panel.style.transform = 'translateY(0)';
+            }, 50);
+        } else {
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(20px)';
+            setTimeout(() => panel.classList.remove('active'), 300);
+        }
+    });
+   
+    if (shouldScroll) {
+        setTimeout(() => {
+            const featuresSection = document.getElementById('features');
+            if (featuresSection) featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+    }
+}
+// ===== LANGUAGE SWITCHING =====
+function switchLanguage(lang) {
+    currentLang = lang;
+    const html = document.documentElement;
+    html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    html.setAttribute('lang', lang);
+   
+    const langEn = document.getElementById('langEn');
+    const langAr = document.getElementById('langAr');
+    if (langEn) langEn.classList.toggle('active', lang === 'en');
+    if (langAr) langAr.classList.toggle('active', lang === 'ar');
+   
+    document.querySelectorAll('.translatable').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.textContent = text;
+    });
+   
+    document.querySelectorAll('option[data-en]').forEach(option => {
+        const text = option.getAttribute(`data-${lang}`);
+        if (text) option.textContent = text;
+    });
+   
+    try { localStorage.setItem('fandaqah-lang', lang); } catch (e) {}
+   
+    const countrySelect = document.querySelector('select[name="country_code"]');
+    if (countrySelect) updateFlag(countrySelect.value, countrySelect);
+}
+// ===== PHONE INPUT =====
+function setupPhoneInput() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+    const countrySelect = form.querySelector('select[name="country_code"]');
+    if (!countrySelect) return;
+    countrySelect.innerHTML = '';
+    countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.dial_code;
+        option.textContent = country.dial_code;
+        countrySelect.appendChild(option);
+    });
+    countrySelect.value = '+966';
+    updateFlag('+966', countrySelect);
+    countrySelect.addEventListener('change', () => {
+        updateFlag(countrySelect.value, countrySelect);
+    });
+}
+function updateFlag(dialCode, selectElement) {
+    const country = countries.find(c => c.dial_code === dialCode) || countries[0];
+    const flagUrl = `https://flagcdn.com/w20/${country.code.toLowerCase()}.png`;
+    selectElement.style.backgroundImage = `url('${flagUrl}')`;
+    selectElement.style.backgroundRepeat = 'no-repeat';
+    selectElement.style.backgroundSize = '20px auto';
+    const isRTL = document.documentElement.dir === 'rtl';
+    selectElement.style.backgroundPosition = isRTL ? 'calc(100% - 10px) center' : '10px center';
+    selectElement.style.paddingLeft = isRTL ? '12px' : '36px';
+    selectElement.style.paddingRight = isRTL ? '36px' : '12px';
+}
+// ===== FORM SUBMISSION =====
+async function setupFormSubmission() {
+    const form = document.getElementById('quickForm');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="ri-loader-4-line animate-spin"></i> ${translations[currentLang].submitting}`;
+        try {
+            const formData = new FormData();
+            formData.append('full_name', form.full_name.value.trim());
+            formData.append('email', form.email.value.trim());
+            formData.append('phone', (form.country_code.value + form.phone.value).replace(/\s/g, ''));
+            formData.append('property_type', form.property_type.value);
+            formData.append('product_interest', form.product_interest?.value || currentProduct);
+            formData.append('source', 'website_form');
+            formData.append('language', currentLang);
+            const response = await fetch('submit_lead.php', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+            const result = await response.json();
+            if (response.ok && result.status === 'success') {
+                submitBtn.innerHTML = `<i class="ri-check-line"></i> ${translations[currentLang].submitted}`;
+                submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                setTimeout(() => {
+                    form.reset();
+                    form.country_code.value = '+966';
+                    updateFlag('+966', form.querySelector('select[name="country_code"]'));
+                    closePopup();
+                }, 2000);
+            } else {
+                throw new Error(result.message || translations[currentLang].error);
+            }
+        } catch (error) {
+            console.error(error);
+            submitBtn.innerHTML = `<i class="ri-error-warning-line"></i> ${translations[currentLang].error}`;
+            submitBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 3000);
+        }
+    });
+}
+function validateForm() {
+    // Simple client-side validation (kept minimal as in original)
+    return true;
+}
+// ===== POPUP =====
+function openPopup() {
+    const popup = document.getElementById('popupForm');
+    popup.style.display = 'flex';
+    setTimeout(() => popup.classList.add('active'), 10);
+}
+function closePopup() {
+    const popup = document.getElementById('popupForm');
+    popup.classList.remove('active');
+    setTimeout(() => popup.style.display = 'none', 300);
+}
+// ===== VIDEO MODAL =====
+function openVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('videoFrame');
+    modal.style.display = 'block';
+    setTimeout(() => modal.classList.add('show'), 10);
+    frame.src = videoUrls[currentProduct];
+}
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('videoFrame');
+    modal.classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        frame.src = '';
+    }, 300);
+}
+// ===== MOBILE MENU =====
+function setupMobileMenu() {
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+    const close = document.getElementById('closeMobileMenu');
+    if (btn && menu && close) {
+        btn.addEventListener('click', () => menu.classList.add('active'));
+        close.addEventListener('click', () => menu.classList.remove('active'));
+    }
+}
+// ===== REVEAL ANIMATIONS =====
+function setupRevealAnimations() {
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+}
+// ===== DROPDOWN =====
+function setupDropdown() {
+    const dropdown = document.getElementById('productsDropdown');
+    if (!dropdown) return;
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    if (trigger) trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) dropdown.classList.remove('active');
+    });
+}
+// ===== WHATSAPP =====
+function setupWhatsAppButton() {
+    const waFloat = document.getElementById('waFloat');
+    const waLabel = document.getElementById('waLabel');
+    if (waFloat && waLabel) {
+        waFloat.addEventListener('mouseenter', () => waLabel.classList.add('show'));
+        waFloat.addEventListener('mouseleave', () => waLabel.classList.remove('show'));
+    }
+}
+// ===== INITIALIZE =====
+document.addEventListener('DOMContentLoaded', function() {
+    setupPhoneInput();
+    setupFormSubmission();
+    setupMobileMenu();
+    setupRevealAnimations();
+    setupDropdown();
+    setupWhatsAppButton();
+   
+    // Default to FAST PASS
+    switchProduct('fastpass', false);
+   
+    // Load saved language
+    try {
+        const savedLang = localStorage.getItem('fandaqah-lang');
+        if (savedLang && ['en', 'ar'].includes(savedLang)) {
+            switchLanguage(savedLang);
+        }
+    } catch (e) {}
+   
+    // Video buttons
+    const heroVideoBtn = document.getElementById('heroVideoBtn');
+    const ctaVideoBtn = document.getElementById('ctaVideoBtn');
+    const videoClose = document.getElementById('videoClose');
+    if (heroVideoBtn) heroVideoBtn.addEventListener('click', openVideoModal);
+    if (ctaVideoBtn) ctaVideoBtn.addEventListener('click', openVideoModal);
+    if (videoClose) videoClose.addEventListener('click', closeVideoModal);
+   
+    // Language toggle
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            switchLanguage(currentLang === 'en' ? 'ar' : 'en');
+        });
+    }
+   
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeVideoModal();
+            closePopup();
+        }
+    });
+});
+</script>
+</body>
+</html>
