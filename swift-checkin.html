@@ -1172,31 +1172,7 @@ input[name="phone"] {
           </span>
         </div>
       </div>
-      <!-- Sign Stay Card -->
-      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="signstay" onclick="switchProduct('signstay', true)">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
-            <i class="ri-edit-line text-2xl text-[#2a273c]"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-white mb-1">Sign Stay</h3>
-            <p class="text-white/70 text-sm translatable" data-en="Digital Signature Solution" data-ar="التوقيع الإلكتروني">Digital Signature Solution</p>
-          </div>
-        </div>
-        <p class="text-white/60 text-sm mb-4 translatable" data-en="Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality." data-ar="تقدم فندقة ميزة التوقيع الإلكتروني عبر الأجهزة اللوحية ( التابلت ) لتجربة افضل لتسجيل الوصول والمغادرة للضيوف">
-         Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality.
-        </p>
-        <div class="flex items-center gap-4 text-sm">
-          <span class="flex items-center gap-2 text-green-400">
-            <i class="ri-check-line"></i>
-            <span class="translatable" data-en="100% Paperless" data-ar="بدون ورق">100% Paperless</span>
-          </span>
-          <span class="flex items-center gap-2 text-green-400">
-            <i class="ri-check-line"></i>
-            <span class="translatable" data-en="Eco-Friendly" data-ar="صديق للبيئة">Eco-Friendly</span>
-          </span>
-        </div>
-      </div>
+      
       <!-- Swift Checkin Card (NEW) -->
       <div class="hero-product-selector product-choice-card cursor-pointer" data-product="swiftcheckin" onclick="switchProduct('swiftcheckin', true)">
         <div class="flex items-start gap-4 mb-4">
@@ -1224,6 +1200,31 @@ input[name="phone"] {
           <span class="flex items-center gap-1 text-green-400">
             <i class="ri-check-line"></i>
             <span class="translatable" data-en="PMS Auto-Fill" data-ar="تعبئة تلقائية">PMS Auto-Fill</span>
+          </span>
+        </div>
+      </div>
+      <!-- Sign Stay Card -->
+      <div class="hero-product-selector product-choice-card cursor-pointer" data-product="signstay" onclick="switchProduct('signstay', true)">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-16 h-16 gold-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+            <i class="ri-edit-line text-2xl text-[#2a273c]"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-1">Sign Stay</h3>
+            <p class="text-white/70 text-sm translatable" data-en="Digital Signature Solution" data-ar="التوقيع الإلكتروني">Digital Signature Solution</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mb-4 translatable" data-en="Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality." data-ar="تقدم فندقة ميزة التوقيع الإلكتروني عبر الأجهزة اللوحية ( التابلت ) لتجربة افضل لتسجيل الوصول والمغادرة للضيوف">
+         Transform your guest experience with our modern digital signature and check-in solution. Eliminate paper forms, reduce wait times, and deliver exceptional hospitality.
+        </p>
+        <div class="flex items-center gap-4 text-sm">
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="100% Paperless" data-ar="بدون ورق">100% Paperless</span>
+          </span>
+          <span class="flex items-center gap-2 text-green-400">
+            <i class="ri-check-line"></i>
+            <span class="translatable" data-en="Eco-Friendly" data-ar="صديق للبيئة">Eco-Friendly</span>
           </span>
         </div>
       </div>
@@ -1288,13 +1289,14 @@ input[name="phone"] {
           <span class="tab-icon"><i class="ri-passport-line"></i></span>
           <span>FAST PASS</span>
         </button>
-        <button class="product-tab" data-product="signstay" onclick="switchProduct('signstay', true)">
-          <span class="tab-icon"><i class="ri-edit-line"></i></span>
-          <span>Sign Stay</span>
-        </button>
+     
         <button class="product-tab" data-product="swiftcheckin" onclick="switchProduct('swiftcheckin', true)">
           <span class="tab-icon"><i class="ri-speed-up-line"></i></span>
           <span>Swift Checkin</span>
+        </button>
+           <button class="product-tab" data-product="signstay" onclick="switchProduct('signstay', true)">
+          <span class="tab-icon"><i class="ri-edit-line"></i></span>
+          <span>Sign Stay</span>
         </button>
       </div>
     </div>
