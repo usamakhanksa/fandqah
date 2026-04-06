@@ -2020,66 +2020,123 @@ const translations = {
     }
 };
 // ===== PRODUCT SWITCHING (UPDATED FOR 3 PRODUCTS) =====
+// function switchProduct(product, shouldScroll = false) {
+//     currentProduct = product;
+   
+//     // 1. Close dropdown instantly for a better UX
+//     const dropdown = document.getElementById('productsDropdown');
+//     if (dropdown) {
+//         dropdown.classList.remove('active');
+//         dropdown.classList.add('force-close');
+//         setTimeout(() => dropdown.classList.remove('force-close'), 400);
+//     }
+   
+//     // 2. Update tab active states
+//     document.querySelectorAll('.product-tab').forEach(tab => {
+//         tab.classList.toggle('active', tab.dataset.product === product);
+//     });
+   
+//     // 3. Update Hero Card styles
+//     document.querySelectorAll('.product-choice-card').forEach(card => {
+//         const isActive = card.dataset.product === product;
+//         card.style.borderColor = isActive ? 'var(--primary-color)' : 'rgba(255, 255, 255, 0.2)';
+//         card.style.background = isActive ? 'rgba(233, 90, 84, 0.15)' : 'rgba(255, 255, 255, 0.1)';
+//     });
+   
+//     // 4. Switch Panels with Animation
+//     document.querySelectorAll('.product-panel').forEach(panel => {
+//         if (panel.id === `${product}-panel`) {
+//             panel.classList.add('active');
+//             // Small delay to allow 'display: block' to register before opacity change
+//             requestAnimationFrame(() => {
+//                 panel.style.opacity = '1';
+//                 panel.style.transform = 'translateY(0)';
+//             });
+//         } else {
+//             panel.style.opacity = '0';
+//             panel.style.transform = 'translateY(20px)';
+//             // Wait for transition before removing from flow
+//             setTimeout(() => panel.classList.remove('active'), 300);
+//         }
+//     });
+   
+//     // 5. FIXED SCROLL LOGIC
+//     if (shouldScroll) {
+//         // We wait slightly longer (200ms) to ensure the panel is active and "pushed" into the DOM height
+//         setTimeout(() => {
+//             const targetId = `${product}-features`;
+//             const targetSection = document.getElementById(targetId);
+            
+//             if (targetSection) {
+//                 const navHeight = 80; // Height of your fixed navbar
+//                 const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+//                 window.scrollTo({
+//                     top: targetPosition,
+//                     behavior: 'smooth'
+//                 });
+//             }
+//         }, 200); 
+//     }
+// }
+   // ===== PRODUCT SWITCHING – FIXED & IMPROVED =====
 function switchProduct(product, shouldScroll = false) {
     currentProduct = product;
-   
-    // 1. Close dropdown instantly for a better UX
+
+    // Close dropdown instantly
     const dropdown = document.getElementById('productsDropdown');
     if (dropdown) {
         dropdown.classList.remove('active');
         dropdown.classList.add('force-close');
         setTimeout(() => dropdown.classList.remove('force-close'), 400);
     }
-   
-    // 2. Update tab active states
+
+    // Update tabs
     document.querySelectorAll('.product-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.product === product);
     });
-   
-    // 3. Update Hero Card styles
+
+    // Update hero cards
     document.querySelectorAll('.product-choice-card').forEach(card => {
         const isActive = card.dataset.product === product;
         card.style.borderColor = isActive ? 'var(--primary-color)' : 'rgba(255, 255, 255, 0.2)';
         card.style.background = isActive ? 'rgba(233, 90, 84, 0.15)' : 'rgba(255, 255, 255, 0.1)';
     });
-   
-    // 4. Switch Panels with Animation
+
+    // Switch panels
     document.querySelectorAll('.product-panel').forEach(panel => {
         if (panel.id === `${product}-panel`) {
             panel.classList.add('active');
-            // Small delay to allow 'display: block' to register before opacity change
-            requestAnimationFrame(() => {
+            setTimeout(() => {
                 panel.style.opacity = '1';
                 panel.style.transform = 'translateY(0)';
-            });
+            }, 50);
         } else {
             panel.style.opacity = '0';
             panel.style.transform = 'translateY(20px)';
-            // Wait for transition before removing from flow
             setTimeout(() => panel.classList.remove('active'), 300);
         }
     });
-   
-    // 5. FIXED SCROLL LOGIC
+
+    // === AUTO SCROLL TO CORRECT FEATURES SECTION ===
     if (shouldScroll) {
-        // We wait slightly longer (200ms) to ensure the panel is active and "pushed" into the DOM height
         setTimeout(() => {
-            const targetId = `${product}-features`;
+            let targetId = '';
+
+            if (product === 'fastpass') targetId = 'fastpass-features';
+            else if (product === 'swiftcheckin') targetId = 'swiftcheckin-features';
+            else if (product === 'signstay') targetId = 'signstay-features';
+
             const targetSection = document.getElementById(targetId);
-            
             if (targetSection) {
-                const navHeight = 80; // Height of your fixed navbar
-                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
-        }, 200); 
+        }, 180);   // Increased delay so panel fully appears first
     }
 }
-   
 //     if (shouldScroll) {
 //         setTimeout(() => {
 //             const featuresSection = document.getElementById('features');
