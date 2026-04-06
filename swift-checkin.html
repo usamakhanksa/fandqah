@@ -2023,7 +2023,7 @@ const translations = {
 function switchProduct(product, shouldScroll = false) {
     currentProduct = product;
    
-    // Close dropdown instantly
+    // 1. Close dropdown instantly for a better UX
     const dropdown = document.getElementById('productsDropdown');
     if (dropdown) {
         dropdown.classList.remove('active');
@@ -2031,32 +2031,54 @@ function switchProduct(product, shouldScroll = false) {
         setTimeout(() => dropdown.classList.remove('force-close'), 400);
     }
    
-    // Update tabs
+    // 2. Update tab active states
     document.querySelectorAll('.product-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.product === product);
     });
    
-    // Update hero cards
+    // 3. Update Hero Card styles
     document.querySelectorAll('.product-choice-card').forEach(card => {
         const isActive = card.dataset.product === product;
         card.style.borderColor = isActive ? 'var(--primary-color)' : 'rgba(255, 255, 255, 0.2)';
         card.style.background = isActive ? 'rgba(233, 90, 84, 0.15)' : 'rgba(255, 255, 255, 0.1)';
     });
    
-    // Switch panels
+    // 4. Switch Panels with Animation
     document.querySelectorAll('.product-panel').forEach(panel => {
         if (panel.id === `${product}-panel`) {
             panel.classList.add('active');
-            setTimeout(() => {
+            // Small delay to allow 'display: block' to register before opacity change
+            requestAnimationFrame(() => {
                 panel.style.opacity = '1';
                 panel.style.transform = 'translateY(0)';
-            }, 50);
+            });
         } else {
             panel.style.opacity = '0';
             panel.style.transform = 'translateY(20px)';
+            // Wait for transition before removing from flow
             setTimeout(() => panel.classList.remove('active'), 300);
         }
     });
+   
+    // 5. FIXED SCROLL LOGIC
+    if (shouldScroll) {
+        // We wait slightly longer (200ms) to ensure the panel is active and "pushed" into the DOM height
+        setTimeout(() => {
+            const targetId = `${product}-features`;
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const navHeight = 80; // Height of your fixed navbar
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 200); 
+    }
+}
    
 //     if (shouldScroll) {
 //         setTimeout(() => {
@@ -2065,23 +2087,23 @@ function switchProduct(product, shouldScroll = false) {
 //         }, 80);
 //     }
 // }
-  if (shouldScroll) {
-    setTimeout(() => {
-        let targetId = '';
+//   if (shouldScroll) {
+//     setTimeout(() => {
+//         let targetId = '';
         
-        if (product === 'fastpass') targetId = 'fastpass-features';
-        else if (product === 'swiftcheckin') targetId = 'swiftcheckin-features';
-        else if (product === 'signstay') targetId = 'signstay-features';
+//         if (product === 'fastpass') targetId = 'fastpass-features';
+//         else if (product === 'swiftcheckin') targetId = 'swiftcheckin-features';
+//         else if (product === 'signstay') targetId = 'signstay-features';
         
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-            targetSection.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
-        }
-    }, 120);   // increased slightly for smooth panel transition
-}
+//         const targetSection = document.getElementById(targetId);
+//         if (targetSection) {
+//             targetSection.scrollIntoView({ 
+//                 behavior: 'smooth', 
+//                 block: 'start' 
+//             });
+//         }
+//     }, 120);   // increased slightly for smooth panel transition
+// }
 // ===== LANGUAGE SWITCHING =====
 function switchLanguage(lang) {
     currentLang = lang;
