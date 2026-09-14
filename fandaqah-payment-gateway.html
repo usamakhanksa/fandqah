@@ -249,8 +249,8 @@ section{ position:relative; }
 .chip-toast{ inset-inline-end:-2px; top:18px; padding:10px 13px; display:flex; align-items:center; gap:9px; }
 .chip-vcc{ inset-inline-end:-10px; bottom:66px; width:206px; padding:14px; background:var(--navy-m); border-color:rgba(242,240,235,.16); color:var(--beige); overflow:hidden; }
 .chip-vcc::after{ content:''; position:absolute; width:150px; height:150px; border-radius:50%; top:-66px; inset-inline-end:-44px; background:radial-gradient(circle,rgba(251,205,171,.34),transparent 70%); }
-.float-a{ animation:bob 6s ease-in-out infinite; }
-.float-b{ animation:bob 7.5s ease-in-out infinite reverse; }
+/* .float-a{ animation:bob 6s ease-in-out infinite; }
+.float-b{ animation:bob 7.5s ease-in-out infinite reverse; } */
 @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-11px) } }
 @media(max-width:700px){ .chip-stats,.chip-vcc,.chip-toast{ display:none; } .stage{ min-height:auto; } }
 
