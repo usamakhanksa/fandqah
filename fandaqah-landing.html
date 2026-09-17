@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fandaqah — Cloud PMS for Hotels, Apartments & Chalets | فندقة</title>
+<meta name="description" content="Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. Reservations, channels, housekeeping, billing and guest messaging in one dashboard.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23E95A54'/><text x='50' y='68' font-size='58' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'>F</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        beige: '#F6F1EA',
+        cream: '#FFFBF6',
+        navy:  '#2A273C',
+        coral: '#E95A54',
+        peach: '#FBCDAB',
+        sage:  '#8F9793',
+      },
+      fontFamily: {
+        sans:    ['"Plus Jakarta Sans"', 'Tajawal', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Tajawal', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        soft: '0 20px 60px -20px rgba(42,39,60,.25)',
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', 'Tajawal', system-ui, sans-serif; }
+  html[dir="rtl"] body { font-family: 'Tajawal', 'Plus Jakarta Sans', system-ui, sans-serif; }
+  html[dir="rtl"] .font-display { font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; }
+
+  .dots-bg {
+    background-image: radial-gradient(rgba(42,39,60,.22) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+
+  .marquee-track { animation: marquee 42s linear infinite; }
+  html[dir="rtl"] .marquee-track { animation-direction: reverse; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .floaty { animation: floaty 6s ease-in-out infinite; }
+  .floaty-slow { animation: floaty 8s ease-in-out infinite; }
+
+  .faq-body { max-height: 0; overflow: hidden; transition: max-height .45s cubic-bezier(.16,1,.3,1), opacity .3s; opacity: 0; }
+  .faq-item.open .faq-body { max-height: 320px; opacity: 1; }
+  .faq-item.open .faq-plus { transform: rotate(45deg); background: #E95A54; color: #fff; }
+  .faq-item.open { border-color: rgba(233,90,84,.35) !important; box-shadow: 0 22px 50px -25px rgba(42,39,60,.35); background:#fff; }
+
+  #progressBar { transform-origin: left center; }
+  html[dir="rtl"] #progressBar { transform-origin: right center; }
+
+  ::selection { background: #E95A54; color: #fff; }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #F6F1EA; }
+  ::-webkit-scrollbar-thumb { background: #2A273C; border-radius: 10px; border: 3px solid #F6F1EA; }
+
+  .showcase-panel { animation: fadePanel .35s ease; }
+  @keyframes fadePanel { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+
+<body class="bg-beige text-navy antialiased overflow-x-hidden">
+
+<div id="progressBar" class="fixed top-0 inset-x-0 z-[60] h-[3px] bg-coral scale-x-0"></div>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader" class="fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-beige/80 backdrop-blur-xl">
+  <div class="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
+    <a href="#top" class="group flex shrink-0 items-center gap-2.5" aria-label="Fandaqah home">
+      <span class="grid h-10 w-10 place-items-center rounded-2xl bg-coral text-white shadow-lg shadow-coral/30 transition-transform duration-300 group-hover:-rotate-6">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/>
+          <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
+          <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+        </svg>
+      </span>
+      <span class="font-display text-[26px] font-extrabold tracking-tight">
+        <span data-en="Fandaqah" data-ar="فندقة">Fandaqah</span><span class="text-coral">.</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+      <a href="#features"     class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="Features"  data-ar="المزايا">Features</a>
+      <a href="#product"      class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="Product"   data-ar="المنتج">Product</a>
+      <a href="#stays"        class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="Stays"     data-ar="الإقامة">Stays</a>
+      <a href="#testimonials" class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="Reviews"   data-ar="التقييمات">Reviews</a>
+      <a href="#pricing"      class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="Pricing"   data-ar="الأسعار">Pricing</a>
+      <a href="#faq"          class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-navy/70 transition hover:bg-navy/5 hover:text-navy" data-en="FAQ"       data-ar="الأسئلة">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <button id="langToggle"
+        class="group inline-flex items-center gap-2 rounded-full border border-navy/15 bg-white/70 px-3.5 py-2 text-[13px] font-bold text-navy transition hover:border-coral hover:text-coral"
+        aria-label="Switch language">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
+        </svg>
+        <span id="langLabel">العربية</span>
+      </button>
+
+      <a href="#demo" class="hidden rounded-full px-4 py-2.5 text-[15px] font-semibold text-navy/70 transition hover:text-navy lg:inline-block" data-en="See pricing" data-ar="اطّلع على الأسعار">See pricing</a>
+
+      <a href="#demo" class="group hidden items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-[15px] font-semibold text-beige shadow-lg shadow-navy/20 transition hover:bg-coral hover:text-white sm:inline-flex">
+        <span data-en="Book a demo" data-ar="احجز عرضًا">Book a demo</span>
+        <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+
+      <button id="menuBtn" class="grid h-11 w-11 place-items-center rounded-full border border-navy/10 bg-white/60 text-navy lg:hidden" aria-label="Open menu">
+        <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="hidden border-t border-navy/10 bg-beige/95 backdrop-blur-xl lg:hidden">
+    <nav class="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-5 sm:px-8">
+      <a href="#features"     class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="Features"  data-ar="المزايا">Features</a>
+      <a href="#product"      class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="Product"   data-ar="المنتج">Product</a>
+      <a href="#stays"        class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="Stays"     data-ar="الإقامة">Stays</a>
+      <a href="#testimonials" class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="Reviews"   data-ar="التقييمات">Reviews</a>
+      <a href="#pricing"      class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="Pricing"   data-ar="الأسعار">Pricing</a>
+      <a href="#faq"          class="mob-link rounded-2xl px-4 py-3 text-[15px] font-semibold text-navy/80 hover:bg-navy/5" data-en="FAQ"       data-ar="الأسئلة">FAQ</a>
+      <a href="#demo" class="mob-link mt-2 rounded-2xl bg-navy px-4 py-3.5 text-center text-[15px] font-bold text-beige" data-en="Book a demo" data-ar="احجز عرضًا">Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="relative overflow-hidden pb-16 pt-[130px] sm:pt-[150px] lg:pb-24">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="dots-bg absolute start-[6%] top-[120px] h-40 w-64 opacity-60"></div>
+    <div class="absolute -end-40 -top-40 h-[480px] w-[480px] rounded-full bg-peach/50 blur-3xl"></div>
+    <div class="absolute -start-52 top-[420px] h-[420px] w-[420px] rounded-full bg-coral/10 blur-3xl"></div>
+    <div class="absolute bottom-10 start-[44%] hidden h-24 w-24 rounded-full border-[10px] border-peach/60 lg:block"></div>
+  </div>
+
+  <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
+    <div>
+      <div class="reveal">
+        <a href="#features" class="inline-flex items-center gap-2.5 rounded-full border border-navy/10 bg-white/70 py-1.5 ps-2 pe-4 text-sm font-medium shadow-sm backdrop-blur transition hover:border-coral/40">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-60"></span>
+            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-coral"></span>
+          </span>
+          <span data-en="New: Smart pricing engine 2.0 is live" data-ar="جديد: محرّك التسعير الذكي 2.0 متاح الآن">New: Smart pricing engine 2.0 is live</span>
+        </a>
+      </div>
+
+      <h1 class="reveal mt-6 font-display text-[42px] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-[68px]">
+        <span data-en="Every room. Every booking." data-ar="كل غرفة. كل حجز.">Every room. Every booking.</span>
+        <span class="relative inline-block whitespace-nowrap">
+          <em class="font-display font-extrabold italic text-coral" data-en="One dashboard." data-ar="لوحة واحدة.">One dashboard.</em>
+          <svg viewBox="0 0 320 22" class="absolute -bottom-2 start-0 w-full" aria-hidden="true">
+            <path d="M4 14 C 70 6, 150 20, 316 10" fill="none" stroke="#FBCDAB" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </h1>
+
+      <p class="reveal mt-7 max-w-xl text-lg leading-relaxed text-navy/70"
+         data-en="Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. Reservations, channels, housekeeping, billing and guest messaging in one fast, bilingual command center."
+         data-ar="فندقة هو نظام إدارة العقارات السحابي للفنادق والشقق المفروشة والشاليهات. الحجوزات وقنوات البيع والتدبير الفندقي والفوترة ورسائل الضيوف في لوحة واحدة سريعة وثنائية اللغة.">
+        Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. Reservations, channels, housekeeping, billing and guest messaging in one fast, bilingual command center.
+      </p>
+
+      <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="#demo" class="group inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-4 text-base font-semibold text-white shadow-xl shadow-coral/30 transition hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-coral/40">
+          <span data-en="Start free 14-day trial" data-ar="ابدأ تجربة مجانية 14 يومًا">Start free 14-day trial</span>
+          <svg class="h-5 w-5 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#product" class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy/15 bg-white/50 px-7 py-[14px] text-base font-semibold text-navy backdrop-blur transition hover:border-navy hover:bg-navy hover:text-beige">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"/><circle cx="12" cy="12" r="10"/>
+          </svg>
+          <span data-en="Take the product tour" data-ar="جولة داخل المنتج">Take the product tour</span>
+        </a>
+      </div>
+
+      <div class="reveal mt-9">
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex -space-x-3 rtl:space-x-reverse">
+            <span class="grid h-11 w-11 place-items-center rounded-full border-[3px] border-beige font-display text-base font-extrabold shadow-sm" style="background:#E95A54;color:#fff">L</span>
+            <span class="grid h-11 w-11 place-items-center rounded-full border-[3px] border-beige font-display text-base font-extrabold shadow-sm" style="background:#2A273C;color:#FBCDAB">O</span>
+            <span class="grid h-11 w-11 place-items-center rounded-full border-[3px] border-beige font-display text-base font-extrabold shadow-sm" style="background:#8F9793;color:#fff">S</span>
+            <span class="grid h-11 w-11 place-items-center rounded-full border-[3px] border-beige font-display text-base font-extrabold shadow-sm" style="background:#FBCDAB;color:#2A273C">D</span>
+            <span class="grid h-11 w-11 place-items-center rounded-full border-[3px] border-beige font-display text-base font-extrabold shadow-sm" style="background:#E95A54;color:#fff">K</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1">
+              <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              <span class="ms-1.5 text-sm font-bold" data-en="2,400+ properties run on Fandaqah" data-ar="أكثر من 2400 منشأة تعمل على فندقة">2,400+ properties run on Fandaqah</span>
+            </div>
+            <p class="mt-1 text-sm text-navy/60" data-en="across hotels, apartments and chalets in 12 countries" data-ar="من فنادق وشقق وشاليهات في 12 دولة">across hotels, apartments and chalets in 12 countries</p>
+          </div>
+        </div>
+
+        <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+          <span class="inline-flex items-center gap-1.5 text-sm font-medium text-navy/70">
+            <svg class="h-4 w-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span data-en="No credit card required" data-ar="بدون بطاقة ائتمان">No credit card required</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-sm font-medium text-navy/70">
+            <svg class="h-4 w-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span data-en="Arabic and English" data-ar="العربية والإنجليزية">Arabic and English</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-sm font-medium text-navy/70">
+            <svg class="h-4 w-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span data-en="Free onboarding" data-ar="تهيئة مجانية">Free onboarding</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard mock -->
+    <div class="reveal relative mx-auto w-full max-w-[560px]">
+      <div class="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-peach/60 via-coral/10 to-sage/20 blur-2xl" aria-hidden="true"></div>
+
+      <div class="relative overflow-hidden rounded-[1.75rem] bg-navy p-5 text-beige shadow-2xl shadow-navy/40 sm:p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex gap-1.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-coral"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-peach"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-sage"></span>
+          </div>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-beige/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-peach">
+            <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-coral"></span>
+            <span data-en="Live: Coral Bay Hotel" data-ar="مباشر: فندق كورال باي">Live: Coral Bay Hotel</span>
+          </span>
+        </div>
+
+        <div class="mt-5 flex items-end justify-between">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-widest text-beige/50" data-en="Today's occupancy" data-ar="إشغال اليوم">Today's occupancy</p>
+            <p class="font-display text-5xl font-extrabold">87<span class="text-2xl text-peach">%</span></p>
+          </div>
+          <div class="flex items-center gap-1.5 rounded-full bg-coral/15 px-3 py-1.5 text-sm font-bold text-peach">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+            +18% RevPAR
+          </div>
+        </div>
+
+        <div class="mt-4 flex h-28 items-end gap-1.5 rounded-2xl bg-beige/[0.06] p-3">
+          <div class="flex-1 rounded-md opacity-90" style="background:#E95A54;height:42%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#FBCDAB;height:68%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#8F9793;height:55%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#2A273C;height:80%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#E95A54;height:62%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#FBCDAB;height:92%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#8F9793;height:74%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#2A273C;height:58%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#E95A54;height:86%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#FBCDAB;height:70%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#8F9793;height:95%"></div>
+          <div class="flex-1 rounded-md opacity-90" style="background:#2A273C;height:66%"></div>
+        </div>
+
+        <div class="mt-4 space-y-2.5">
+          <div class="flex items-center justify-between gap-3 rounded-2xl bg-beige/[0.07] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 place-items-center rounded-xl bg-peach/20 text-peach">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+              </span>
+              <div>
+                <p class="text-sm font-semibold leading-tight" data-en="Sara and family" data-ar="سارة والعائلة">Sara and family</p>
+                <p class="text-xs text-beige/50" data-en="Suite 301 · Sep 18 to 21" data-ar="جناح 301 · 18 إلى 21 سبتمبر">Suite 301 · Sep 18 to 21</p>
+              </div>
+            </div>
+            <span class="rounded-full bg-sage/20 px-3 py-1 text-[11px] font-bold text-navy" data-en="Checked in" data-ar="تم الوصول">Checked in</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3 rounded-2xl bg-beige/[0.07] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 place-items-center rounded-xl bg-peach/20 text-peach">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+              </span>
+              <div>
+                <p class="text-sm font-semibold leading-tight" data-en="Omar H." data-ar="عمر ح.">Omar H.</p>
+                <p class="text-xs text-beige/50" data-en="Deluxe 204 · Sep 18 to 19" data-ar="ديلوكس 204 · 18 إلى 19 سبتمبر">Deluxe 204 · Sep 18 to 19</p>
+              </div>
+            </div>
+            <span class="rounded-full bg-peach/60 px-3 py-1 text-[11px] font-bold text-navy" data-en="Arriving" data-ar="في الطريق">Arriving</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3 rounded-2xl bg-beige/[0.07] px-4 py-3">
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 place-items-center rounded-xl bg-peach/20 text-peach">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+              </span>
+              <div>
+                <p class="text-sm font-semibold leading-tight" data-en="Layla R." data-ar="ليلى ر.">Layla R.</p>
+                <p class="text-xs text-beige/50" data-en="Villa 7 · Sep 19 to 24" data-ar="فيلا 7 · 19 إلى 24 سبتمبر">Villa 7 · Sep 19 to 24</p>
+              </div>
+            </div>
+            <span class="rounded-full bg-coral px-3 py-1 text-[11px] font-bold text-white">VIP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="floaty absolute -start-4 top-24 flex items-center gap-3 rounded-2xl bg-white/95 p-3.5 pe-5 shadow-xl shadow-navy/20 backdrop-blur sm:-start-10">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-sage/20 text-navy">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        </span>
+        <div>
+          <p class="text-sm font-bold" data-en="SAR 1,240 received" data-ar="تم استلام 1,240 ريال">SAR 1,240 received</p>
+          <p class="text-xs text-navy/55" data-en="Booking #8821 · just now" data-ar="حجز #8821 · الآن">Booking #8821 · just now</p>
+        </div>
+      </div>
+
+      <div class="floaty-slow absolute -end-3 top-6 flex items-center gap-2.5 rounded-2xl bg-coral p-3.5 pe-5 text-white shadow-xl shadow-coral/40 sm:-end-6">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/>
+          <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+          <path d="M4 2C2.8 3.7 2 5.7 2 8"/>
+        </svg>
+        <div>
+          <p class="text-sm font-bold leading-tight" data-en="New booking" data-ar="حجز جديد">New booking</p>
+          <p class="text-xs text-white/75" data-en="via Booking.com" data-ar="عبر Booking.com">via Booking.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR ================= -->
+<section class="relative border-y border-navy/10 bg-beige/60 py-9">
+  <p class="px-5 text-center text-xs font-bold uppercase tracking-[0.25em] text-navy/50"
+     data-en="Trusted by hotels, apartments and chalets across the region"
+     data-ar="موثوق من الفنادق والشقق والشاليهات في جميع أنحاء المنطقة">
+    Trusted by hotels, apartments and chalets across the region
+  </p>
+
+  <div class="marquee relative mt-6 overflow-hidden" aria-label="Customer properties">
+    <div class="pointer-events-none absolute inset-y-0 start-0 z-10 w-24 bg-gradient-to-r from-beige to-transparent rtl:bg-gradient-to-l"></div>
+    <div class="pointer-events-none absolute inset-y-0 end-0 z-10 w-24 bg-gradient-to-l from-beige to-transparent rtl:bg-gradient-to-r"></div>
+    <div class="marquee-track flex w-max items-center gap-4 pe-4" id="trustTrack"></div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+  <div class="reveal">
+    <div class="relative overflow-hidden rounded-[2.5rem] bg-navy px-7 py-12 text-beige shadow-2xl shadow-navy/30 sm:px-12 lg:px-16 lg:py-14">
+      <div class="pointer-events-none absolute -end-24 -top-24 h-72 w-72 rounded-full bg-coral/25 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-28 -start-20 h-72 w-72 rounded-full bg-peach/15 blur-3xl"></div>
+      <div class="pointer-events-none absolute bottom-4 end-10 hidden select-none font-display text-[110px] font-extrabold leading-none text-beige/[0.05] lg:block">فندقة</div>
+
+      <p class="relative text-xs font-bold uppercase tracking-[0.25em] text-peach/80" data-en="Fandaqah in numbers" data-ar="فندقة بالأرقام">Fandaqah in numbers</p>
+
+      <div class="relative mt-8 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+        <div>
+          <p class="font-display text-5xl font-extrabold tracking-tight lg:text-[56px]" style="color:#FBCDAB">2,400<span class="text-3xl lg:text-4xl">+</span></p>
+          <p class="mt-2 text-base font-bold" data-en="Properties onboard" data-ar="منشأة على المنصة">Properties onboard</p>
+          <p class="mt-1 text-sm leading-relaxed text-beige/55" data-en="hotels, apartments and chalets and counting" data-ar="فنادق وشقق وشاليهات والعدد في تزايد">hotels, apartments and chalets and counting</p>
+        </div>
+        <div class="lg:border-s lg:border-beige/10 lg:ps-8">
+          <p class="font-display text-5xl font-extrabold tracking-tight lg:text-[56px]" style="color:#E95A54">1<span class="text-3xl lg:text-4xl">M+</span></p>
+          <p class="mt-2 text-base font-bold" data-en="Nights booked yearly" data-ar="ليلة تُحجز سنويًا">Nights booked yearly</p>
+          <p class="mt-1 text-sm leading-relaxed text-beige/55" data-en="processed through Fandaqah calendars" data-ar="تُدار عبر تقويمات فندقة">processed through Fandaqah calendars</p>
+        </div>
+        <div class="lg:border-s lg:border-beige/10 lg:ps-8">
+          <p class="font-display text-5xl font-extrabold tracking-tight lg:text-[56px]" style="color:#8F9793">99<span class="text-3xl lg:text-4xl">%</span></p>
+          <p class="mt-2 text-base font-bold" data-en="Uptime SLA" data-ar="اتفاقية التوافر">Uptime SLA</p>
+          <p class="mt-1 text-sm leading-relaxed text-beige/55" data-en="bank-grade cloud with daily backups" data-ar="سحابة بمستوى بنكي مع نسخ احتياطي يومي">bank-grade cloud with daily backups</p>
+        </div>
+        <div class="lg:border-s lg:border-beige/10 lg:ps-8">
+          <p class="font-display text-5xl font-extrabold tracking-tight lg:text-[56px]" style="color:#FBCDAB">18<span class="text-3xl lg:text-4xl">%</span></p>
+          <p class="mt-2 text-base font-bold" data-en="Avg. RevPAR lift" data-ar="متوسط نمو الإيراد لكل غرفة">Avg. RevPAR lift</p>
+          <p class="mt-1 text-sm leading-relaxed text-beige/55" data-en="reported within the first 6 months" data-ar="خلال أول 6 أشهر من الاستخدام">reported within the first 6 months</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section id="features" class="scroll-mt-24 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+        <span data-en="Core platform" data-ar="المنصة الأساسية">Core platform</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Everything a modern stay needs." data-ar="كل ما تحتاجه الإقامة العصرية.">Everything a modern stay needs.</span>
+        <em class="italic text-coral" data-en="Nothing it does not." data-ar="ولا شيء زائد.">Nothing it does not.</em>
+      </h2>
+      <p class="mt-4 text-lg text-navy/65" data-en="One login for the front desk, housekeeping, revenue and guests — designed to feel effortless from day one." data-ar="تسجيل دخول واحد لاستقبال الفندق والتدبير الداخلي والإيرادات والضيوف — بتصميم سلس من اليوم الأول.">One login for the front desk, housekeeping, revenue and guests — designed to feel effortless from day one.</p>
+    </div>
+
+    <div class="reveal mt-8 flex flex-wrap justify-center gap-2" id="featureFilters">
+      <button data-cat="all"     class="filter-btn rounded-full px-5 py-2.5 text-sm font-semibold transition bg-navy text-beige shadow-lg shadow-navy/20" data-en="All"              data-ar="الكل">All</button>
+      <button data-cat="ops"     class="filter-btn rounded-full px-5 py-2.5 text-sm font-semibold transition border border-navy/15 bg-white/60 text-navy/65 hover:border-navy/30 hover:text-navy" data-en="Operations"       data-ar="التشغيل">Operations</button>
+      <button data-cat="dist"    class="filter-btn rounded-full px-5 py-2.5 text-sm font-semibold transition border border-navy/15 bg-white/60 text-navy/65 hover:border-navy/30 hover:text-navy" data-en="Distribution"     data-ar="قنوات البيع">Distribution</button>
+      <button data-cat="rev"     class="filter-btn rounded-full px-5 py-2.5 text-sm font-semibold transition border border-navy/15 bg-white/60 text-navy/65 hover:border-navy/30 hover:text-navy" data-en="Revenue"          data-ar="الإيرادات">Revenue</button>
+      <button data-cat="guest"   class="filter-btn rounded-full px-5 py-2.5 text-sm font-semibold transition border border-navy/15 bg-white/60 text-navy/65 hover:border-navy/30 hover:text-navy" data-en="Guest Experience" data-ar="تجربة الضيف">Guest Experience</button>
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" id="featureGrid">
+
+      <article data-cat="guest" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="absolute end-5 top-5 rounded-full bg-navy px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-peach" data-en="Most loved" data-ar="الأكثر تفضيلًا">Most loved</span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Guest Experience" data-ar="تجربة الضيف">Guest Experience</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Online check-in and digital keys" data-ar="تسجيل وصول إلكتروني ومفاتيح رقمية">Online check-in and digital keys</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Guests arrive to a branded check-in flow, pay deposits online and unlock doors with PIN codes. Queues disappear." data-ar="يصل الضيوف إلى تجربة تسجيل وصول بهويتكم، ويدفعون العربون إلكترونيًا ويفتحون الأبواب برموز PIN. لا مزيد من الطوابير.">Guests arrive to a branded check-in flow, pay deposits online and unlock doors with PIN codes. Queues disappear.</p>
+      </article>
+
+      <article data-cat="guest" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Guest Experience" data-ar="تجربة الضيف">Guest Experience</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Unified guest messaging" data-ar="رسائل ضيوف موحّدة">Unified guest messaging</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="WhatsApp, SMS and email threads live next to each reservation, with templates and auto-replies in Arabic and English." data-ar="محادثات واتساب والرسائل القصيرة والبريد بجانب كل حجز، مع قوالب وردود تلقائية بالعربية والإنجليزية.">WhatsApp, SMS and email threads live next to each reservation, with templates and auto-replies in Arabic and English.</p>
+      </article>
+
+      <article data-cat="dist" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Distribution" data-ar="قنوات البيع">Distribution</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Channel manager, zero double-bookings" data-ar="مدير قنوات بلا حجوزات مزدوجة">Channel manager, zero double-bookings</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Two-way sync with Booking.com, Airbnb, Expedia, Agoda and 40+ channels. One change in Fandaqah updates everywhere in seconds." data-ar="مزامنة ثنائية مع Booking.com وAirbnb وExpedia وAgoda وأكثر من 40 قناة. تغيير واحد في فندقة يُحدّث الجميع في ثوانٍ.">Two-way sync with Booking.com, Airbnb, Expedia, Agoda and 40+ channels. One change in Fandaqah updates everywhere in seconds.</p>
+      </article>
+
+      <article data-cat="rev" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Revenue" data-ar="الإيرادات">Revenue</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Smart pricing and revenue insights" data-ar="تسعير ذكي ورؤى الإيرادات">Smart pricing and revenue insights</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Demand-based rate suggestions, pickup reports and forecast dashboards that help you sell the right room at the right price." data-ar="اقتراحات أسعار مبنية على الطلب، وتقارير الحجوزات، ولوحات توقعات تساعدك على بيع الغرفة المناسبة بالسعر المناسب.">Demand-based rate suggestions, pickup reports and forecast dashboards that help you sell the right room at the right price.</p>
+      </article>
+
+      <article data-cat="ops" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Operations" data-ar="التشغيل">Operations</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Housekeeping on autopilot" data-ar="تدبير داخلي تلقائي">Housekeeping on autopilot</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Turnover tasks generate themselves from checkouts. Attendants update rooms from any phone and the front desk sees it live." data-ar="مهام تغيير الغرف تُنشأ تلقائيًا عند المغادرة. يُحدّث العاملون حالة الغرف من أي جوال ويرى الاستقبال ذلك فورًا.">Turnover tasks generate themselves from checkouts. Attendants update rooms from any phone and the front desk sees it live.</p>
+      </article>
+
+      <article data-cat="rev" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Revenue" data-ar="الإيرادات">Revenue</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Billing, folios and night audit" data-ar="الفوترة والكشوف والإقفال الليلي">Billing, folios and night audit</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Split folios, taxes, city ledger and one-click night audit. Mada, Visa, Mastercard and Apple Pay built in." data-ar="كشوف مقسّمة، وضرائب، ودفتر المدينة، وإقفال ليلي بضغطة. مدى وفيزا وماستركارد وآبل باي مدمجة.">Split folios, taxes, city ledger and one-click night audit. Mada, Visa, Mastercard and Apple Pay built in.</p>
+      </article>
+
+      <article data-cat="ops" class="feature-card reveal group relative h-full overflow-hidden rounded-3xl border border-navy/10 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-2xl hover:shadow-navy/10">
+        <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-coral transition-transform duration-300 group-hover:scale-x-100"></span>
+        <span class="inline-grid place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition duration-300 group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
+          </svg>
+        </span>
+        <p class="mt-5 text-[11px] font-bold uppercase tracking-[0.2em] text-sage" data-en="Operations" data-ar="التشغيل">Operations</p>
+        <h3 class="mt-1.5 font-display text-[22px] font-bold leading-snug" data-en="Run it all from your phone" data-ar="أدِر كل شيء من جوالك">Run it all from your phone</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Owner and manager apps with live occupancy, approvals and alerts. Your property, in your pocket, anywhere." data-ar="تطبيقات للمالك والمدير مع الإشغال المباشر والموافقات والتنبيهات. منشأتك في جيبك، أينما كنت.">Owner and manager apps with live occupancy, approvals and alerts. Your property, in your pocket, anywhere.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCT SHOWCASE ================= -->
+<section id="product" class="relative scroll-mt-24 overflow-hidden bg-navy py-20 text-beige lg:py-28">
+  <div class="pointer-events-none absolute -start-32 top-20 h-96 w-96 rounded-full bg-coral/20 blur-3xl"></div>
+  <div class="pointer-events-none absolute -end-32 bottom-10 h-96 w-96 rounded-full bg-peach/10 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="reveal max-w-3xl">
+      <span class="inline-flex items-center gap-2 rounded-full bg-beige/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/>
+        </svg>
+        <span data-en="Product tour" data-ar="جولة في المنتج">Product tour</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Take the controls." data-ar="أمسك بزمام الأمور.">Take the controls.</span>
+        <em class="italic text-peach" data-en="Feel the calm." data-ar="واشعر بالهدوء.">Feel the calm.</em>
+      </h2>
+      <p class="mt-4 text-lg text-beige/60" data-en="Four consoles, one source of truth. Peek inside the tools your team will use every day. Go ahead, tap around." data-ar="أربع واجهات، ومصدر واحد للحقيقة. ألقِ نظرة على الأدوات التي سيستخدمها فريقك يوميًا. تفضّل، جرّب بنفسك.">Four consoles, one source of truth. Peek inside the tools your team will use every day. Go ahead, tap around.</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-[380px_1fr] lg:gap-12">
+
+      <div class="reveal flex flex-col gap-3" id="showcaseTabs">
+        <button data-tab="front" class="showcase-tab rounded-3xl border p-5 text-start transition duration-300 border-coral/60 bg-beige/[0.08] shadow-xl shadow-coral/10">
+          <span class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl transition bg-coral text-white">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+            </span>
+            <span class="font-display text-xl font-bold" data-en="Front Desk" data-ar="الاستقبال">Front Desk</span>
+          </span>
+          <span class="mt-2 block text-[15px] text-beige/60" data-en="Arrivals, departures and walk-ins, handled in seconds." data-ar="الوصول والمغادرة والضيوف بدون حجز، في ثوانٍ.">Arrivals, departures and walk-ins, handled in seconds.</span>
+        </button>
+
+        <button data-tab="house" class="showcase-tab rounded-3xl border p-5 text-start transition duration-300 border-beige/10 bg-transparent hover:border-beige/25 hover:bg-beige/[0.04]">
+          <span class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl transition bg-beige/10 text-peach">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>
+            </span>
+            <span class="font-display text-xl font-bold" data-en="Housekeeping" data-ar="التدبير الداخلي">Housekeeping</span>
+          </span>
+          <span class="mt-2 block text-[15px] text-beige/60" data-en="Live room status and cleaner dispatch on mobile." data-ar="حالة الغرف لحظيًا وتوزيع عمال النظافة عبر الجوال.">Live room status and cleaner dispatch on mobile.</span>
+        </button>
+
+        <button data-tab="rev" class="showcase-tab rounded-3xl border p-5 text-start transition duration-300 border-beige/10 bg-transparent hover:border-beige/25 hover:bg-beige/[0.04]">
+          <span class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl transition bg-beige/10 text-peach">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            </span>
+            <span class="font-display text-xl font-bold" data-en="Revenue" data-ar="الإيرادات">Revenue</span>
+          </span>
+          <span class="mt-2 block text-[15px] text-beige/60" data-en="Forecasts, pace and pricing suggestions in one view." data-ar="التوقعات ووتيرة الحجز واقتراحات التسعير في شاشة واحدة.">Forecasts, pace and pricing suggestions in one view.</span>
+        </button>
+
+        <button data-tab="guest" class="showcase-tab rounded-3xl border p-5 text-start transition duration-300 border-beige/10 bg-transparent hover:border-beige/25 hover:bg-beige/[0.04]">
+          <span class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl transition bg-beige/10 text-peach">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+            </span>
+            <span class="font-display text-xl font-bold" data-en="Guest App" data-ar="تطبيق الضيف">Guest App</span>
+          </span>
+          <span class="mt-2 block text-[15px] text-beige/60" data-en="A five-star arrival, without the queue." data-ar="وصول بخمس نجوم، بدون طوابير.">A five-star arrival, without the queue.</span>
+        </button>
+      </div>
+
+      <div class="reveal">
+        <div class="rounded-[2rem] bg-beige p-5 text-navy shadow-2xl sm:p-7">
+
+          <div data-panel="front" class="showcase-panel">
+            <div class="grid gap-5 sm:grid-cols-3">
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="Arrivals today" data-ar="وصول اليوم">Arrivals today</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">24</p>
+                <p class="mt-1 text-xs font-semibold text-coral">6 <span data-en="VIP" data-ar="كبار الشخصيات">VIP</span></p>
+              </div>
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="Departures" data-ar="مغادرة">Departures</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">17</p>
+                <p class="mt-1 text-xs font-semibold text-sage" data-en="2 late checkouts" data-ar="مغادرتان متأخرتان">2 late checkouts</p>
+              </div>
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="In-house" data-ar="داخل الفندق">In-house</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">141</p>
+                <p class="mt-1 text-xs font-semibold text-navy/55">87% <span data-en="occupancy" data-ar="إشغال">occupancy</span></p>
+              </div>
+            </div>
+
+            <div class="mt-5 rounded-3xl border border-navy/10 bg-white p-5">
+              <p class="font-display text-lg font-bold" data-en="Room board" data-ar="لوحة الغرف">Room board</p>
+              <div class="mt-4 grid grid-cols-6 gap-2 sm:grid-cols-10">
+                <span class="grid h-10 place-items-center rounded-xl bg-sage/25 text-xs font-bold">101</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-sage/25 text-xs font-bold">102</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-peach/70 text-xs font-bold">103</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-coral text-xs font-bold text-white">104</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-sage/25 text-xs font-bold">105</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-navy text-xs font-bold text-beige">106</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-peach/70 text-xs font-bold">201</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-sage/25 text-xs font-bold">202</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-sage/25 text-xs font-bold">203</span>
+                <span class="grid h-10 place-items-center rounded-xl bg-coral text-xs font-bold text-white">204</span>
+              </div>
+              <div class="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-navy/60">
+                <span class="inline-flex items-center gap-1.5"><span class="h-3 w-3 rounded bg-sage/25"></span><span data-en="Ready" data-ar="جاهزة">Ready</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="h-3 w-3 rounded bg-peach/70"></span><span data-en="Cleaning" data-ar="قيد التنظيف">Cleaning</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="h-3 w-3 rounded bg-coral"></span><span data-en="Occupied" data-ar="مشغولة">Occupied</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="h-3 w-3 rounded bg-navy"></span><span data-en="Maintenance" data-ar="صيانة">Maintenance</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div data-panel="house" class="showcase-panel hidden">
+            <div class="rounded-3xl border border-navy/10 bg-white p-5">
+              <p class="font-display text-lg font-bold" data-en="Today's cleaning queue" data-ar="قائمة التنظيف اليوم">Today's cleaning queue</p>
+              <div class="mt-4 space-y-2.5">
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="grid h-9 w-9 place-items-center rounded-xl bg-coral/15 text-coral text-xs font-bold">301</span>
+                    <div>
+                      <p class="text-sm font-bold" data-en="Checkout clean · priority" data-ar="تنظيف بعد المغادرة · أولوية">Checkout clean · priority</p>
+                      <p class="text-xs text-navy/55" data-en="Assigned to Fatima" data-ar="مسندة إلى فاطمة">Assigned to Fatima</p>
+                    </div>
+                  </div>
+                  <span class="rounded-full bg-coral px-3 py-1 text-[11px] font-bold text-white" data-en="Now" data-ar="الآن">Now</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="grid h-9 w-9 place-items-center rounded-xl bg-peach/60 text-navy text-xs font-bold">204</span>
+                    <div>
+                      <p class="text-sm font-bold" data-en="Stayover refresh" data-ar="تجديد إقامة">Stayover refresh</p>
+                      <p class="text-xs text-navy/55" data-en="Assigned to Ahmed" data-ar="مسندة إلى أحمد">Assigned to Ahmed</p>
+                    </div>
+                  </div>
+                  <span class="rounded-full bg-peach/70 px-3 py-1 text-[11px] font-bold text-navy">12:30</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <span class="grid h-9 w-9 place-items-center rounded-xl bg-sage/25 text-navy text-xs font-bold">V7</span>
+                    <div>
+                      <p class="text-sm font-bold" data-en="Deep clean · villa" data-ar="تنظيف شامل · فيلا">Deep clean · villa</p>
+                      <p class="text-xs text-navy/55" data-en="Assigned to Team B" data-ar="مسندة إلى الفريق ب">Assigned to Team B</p>
+                    </div>
+                  </div>
+                  <span class="rounded-full bg-sage/30 px-3 py-1 text-[11px] font-bold text-navy">14:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-panel="rev" class="showcase-panel hidden">
+            <div class="grid gap-5 sm:grid-cols-3">
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="RevPAR" data-ar="الإيراد لكل غرفة">RevPAR</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">SAR 412</p>
+                <p class="mt-1 text-xs font-semibold text-coral">▲ 18%</p>
+              </div>
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="ADR" data-ar="متوسط السعر">ADR</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">SAR 538</p>
+                <p class="mt-1 text-xs font-semibold text-coral">▲ 9%</p>
+              </div>
+              <div class="rounded-3xl border border-navy/10 bg-white p-5">
+                <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="Pickup 7d" data-ar="حجوزات 7 أيام">Pickup 7d</p>
+                <p class="mt-1 font-display text-3xl font-extrabold">+61</p>
+                <p class="mt-1 text-xs font-semibold text-sage" data-en="rooms sold" data-ar="غرفة مبيعة">rooms sold</p>
+              </div>
+            </div>
+            <div class="mt-5 rounded-3xl border border-navy/10 bg-white p-5">
+              <p class="font-display text-lg font-bold" data-en="Pricing suggestions" data-ar="اقتراحات التسعير">Pricing suggestions</p>
+              <div class="mt-4 space-y-2.5 text-sm">
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <span class="font-semibold" data-en="Weekend · Suite" data-ar="نهاية الأسبوع · جناح">Weekend · Suite</span>
+                  <span class="font-bold text-coral">SAR 780 → 890</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <span class="font-semibold" data-en="Midweek · Deluxe" data-ar="منتصف الأسبوع · ديلوكس">Midweek · Deluxe</span>
+                  <span class="font-bold text-coral">SAR 420 → 465</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-beige px-4 py-3">
+                  <span class="font-semibold" data-en="Event night · Villa" data-ar="ليلة فعالية · فيلا">Event night · Villa</span>
+                  <span class="font-bold text-coral">SAR 1,400 → 1,750</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-panel="guest" class="showcase-panel hidden">
+            <div class="mx-auto max-w-[320px] rounded-[2rem] border-[6px] border-navy bg-beige p-5 shadow-xl">
+              <p class="text-xs font-bold uppercase tracking-widest text-navy/45" data-en="Coral Bay Hotel" data-ar="فندق كورال باي">Coral Bay Hotel</p>
+              <p class="mt-1 font-display text-2xl font-extrabold" data-en="Ahlan, Sara!" data-ar="أهلًا، سارة!">Ahlan, Sara!</p>
+              <p class="text-sm text-navy/60" data-en="Suite 301 · ready from 2:00 PM" data-ar="جناح 301 · جاهز من 2:00 مساءً">Suite 301 · ready from 2:00 PM</p>
+
+              <div class="mt-4 rounded-2xl bg-navy p-4 text-center text-beige">
+                <svg class="mx-auto h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/>
+                </svg>
+                <p class="mt-1 text-sm font-bold" data-en="Skip the front-desk queue" data-ar="تجاوز طابور الاستقبال">Skip the front-desk queue</p>
+                <p class="text-xs opacity-70" data-en="Check in online and get your key" data-ar="سجّل وصولك إلكترونيًا واستلم مفتاحك">Check in online and get your key</p>
+              </div>
+
+              <button class="mt-3 w-full rounded-2xl bg-coral py-3 text-sm font-bold text-white shadow-lg shadow-coral/30 transition hover:brightness-110" data-en="Check in now" data-ar="سجّل الوصول الآن">Check in now</button>
+
+              <div class="mt-4 flex justify-around text-navy/50">
+                <span class="flex flex-col items-center gap-1 text-[10px] font-bold">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
+                  <span data-en="WIFI" data-ar="واي فاي">WIFI</span>
+                </span>
+                <span class="flex flex-col items-center gap-1 text-[10px] font-bold">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  <span data-en="PARKING" data-ar="مواقف">PARKING</span>
+                </span>
+                <span class="flex flex-col items-center gap-1 text-[10px] font-bold">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>
+                  <span data-en="DINING" data-ar="مطاعم">DINING</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 border-t border-navy/10 pt-5">
+            <span class="inline-flex items-center gap-2 text-sm font-semibold text-navy/75">
+              <span class="grid h-5 w-5 place-items-center rounded-full bg-sage/25">
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="Branded online check-in and upsells" data-ar="تسجيل وصول إلكتروني بهويتك مع عروض إضافية">Branded online check-in and upsells</span>
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm font-semibold text-navy/75">
+              <span class="grid h-5 w-5 place-items-center rounded-full bg-sage/25">
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="Digital keys and access codes" data-ar="مفاتيح رقمية ورموز دخول">Digital keys and access codes</span>
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm font-semibold text-navy/75">
+              <span class="grid h-5 w-5 place-items-center rounded-full bg-sage/25">
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="WhatsApp concierge built right in" data-ar="كونسيرج واتساب مدمج بالكامل">WhatsApp concierge built right in</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEGMENTS ================= -->
+<section id="stays" class="scroll-mt-24 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/>
+          <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
+          <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+        </svg>
+        <span data-en="Who it is for" data-ar="لمن هذه المنصة">Who it is for</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Built for" data-ar="مصمّمة من أجل">Built for</span>
+        <em class="italic text-coral" data-en="every" data-ar="كل">every</em>
+        <span data-en="kind of stay." data-ar="أنواع الإقامة.">kind of stay.</span>
+      </h2>
+      <p class="mt-4 text-lg text-navy/65" data-en="One platform, tuned to the way you host. Whether that is 200 rooms or one beloved chalet." data-ar="منصة واحدة، مصمّمة على طريقة استضافتك. سواء كانت 200 غرفة أو شاليه واحدًا عزيزًا.">One platform, tuned to the way you host. Whether that is 200 rooms or one beloved chalet.</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+
+      <div class="reveal">
+        <article class="group relative h-[540px] overflow-hidden rounded-[2rem] shadow-xl shadow-navy/15 transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-navy/25">
+          <img alt="Elegant hotel lobby" loading="lazy"
+               src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+               class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/5"></div>
+          <div class="absolute inset-x-0 bottom-0 p-7 text-beige">
+            <span class="inline-flex items-center gap-2 rounded-full bg-peach px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-navy">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 22v-6.57"/><path d="M12 11h.01"/><path d="M12 7h.01"/><path d="M14 15.43V22"/><path d="M15 16a5 5 0 0 0-6 0"/>
+                <path d="M16 11h.01"/><path d="M16 7h.01"/><path d="M8 11h.01"/><path d="M8 7h.01"/><rect x="4" y="2" width="16" height="20" rx="2"/>
+              </svg>
+              <span data-en="Hotels and resorts" data-ar="الفنادق والمنتجعات">Hotels and resorts</span>
+            </span>
+            <h3 class="mt-4 font-display text-3xl font-extrabold leading-tight" data-en="Front desks that fly" data-ar="استقبال يطير بلا عقبات">Front desks that fly</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-beige/75" data-en="High-volume arrivals, groups and events. Handled without the chaos." data-ar="وصول بأعداد كبيرة ومجموعات وفعاليات. بدون فوضى.">High-volume arrivals, groups and events. Handled without the chaos.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Group blocks and allotments" data-ar="حجوزات المجموعات والتخصيصات">Group blocks and allotments</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Multi-shift front-desk roles" data-ar="أدوار استقبال متعددة الورديات">Multi-shift front-desk roles</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Night audit in one click" data-ar="إقفال ليلي بضغطة واحدة">Night audit in one click</span>
+              </li>
+            </ul>
+            <a href="#demo" class="mt-5 inline-flex items-center gap-2 rounded-full bg-beige/15 px-5 py-2.5 text-sm font-bold backdrop-blur transition group-hover:bg-coral group-hover:text-white">
+              <span data-en="Get started" data-ar="ابدأ الآن">Get started</span>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal">
+        <article class="group relative h-[540px] overflow-hidden rounded-[2rem] shadow-xl shadow-navy/15 transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-navy/25">
+          <img alt="Modern serviced apartment bedroom" loading="lazy"
+               src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80"
+               class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/5"></div>
+          <div class="absolute inset-x-0 bottom-0 p-7 text-beige">
+            <span class="inline-flex items-center gap-2 rounded-full bg-peach px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-navy">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/>
+              </svg>
+              <span data-en="Serviced apartments" data-ar="الشقق المفروشة">Serviced apartments</span>
+            </span>
+            <h3 class="mt-4 font-display text-3xl font-extrabold leading-tight" data-en="Long stays, zero admin" data-ar="إقامات طويلة بلا أعباء إدارية">Long stays, zero admin</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-beige/75" data-en="Monthly billing, owner splits and self check-in for every unit." data-ar="فوترة شهرية وتقسيم مستحقات المالك وتسجيل وصول ذاتي لكل وحدة.">Monthly billing, owner splits and self check-in for every unit.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Recurring billing and deposits" data-ar="فوترة متكررة وعرابين">Recurring billing and deposits</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Owner statements and payouts" data-ar="كشوف المالك والمدفوعات">Owner statements and payouts</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Key codes per reservation" data-ar="رموز دخول لكل حجز">Key codes per reservation</span>
+              </li>
+            </ul>
+            <a href="#demo" class="mt-5 inline-flex items-center gap-2 rounded-full bg-beige/15 px-5 py-2.5 text-sm font-bold backdrop-blur transition group-hover:bg-coral group-hover:text-white">
+              <span data-en="Get started" data-ar="ابدأ الآن">Get started</span>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal">
+        <article class="group relative h-[540px] overflow-hidden rounded-[2rem] shadow-xl shadow-navy/15 transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-navy/25">
+          <img alt="Cozy mountain chalets at dusk" loading="lazy"
+               src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80"
+               class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-navy/5"></div>
+          <div class="absolute inset-x-0 bottom-0 p-7 text-beige">
+            <span class="inline-flex items-center gap-2 rounded-full bg-peach px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-navy">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z"/><path d="M4.14 15.08c2.62-1.57 5.24-1.43 7.86.42 2.74 1.94 5.49 2 8.23.19"/>
+              </svg>
+              <span data-en="Chalets and rentals" data-ar="الشاليهات والعقارات">Chalets and rentals</span>
+            </span>
+            <h3 class="mt-4 font-display text-3xl font-extrabold leading-tight" data-en="Host from your phone" data-ar="أدِر استضافتك من جوالك">Host from your phone</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-beige/75" data-en="Seasonal peaks, remote turnovers and happy guests. On autopilot." data-ar="مواسم الذروة، وتغيير الضيوف عن بُعد، وضيوف سعداء. على الطيار الآلي.">Seasonal peaks, remote turnovers and happy guests. On autopilot.</p>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Airbnb and Vrbo two-way sync" data-ar="مزامنة ثنائية مع Airbnb وVrbo">Airbnb and Vrbo two-way sync</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Cleaner dispatch and checklists" data-ar="إرسال عمال النظافة وقوائم المهام">Cleaner dispatch and checklists</span>
+              </li>
+              <li class="flex items-center gap-2 text-sm font-medium text-beige/90">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span data-en="Damage deposits and upsells" data-ar="تأمين الأضرار والعروض الإضافية">Damage deposits and upsells</span>
+              </li>
+            </ul>
+            <a href="#demo" class="mt-5 inline-flex items-center gap-2 rounded-full bg-beige/15 px-5 py-2.5 text-sm font-bold backdrop-blur transition group-hover:bg-coral group-hover:text-white">
+              <span data-en="Get started" data-ar="ابدأ الآن">Get started</span>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+<section class="border-y border-navy/10 bg-white/50 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/>
+          <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/>
+          <path d="M16 17h4"/><path d="M4 13h4"/>
+        </svg>
+        <span data-en="Getting started" data-ar="البدء معنا">Getting started</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Live in days," data-ar="جاهز خلال أيام،">Live in days,</span>
+        <em class="italic text-coral" data-en="not months." data-ar="لا أشهر.">not months.</em>
+      </h2>
+    </div>
+
+    <div class="relative mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="absolute start-[12%] end-[12%] top-10 hidden border-t-2 border-dashed border-sage/40 lg:block" aria-hidden="true"></div>
+
+      <div class="reveal">
+        <div class="group relative h-full rounded-3xl border border-navy/10 bg-beige p-7 transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-xl hover:shadow-navy/10">
+          <span class="pointer-events-none absolute end-5 top-4 select-none font-display text-6xl font-extrabold text-navy/[0.07] transition group-hover:text-coral/15">01</span>
+          <span class="relative grid h-14 w-14 place-items-center rounded-2xl bg-navy text-peach shadow-lg shadow-navy/20 transition duration-300 group-hover:bg-coral group-hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 2v6"/><path d="M15 2v6"/><path d="M12 17v5"/><path d="M5 8h14"/><path d="M6 11V8h12v3a6 6 0 1 1-12 0Z"/>
+            </svg>
+          </span>
+          <p class="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-coral" data-en="Step 01" data-ar="الخطوة 01">Step 01</p>
+          <h3 class="mt-1 font-display text-2xl font-bold" data-en="Connect" data-ar="اربط">Connect</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Link your channels and payment gateway in a guided 30-minute call." data-ar="اربط قنوات البيع وبوابة الدفع في مكالمة موجّهة مدتها 30 دقيقة.">Link your channels and payment gateway in a guided 30-minute call.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="group relative h-full rounded-3xl border border-navy/10 bg-beige p-7 transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-xl hover:shadow-navy/10">
+          <span class="pointer-events-none absolute end-5 top-4 select-none font-display text-6xl font-extrabold text-navy/[0.07] transition group-hover:text-coral/15">02</span>
+          <span class="relative grid h-14 w-14 place-items-center rounded-2xl bg-navy text-peach shadow-lg shadow-navy/20 transition duration-300 group-hover:bg-coral group-hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 15 21.84"/><path d="M21 5V8"/><path d="M21 12L18 17H22L19 22"/><path d="M3 12A9 3 0 0 0 14.59 14.87"/>
+            </svg>
+          </span>
+          <p class="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-coral" data-en="Step 02" data-ar="الخطوة 02">Step 02</p>
+          <h3 class="mt-1 font-display text-2xl font-bold" data-en="Import" data-ar="استورد">Import</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="We migrate your rooms, rates and future reservations. Free." data-ar="ننقل غرفك وأسعارك وحجوزاتك المستقبلية. مجانًا.">We migrate your rooms, rates and future reservations. Free.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="group relative h-full rounded-3xl border border-navy/10 bg-beige p-7 transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-xl hover:shadow-navy/10">
+          <span class="pointer-events-none absolute end-5 top-4 select-none font-display text-6xl font-extrabold text-navy/[0.07] transition group-hover:text-coral/15">03</span>
+          <span class="relative grid h-14 w-14 place-items-center rounded-2xl bg-navy text-peach shadow-lg shadow-navy/20 transition duration-300 group-hover:bg-coral group-hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/>
+              <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/>
+            </svg>
+          </span>
+          <p class="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-coral" data-en="Step 03" data-ar="الخطوة 03">Step 03</p>
+          <h3 class="mt-1 font-display text-2xl font-bold" data-en="Go live" data-ar="انطلق">Go live</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Your team trains in one afternoon. Guests notice from day one." data-ar="يتدرّب فريقك في ظهيرة واحدة. ويلاحظ الضيوف الفرق من اليوم الأول.">Your team trains in one afternoon. Guests notice from day one.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="group relative h-full rounded-3xl border border-navy/10 bg-beige p-7 transition duration-300 hover:-translate-y-1.5 hover:border-coral/30 hover:shadow-xl hover:shadow-navy/10">
+          <span class="pointer-events-none absolute end-5 top-4 select-none font-display text-6xl font-extrabold text-navy/[0.07] transition group-hover:text-coral/15">04</span>
+          <span class="relative grid h-14 w-14 place-items-center rounded-2xl bg-navy text-peach shadow-lg shadow-navy/20 transition duration-300 group-hover:bg-coral group-hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+          </span>
+          <p class="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-coral" data-en="Step 04" data-ar="الخطوة 04">Step 04</p>
+          <h3 class="mt-1 font-display text-2xl font-bold" data-en="Grow" data-ar="انمُ">Grow</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-navy/65" data-en="Smart pricing and direct bookings start compounding revenue." data-ar="التسعير الذكي والحجوزات المباشرة يضاعفان الإيرادات.">Smart pricing and direct bookings start compounding revenue.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal mt-8 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-sage/40 bg-sage/10 px-5 py-2.5 text-sm font-bold text-navy">
+        <svg class="h-4 w-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6h4"/></svg>
+        <span data-en="Average go-live: 6 days, with free white-glove data import" data-ar="متوسط الانطلاق: 6 أيام، مع نقل بيانات مجاني بخدمة كاملة">Average go-live: 6 days, with free white-glove data import</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" class="scroll-mt-24 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"/>
+        </svg>
+        <span data-en="Wall of love" data-ar="جدار المحبة">Wall of love</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Hosts who switch" data-ar="مضيفون انتقلوا إلينا">Hosts who switch</span>
+        <em class="italic text-coral" data-en="never look back." data-ar="ولا ينظرون للوراء.">never look back.</em>
+      </h2>
+    </div>
+
+    <div class="reveal mt-12">
+      <div class="relative overflow-hidden rounded-[2.5rem] bg-navy p-8 text-beige shadow-2xl shadow-navy/30 sm:p-12 lg:p-14">
+        <div class="pointer-events-none absolute -end-20 -top-20 h-64 w-64 rounded-full bg-coral/25 blur-3xl"></div>
+
+        <svg class="absolute end-8 top-8 h-16 w-16 text-beige/10 sm:h-24 sm:w-24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/>
+          <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/>
+        </svg>
+
+        <div class="relative">
+          <figure id="testimonialFigure">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="flex items-center gap-1" aria-label="5 out of 5 stars">
+                <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                <svg class="h-4 w-4 fill-coral text-coral" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+              </span>
+              <span class="rounded-full bg-peach/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-peach" id="testimonialBadge">Resort · 210 rooms</span>
+            </div>
+
+            <blockquote id="testimonialQuote" class="mt-6 max-w-4xl font-display text-2xl font-medium leading-snug sm:text-3xl lg:text-[34px]">
+              "RevPAR is up 18% in six months. The pricing suggestions alone paid for the year, and the reports our owners get are boardroom-ready."
+            </blockquote>
+
+            <figcaption class="mt-8 flex flex-wrap items-center gap-4">
+              <span id="testimonialAvatar" class="grid h-14 w-14 place-items-center rounded-full font-display text-xl font-extrabold text-white shadow-lg" style="background:#E95A54">D</span>
+              <span>
+                <span id="testimonialName" class="block text-base font-bold">Daniel K.</span>
+                <span id="testimonialRole" class="block text-sm text-beige/60">Revenue Manager · Harbor View Resort</span>
+              </span>
+              <span class="ms-auto hidden items-center gap-1.5 rounded-full border border-beige/15 px-4 py-2 text-sm font-medium text-beige/70 sm:inline-flex">
+                <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                <span id="testimonialCity">Aqaba</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <div class="mt-10 flex flex-wrap items-center justify-between gap-5 border-t border-beige/10 pt-7">
+            <div class="flex items-center gap-2.5" id="testimonialDots"></div>
+
+            <div class="flex items-center gap-3">
+              <button id="prevTest" aria-label="Previous review" class="grid h-12 w-12 place-items-center rounded-full border border-beige/20 transition hover:border-coral hover:bg-coral hover:text-white">
+                <svg class="h-5 w-5 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+              </button>
+              <button id="nextTest" aria-label="Next review" class="grid h-12 w-12 place-items-center rounded-full bg-coral text-white shadow-lg shadow-coral/30 transition hover:brightness-110">
+                <svg class="h-5 w-5 rtl:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" class="scroll-mt-24 border-y border-navy/10 bg-white/50 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+          <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>
+        </svg>
+        <span data-en="Pricing" data-ar="الأسعار">Pricing</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Simple pricing that" data-ar="أسعار بسيطة">Simple pricing that</span>
+        <em class="italic text-coral" data-en="scales with you." data-ar="تنمو معك.">scales with you.</em>
+      </h2>
+      <p class="mt-4 text-lg text-navy/65" data-en="Per property, unlimited users. Start free, upgrade when you are full." data-ar="لكل منشأة، وبدون حد للمستخدمين. ابدأ مجانًا، وارتقِ عندما تكتمل.">Per property, unlimited users. Start free, upgrade when you are full.</p>
+
+      <div class="mt-7 inline-flex items-center rounded-full border border-navy/15 bg-beige p-1.5">
+        <button id="billMonthly" class="rounded-full px-6 py-2.5 text-sm font-bold transition text-navy/55 hover:text-navy" data-en="Monthly" data-ar="شهري">Monthly</button>
+        <button id="billYearly" class="relative rounded-full px-6 py-2.5 text-sm font-bold transition text-beige">
+          <span class="absolute inset-0 rounded-full bg-navy shadow-lg"></span>
+          <span class="relative" data-en="Yearly" data-ar="سنوي">Yearly</span>
+          <span class="relative ms-1.5 text-peach" data-en="-20%" data-ar="-20%">-20%</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="reveal mt-12 grid items-stretch gap-6 lg:grid-cols-3">
+
+      <article class="relative flex h-full flex-col rounded-[2rem] border border-navy/10 bg-white p-8 text-navy shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-navy/10">
+        <p class="font-display text-2xl font-extrabold" data-en="Chalet" data-ar="شاليه">Chalet</p>
+        <p class="mt-0.5 text-sm font-semibold text-navy/50" data-en="For 1 to 10 units" data-ar="من 1 إلى 10 وحدات">For 1 to 10 units</p>
+        <div class="mt-5 flex items-end gap-2">
+          <span class="price font-display text-[52px] font-extrabold leading-none" data-monthly="$49" data-yearly="$39">$39</span>
+          <span class="pb-1.5 text-sm font-medium text-navy/50" data-en="/ property / mo" data-ar="/ منشأة / شهريًا">/ property / mo</span>
+        </div>
+        <p class="mt-1 text-[13px] font-semibold text-coral billing-note" data-en="Billed annually · save 20%" data-ar="تُدفع سنويًا · وفّر 20%">Billed annually · save 20%</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-navy/65" data-en="Everything a small host needs to look like a five-star brand." data-ar="كل ما يحتاجه المضيف الصغير ليبدو كعلامة بخمس نجوم.">Everything a small host needs to look like a five-star brand.</p>
+
+        <ul class="mt-6 flex-1 space-y-3">
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Up to 10 rooms or units" data-ar="حتى 10 غرف أو وحدات">Up to 10 rooms or units</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Channel manager (5 channels)" data-ar="مدير قنوات (5 قنوات)">Channel manager (5 channels)</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Online check-in and key codes" data-ar="تسجيل وصول إلكتروني ورموز دخول">Online check-in and key codes</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Guest messaging templates" data-ar="قوالب رسائل الضيوف">Guest messaging templates</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Basic reports" data-ar="تقارير أساسية">Basic reports</span>
+          </li>
+        </ul>
+
+        <a href="#demo" class="mt-8 block rounded-2xl bg-navy py-3.5 text-center text-[15px] font-bold text-beige transition hover:bg-coral hover:text-white" data-en="Start free trial" data-ar="ابدأ التجربة المجانية">Start free trial</a>
+      </article>
+
+      <article class="relative flex h-full flex-col rounded-[2rem] bg-navy p-8 text-beige shadow-2xl shadow-navy/40 transition duration-300 hover:-translate-y-2 lg:scale-[1.04]">
+        <span class="absolute -top-4 start-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-coral px-5 py-2 text-xs font-extrabold uppercase tracking-widest text-white shadow-lg shadow-coral/40 rtl:translate-x-1/2">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/>
+          </svg>
+          <span data-en="Most popular" data-ar="الأكثر اختيارًا">Most popular</span>
+        </span>
+        <p class="font-display text-2xl font-extrabold text-peach" data-en="Hotel" data-ar="فندق">Hotel</p>
+        <p class="mt-0.5 text-sm font-semibold text-beige/60" data-en="For 11 to 150 rooms" data-ar="من 11 إلى 150 غرفة">For 11 to 150 rooms</p>
+        <div class="mt-5 flex items-end gap-2">
+          <span class="price font-display text-[52px] font-extrabold leading-none" data-monthly="$129" data-yearly="$103">$103</span>
+          <span class="pb-1.5 text-sm font-medium text-beige/55" data-en="/ property / mo" data-ar="/ منشأة / شهريًا">/ property / mo</span>
+        </div>
+        <p class="mt-1 text-[13px] font-semibold text-peach billing-note" data-en="Billed annually · save 20%" data-ar="تُدفع سنويًا · وفّر 20%">Billed annually · save 20%</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-beige/70" data-en="The full front-desk, housekeeping and revenue toolkit." data-ar="مجموعة أدوات الاستقبال والتدبير والإيرادات الكاملة.">The full front-desk, housekeeping and revenue toolkit.</p>
+
+        <ul class="mt-6 flex-1 space-y-3">
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="Unlimited users and shifts" data-ar="مستخدمون وورديات بلا حدود">Unlimited users and shifts</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="All 40+ channels, two-way sync" data-ar="أكثر من 40 قناة بمزامنة ثنائية">All 40+ channels, two-way sync</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="Smart pricing engine" data-ar="محرّك تسعير ذكي">Smart pricing engine</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="Housekeeping and maintenance" data-ar="التدبير الداخلي والصيانة">Housekeeping and maintenance</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="Advanced reports and night audit" data-ar="تقارير متقدمة وإقفال ليلي">Advanced reports and night audit</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-peach/25"><svg class="h-3 w-3 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-beige/85" data-en="Priority support in AR / EN" data-ar="دعم ذو أولوية بالعربية والإنجليزية">Priority support in AR / EN</span>
+          </li>
+        </ul>
+
+        <a href="#demo" class="mt-8 block rounded-2xl bg-coral py-3.5 text-center text-[15px] font-bold text-white shadow-xl shadow-coral/30 transition hover:brightness-110" data-en="Start free trial" data-ar="ابدأ التجربة المجانية">Start free trial</a>
+      </article>
+
+      <article class="relative flex h-full flex-col rounded-[2rem] border border-navy/10 bg-white p-8 text-navy shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-navy/10">
+        <p class="font-display text-2xl font-extrabold" data-en="Group" data-ar="مجموعة">Group</p>
+        <p class="mt-0.5 text-sm font-semibold text-navy/50" data-en="Multi-property and resorts" data-ar="متعدد المنشآت والمنتجعات">Multi-property and resorts</p>
+        <div class="mt-5 flex items-end gap-2">
+          <span class="price font-display text-[52px] font-extrabold leading-none" data-monthly="$299" data-yearly="$239">$239</span>
+          <span class="pb-1.5 text-sm font-medium text-navy/50" data-en="/ property / mo" data-ar="/ منشأة / شهريًا">/ property / mo</span>
+        </div>
+        <p class="mt-1 text-[13px] font-semibold text-coral billing-note" data-en="Billed annually · save 20%" data-ar="تُدفع سنويًا · وفّر 20%">Billed annually · save 20%</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-navy/65" data-en="Portfolio control with owner statements and API access." data-ar="تحكم في محفظة العقارات مع كشوف المالك والوصول عبر API.">Portfolio control with owner statements and API access.</p>
+
+        <ul class="mt-6 flex-1 space-y-3">
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Everything in Hotel" data-ar="كل ما في خطة الفندق">Everything in Hotel</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Multi-property dashboard" data-ar="لوحة تحكم متعددة المنشآت">Multi-property dashboard</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Owner statements and payouts" data-ar="كشوف المالك والمدفوعات">Owner statements and payouts</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Open API and integrations" data-ar="واجهة API وتكاملات مفتوحة">Open API and integrations</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Dedicated success manager" data-ar="مدير نجاح مخصص">Dedicated success manager</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[15px] font-medium">
+            <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sage/20"><svg class="h-3 w-3 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="text-navy/80" data-en="Custom contracts and SLA" data-ar="عقود مخصصة واتفاقية مستوى خدمة">Custom contracts and SLA</span>
+          </li>
+        </ul>
+
+        <a href="#demo" class="mt-8 block rounded-2xl bg-navy py-3.5 text-center text-[15px] font-bold text-beige transition hover:bg-coral hover:text-white" data-en="Talk to sales" data-ar="تحدّث إلى فريق المبيعات">Talk to sales</a>
+      </article>
+    </div>
+
+    <p class="reveal mt-8 text-center text-sm text-navy/55" data-en="All plans include free onboarding, Arabic and English support, unlimited users and bank-grade security." data-ar="جميع الخطط تشمل تهيئة مجانية، ودعمًا بالعربية والإنجليزية، ومستخدمين بلا حدود، وأمانًا بمستوى بنكي.">All plans include free onboarding, Arabic and English support, unlimited users and bank-grade security.</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="scroll-mt-24 py-16 lg:py-24">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[380px_1fr] lg:gap-14">
+
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>
+        </svg>
+        <span data-en="Questions" data-ar="الأسئلة">Questions</span>
+      </span>
+      <h2 class="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <span data-en="Everything else you are" data-ar="كل ما يتبادر إلى ذهنك">Everything else you are</span>
+        <em class="italic text-coral" data-en="wondering." data-ar="من أسئلة.">wondering.</em>
+      </h2>
+      <p class="mt-4 text-lg text-navy/65" data-en="Straight answers, no sales-speak. Something missing? We reply within hours." data-ar="أجوبة مباشرة، بلا كلام تسويقي. لم تجد سؤالك؟ نجيب خلال ساعات.">Straight answers, no sales-speak. Something missing? We reply within hours.</p>
+
+      <a href="#demo" class="group mt-7 flex items-center gap-4 rounded-3xl border border-navy/10 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+        <span class="grid shrink-0 place-items-center rounded-2xl bg-coral/10 p-3.5 text-coral transition group-hover:bg-coral group-hover:text-white">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/>
+          </svg>
+        </span>
+        <span>
+          <span class="block font-display text-lg font-bold" data-en="Still curious? Talk to a human." data-ar="ما زلت فضوليًا؟ تحدّث مع إنسان.">Still curious? Talk to a human.</span>
+          <span class="mt-0.5 flex items-center gap-1 text-sm font-semibold text-coral">
+            <span data-en="Get a personal demo" data-ar="احصل على عرض خاص">Get a personal demo</span>
+            <svg class="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </span>
+      </a>
+    </div>
+
+    <div class="reveal">
+      <div class="space-y-3" id="faqList">
+
+        <div class="faq-item open overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="true">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="How long does it take to go live with Fandaqah?" data-ar="كم يستغرق الانطلاق مع فندقة؟">How long does it take to go live with Fandaqah?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="Most properties go live in under a week. We import your rooms, rates and future reservations for free, connect your channels in a guided call, and train your team in a single afternoon session." data-ar="معظم المنشآت تنطلق في أقل من أسبوع. ننقل غرفك وأسعارك وحجوزاتك المستقبلية مجانًا، ونربط قنواتك في مكالمة موجّهة، وندرّب فريقك في جلسة واحدة بعد الظهر.">Most properties go live in under a week. We import your rooms, rates and future reservations for free, connect your channels in a guided call, and train your team in a single afternoon session.</p>
+          </div>
+        </div>
+
+        <div class="faq-item overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="false">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="Which booking channels do you support?" data-ar="أي قنوات حجز تدعمونها؟">Which booking channels do you support?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="Over 40 channels including Booking.com, Airbnb, Expedia, Agoda, Trip.com, Vrbo and your own website. Rates, availability and restrictions sync both ways, so no more double bookings." data-ar="أكثر من 40 قناة تشمل Booking.com وAirbnb وExpedia وAgoda وTrip.com وVrbo وموقعك الخاص. تُزامَن الأسعار والتوافر والقيود في الاتجاهين، فلا مزيد من الحجوزات المزدوجة.">Over 40 channels including Booking.com, Airbnb, Expedia, Agoda, Trip.com, Vrbo and your own website. Rates, availability and restrictions sync both ways, so no more double bookings.</p>
+          </div>
+        </div>
+
+        <div class="faq-item overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="false">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="Does Fandaqah work in Arabic and English?" data-ar="هل يعمل فندقة بالعربية والإنجليزية؟">Does Fandaqah work in Arabic and English?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="Yes — the entire platform is fully bilingual with true right-to-left layout. Guests, front desk and reporting all speak both languages natively. Support is available in Arabic and English, 7 days a week." data-ar="نعم — المنصة بالكامل ثنائية اللغة بواجهة شرقية حقيقية من اليمين إلى اليسار. الضيوف والاستقبال والتقارير يدعمون اللغتين بشكل أصلي. والدعم متاح بالعربية والإنجليزية طوال أيام الأسبوع.">Yes — the entire platform is fully bilingual with true right-to-left layout. Guests, front desk and reporting all speak both languages natively. Support is available in Arabic and English, 7 days a week.</p>
+          </div>
+        </div>
+
+        <div class="faq-item overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="false">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="Can I migrate from my current PMS or spreadsheets?" data-ar="هل يمكنني الانتقال من نظامي الحالي أو جداول البيانات؟">Can I migrate from my current PMS or spreadsheets?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="Absolutely. Our onboarding team migrates rooms, rates, guest profiles and future reservations from any PMS or spreadsheet — completely free. You keep your history, we handle the plumbing." data-ar="بالتأكيد. يقوم فريق التهيئة بنقل الغرف والأسعار وملفات الضيوف والحجوزات المستقبلية من أي نظام أو جدول بيانات — مجانًا تمامًا. تحتفظ بسجلك، ونحن نتولى التفاصيل التقنية.">Absolutely. Our onboarding team migrates rooms, rates, guest profiles and future reservations from any PMS or spreadsheet — completely free. You keep your history, we handle the plumbing.</p>
+          </div>
+        </div>
+
+        <div class="faq-item overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="false">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="What payments and hardware does it support?" data-ar="ما المدفوعات والأجهزة المدعومة؟">What payments and hardware does it support?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="We integrate with Mada, Visa, Mastercard, Amex, Apple Pay and STC Pay through leading regional gateways. Smart locks from Igloohome, Nuki and Salto are supported out of the box for keyless entry." data-ar="نتكامل مع مدى وفيزا وماستركارد وأمريكان إكسبرس وآبل باي وSTC Pay عبر بوابات الدفع الإقليمية الرائدة. والأقفال الذكية من Igloohome وNuki وSalto مدعومة بشكل جاهز للدخول بدون مفاتيح.">We integrate with Mada, Visa, Mastercard, Amex, Apple Pay and STC Pay through leading regional gateways. Smart locks from Igloohome, Nuki and Salto are supported out of the box for keyless entry.</p>
+          </div>
+        </div>
+
+        <div class="faq-item overflow-hidden rounded-3xl border border-navy/10 bg-white/60 transition duration-300 hover:border-navy/25">
+          <button class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-start" aria-expanded="false">
+            <span class="font-display text-lg font-bold sm:text-xl" data-en="Is my data safe, and can I export it?" data-ar="هل بياناتي آمنة؟ وهل يمكنني تصديرها؟">Is my data safe, and can I export it?</span>
+            <span class="faq-plus grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy/5 text-navy transition duration-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-[15px] leading-relaxed text-navy/70" data-en="Your data lives in ISO 27001-certified data centers with AES-256 encryption at rest and TLS 1.3 in transit. Daily backups, 99% uptime SLA, and one-click export of everything to CSV or Excel whenever you want it." data-ar="تعيش بياناتك في مراكز بيانات معتمدة ISO 27001 بتشفير AES-256 عند التخزين وTLS 1.3 أثناء النقل. نسخ احتياطي يومي، واتفاقية توافر 99%، وتصدير كل شيء إلى CSV أو Excel بضغطة واحدة متى شئت.">Your data lives in ISO 27001-certified data centers with AES-256 encryption at rest and TLS 1.3 in transit. Daily backups, 99% uptime SLA, and one-click export of everything to CSV or Excel whenever you want it.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA / DEMO ================= -->
+<section id="demo" class="scroll-mt-24 px-5 pb-20 sm:px-8 lg:pb-28">
+  <div class="reveal">
+    <div class="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-coral text-white shadow-2xl shadow-coral/30">
+      <div class="pointer-events-none absolute -start-24 -top-24 h-80 w-80 rounded-full bg-peach/30 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-32 -end-16 h-96 w-96 rounded-full bg-navy/25 blur-3xl"></div>
+
+      <div class="relative grid gap-10 p-8 sm:p-12 lg:grid-cols-[1fr_480px] lg:gap-14 lg:p-16">
+
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-navy/25 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-peach backdrop-blur">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 14v2.2l1.6 1"/><path d="M16 2v4"/><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/>
+              <path d="M3 10h5"/><path d="M8 2v4"/><circle cx="16" cy="16" r="6"/>
+            </svg>
+            <span data-en="Free 20-minute demo" data-ar="عرض توضيحي مجاني 20 دقيقة">Free 20-minute demo</span>
+          </span>
+
+          <h2 class="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[56px]" data-en="See your property running on Fandaqah." data-ar="شاهد منشأتك تعمل على فندقة.">See your property running on Fandaqah.</h2>
+
+          <p class="mt-4 max-w-lg text-lg leading-relaxed text-white/85" data-en="Tell us about your stay and we will tailor a live walkthrough: your rooms, your channels, your numbers. No pressure, no jargon." data-ar="أخبرنا عن منشأتك وسنصمّم لك عرضًا حيًا: غرفك، قنواتك، أرقامك. بلا ضغط، وبلا مصطلحات معقّدة.">Tell us about your stay and we will tailor a live walkthrough: your rooms, your channels, your numbers. No pressure, no jargon.</p>
+
+          <ul class="mt-7 space-y-3">
+            <li class="flex items-center gap-3 font-medium">
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/20">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="Live demo on your own property data" data-ar="عرض حي على بيانات منشأتك الفعلية">Live demo on your own property data</span>
+            </li>
+            <li class="flex items-center gap-3 font-medium">
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/20">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="Migration plan and go-live date, on the call" data-ar="خطة النقل وتاريخ الانطلاق في نفس المكالمة">Migration plan and go-live date, on the call</span>
+            </li>
+            <li class="flex items-center gap-3 font-medium">
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/20">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span data-en="Transparent quote with no hidden modules" data-ar="عرض سعر شفاف بلا وحدات خفية">Transparent quote with no hidden modules</span>
+            </li>
+          </ul>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="mailto:hello@fandaqah.com" class="inline-flex items-center gap-2.5 rounded-2xl bg-navy/30 px-5 py-3 text-sm font-bold backdrop-blur transition hover:bg-navy/50">
+              <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+              hello@fandaqah.com
+            </a>
+            <a href="tel:+966112345678" class="inline-flex items-center gap-2.5 rounded-2xl bg-navy/30 px-5 py-3 text-sm font-bold backdrop-blur transition hover:bg-navy/50">
+              <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+              <span dir="ltr">+966 11 234 5678</span>
+            </a>
+            <span class="inline-flex items-center gap-2.5 rounded-2xl bg-navy/30 px-5 py-3 text-sm font-bold backdrop-blur">
+              <svg class="h-4 w-4 text-peach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              <span data-en="Riyadh · Dubai · Cairo" data-ar="الرياض · دبي · القاهرة">Riyadh · Dubai · Cairo</span>
+            </span>
+          </div>
+
+          <div class="relative mt-8 hidden max-w-md overflow-hidden rounded-3xl shadow-xl lg:block">
+            <img alt="A warm Fandaqah-powered welcome at check-in" loading="lazy"
+                 src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80"
+                 class="h-52 w-full object-cover">
+            <span class="absolute bottom-3 start-3 rounded-full bg-navy/85 px-4 py-2 text-xs font-bold text-peach backdrop-blur" data-en="Onboarding in days, not months" data-ar="تهيئة في أيام، لا أشهر">Onboarding in days, not months</span>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] bg-beige p-6 text-navy shadow-2xl sm:p-8">
+          <form id="demoForm" novalidate>
+            <h3 class="font-display text-2xl font-extrabold" data-en="Book your demo" data-ar="احجز عرضك التوضيحي">Book your demo</h3>
+            <p class="mt-1 text-sm text-navy/60" data-en="Free · 20 minutes · Arabic or English" data-ar="مجاني · 20 دقيقة · بالعربية أو الإنجليزية">Free · 20 minutes · Arabic or English</p>
+
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="lead-name" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Full name *" data-ar="الاسم الكامل *">Full name *</label>
+                <input id="lead-name" required data-en-ph="Layla Al-Rashid" data-ar-ph="ليلى الراشد" placeholder="Layla Al-Rashid" autocomplete="name"
+                       class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+              </div>
+              <div>
+                <label for="lead-email" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Work email *" data-ar="البريد الإلكتروني *">Work email *</label>
+                <input id="lead-email" type="email" required data-en-ph="layla@hotel.com" data-ar-ph="layla@hotel.com" placeholder="layla@hotel.com" autocomplete="email"
+                       class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+              </div>
+              <div>
+                <label for="lead-phone" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Phone" data-ar="الهاتف">Phone</label>
+                <input id="lead-phone" data-en-ph="+966 5x xxx xxxx" data-ar-ph="+966 5x xxx xxxx" placeholder="+966 5x xxx xxxx" autocomplete="tel" dir="ltr"
+                       class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+              </div>
+              <div>
+                <label for="lead-property" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Property name" data-ar="اسم المنشأة">Property name</label>
+                <input id="lead-property" data-en-ph="Coral Bay Hotel" data-ar-ph="فندق كورال باي" placeholder="Coral Bay Hotel"
+                       class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+              </div>
+              <div>
+                <label for="lead-type" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Property type *" data-ar="نوع المنشأة *">Property type *</label>
+                <select id="lead-type" class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+                  <option value="Hotel"                   data-en="Hotel"                    data-ar="فندق">Hotel</option>
+                  <option value="Serviced Apartments"     data-en="Serviced Apartments"      data-ar="شقق مفروشة">Serviced Apartments</option>
+                  <option value="Chalet / Vacation Rental" data-en="Chalet / Vacation Rental" data-ar="شاليه / إيجار موسمي">Chalet / Vacation Rental</option>
+                  <option value="Resort"                  data-en="Resort"                   data-ar="منتجع">Resort</option>
+                  <option value="Other"                   data-en="Other"                    data-ar="أخرى">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="lead-rooms" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Rooms / units" data-ar="الغرف / الوحدات">Rooms / units</label>
+                <input id="lead-rooms" type="number" min="1" data-en-ph="48" data-ar-ph="48" placeholder="48"
+                       class="w-full rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15">
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label for="lead-msg" class="mb-1.5 block text-[13px] font-bold uppercase tracking-wider text-navy/55" data-en="Anything we should prepare?" data-ar="هل هناك ما نحضّره مسبقًا؟">Anything we should prepare?</label>
+              <textarea id="lead-msg" rows="3" data-en-ph="We run 3 chalets in AlUla and struggle with double bookings..." data-ar-ph="نُدير 3 شاليهات في العُلا ونعاني من الحجوزات المزدوجة..." placeholder="We run 3 chalets in AlUla and struggle with double bookings..."
+                        class="w-full resize-none rounded-2xl border border-navy/15 bg-white px-4 py-3 text-[15px] font-medium outline-none transition focus:border-coral focus:ring-4 focus:ring-coral/15"></textarea>
+            </div>
+
+            <button type="submit" class="group mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-navy py-4 text-base font-bold text-beige shadow-xl shadow-navy/20 transition hover:bg-coral hover:text-white">
+              <span data-en="Request my demo" data-ar="اطلب عرضي التوضيحي">Request my demo</span>
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5 rtl:group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+                <path d="m21.854 2.147-10.94 10.939"/>
+              </svg>
+            </button>
+
+            <p class="mt-3 text-center text-xs text-navy/50" data-en="By submitting, you agree to be contacted about Fandaqah. No spam, ever." data-ar="بإرسالك الطلب، أنت توافق على أن نتواصل معك بخصوص فندقة. لا رسائل مزعجة أبدًا.">By submitting, you agree to be contacted about Fandaqah. No spam, ever.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-navy text-beige">
+  <div class="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
+    <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
+
+      <div>
+        <a href="#top" class="flex items-center gap-2.5">
+          <span class="grid h-10 w-10 place-items-center rounded-2xl bg-coral text-white">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/>
+              <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
+              <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+            </svg>
+          </span>
+          <span class="font-display text-2xl font-extrabold tracking-tight">
+            <span data-en="Fandaqah" data-ar="فندقة">Fandaqah</span><span class="text-coral">.</span>
+          </span>
+        </a>
+        <p class="mt-4 max-w-xs text-[15px] leading-relaxed text-beige/60" data-en="The cloud PMS for hotels, apartments and chalets. Crafted in Riyadh, loved across 12 countries." data-ar="نظام إدارة العقارات السحابي للفنادق والشقق والشاليهات. صُنع في الرياض، ومحبوب في 12 دولة.">The cloud PMS for hotels, apartments and chalets. Crafted in Riyadh, loved across 12 countries.</p>
+
+        <div class="mt-5 flex gap-2.5">
+          <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X" class="grid h-10 w-10 place-items-center rounded-full border border-beige/15 text-beige/70 transition hover:border-coral hover:bg-coral hover:text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" class="grid h-10 w-10 place-items-center rounded-full border border-beige/15 text-beige/70 transition hover:border-coral hover:bg-coral hover:text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="grid h-10 w-10 place-items-center rounded-full border border-beige/15 text-beige/70 transition hover:border-coral hover:bg-coral hover:text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" class="grid h-10 w-10 place-items-center rounded-full border border-beige/15 text-beige/70 transition hover:border-coral hover:bg-coral hover:text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav aria-label="Product">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-peach/70" data-en="Product" data-ar="المنتج">Product</p>
+        <ul class="mt-4 space-y-2.5">
+          <li><a href="#features"     class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Core features"  data-ar="المزايا الأساسية">Core features</a></li>
+          <li><a href="#product"      class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Product tour"   data-ar="جولة في المنتج">Product tour</a></li>
+          <li><a href="#stays"        class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Who it serves"  data-ar="لمن نخدم">Who it serves</a></li>
+          <li><a href="#pricing"      class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Pricing"        data-ar="الأسعار">Pricing</a></li>
+          <li><a href="#faq"          class="text-[15px] text-beige/70 transition hover:text-peach" data-en="FAQ"            data-ar="الأسئلة الشائعة">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Get started">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-peach/70" data-en="Get started" data-ar="ابدأ الآن">Get started</p>
+        <ul class="mt-4 space-y-2.5">
+          <li><a href="#testimonials" class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Customer stories" data-ar="قصص عملائنا">Customer stories</a></li>
+          <li><a href="#demo"         class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Book a demo"      data-ar="احجز عرضًا">Book a demo</a></li>
+          <li><a href="#demo"         class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Start free trial" data-ar="ابدأ التجربة المجانية">Start free trial</a></li>
+          <li><a href="#top"          class="text-[15px] text-beige/70 transition hover:text-peach" data-en="Back to top"      data-ar="العودة للأعلى">Back to top</a></li>
+        </ul>
+      </nav>
+
+      <div class="rounded-3xl bg-beige/[0.06] p-6">
+        <p class="font-display text-xl font-bold" data-en="Ready when you are." data-ar="جاهزون متى كنت جاهزًا.">Ready when you are.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-beige/60" data-en="Join 2,400+ properties running calmer, fuller and more profitably." data-ar="انضم إلى أكثر من 2400 منشأة تعمل بهدوء وإشغال أعلى وربحية أكبر.">Join 2,400+ properties running calmer, fuller and more profitably.</p>
+        <a href="#demo" class="group mt-4 inline-flex items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-coral/30 transition hover:brightness-110">
+          <span data-en="Book a demo" data-ar="احجز عرضًا">Book a demo</span>
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-beige/10 pt-7 sm:flex-row">
+      <p class="text-sm text-beige/50" data-en="© 2026 Fandaqah Technologies. All rights reserved." data-ar="© 2026 شركة فندقة للتقنية. جميع الحقوق محفوظة.">© 2026 Fandaqah Technologies. All rights reserved.</p>
+      <p class="font-display text-sm italic text-beige/40" data-en="Hospitality, beautifully managed." data-ar="ضيافة تُدار بجمال.">Hospitality, beautifully managed.</p>
+      <a href="#top" class="inline-flex items-center gap-2 rounded-full border border-beige/15 px-4 py-2 text-sm font-semibold text-beige/70 transition hover:border-peach hover:text-peach">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+        <span data-en="Back to top" data-ar="العودة للأعلى">Back to top</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button id="backTop" aria-label="Back to top" class="fixed bottom-6 end-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-navy text-beige shadow-xl shadow-navy/30 transition hover:bg-coral hover:text-white opacity-0 pointer-events-none">
+  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+</button>
+
+<script>
+/* ===========================================================
+   1. LANGUAGE (EN <-> AR) + RTL
+   =========================================================== */
+(function () {
+  const html = document.documentElement;
+  const toggle = document.getElementById('langToggle');
+  const label  = document.getElementById('langLabel');
+
+  function applyLang(lang) {
+    const isAr = lang === 'ar';
+    html.lang = isAr ? 'ar' : 'en';
+    html.dir  = isAr ? 'rtl' : 'ltr';
+    label.textContent = isAr ? 'English' : 'العربية';
+    localStorage.setItem('fandaqah_lang', lang);
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const v = el.getAttribute(isAr ? 'data-ar' : 'data-en');
+      if (v !== null && v !== '') el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-en-ph]').forEach(el => {
+      const v = el.getAttribute(isAr ? 'data-ar-ph' : 'data-en-ph');
+      if (v) el.setAttribute('placeholder', v);
+    });
+    renderTestimonial();
+    buildTrust();
+    setBilling(currentBilling);
+  }
+
+  const saved = localStorage.getItem('fandaqah_lang');
+  const initial = saved === 'ar' ? 'ar' : 'en';
+  if (initial === 'ar') applyLang('ar');
+
+  toggle.addEventListener('click', () => {
+    applyLang(html.lang === 'ar' ? 'en' : 'ar');
+  });
+})();
+
+/* ===========================================================
+   2. TRUST BAR MARQUEE
+   =========================================================== */
+const trustData = [
+  { en: 'Coral Bay Hotel',      ar: 'فندق كورال باي',      city_en: 'Jeddah', city_ar: 'جدة' },
+  { en: 'Palm Suites',          ar: 'بالم سويتس',          city_en: 'Dubai',  city_ar: 'دبي' },
+  { en: 'Cedar Ridge Chalets',  ar: 'شاليهات سيدار',       city_en: 'AlUla',  city_ar: 'العُلا' },
+  { en: 'Harbor View Resort',   ar: 'منتجع هاربر فيو',     city_en: 'Aqaba',  city_ar: 'العقبة' },
+  { en: 'Oasis City Hotels',    ar: 'فنادق واحة المدينة',  city_en: 'Riyadh', city_ar: 'الرياض' },
+  { en: 'Marina Lofts',         ar: 'مارينا لوفتس',        city_en: 'Doha',   city_ar: 'الدوحة' },
+  { en: 'Dune Rose Villas',     ar: 'فلل ديون روز',        city_en: 'Muscat', city_ar: 'مسقط' },
+  { en: 'Old Town House',       ar: 'بيت البلدة القديمة',  city_en: 'Cairo',  city_ar: 'القاهرة' },
+  { en: 'Pearl Bay Suites',     ar: 'بيرل باي سويتس',      city_en: 'Manama', city_ar: 'المنامة' },
+  { en: 'Summit Pines Lodge',   ar: 'نزل قمم الصنوبر',     city_en: 'Abha',   city_ar: 'أبها' },
+];
+
+function buildTrust() {
+  const track = document.getElementById('trustTrack');
+  const isAr = document.documentElement.lang === 'ar';
+  const icon = `<span class="grid h-8 w-8 place-items-center rounded-full bg-navy/[0.06] text-coral">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/>
+      <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
+      <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+    </svg></span>`;
+
+  const pill = (d) => `
+    <div class="flex shrink-0 items-center gap-3 rounded-full border border-navy/10 bg-white/70 px-5 py-3 shadow-sm backdrop-blur">
+      ${icon}
+      <span class="whitespace-nowrap text-[15px] font-semibold text-navy">${isAr ? d.ar : d.en}</span>
+      <span class="whitespace-nowrap text-sm text-navy/45">· ${isAr ? d.city_ar : d.city_en}</span>
+    </div>`;
+
+  track.innerHTML = trustData.map(pill).join('') + trustData.map(pill).join('');
+}
+buildTrust();
+
+/* ===========================================================
+   3. HEADER + MOBILE MENU + SCROLL
+   =========================================================== */
+const header = document.getElementById('siteHeader');
+const bar    = document.getElementById('progressBar');
+const backTop= document.getElementById('backTop');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const p = Math.min(1, y / Math.max(1, h));
+  bar.style.transform = `scaleX(${p})`;
+
+  if (y > 20) {
+    header.style.boxShadow = '0 8px 30px rgba(42,39,60,.10)';
+    header.style.backgroundColor = 'rgba(246,241,234,.92)';
+  } else {
+    header.style.boxShadow = 'none';
+    header.style.backgroundColor = 'rgba(246,241,234,.8)';
+  }
+
+  if (y > 600) {
+    backTop.style.opacity = '1';
+    backTop.style.pointerEvents = 'auto';
+  } else {
+    backTop.style.opacity = '0';
+    backTop.style.pointerEvents = 'none';
+  }
+}, { passive: true });
+
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+const menuBtn = document.getElementById('menuBtn');
+const menuIcon = document.getElementById('menuIcon');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+menuBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('hidden', !menuOpen);
+  menuIcon.innerHTML = menuOpen
+    ? '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
+    : '<path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>';
+});
+
+document.querySelectorAll('.mob-link').forEach(a => {
+  a.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.add('hidden');
+    menuIcon.innerHTML = '<path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>';
+  });
+});
+
+/* ===========================================================
+   4. REVEAL ON SCROLL
+   =========================================================== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = (entry.target.dataset.delay || 0) + 'ms';
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  if (!el.dataset.delay) el.dataset.delay = String((i % 4) * 80);
+  revealObserver.observe(el);
+});
+
+/* ===========================================================
+   5. FEATURE FILTERS
+   =========================================================== */
+const filterBtns = document.querySelectorAll('#featureFilters .filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    filterBtns.forEach(b => {
+      b.classList.remove('bg-navy','text-beige','shadow-lg','shadow-navy/20');
+      b.classList.add('border','border-navy/15','bg-white/60','text-navy/65','hover:border-navy/30','hover:text-navy');
+    });
+    btn.classList.remove('border','border-navy/15','bg-white/60','text-navy/65','hover:border-navy/30','hover:text-navy');
+    btn.classList.add('bg-navy','text-beige','shadow-lg','shadow-navy/20');
+
+    document.querySelectorAll('#featureGrid .feature-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+/* ===========================================================
+   6. PRODUCT SHOWCASE TABS
+   =========================================================== */
+const showcaseTabs = document.querySelectorAll('.showcase-tab');
+const showcasePanels = document.querySelectorAll('.showcase-panel');
+
+showcaseTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const key = tab.dataset.tab;
+    showcaseTabs.forEach(t => {
+      t.classList.remove('border-coral/60','bg-beige/[0.08]','shadow-xl','shadow-coral/10');
+      t.classList.add('border-beige/10','bg-transparent','hover:border-beige/25','hover:bg-beige/[0.04]');
+      const icon = t.querySelector('span > span');
+      if (icon) { icon.classList.remove('bg-coral','text-white'); icon.classList.add('bg-beige/10','text-peach'); }
+    });
+    tab.classList.remove('border-beige/10','bg-transparent','hover:border-beige/25','hover:bg-beige/[0.04]');
+    tab.classList.add('border-coral/60','bg-beige/[0.08]','shadow-xl','shadow-coral/10');
+    const icon = tab.querySelector('span > span');
+    if (icon) { icon.classList.remove('bg-beige/10','text-peach'); icon.classList.add('bg-coral','text-white'); }
+
+    showcasePanels.forEach(p => p.classList.toggle('hidden', p.dataset.panel !== key));
+  });
+});
+
+/* ===========================================================
+   7. FAQ ACCORDION
+   =========================================================== */
+document.querySelectorAll('.faq-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ===========================================================
+   8. TESTIMONIALS CAROUSEL
+   =========================================================== */
+const testimonials = [
+  {
+    letter: 'L', color: '#8F9793',
+    name_en: 'Layla Al-Rashid', name_ar: 'ليلى الراشد',
+    role_en: 'General Manager · Palm Suites', role_ar: 'المديرة العامة · بالم سويتس',
+    city_en: 'Dubai', city_ar: 'دبي',
+    badge_en: 'Apartments · 64 units', badge_ar: 'شقق · 64 وحدة',
+    quote_en: '"We moved 64 apartments off spreadsheets in one weekend. Owner statements that used to take three days now take three minutes."',
+    quote_ar: '«نقلنا 64 شقة من جداول البيانات في نهاية أسبوع واحدة. كشوف المالك التي كانت تستغرق ثلاثة أيام أصبحت تستغرق ثلاث دقائق.»'
+  },
+  {
+    letter: 'O', color: '#E95A54',
+    name_en: 'Omar Haddad', name_ar: 'عمر حداد',
+    city_en: 'AlUla', city_ar: 'العُلا',
+    badge_en: 'Chalets · 12 villas', badge_ar: 'شاليهات · 12 فيلا',
+    role_en: 'Owner · Cedar Ridge Chalets', role_ar: 'المالك · شاليهات سيدار',
+    quote_en: '"I run 12 chalets from my phone. Cleaner dispatch, digital keys, guest WhatsApp — everything in one place. It finally feels calm."',
+    quote_ar: '«أُدير 12 شاليهًا من جوالي. توزيع عمال النظافة، والمفاتيح الرقمية، وواتساب الضيوف — كل شيء في مكان واحد. أخيرًا أشعر بالهدوء.»'
+  },
+  {
+    letter: 'S', color: '#FBCDAB', dark: true,
+    name_en: 'Sara Nasser', name_ar: 'سارة ناصر',
+    city_en: 'Riyadh', city_ar: 'الرياض',
+    badge_en: 'Hotel · 96 rooms', badge_ar: 'فندق · 96 غرفة',
+    role_en: 'Front Office Manager · Oasis City Hotels', role_ar: 'مديرة الاستقبال · فنادق واحة المدينة',
+    quote_en: '"Check-in queues dropped by half in the first week. Guests love the online check-in, and my team loves not typing the same data twice."',
+    quote_ar: '«انخفضت طوابير تسجيل الوصول إلى النصف في الأسبوع الأول. الضيوف يحبون الوصول الإلكتروني، وفريقي يحب عدم كتابة نفس البيانات مرتين.»'
+  },
+  {
+    letter: 'D', color: '#E95A54',
+    name_en: 'Daniel K.', name_ar: 'دانيال ك.',
+    city_en: 'Aqaba', city_ar: 'العقبة',
+    badge_en: 'Resort · 210 rooms', badge_ar: 'منتجع · 210 غرفة',
+    role_en: 'Revenue Manager · Harbor View Resort', role_ar: 'مدير الإيرادات · منتجع هاربر فيو',
+    quote_en: '"RevPAR is up 18% in six months. The pricing suggestions alone paid for the year, and the reports our owners get are boardroom-ready."',
+    quote_ar: '«ارتفع الإيراد لكل غرفة بنسبة 18% في ستة أشهر. اقتراحات التسعير وحدها غطّت تكلفة السنة، والتقارير التي يستلمها الملاك جاهزة لمجلس الإدارة.»'
+  },
+  {
+    letter: 'K', color: '#2A273C',
+    name_en: 'Khalid Mansour', name_ar: 'خالد منصور',
+    city_en: 'Cairo', city_ar: 'القاهرة',
+    badge_en: 'Boutique · 42 rooms', badge_ar: 'بوتيك · 42 غرفة',
+    role_en: 'Owner · Old Town House', role_ar: 'المالك · بيت البلدة القديمة',
+    quote_en: '"The Arabic-first experience sold me. My team learned it in one afternoon, and our guests get a warm, native welcome every time."',
+    quote_ar: '«تجربة عربية أولًا هي ما أقنعني. تعلّمها فريقي في ظهيرة واحدة، وضيوفنا يحصلون على ترحيب دافئ أصيل في كل مرة.»'
+  },
+];
+
+let testIndex = 3;
+
+function renderTestimonial() {
+  const isAr = document.documentElement.lang === 'ar';
+  const t = testimonials[testIndex];
+
+  document.getElementById('testimonialQuote').textContent = isAr ? t.quote_ar : t.quote_en;
+  document.getElementById('testimonialName').textContent  = isAr ? t.name_ar  : t.name_en;
+  document.getElementById('testimonialRole').textContent  = isAr ? t.role_ar  : t.role_en;
+  document.getElementById('testimonialCity').textContent  = isAr ? t.city_ar  : t.city_en;
+  document.getElementById('testimonialBadge').textContent = isAr ? t.badge_ar : t.badge_en;
+
+  const av = document.getElementById('testimonialAvatar');
+  av.textContent = t.letter;
+  av.style.background = t.color;
+  av.style.color = t.dark ? '#2A273C' : '#ffffff';
+
+  const dotsWrap = document.getElementById('testimonialDots');
+  dotsWrap.innerHTML = testimonials.map((tt, i) => `
+    <button data-i="${i}" aria-label="Review ${i + 1}"
+      class="grid h-11 w-11 place-items-center rounded-full font-display text-sm font-bold transition-all duration-300
+      ${i === testIndex
+        ? 'scale-110 text-white shadow-lg ring-[3px] ring-peach/60'
+        : 'bg-beige/10 text-beige/60 hover:bg-beige/20 hover:text-beige'}"
+      style="${i === testIndex ? `background:${tt.color};color:${tt.dark ? '#2A273C' : '#ffffff'}` : ''}">
+      ${tt.letter}
+    </button>
+  `).join('');
+  dotsWrap.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => { testIndex = +b.dataset.i; renderTestimonial(); });
+  });
+}
+renderTestimonial();
+
+document.getElementById('prevTest').addEventListener('click', () => {
+  testIndex = (testIndex - 1 + testimonials.length) % testimonials.length;
+  renderTestimonial();
+});
+document.getElementById('nextTest').addEventListener('click', () => {
+  testIndex = (testIndex + 1) % testimonials.length;
+  renderTestimonial();
+});
+
+/* ===========================================================
+   9. PRICING TOGGLE
+   =========================================================== */
+const billMonthly = document.getElementById('billMonthly');
+const billYearly  = document.getElementById('billYearly');
+let currentBilling = 'yearly';
+
+function setBilling(period) {
+  currentBilling = period;
+  const isYearly = period === 'yearly';
+  const isAr = document.documentElement.lang === 'ar';
+
+  billMonthly.classList.toggle('text-navy/55',  isYearly);
+  billMonthly.classList.toggle('text-beige',    !isYearly);
+  billMonthly.classList.toggle('hover:text-navy', isYearly);
+  billYearly.classList.toggle('text-beige',   isYearly);
+  billYearly.classList.toggle('text-navy/55', !isYearly);
+
+  document.querySelectorAll('.price').forEach(el => {
+    el.textContent = el.getAttribute(isYearly ? 'data-yearly' : 'data-monthly');
+  });
+  document.querySelectorAll('.billing-note').forEach(el => {
+    if (isYearly) {
+      el.style.visibility = 'visible';
+      el.innerHTML = isAr ? 'تُدفع سنويًا · وفّر 20%' : 'Billed annually · save 20%';
+    } else {
+      el.style.visibility = 'hidden';
+      el.innerHTML = isAr ? 'تُدفع شهريًا' : 'Billed monthly';
+    }
+  });
+}
+setBilling('yearly');
+billMonthly.addEventListener('click', () => setBilling('monthly'));
+billYearly.addEventListener('click', () => setBilling('yearly'));
+
+/* ===========================================================
+   10. DEMO FORM
+   =========================================================== */
+document.getElementById('demoForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const isAr = document.documentElement.lang === 'ar';
+  const original = btn.innerHTML;
+  btn.innerHTML = isAr ? '✓ تم استلام طلبك!' : '✓ Request received!';
+  btn.disabled = true;
+  setTimeout(() => { btn.innerHTML = original; btn.disabled = false; e.target.reset(); }, 2600);
+});
+
+/* ===========================================================
+   11. SMOOTH SCROLL
+   =========================================================== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id.length < 2) return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.scrollY - 84;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
