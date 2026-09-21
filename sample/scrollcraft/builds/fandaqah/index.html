@@ -1,0 +1,1692 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fandaqah · one day, running</title>
+<meta name="description" content="Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. Scroll through one operating day and watch the property run.">
+<link rel="icon" href="assets/fandaqah-dark.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+/* ============================================================
+   FANDAQAH — live surface
+   The whole page is one property's operating board. `state.hour`
+   is the only input: every panel, every figure and the ground
+   colour itself derive from it.
+   ============================================================ */
+
+:root {
+  /* Ground and ink are written every frame by the Day Dial.
+     These are the 06:40 values the page lands on. */
+  --sc-canvas:     #F2EAE0;
+  --sc-surface:    #FFFBF6;
+  --sc-ink:        #2A273C;
+  --sc-ink-soft:   #6E687F;
+  --sc-accent:     #E95A54;
+  --sc-accent-ink: #FFFFFF;
+
+  --sc-font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --sc-font-text:    "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --sc-shadow-color: 255 22% 18%;
+  --sc-r-sm: 5px; --sc-r-md: 10px; --sc-r-lg: 16px;
+
+  /* surface-local */
+  --fd-line:      color-mix(in oklab, var(--sc-ink) 14%, transparent);
+  --fd-line-soft: color-mix(in oklab, var(--sc-ink) 8%, transparent);
+  --fd-raise:     color-mix(in oklab, var(--sc-surface) 92%, var(--sc-ink));
+  --fd-rail: 13.5rem;
+  --fd-bar:  3.25rem;
+  --fd-dial: 4.75rem;
+  --fd-ok:   #4F9E77;
+  --fd-warn: #C98A2E;
+}
+
+html[dir="rtl"] body,
+html[dir="rtl"] .fd-num { font-family: "Tajawal", "Plus Jakarta Sans", system-ui, sans-serif; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--sc-canvas);
+  color: var(--sc-ink);
+  font-family: var(--sc-font-text);
+  font-size: var(--sc-t-sm);
+  overflow-x: hidden;
+  padding-block: var(--fd-bar) var(--fd-dial);
+  padding-inline-start: 0;
+}
+@media (min-width: 62rem) { body { padding-inline-start: var(--fd-rail); } }
+
+.fd-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* ---------- app chrome: status bar ---------- */
+.fd-bar {
+  position: fixed; inset-block-start: 0; inset-inline: 0; height: var(--fd-bar);
+  z-index: var(--sc-z-chrome);
+  display: flex; align-items: center; gap: var(--sc-4);
+  padding-inline: var(--sc-4);
+  background: color-mix(in oklab, var(--sc-surface) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-block-end: 1px solid var(--fd-line);
+  font-size: var(--sc-t-xs);
+}
+.fd-bar__mark { display: flex; align-items: center; gap: var(--sc-2); flex-shrink: 0; }
+.fd-bar__mark img { height: 1.35rem; width: auto; display: block; }
+.fd-prop {
+  display: flex; align-items: center; gap: var(--sc-2);
+  padding: 0.3rem 0.6rem; border-radius: var(--sc-r-sm);
+  border: 1px solid var(--fd-line); background: var(--fd-raise);
+  font-weight: 600; letter-spacing: var(--sc-track-normal);
+  color: var(--sc-ink);
+}
+.fd-prop__dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--fd-ok); flex-shrink: 0; }
+.fd-bar__stats { display: none; gap: var(--sc-5); margin-inline-start: auto; align-items: center; }
+@media (min-width: 52rem) { .fd-bar__stats { display: flex; } }
+.fd-stat { display: flex; align-items: baseline; gap: .4rem; }
+.fd-stat__k { color: var(--sc-ink-soft); text-transform: uppercase; letter-spacing: var(--sc-track-wide); font-size: 0.66rem; font-weight: 600; }
+.fd-stat__v { font-weight: 700; font-size: var(--sc-t-sm); }
+.fd-bar__act { display: flex; align-items: center; gap: var(--sc-2); margin-inline-start: auto; }
+@media (min-width: 52rem) { .fd-bar__act { margin-inline-start: var(--sc-5); } }
+
+.fd-btn {
+  font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap;
+  padding: 0.4rem 0.8rem; border-radius: var(--sc-r-sm);
+  border: 1px solid var(--fd-line); background: var(--fd-raise); color: var(--sc-ink);
+  transition: background var(--sc-d-fast) var(--sc-ease-out),
+              border-color var(--sc-d-fast) var(--sc-ease-out),
+              transform 120ms var(--sc-ease-out);
+}
+.fd-btn:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+.fd-btn:active { transform: translateY(1px); }
+.fd-btn--primary {
+  background: var(--sc-accent); border-color: var(--sc-accent); color: var(--sc-accent-ink);
+}
+.fd-btn--primary:hover { background: color-mix(in oklab, var(--sc-accent) 86%, var(--sc-ink)); color: var(--sc-accent-ink); }
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--sc-accent); outline-offset: 2px; border-radius: var(--sc-r-sm);
+}
+
+/* ---------- app chrome: module rail ---------- */
+.fd-rail {
+  position: fixed; inset-block: var(--fd-bar) var(--fd-dial); inset-inline-start: 0;
+  width: var(--fd-rail); z-index: calc(var(--sc-z-chrome) - 1);
+  display: none; flex-direction: column; gap: 1px;
+  padding: var(--sc-4) var(--sc-3);
+  background: color-mix(in oklab, var(--sc-surface) 62%, transparent);
+  backdrop-filter: blur(10px);
+  border-inline-end: 1px solid var(--fd-line);
+  font-size: var(--sc-t-xs);
+}
+@media (min-width: 62rem) { .fd-rail { display: flex; } }
+.fd-rail__h {
+  text-transform: uppercase; letter-spacing: var(--sc-track-wide);
+  font-size: 0.64rem; font-weight: 700; color: var(--sc-ink-soft);
+  padding: var(--sc-3) var(--sc-3) var(--sc-2);
+}
+.fd-rail a {
+  display: flex; align-items: center; gap: var(--sc-3);
+  padding: 0.5rem var(--sc-3); border-radius: var(--sc-r-sm);
+  color: var(--sc-ink-soft); text-decoration: none; font-weight: 600;
+  transition: background var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out);
+}
+.fd-rail a:hover { background: var(--fd-line-soft); color: var(--sc-ink); }
+.fd-rail a[aria-current="true"] { background: var(--fd-line-soft); color: var(--sc-ink); }
+.fd-rail a[aria-current="true"] .fd-rail__t { background: var(--sc-accent); }
+.fd-rail__t { width: 3px; height: 1rem; border-radius: 2px; background: var(--fd-line); flex-shrink: 0; transition: background var(--sc-d-fast) var(--sc-ease-out); }
+.fd-rail__foot { margin-top: auto; padding: var(--sc-3); color: var(--sc-ink-soft); line-height: 1.5; font-size: 0.68rem; }
+
+/* ---------- THE DAY DIAL (signature move) ---------- */
+.fd-dial {
+  position: fixed; inset-block-end: 0; inset-inline: 0; height: var(--fd-dial);
+  z-index: var(--sc-z-chrome);
+  background: color-mix(in oklab, var(--sc-surface) 90%, transparent);
+  backdrop-filter: blur(16px);
+  border-block-start: 1px solid var(--fd-line);
+  padding: 0 var(--sc-4);
+  display: flex; align-items: center; gap: var(--sc-4);
+  touch-action: none;
+}
+.fd-dial__clock {
+  flex-shrink: 0; display: flex; flex-direction: column; gap: 1px; min-width: 5.5rem;
+}
+.fd-dial__time { font-size: var(--sc-t-lg); font-weight: 800; letter-spacing: var(--sc-track-snug); line-height: 1; }
+.fd-dial__phase { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft); }
+.fd-dial__track {
+  position: relative; flex: 1; height: 2.4rem; cursor: grab;
+}
+.fd-dial__track:active { cursor: grabbing; }
+.fd-dial__line {
+  position: absolute; inset-block-start: 50%; inset-inline: 0; height: 2px;
+  background: var(--fd-line); border-radius: 2px; translate: 0 -50%;
+}
+.fd-dial__fill {
+  position: absolute; inset-block-start: 50%; inset-inline-start: 0; height: 2px;
+  background: var(--sc-accent); border-radius: 2px; translate: 0 -50%;
+  width: 0%;
+}
+html[dir="rtl"] .fd-dial__fill { inset-inline-start: auto; inset-inline-end: 0; }
+.fd-mark {
+  position: absolute; inset-block-start: 50%; translate: -50% -50%;
+  width: 1.5rem; height: 1.5rem; padding: 0; border: 0; background: none;
+  cursor: pointer; display: grid; place-items: center;
+}
+html[dir="rtl"] .fd-mark { translate: 50% -50%; }
+.fd-mark::before {
+  content: ""; width: .44rem; height: .44rem; border-radius: 50%;
+  background: var(--fd-line); border: 1px solid var(--sc-canvas);
+  transition: background var(--sc-d-base) var(--sc-ease-out), scale var(--sc-d-base) var(--sc-ease-out);
+}
+.fd-mark[data-passed="1"]::before { background: var(--sc-accent); scale: 1.25; }
+.fd-mark:hover::before { scale: 1.5; }
+.fd-mark__tip {
+  position: absolute; inset-block-end: 115%; white-space: nowrap;
+  font-size: 0.62rem; font-weight: 700; color: var(--sc-ink-soft);
+  opacity: 0; transition: opacity var(--sc-d-fast) var(--sc-ease-out); pointer-events: none;
+  text-transform: uppercase; letter-spacing: var(--sc-track-wide);
+}
+.fd-mark:hover .fd-mark__tip, .fd-mark:focus-visible .fd-mark__tip { opacity: 1; }
+.fd-dial__head {
+  position: absolute; inset-block-start: 50%; translate: -50% -50%;
+  width: 1rem; height: 1rem; border-radius: 50%;
+  background: var(--sc-accent); border: 2.5px solid var(--sc-surface);
+  box-shadow: var(--sc-e2); pointer-events: none;
+}
+html[dir="rtl"] .fd-dial__head { translate: 50% -50%; }
+.fd-dial__hint {
+  flex-shrink: 0; display: none; font-size: 0.64rem; font-weight: 600;
+  color: var(--sc-ink-soft); max-width: 9rem; line-height: 1.35;
+}
+@media (min-width: 74rem) { .fd-dial__hint { display: block; } }
+.fd-dial[data-held="1"] .fd-dial__hint { color: var(--sc-accent); }
+
+/* ---------- surface panels ---------- */
+.fd-wrap { width: 100%; max-width: 74rem; margin-inline: auto; padding-inline: var(--sc-5); }
+
+.fd-panel {
+  background: var(--sc-surface);
+  border: 1px solid var(--fd-line);
+  border-radius: var(--sc-r-md);
+  box-shadow: var(--sc-e1), var(--sc-edge);
+  overflow: hidden;
+}
+.fd-panel__head {
+  display: flex; align-items: center; gap: var(--sc-3);
+  padding: 0.55rem var(--sc-4);
+  border-block-end: 1px solid var(--fd-line-soft);
+  background: var(--fd-raise);
+}
+.fd-panel__t {
+  font-size: 0.66rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft); margin: 0;
+}
+.fd-panel__meta { margin-inline-start: auto; font-size: 0.68rem; font-weight: 700; color: var(--sc-ink-soft); }
+.fd-panel__body { padding: var(--sc-4); }
+
+.fd-grid { display: grid; gap: var(--sc-4); }
+@media (min-width: 54rem) { .fd-grid--2 { grid-template-columns: 1.35fr 1fr; } }
+@media (min-width: 54rem) { .fd-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* figures */
+.fd-figs { display: flex; flex-wrap: wrap; gap: var(--sc-5) var(--sc-7); }
+.fd-fig__v { font-size: var(--sc-t-xl); font-weight: 800; letter-spacing: var(--sc-track-tight); line-height: 1; display: flex; align-items: baseline; gap: .15rem; }
+.fd-fig__u { font-size: var(--sc-t-base); font-weight: 700; color: var(--sc-ink-soft); }
+.fd-fig__k { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft); margin-top: .35rem; }
+.fd-fig__d { font-size: 0.7rem; color: var(--sc-ink-soft); margin-top: .1rem; }
+
+/* room board */
+.fd-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(3.1rem, 1fr)); gap: 4px; }
+.fd-room {
+  aspect-ratio: 1.45; border-radius: var(--sc-r-sm); border: 1px solid var(--fd-line);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: .3rem .35rem; font-size: 0.62rem; font-weight: 700;
+  background: var(--fd-raise); color: var(--sc-ink-soft);
+  transition: background 420ms var(--sc-ease-out), color 420ms var(--sc-ease-out), border-color 420ms var(--sc-ease-out);
+}
+.fd-room__n { font-variant-numeric: tabular-nums; }
+.fd-room__s { font-size: 0.54rem; font-weight: 600; opacity: .8; text-transform: uppercase; letter-spacing: .04em; }
+.fd-room[data-s="occupied"] { background: var(--sc-ink); border-color: var(--sc-ink); color: var(--sc-surface); }
+.fd-room[data-s="arriving"] { background: var(--sc-accent); border-color: var(--sc-accent); color: var(--sc-accent-ink); }
+.fd-room[data-s="cleaning"] { background: color-mix(in oklab, var(--fd-warn) 22%, var(--sc-surface)); border-color: color-mix(in oklab, var(--fd-warn) 45%, transparent); color: var(--sc-ink); }
+.fd-room[data-s="ready"] { background: var(--sc-surface); color: var(--sc-ink-soft); }
+
+.fd-legend { display: flex; flex-wrap: wrap; gap: var(--sc-4); margin-top: var(--sc-4); font-size: 0.66rem; font-weight: 600; color: var(--sc-ink-soft); }
+.fd-legend span { display: inline-flex; align-items: center; gap: .35rem; }
+.fd-legend i { width: .6rem; height: .6rem; border-radius: 2px; border: 1px solid var(--fd-line); display: block; }
+
+/* log / rows */
+.fd-rows { display: flex; flex-direction: column; }
+.fd-row {
+  display: grid; grid-template-columns: 3.1rem 1fr auto; gap: var(--sc-3);
+  align-items: baseline; padding: .42rem 0;
+  border-block-end: 1px solid var(--fd-line-soft); font-size: 0.74rem;
+}
+.fd-row:last-child { border-block-end: 0; }
+.fd-row__h { color: var(--sc-ink-soft); font-weight: 700; font-variant-numeric: tabular-nums; font-size: 0.68rem; }
+.fd-row__b { line-height: 1.45; }
+.fd-row__b b { font-weight: 700; }
+.fd-row__tag {
+  font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  padding: .12rem .35rem; border-radius: 3px; border: 1px solid var(--fd-line); color: var(--sc-ink-soft);
+  white-space: nowrap;
+}
+.fd-row__tag[data-k="in"]   { color: var(--sc-accent); border-color: color-mix(in oklab, var(--sc-accent) 45%, transparent); }
+.fd-row__tag[data-k="ok"]   { color: var(--fd-ok); border-color: color-mix(in oklab, var(--fd-ok) 45%, transparent); }
+.fd-row__tag[data-k="warn"] { color: var(--fd-warn); border-color: color-mix(in oklab, var(--fd-warn) 45%, transparent); }
+.fd-empty { color: var(--sc-ink-soft); font-size: 0.74rem; padding: var(--sc-4) 0; font-style: italic; }
+
+/* section typography — surface idiom, not marketing display */
+.fd-h {
+  font-family: var(--sc-font-display);
+  font-size: var(--sc-t-xl); font-weight: 800;
+  letter-spacing: var(--sc-track-tight); line-height: 1.1;
+  text-wrap: balance; margin: 0; max-width: 22ch;
+}
+.fd-h--lg { font-size: var(--sc-t-2xl); }
+.fd-p { color: var(--sc-ink-soft); max-width: 52ch; line-height: var(--sc-leading-body); margin: 0; font-size: var(--sc-t-sm); text-wrap: pretty; }
+.fd-eyebrow {
+  font-size: 0.64rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: var(--sc-track-wide); color: var(--sc-accent); margin: 0;
+}
+.fd-note { font-size: 0.68rem; color: var(--sc-ink-soft); line-height: 1.5; }
+
+.fd-sec { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+.fd-sec--tight { padding-block: clamp(2rem, 4vw, 3.5rem); }
+
+/* stage layout for pinned acts. The fixed bar and dial eat into the
+   viewport, so a plain 100svh stage overflows and clips its last panel. */
+.fd-stage {
+  min-height: calc(100svh - var(--fd-bar) - var(--fd-dial));
+  display: flex; flex-direction: column;
+  justify-content: center; padding-block: var(--sc-6);
+}
+
+/* Mobile art direction: the hero is composed for the phone, not inherited
+   from the desktop composition. Type steps down a rung, the board tightens
+   to a denser grid, and the legend goes (the colours are self-evident in
+   motion and the board stays described to screen readers). */
+@media (max-width: 54rem) {
+  .fd-stage { padding-block: var(--sc-4); }
+  .fd-h--lg { font-size: var(--sc-t-xl); }
+  .fd-h { font-size: var(--sc-t-lg); }
+  .fd-board { grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr)); gap: 3px; }
+  .fd-room { aspect-ratio: 1.6; font-size: 0.56rem; padding: .22rem .26rem; }
+  .fd-room__s { font-size: 0.48rem; }
+  .fd-legend { display: none; }
+  .fd-figs { gap: var(--sc-4) var(--sc-5); }
+  .fd-fig__v { font-size: var(--sc-t-lg); }
+  .fd-panel__body { padding: var(--sc-3); }
+  .fd-grid { gap: var(--sc-3); }
+  .fd-bar { gap: var(--sc-2); padding-inline: var(--sc-2); }
+  .fd-bar__mark img { height: 1.15rem; }
+  .fd-prop { padding: .25rem .45rem; font-size: 0.68rem; }
+  .fd-btn { padding: .35rem .55rem; font-size: 0.7rem; }
+  .fd-railpan { padding-inline: var(--sc-4); gap: var(--sc-3); }
+  .fd-console { width: min(78vw, 20rem); }
+  .fd-railpan__lead, .fd-railpan__end { width: min(78vw, 20rem); }
+}
+
+/* channel cascade (act 3) */
+.fd-chan { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 4px; }
+.fd-chan__i {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .38rem .5rem; border-radius: var(--sc-r-sm);
+  border: 1px solid var(--fd-line); background: var(--fd-raise);
+  font-size: 0.68rem; font-weight: 600; color: var(--sc-ink-soft);
+  transition: background 300ms var(--sc-ease-out), color 300ms var(--sc-ease-out), border-color 300ms var(--sc-ease-out);
+}
+.fd-chan__i[data-ack="1"] { border-color: color-mix(in oklab, var(--fd-ok) 50%, transparent); color: var(--sc-ink); background: color-mix(in oklab, var(--fd-ok) 10%, var(--sc-surface)); }
+.fd-chan__d { width: .42rem; height: .42rem; border-radius: 50%; background: var(--fd-line); flex-shrink: 0; transition: background 300ms var(--sc-ease-out); }
+.fd-chan__i[data-ack="1"] .fd-chan__d { background: var(--fd-ok); }
+
+/* console rail (act 4) */
+.fd-railpan { display: flex; gap: var(--sc-4); align-items: stretch; padding-inline: var(--sc-5); }
+.fd-console { flex: 0 0 auto; width: clamp(17rem, 27vw, 22rem); display: flex; flex-direction: column; }
+.fd-console .fd-panel { flex: 1; display: flex; flex-direction: column; }
+.fd-console .fd-panel__body { flex: 1; }
+.fd-railpan__lead, .fd-railpan__end { flex: 0 0 auto; width: clamp(15rem, 24vw, 20rem); display: flex; flex-direction: column; justify-content: center; gap: var(--sc-4); }
+
+/* range (act 5) — asymmetric, not three equal cards */
+.fd-range { display: grid; gap: var(--sc-4); }
+@media (min-width: 58rem) {
+  .fd-range { grid-template-columns: 1.6fr 1fr; grid-template-rows: auto auto; }
+  .fd-range > :nth-child(1) { grid-row: span 2; }
+}
+.fd-mode {
+  text-align: start; font: inherit; cursor: pointer; width: 100%;
+  background: var(--sc-surface); border: 1px solid var(--fd-line);
+  border-radius: var(--sc-r-md); padding: var(--sc-5);
+  display: flex; flex-direction: column; gap: var(--sc-2);
+  transition: border-color var(--sc-d-base) var(--sc-ease-out), transform var(--sc-d-base) var(--sc-ease-out);
+  color: var(--sc-ink);
+}
+.fd-mode:hover { border-color: color-mix(in oklab, var(--sc-accent) 55%, transparent); }
+.fd-mode[aria-pressed="true"] { border-color: var(--sc-accent); box-shadow: 0 0 0 1px var(--sc-accent) inset; }
+.fd-mode__k { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: var(--sc-track-wide); color: var(--sc-accent); }
+.fd-mode__t { font-size: var(--sc-t-lg); font-weight: 800; letter-spacing: var(--sc-track-snug); line-height: 1.15; }
+.fd-mode__d { font-size: 0.76rem; color: var(--sc-ink-soft); line-height: 1.5; }
+.fd-mode__f { margin: var(--sc-2) 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .3rem; font-size: 0.72rem; color: var(--sc-ink-soft); }
+.fd-mode__f li { padding-inline-start: .9rem; position: relative; }
+.fd-mode__f li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .45em; width: .3rem; height: 1px; background: var(--sc-accent); }
+
+/* ledger (act 6 peak) */
+.fd-ledger { display: flex; flex-direction: column; font-size: 0.76rem; }
+/* Always present (the pinned stage's ground), but visibly unposted until
+   its audit hour: muted, with a hairline marker that fills when it posts. */
+.fd-led {
+  display: grid; grid-template-columns: auto 1fr auto; gap: var(--sc-3);
+  align-items: baseline;
+  padding: .4rem 0; border-block-end: 1px solid var(--fd-line-soft);
+  color: var(--sc-ink-soft);
+  transition: color 340ms var(--sc-ease-out);
+}
+.fd-led::before {
+  content: ""; width: .34rem; height: .34rem; border-radius: 50%;
+  background: transparent; border: 1px solid var(--fd-line);
+  transition: background 340ms var(--sc-ease-out), border-color 340ms var(--sc-ease-out);
+  align-self: center;
+}
+.fd-led[data-posted="1"] { color: var(--sc-ink); }
+.fd-led[data-posted="1"]::before { background: var(--fd-ok); border-color: var(--fd-ok); }
+.fd-led__v { font-variant-numeric: tabular-nums; font-weight: 700; }
+.fd-led--total {
+  border-block-end: 0; border-block-start: 2px solid var(--sc-ink);
+  margin-top: .3rem; padding-top: .6rem; font-size: var(--sc-t-base); font-weight: 800;
+  color: var(--sc-ink);
+}
+.fd-led--total::before { display: none; }
+.fd-led--total { grid-template-columns: 1fr auto; }
+.fd-led--total .fd-led__v { font-size: var(--sc-t-lg); }
+.fd-seal {
+  display: inline-flex; align-items: center; gap: var(--sc-2);
+  padding: .4rem .7rem; border-radius: var(--sc-r-pill);
+  border: 1px solid color-mix(in oklab, var(--fd-ok) 55%, transparent);
+  color: var(--fd-ok); font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: var(--sc-track-wide);
+  opacity: 0; transform: scale(0.95);
+  transition: opacity 500ms var(--sc-ease-out), transform 500ms var(--sc-ease-out);
+}
+.fd-seal[data-on="1"] { opacity: 1; transform: none; }
+
+/* first-run (act 7 close) */
+.fd-run { display: grid; gap: var(--sc-4); }
+@media (min-width: 54rem) { .fd-run { grid-template-columns: 1fr 1fr; align-items: start; } }
+.fd-field { display: flex; flex-direction: column; gap: .3rem; margin-block-end: var(--sc-4); }
+.fd-field > label { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft); }
+.fd-field :is(input, select) {
+  font: inherit; font-size: var(--sc-t-sm); color: var(--sc-ink);
+  background: var(--fd-raise); border: 1px solid var(--fd-line);
+  border-radius: var(--sc-r-sm); padding: .55rem .7rem; width: 100%;
+  transition: border-color var(--sc-d-fast) var(--sc-ease-out);
+}
+.fd-field :is(input, select):hover { border-color: var(--fd-line); }
+.fd-field :is(input, select):focus { border-color: var(--sc-accent); }
+.fd-field input::placeholder { color: color-mix(in oklab, var(--sc-ink) 34%, transparent); }
+.fd-caret { display: inline-block; width: 2px; height: 1em; background: var(--sc-accent); vertical-align: -0.12em; animation: fdblink 1.05s steps(2, start) infinite; }
+@keyframes fdblink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fd-caret { animation: none; } }
+.fd-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sc-3); counter-reset: s; }
+.fd-steps li { display: grid; grid-template-columns: 1.4rem 1fr; gap: var(--sc-3); font-size: 0.78rem; color: var(--sc-ink-soft); line-height: 1.5; }
+.fd-steps li::before {
+  counter-increment: s; content: counter(s, decimal-leading-zero);
+  font-size: 0.64rem; font-weight: 800; color: var(--sc-accent);
+  font-variant-numeric: tabular-nums; padding-top: .15rem;
+}
+.fd-steps b { color: var(--sc-ink); font-weight: 700; display: block; }
+
+.fd-foot {
+  border-block-start: 1px solid var(--fd-line); margin-top: var(--sc-7);
+  padding-block: var(--sc-5); display: flex; flex-wrap: wrap; gap: var(--sc-4);
+  align-items: center; font-size: 0.7rem; color: var(--sc-ink-soft);
+}
+.fd-foot img { height: 1.15rem; width: auto; }
+.fd-foot__links { display: flex; flex-wrap: wrap; gap: var(--sc-4); margin-inline-start: auto; }
+.fd-foot a { color: var(--sc-ink-soft); text-decoration: none; text-underline-offset: 3px; }
+.fd-foot a:hover { color: var(--sc-accent); text-decoration: underline; }
+
+.fd-sample {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: var(--sc-track-wide); color: var(--sc-ink-soft);
+  border: 1px dashed var(--fd-line); border-radius: var(--sc-r-pill);
+  padding: .22rem .6rem;
+}
+
+/* reduced motion: the dial stops driving position, hour parks at midday */
+@media (prefers-reduced-motion: reduce) {
+  .fd-led, .fd-seal { opacity: 1; transform: none; }
+}
+
+/* the visually-hidden helper for the live region */
+.fd-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+</style>
+</head>
+
+<body>
+
+<span data-sc-progress></span>
+
+<!-- ============ APP CHROME: status bar ============ -->
+<header class="fd-bar">
+  <a class="fd-bar__mark" href="#wake" aria-label="Fandaqah">
+    <img id="fdLogo" src="assets/fandaqah-dark.png" alt="Fandaqah">
+  </a>
+
+  <span class="fd-prop">
+    <span class="fd-prop__dot" aria-hidden="true"></span>
+    <span id="fdPropName">Coral Bay Hotel</span>
+  </span>
+
+  <div class="fd-bar__stats" aria-hidden="true">
+    <span class="fd-stat"><span class="fd-stat__k" data-en="In-house" data-ar="نزلاء">In-house</span><span class="fd-stat__v fd-num" id="sbInhouse">0</span></span>
+    <span class="fd-stat"><span class="fd-stat__k" data-en="Occ" data-ar="الإشغال">Occ</span><span class="fd-stat__v fd-num" id="sbOcc">0%</span></span>
+    <span class="fd-stat"><span class="fd-stat__k" data-en="Arrivals" data-ar="وصول">Arrivals</span><span class="fd-stat__v fd-num" id="sbArr">0</span></span>
+  </div>
+
+  <div class="fd-bar__act">
+    <button class="fd-btn" id="langToggle" type="button">العربية</button>
+    <a class="fd-btn fd-btn--primary" href="#firstrun" data-en="Book a demo" data-ar="احجز عرضًا">Book a demo</a>
+  </div>
+</header>
+
+<!-- ============ APP CHROME: module rail ============ -->
+<nav class="fd-rail" id="fdRail" aria-label="Modules">
+  <p class="fd-rail__h" data-en="Property" data-ar="العقار">Property</p>
+  <a href="#wake"     data-mod><span class="fd-rail__t"></span><span data-en="Front desk"   data-ar="الاستقبال">Front desk</span></a>
+  <a href="#rush"     data-mod><span class="fd-rail__t"></span><span data-en="Arrivals"     data-ar="الوصول">Arrivals</span></a>
+  <a href="#sync"     data-mod><span class="fd-rail__t"></span><span data-en="Distribution" data-ar="قنوات البيع">Distribution</span></a>
+  <a href="#consoles" data-mod><span class="fd-rail__t"></span><span data-en="Consoles"     data-ar="اللوحات">Consoles</span></a>
+  <a href="#range"    data-mod><span class="fd-rail__t"></span><span data-en="Property type" data-ar="نوع العقار">Property type</span></a>
+  <a href="#audit"    data-mod><span class="fd-rail__t"></span><span data-en="Night audit"  data-ar="تدقيق الليل">Night audit</span></a>
+  <a href="#firstrun" data-mod><span class="fd-rail__t"></span><span data-en="Set up"       data-ar="الإعداد">Set up</span></a>
+  <p class="fd-rail__foot">
+    <span data-en="Sample property. Every figure on this page is computed from the clock below."
+          data-ar="عقار تجريبي. كل رقم في هذه الصفحة محسوب من الساعة بالأسفل.">Sample property. Every figure on this page is computed from the clock below.</span>
+  </p>
+</nav>
+
+<main id="top">
+
+  <!-- ============ ACT 1 · WAKE 06:40 · pin ============ -->
+  <section id="wake" data-sc-act="pin" data-sc-span="1.9">
+    <div data-sc-stage class="fd-stage">
+      <div class="fd-wrap">
+
+        <div class="fd-grid fd-grid--2" data-sc-cue="0 1 0 0">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h2 class="fd-panel__t" data-en="Room board" data-ar="لوحة الغرف">Room board</h2>
+              <span class="fd-panel__meta fd-num" id="boardMeta">24 units</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-board" id="board" role="img" aria-labelledby="boardA11y"></div>
+              <p class="fd-sr" id="boardA11y" aria-live="polite"></p>
+              <div class="fd-legend" aria-hidden="true">
+                <span><i style="background:var(--sc-ink);border-color:var(--sc-ink)"></i><span data-en="Occupied" data-ar="مشغولة">Occupied</span></span>
+                <span><i style="background:var(--sc-accent);border-color:var(--sc-accent)"></i><span data-en="Arriving" data-ar="وصول">Arriving</span></span>
+                <span><i style="background:color-mix(in oklab,var(--fd-warn) 22%,var(--sc-surface))"></i><span data-en="Cleaning" data-ar="تنظيف">Cleaning</span></span>
+                <span><i style="background:var(--sc-surface)"></i><span data-en="Ready" data-ar="جاهزة">Ready</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--sc-4)">
+            <div>
+              <p class="fd-eyebrow" data-en="06:40 · the property is awake" data-ar="٠٦:٤٠ · العقار مستيقظ">06:40 · the property is awake</p>
+              <h1 class="fd-h fd-h--lg" style="margin-top:var(--sc-3)"
+                  data-en="Every room. Every booking. One dashboard."
+                  data-ar="كل غرفة. كل حجز. لوحة واحدة.">Every room. Every booking. One dashboard.</h1>
+              <p class="fd-p" style="margin-top:var(--sc-4)"
+                 data-en="Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. This page is not a screenshot of it. Scroll, and one operating day runs in front of you."
+                 data-ar="فندقة هو نظام إدارة العقارات السحابي للفنادق والشقق المفروشة والشاليهات. هذه الصفحة ليست صورة للنظام. مرّر للأسفل، ويعمل أمامك يوم تشغيلي كامل.">Fandaqah is the cloud property-management system for hotels, serviced apartments and chalets. This page is not a screenshot of it. Scroll, and one operating day runs in front of you.</p>
+            </div>
+
+            <div class="fd-panel">
+              <div class="fd-panel__head">
+                <h2 class="fd-panel__t" data-en="Now" data-ar="الآن">Now</h2>
+                <span class="fd-panel__meta fd-num" id="nowClock">06:40</span>
+              </div>
+              <div class="fd-panel__body">
+                <div class="fd-figs">
+                  <div>
+                    <p class="fd-fig__v"><span class="fd-num" id="figOcc">61</span><span class="fd-fig__u">%</span></p>
+                    <p class="fd-fig__k" data-en="Occupancy" data-ar="الإشغال">Occupancy</p>
+                  </div>
+                  <div>
+                    <p class="fd-fig__v fd-num" id="figArr">0</p>
+                    <p class="fd-fig__k" data-en="Arrivals left" data-ar="وصول متبقٍ">Arrivals left</p>
+                  </div>
+                  <div>
+                    <p class="fd-fig__v fd-num" id="figDep">0</p>
+                    <p class="fd-fig__k" data-en="Departures left" data-ar="مغادرة متبقية">Departures left</p>
+                  </div>
+                  <div>
+                    <p class="fd-fig__v"><span class="fd-fig__u">SAR</span> <span class="fd-num" id="figRev">0</span></p>
+                    <p class="fd-fig__k" data-en="Posted today" data-ar="مُرحّل اليوم">Posted today</p>
+                  </div>
+                </div>
+                <p class="fd-note" style="margin-top:var(--sc-4)">
+                  <span class="fd-sample" data-en="Sample data" data-ar="بيانات تجريبية">Sample data</span>
+                  <span style="margin-inline-start:.5rem" data-en="Last night's audit closed at 03:12. Nothing is outstanding."
+                        data-ar="أُغلق تدقيق الليلة الماضية ٠٣:١٢. لا يوجد معلّق.">Last night's audit closed at 03:12. Nothing is outstanding.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 2 · RUSH 14:00 · flow ============ -->
+  <section id="rush" class="fd-sec">
+    <div class="fd-wrap">
+      <div class="fd-grid fd-grid--2" data-sc-in data-sc-stagger="70">
+        <div class="fd-panel">
+          <div class="fd-panel__head">
+            <h2 class="fd-panel__t" data-en="Event log" data-ar="سجل الأحداث">Event log</h2>
+            <span class="fd-panel__meta fd-num" id="logMeta">0 events</span>
+          </div>
+          <div class="fd-panel__body">
+            <div class="fd-rows" id="log"></div>
+            <p class="fd-empty" id="logEmpty" data-en="Quiet. The day has not started yet." data-ar="هادئ. اليوم لم يبدأ بعد.">Quiet. The day has not started yet.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="fd-eyebrow" data-en="14:00 · the rush" data-ar="١٤:٠٠ · الذروة">14:00 · the rush</p>
+          <h2 class="fd-h" style="margin-top:var(--sc-3)"
+              data-en="This is the hour that breaks a spreadsheet."
+              data-ar="هذه هي الساعة التي تُسقط جدول البيانات.">This is the hour that breaks a spreadsheet.</h2>
+          <p class="fd-p" style="margin-top:var(--sc-4)"
+             data-en="Three channels confirm inside the same minute. A walk-in wants a room that a portal has already sold. Housekeeping has eleven turnovers and four staff. Every one of these arrives in the log above, in order, with the room it touches."
+             data-ar="ثلاث قنوات تؤكد في الدقيقة نفسها. نزيل بلا حجز يطلب غرفة باعتها بوابة حجز بالفعل. التدبير الفندقي أمامه إحدى عشرة غرفة وأربعة موظفين. كل ذلك يصل إلى السجل أعلاه، بالترتيب، مع رقم الغرفة.">Three channels confirm inside the same minute. A walk-in wants a room that a portal has already sold. Housekeeping has eleven turnovers and four staff. Every one of these arrives in the log above, in order, with the room it touches.</p>
+          <p class="fd-p" style="margin-top:var(--sc-4)"
+             data-en="Scrub the clock below to any hour and the log, the board and every figure recompute together. Nothing here is a fixed image."
+             data-ar="حرّك الساعة بالأسفل إلى أي وقت، وسيُعاد حساب السجل واللوحة وكل الأرقام معًا. لا شيء هنا صورة ثابتة.">Scrub the clock below to any hour and the log, the board and every figure recompute together. Nothing here is a fixed image.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 3 · TURN · reveal ============ -->
+  <section id="sync" class="fd-sec">
+    <div class="fd-wrap">
+      <div class="fd-grid fd-grid--2">
+        <div data-sc-in data-sc-stagger="60">
+          <p class="fd-eyebrow" data-en="One change" data-ar="تغيير واحد">One change</p>
+          <h2 class="fd-h" style="margin-top:var(--sc-3)"
+              data-en="Edit the rate once. Forty channels agree."
+              data-ar="عدّل السعر مرة واحدة. أربعون قناة تتفق.">Edit the rate once. Forty channels agree.</h2>
+          <p class="fd-p" style="margin-top:var(--sc-4)"
+             data-en="Two-way sync with Booking.com, Airbnb, Expedia, Agoda and more. One change in Fandaqah updates everywhere in seconds, so the double-booking that ruins an arrival never gets created."
+             data-ar="مزامنة ثنائية الاتجاه مع Booking.com وAirbnb وExpedia وAgoda وغيرها. تغيير واحد في فندقة يُحدّث كل القنوات خلال ثوانٍ، فلا يحدث الحجز المزدوج الذي يفسد الوصول أصلًا.">Two-way sync with Booking.com, Airbnb, Expedia, Agoda and more. One change in Fandaqah updates everywhere in seconds, so the double-booking that ruins an arrival never gets created.</p>
+
+          <div class="fd-field" style="margin-top:var(--sc-5);max-width:16rem">
+            <label for="rateInput" data-en="Deluxe · tonight" data-ar="ديلوكس · الليلة">Deluxe · tonight</label>
+            <input id="rateInput" type="number" min="200" max="2000" step="10" value="780" inputmode="numeric">
+          </div>
+          <p class="fd-note" data-en="Change it. The channels below re-acknowledge." data-ar="غيّره. ستعيد القنوات أدناه التأكيد.">Change it. The channels below re-acknowledge.</p>
+        </div>
+
+        <figure style="margin:0" data-sc-reveal="left" data-sc-reveal-at="0.12 0.5">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h2 class="fd-panel__t" data-en="Channel acknowledgements" data-ar="تأكيدات القنوات">Channel acknowledgements</h2>
+              <span class="fd-panel__meta fd-num" id="chanMeta">0 / 12</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-chan" id="chan"></div>
+              <p class="fd-note" style="margin-top:var(--sc-4)">
+                <span class="fd-sample" data-en="12 of 40+ shown" data-ar="١٢ من أكثر من ٤٠">12 of 40+ shown</span>
+              </p>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 4 · CONSOLES · pan ============ -->
+  <section id="consoles" data-sc-act="pan" data-sc-span="4.2">
+    <div data-sc-stage>
+      <div class="fd-railpan" data-sc-pan="0.05">
+
+        <div class="fd-railpan__lead">
+          <p class="fd-eyebrow" data-en="The consoles" data-ar="اللوحات">The consoles</p>
+          <h2 class="fd-h" data-en="Four surfaces. One source of truth."
+              data-ar="أربع لوحات. مصدر واحد للحقيقة.">Four surfaces. One source of truth.</h2>
+          <p class="fd-p" data-en="Each one is reading the same clock you are. Keep scrolling sideways."
+             data-ar="كل لوحة تقرأ الساعة نفسها التي تقرأها أنت. واصل التمرير أفقيًا.">Each one is reading the same clock you are. Keep scrolling sideways.</p>
+        </div>
+
+        <div class="fd-console" data-sc-tilt="5">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Front desk" data-ar="الاستقبال">Front desk</h3>
+              <span class="fd-panel__meta fd-num" id="c1Meta">—</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-rows" id="c1"></div>
+              <p class="fd-note" style="margin-top:var(--sc-3)" data-en="Arrivals, departures and walk-ins, handled in seconds."
+                 data-ar="الوصول والمغادرة والنزلاء بلا حجز، في ثوانٍ.">Arrivals, departures and walk-ins, handled in seconds.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fd-console" data-sc-tilt="5">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Housekeeping" data-ar="التدبير الفندقي">Housekeeping</h3>
+              <span class="fd-panel__meta fd-num" id="c2Meta">—</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-rows" id="c2"></div>
+              <p class="fd-note" style="margin-top:var(--sc-3)" data-en="Turnovers generate themselves from checkouts. Attendants update from any phone."
+                 data-ar="مهام التنظيف تتولد تلقائيًا من المغادرات. يحدّثها الموظفون من أي هاتف.">Turnovers generate themselves from checkouts. Attendants update from any phone.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fd-console" data-sc-tilt="5">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Revenue" data-ar="الإيرادات">Revenue</h3>
+              <span class="fd-panel__meta fd-num" id="c3Meta">—</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-figs" style="gap:var(--sc-5)">
+                <div>
+                  <p class="fd-fig__v"><span class="fd-fig__u">SAR</span> <span class="fd-num" id="c3Adr">0</span></p>
+                  <p class="fd-fig__k" data-en="ADR" data-ar="متوسط سعر الغرفة">ADR</p>
+                </div>
+                <div>
+                  <p class="fd-fig__v"><span class="fd-fig__u">SAR</span> <span class="fd-num" id="c3Rev">0</span></p>
+                  <p class="fd-fig__k" data-en="RevPAR" data-ar="إيراد الغرفة المتاحة">RevPAR</p>
+                </div>
+              </div>
+              <div class="fd-rows" id="c3" style="margin-top:var(--sc-4)"></div>
+              <p class="fd-note" style="margin-top:var(--sc-3)" data-en="Demand-based suggestions, pickup and forecast in one view."
+                 data-ar="اقتراحات مبنية على الطلب، والحجوزات الجديدة والتوقعات في شاشة واحدة.">Demand-based suggestions, pickup and forecast in one view.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fd-console" data-sc-tilt="5">
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Guest app" data-ar="تطبيق الضيف">Guest app</h3>
+              <span class="fd-panel__meta fd-num" id="c4Meta">—</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-rows" id="c4"></div>
+              <p class="fd-note" style="margin-top:var(--sc-3)" data-en="Branded online check-in, digital keys and a WhatsApp thread on every reservation. In Arabic and English."
+                 data-ar="تسجيل وصول إلكتروني بهوية الفندق، ومفاتيح رقمية، ومحادثة واتساب مع كل حجز. بالعربية والإنجليزية.">Branded online check-in, digital keys and a WhatsApp thread on every reservation. In Arabic and English.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fd-railpan__end">
+          <h3 class="fd-h" data-en="No module is sold separately."
+              data-ar="لا تُباع أي وحدة على حدة.">No module is sold separately.</h3>
+          <p class="fd-p" data-en="One login, unlimited users, every console above. The plan is chosen by how many rooms you run, not by which screens you are allowed to open."
+             data-ar="تسجيل دخول واحد، مستخدمون بلا حد، وكل اللوحات أعلاه. تُختار الباقة حسب عدد الغرف، لا حسب الشاشات المسموح لك بفتحها.">One login, unlimited users, every console above. The plan is chosen by how many rooms you run, not by which screens you are allowed to open.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 5 · RANGE · flow (the quiet before the peak) ============ -->
+  <section id="range" class="fd-sec">
+    <div class="fd-wrap">
+      <div data-sc-in data-sc-stagger="60" style="margin-bottom:var(--sc-6)">
+        <p class="fd-eyebrow" data-en="Same board, your shape" data-ar="اللوحة نفسها، بشكلك">Same board, your shape</p>
+        <h2 class="fd-h" style="margin-top:var(--sc-3)"
+            data-en="Switch the property type. The surface follows."
+            data-ar="غيّر نوع العقار. تتبعه اللوحة.">Switch the property type. The surface follows.</h2>
+      </div>
+
+      <div class="fd-range">
+        <button class="fd-mode" type="button" data-mode="hotel" aria-pressed="true">
+          <span class="fd-mode__k" data-en="Hotels and resorts" data-ar="فنادق ومنتجعات">Hotels and resorts</span>
+          <span class="fd-mode__t" data-en="Front desks that fly" data-ar="استقبال بلا اختناق">Front desks that fly</span>
+          <span class="fd-mode__d" data-en="High-volume arrivals, groups and events. Handled without the chaos."
+                data-ar="وصول كثيف ومجموعات وفعاليات. بلا فوضى.">High-volume arrivals, groups and events. Handled without the chaos.</span>
+          <ul class="fd-mode__f">
+            <li data-en="Group blocks and allotments" data-ar="حجوزات المجموعات والحصص">Group blocks and allotments</li>
+            <li data-en="Multi-shift front-desk roles" data-ar="صلاحيات الاستقبال متعددة الورديات">Multi-shift front-desk roles</li>
+            <li data-en="Night audit in one click" data-ar="تدقيق ليلي بنقرة واحدة">Night audit in one click</li>
+          </ul>
+        </button>
+
+        <button class="fd-mode" type="button" data-mode="apartments" aria-pressed="false">
+          <span class="fd-mode__k" data-en="Serviced apartments" data-ar="شقق مفروشة">Serviced apartments</span>
+          <span class="fd-mode__t" data-en="Long stays, zero admin" data-ar="إقامات طويلة بلا أعمال إدارية">Long stays, zero admin</span>
+          <span class="fd-mode__d" data-en="Monthly billing, owner splits and self check-in for every unit."
+                data-ar="فوترة شهرية، وتوزيع حصص الملاك، وتسجيل وصول ذاتي لكل وحدة.">Monthly billing, owner splits and self check-in for every unit.</span>
+        </button>
+
+        <button class="fd-mode" type="button" data-mode="chalets" aria-pressed="false">
+          <span class="fd-mode__k" data-en="Chalets and rentals" data-ar="شاليهات وإيجارات">Chalets and rentals</span>
+          <span class="fd-mode__t" data-en="Host from your phone" data-ar="أدر من هاتفك">Host from your phone</span>
+          <span class="fd-mode__d" data-en="Seasonal peaks, remote turnovers and happy guests."
+                data-ar="مواسم الذروة، وتجهيز عن بُعد، وضيوف سعداء.">Seasonal peaks, remote turnovers and happy guests.</span>
+        </button>
+      </div>
+
+      <p class="fd-note" style="margin-top:var(--sc-5);max-width:56ch"
+         data-en="Choosing a type renames the units, resizes the board and re-labels every console on this page, including the ones you already scrolled past."
+         data-ar="اختيار النوع يعيد تسمية الوحدات، ويغيّر حجم اللوحة، ويعيد تسمية كل لوحة في هذه الصفحة، بما فيها التي مررت عليها بالفعل.">Choosing a type renames the units, resizes the board and re-labels every console on this page, including the ones you already scrolled past.</p>
+    </div>
+  </section>
+
+  <!-- ============ ACT 6 · NIGHT AUDIT 03:00 · pin · THE PEAK ============ -->
+  <section id="audit" data-sc-act="pin" data-sc-span="4.4">
+    <div data-sc-stage class="fd-stage">
+      <div class="fd-wrap">
+
+        <div class="fd-grid fd-grid--2" data-sc-cue="0 1 0 0">
+          <div>
+            <p class="fd-eyebrow" id="auditEyebrow" data-en="03:00 · night audit" data-ar="٠٣:٠٠ · تدقيق الليل">03:00 · night audit</p>
+            <h2 class="fd-h fd-h--lg" style="margin-top:var(--sc-3)"
+                data-en="The day closes itself."
+                data-ar="اليوم يُغلق نفسه.">The day closes itself.</h2>
+            <p class="fd-p" style="margin-top:var(--sc-4)"
+               data-en="Room charges post. Taxes calculate. The city ledger balances. Tomorrow's arrivals move into place. On most systems this is a person at a desk at three in the morning with a printout. Here it is a ledger that fills while you watch, and a date that rolls over."
+               data-ar="تُرحّل رسوم الغرف. تُحتسب الضرائب. يتوازن دفتر الذمم. وتنتقل وصولات الغد إلى مكانها. في معظم الأنظمة هذا موظف أمام مكتب في الثالثة فجرًا ومعه مطبوعة. هنا هو دفتر يمتلئ أمام عينيك، وتاريخ ينقلب إلى الغد.">Room charges post. Taxes calculate. The city ledger balances. Tomorrow's arrivals move into place. On most systems this is a person at a desk at three in the morning with a printout. Here it is a ledger that fills while you watch, and a date that rolls over.</p>
+            <p class="fd-note" style="margin-top:var(--sc-5)">
+              <span class="fd-sample" data-en="Sample data" data-ar="بيانات تجريبية">Sample data</span>
+            </p>
+          </div>
+
+          <div class="fd-panel">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Night audit · closing" data-ar="تدقيق الليل · الإغلاق">Night audit · closing</h3>
+              <span class="fd-panel__meta fd-num" id="auditMeta">—</span>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-ledger" id="ledger"></div>
+              <div style="margin-top:var(--sc-5);display:flex;align-items:center;gap:var(--sc-4);flex-wrap:wrap">
+                <span class="fd-seal" id="auditSeal">
+                  <span data-en="Business date rolled" data-ar="تم ترحيل تاريخ التشغيل">Business date rolled</span>
+                </span>
+                <span class="fd-note fd-num" id="auditDate"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 7 · FIRST RUN · flow · the close is an input ============ -->
+  <section id="firstrun" class="fd-sec">
+    <div class="fd-wrap">
+      <div data-sc-in data-sc-stagger="70" style="margin-bottom:var(--sc-6)">
+        <p class="fd-eyebrow" data-en="Set up · step 01 of 04" data-ar="الإعداد · الخطوة ٠١ من ٠٤">Set up · step 01 of 04</p>
+        <h2 class="fd-h fd-h--lg" style="margin-top:var(--sc-3)"
+            data-en="Now put your own property in."
+            data-ar="الآن أدخل عقارك أنت.">Now put your own property in.</h2>
+        <p class="fd-p" style="margin-top:var(--sc-4)"
+           data-en="You have just watched a day run on a sample property. Type your own name in the field and this page's board, clock and consoles will run under it instead."
+           data-ar="لقد شاهدت للتو يومًا كاملًا على عقار تجريبي. اكتب اسم عقارك في الحقل، وستعمل لوحة هذه الصفحة وساعتها ولوحاتها باسمه.">You have just watched a day run on a sample property. Type your own name in the field and this page's board, clock and consoles will run under it instead.</p>
+      </div>
+
+      <div class="fd-run">
+        <form class="fd-panel" id="runForm" novalidate>
+          <div class="fd-panel__head">
+            <h3 class="fd-panel__t" data-en="New property" data-ar="عقار جديد">New property</h3>
+            <span class="fd-panel__meta"><span class="fd-caret" aria-hidden="true"></span></span>
+          </div>
+          <div class="fd-panel__body">
+            <div class="fd-field">
+              <label for="runName" data-en="Property name" data-ar="اسم العقار">Property name</label>
+              <input id="runName" name="name" type="text" autocomplete="organization"
+                     placeholder="Coral Bay Hotel" data-ph-en="Coral Bay Hotel" data-ph-ar="فندق خليج المرجان">
+            </div>
+            <div class="fd-field">
+              <label for="runType" data-en="Property type" data-ar="نوع العقار">Property type</label>
+              <select id="runType" name="type">
+                <option value="hotel"      data-en="Hotel or resort"    data-ar="فندق أو منتجع">Hotel or resort</option>
+                <option value="apartments" data-en="Serviced apartments" data-ar="شقق مفروشة">Serviced apartments</option>
+                <option value="chalets"    data-en="Chalet or rental"   data-ar="شاليه أو إيجار">Chalet or rental</option>
+              </select>
+            </div>
+            <div class="fd-field">
+              <label for="runUnits" data-en="Rooms or units" data-ar="عدد الغرف أو الوحدات">Rooms or units</label>
+              <input id="runUnits" name="units" type="number" min="1" max="400" value="24" inputmode="numeric">
+            </div>
+            <div class="fd-field">
+              <label for="runEmail" data-en="Work email" data-ar="البريد المهني">Work email</label>
+              <input id="runEmail" name="email" type="email" autocomplete="email" placeholder="you@property.com">
+            </div>
+            <button class="fd-btn fd-btn--primary" type="submit" style="width:100%"
+                    data-en="Book a demo" data-ar="احجز عرضًا">Book a demo</button>
+            <p class="fd-note" style="margin-top:var(--sc-3)" id="runMsg" role="status"
+               data-en="Free, 20 minutes, Arabic or English. Nothing is sent from this page."
+               data-ar="مجانًا، ٢٠ دقيقة، بالعربية أو الإنجليزية. لا يتم إرسال أي شيء من هذه الصفحة.">Free, 20 minutes, Arabic or English. Nothing is sent from this page.</p>
+          </div>
+        </form>
+
+        <div>
+          <ol class="fd-steps">
+            <li><span><b data-en="Connect" data-ar="اربط">Connect</b><span data-en="Link your channels and payment gateway in a guided 30-minute call." data-ar="اربط قنوات البيع وبوابة الدفع في مكالمة موجّهة مدتها ٣٠ دقيقة.">Link your channels and payment gateway in a guided 30-minute call.</span></span></li>
+            <li><span><b data-en="Import" data-ar="استورد">Import</b><span data-en="We migrate your rooms, rates and future reservations. Free." data-ar="ننقل غرفك وأسعارك وحجوزاتك المستقبلية. مجانًا.">We migrate your rooms, rates and future reservations. Free.</span></span></li>
+            <li><span><b data-en="Go live" data-ar="انطلق">Go live</b><span data-en="Your team trains in one afternoon. Guests notice from day one." data-ar="يتدرب فريقك في فترة بعد ظهر واحدة. ويلاحظ الضيوف الفرق من اليوم الأول.">Your team trains in one afternoon. Guests notice from day one.</span></span></li>
+            <li><span><b data-en="Grow" data-ar="انمُ">Grow</b><span data-en="Smart pricing and direct bookings start compounding revenue." data-ar="التسعير الذكي والحجوزات المباشرة تبدأ في مضاعفة الإيراد.">Smart pricing and direct bookings start compounding revenue.</span></span></li>
+          </ol>
+
+          <div class="fd-panel" style="margin-top:var(--sc-5)">
+            <div class="fd-panel__head">
+              <h3 class="fd-panel__t" data-en="Included on every plan" data-ar="متضمَّن في كل الباقات">Included on every plan</h3>
+            </div>
+            <div class="fd-panel__body">
+              <div class="fd-rows">
+                <div class="fd-row"><span class="fd-row__h">—</span><span class="fd-row__b" data-en="Free onboarding and data migration" data-ar="إعداد ونقل بيانات مجاني">Free onboarding and data migration</span><span class="fd-row__tag" data-k="ok" data-en="Free" data-ar="مجاني">Free</span></div>
+                <div class="fd-row"><span class="fd-row__h">—</span><span class="fd-row__b" data-en="Unlimited users and shifts" data-ar="مستخدمون وورديات بلا حد">Unlimited users and shifts</span><span class="fd-row__tag" data-k="ok">∞</span></div>
+                <div class="fd-row"><span class="fd-row__h">—</span><span class="fd-row__b" data-en="Full Arabic and English, true RTL" data-ar="عربي وإنجليزي كامل، واتجاه صحيح من اليمين">Full Arabic and English, true RTL</span><span class="fd-row__tag" data-k="ok">AR / EN</span></div>
+                <div class="fd-row"><span class="fd-row__h">—</span><span class="fd-row__b" data-en="Mada, Visa, Mastercard, Apple Pay" data-ar="مدى، فيزا، ماستركارد، آبل باي">Mada, Visa, Mastercard, Apple Pay</span><span class="fd-row__tag" data-en="Built in" data-ar="مدمج">Built in</span></div>
+                <div class="fd-row"><span class="fd-row__h">—</span><span class="fd-row__b" data-en="One-click export to CSV or Excel" data-ar="تصدير بنقرة إلى CSV أو Excel">One-click export to CSV or Excel</span><span class="fd-row__tag" data-en="Yours" data-ar="ملكك">Yours</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="fd-foot">
+        <img id="fdLogoFoot" src="assets/fandaqah-dark.png" alt="Fandaqah">
+        <span data-en="Hospitality, beautifully managed. Riyadh · Dubai · Cairo"
+              data-ar="ضيافة تُدار بإتقان. الرياض · دبي · القاهرة">Hospitality, beautifully managed. Riyadh · Dubai · Cairo</span>
+        <span class="fd-foot__links">
+          <a href="mailto:hello@fandaqah.com">hello@fandaqah.com</a>
+          <a href="tel:+966112345678" dir="ltr">+966 11 234 5678</a>
+          <a href="#top" data-en="Back to top" data-ar="إلى الأعلى">Back to top</a>
+        </span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ THE DAY DIAL ============ -->
+<div class="fd-dial" id="dial" data-held="0">
+  <div class="fd-dial__clock">
+    <span class="fd-dial__time fd-num" id="dialTime">06:40</span>
+    <span class="fd-dial__phase" id="dialPhase">Early</span>
+  </div>
+
+  <div class="fd-dial__track" id="dialTrack" role="slider"
+       tabindex="0" aria-valuemin="6" aria-valuemax="27" aria-valuenow="6.66"
+       aria-label="Time of day. Drag to run the property's day by hand.">
+    <span class="fd-dial__line" aria-hidden="true"></span>
+    <span class="fd-dial__fill" id="dialFill" aria-hidden="true"></span>
+    <span class="fd-dial__head" id="dialHead" aria-hidden="true"></span>
+  </div>
+
+  <p class="fd-dial__hint" id="dialHint"
+     data-en="Scroll runs the clock. Or grab it and run the day yourself."
+     data-ar="التمرير يحرّك الساعة. أو أمسكها وشغّل اليوم بنفسك.">Scroll runs the clock. Or grab it and run the day yourself.</p>
+</div>
+
+<p class="fd-sr" id="live" aria-live="polite"></p>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* ============================================================
+   1 · THE DAY
+   The property's operating day runs 06:00 to 03:00 the next
+   morning: 21 hours. `state.hour` is the single input to
+   everything below.
+   ============================================================ */
+
+var H0 = 6, H1 = 27;                 // 27 === 03:00 next day
+var state = { hour: 6.66, lang: "en", mode: "hotel", rate: 780, held: false };
+
+var MODES = {
+  hotel:      { units: 24, unitWord: { en: "rooms", ar: "غرفة" }, name: { en: "Coral Bay Hotel",   ar: "فندق خليج المرجان" }, prefix: ["1","2","3"], adr: 412 },
+  apartments: { units: 18, unitWord: { en: "units", ar: "وحدة" }, name: { en: "Olaya Residences",  ar: "أولايا ريزيدنسز" },  prefix: ["A","B","C"], adr: 268 },
+  chalets:    { units: 9,  unitWord: { en: "chalets", ar: "شاليه" }, name: { en: "Sahab Chalets",  ar: "شاليهات سحاب" },    prefix: ["V"],         adr: 690 }
+};
+
+/* Reservations for the sample day. Each one is a real record:
+   arrival hour, departure hour, channel, rate. Occupancy, the
+   board, the log, the folio and the audit are all DERIVED from
+   this array — none of them are written by hand. */
+var GUESTS = [
+  ["Sara A.",    "سارة ع.",   13.5, 31, "Direct",      1240],
+  ["Omar H.",    "عمر ح.",    15.2, 26, "Booking.com",  780],
+  ["Layla R.",   "ليلى ر.",   16.0, 33, "Direct",      1400],
+  ["Khalid M.",  "خالد م.",    9.4, 24, "Expedia",      640],
+  ["Noura S.",   "نورة س.",   14.1, 30, "Agoda",        720],
+  ["Yousef B.",  "يوسف ب.",   17.6, 28, "Airbnb",       880],
+  ["Hessa K.",   "حصة ك.",     8.0, 22, "Direct",       950],
+  ["Tariq N.",   "طارق ن.",   14.8, 27, "Booking.com",  810],
+  ["Mona F.",    "منى ف.",    19.2, 32, "Direct",       760],
+  ["Faisal D.",  "فيصل د.",   12.2, 25, "Trip.com",     690],
+  ["Reem Q.",    "ريم ق.",    21.0, 34, "Direct",      1100],
+  ["Bader W.",   "بدر و.",    18.4, 29, "Expedia",      700]
+];
+
+/* Guests already in-house when the day starts (arrived yesterday). */
+var RESIDENT = 9;
+
+function seeded(i) { var x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); }
+
+function units()    { return MODES[state.mode].units; }
+function unitWord() { return MODES[state.mode].unitWord[state.lang]; }
+
+function roomIds() {
+  var m = MODES[state.mode], out = [], n = m.units, p = m.prefix, per = Math.ceil(n / p.length), i, f;
+  for (i = 0; i < n; i++) {
+    f = p[Math.floor(i / per)] || p[p.length - 1];
+    out.push(/^[0-9]$/.test(f) ? (f + String(i % per + 1).padStart(2, "0")) : (f + String(i % per + 1)));
+  }
+  return out;
+}
+
+/* --- derived state, all from state.hour --- */
+
+function arrivalsBy(h)   { var n = 0, i; for (i = 0; i < GUESTS.length; i++) if (GUESTS[i][2] <= h) n++; return n; }
+function arrivalsLeft(h) { return Math.max(0, activeGuests().length - arrivalsBy(h)); }
+function activeGuests()  { return GUESTS.slice(0, Math.max(3, Math.min(GUESTS.length, Math.round(units() * 0.5)))); }
+
+function departuresBy(h) {
+  // Yesterday's guests leave between 07:00 and 12:00.
+  var total = Math.round(RESIDENT * units() / 24), i, n = 0;
+  for (i = 0; i < total; i++) { if (7 + seeded(i + 40) * 5 <= h) n++; }
+  return n;
+}
+function departuresTotal() { return Math.round(RESIDENT * units() / 24); }
+
+function inHouse(h) {
+  var start = Math.round(units() * 0.61);
+  return Math.max(0, Math.min(units(), start - departuresBy(h) + arrivalsBy(h)));
+}
+function occPct(h) { return Math.round(inHouse(h) / units() * 100); }
+
+function postedBy(h) {
+  // Room revenue posts at each arrival; F&B and extras post through the evening.
+  var g = activeGuests(), sum = 0, i;
+  for (i = 0; i < g.length; i++) if (g[i][2] <= h) sum += g[i][5];
+  for (i = 0; i < 14; i++) { var t = 12 + seeded(i + 7) * 11; if (t <= h) sum += Math.round(60 + seeded(i + 21) * 260); }
+  return sum;
+}
+
+function phaseOf(h) {
+  if (h < 9)  return { en: "Early",       ar: "الفجر" };
+  if (h < 12) return { en: "Departures",  ar: "المغادرات" };
+  if (h < 15) return { en: "Changeover",  ar: "التبديل" };
+  if (h < 19) return { en: "Arrivals",    ar: "الوصول" };
+  if (h < 23) return { en: "Evening",     ar: "المساء" };
+  if (h < 26) return { en: "Overnight",   ar: "الليل" };
+  return { en: "Night audit", ar: "تدقيق الليل" };
+}
+
+function fmtHour(h) {
+  var hh = Math.floor(h) % 24, mm = Math.floor((h - Math.floor(h)) * 60);
+  return String(hh).padStart(2, "0") + ":" + String(mm).padStart(2, "0");
+}
+function fmtNum(n) { return Math.round(n).toLocaleString(state.lang === "ar" ? "en-US" : "en-US"); }
+
+/* ============================================================
+   2 · THE GROUND
+   Dawn to night, interpolated from the same hour. The page is
+   dark at the night audit because it is 3am, not because act
+   six is a dark section.
+   ============================================================ */
+
+/* Two families, never interpolated across. A ground cannot travel from
+   light to dark by interpolation without passing through a mid-tone where
+   neither dark nor light ink clears 4.5:1 — measured at 2.08:1 before this
+   was split. So nightfall is a hard cut at 21:00: canvas, ink and accent
+   all switch in the same frame, and each family interpolates only inside
+   itself. taste.md licenses the two-stop accent for exactly this page. */
+var NIGHTFALL = 21;
+
+var DAY = [
+  [6,  { canvas: "#EFE3D6", surface: "#FFFBF6", ink: "#2A273C", inkSoft: "#6E687F", accent: "#C7433D", accentInk: "#FFFFFF" }],
+  [9,  { canvas: "#F6F1EA", surface: "#FFFFFF", ink: "#2A273C", inkSoft: "#655F73", accent: "#C7433D", accentInk: "#FFFFFF" }],
+  [17, { canvas: "#F3ECE3", surface: "#FFFCF8", ink: "#2A273C", inkSoft: "#655F73", accent: "#C7433D", accentInk: "#FFFFFF" }],
+  [21, { canvas: "#E4D3C6", surface: "#F8EFE7", ink: "#2A273C", inkSoft: "#5C566B", accent: "#B93B36", accentInk: "#FFFFFF" }]
+];
+
+var NIGHT = [
+  [21, { canvas: "#2E2A41", surface: "#3A3550", ink: "#F7F2EC", inkSoft: "#B8B0C7", accent: "#FF8C84", accentInk: "#241F30" }],
+  [24, { canvas: "#231F35", surface: "#2F2A45", ink: "#F9F5F0", inkSoft: "#B1A9C0", accent: "#FF9189", accentInk: "#201B2E" }],
+  [27, { canvas: "#17152A", surface: "#221F36", ink: "#FBF7F2", inkSoft: "#ADA5BE", accent: "#FF9D95", accentInk: "#17152A" }]
+];
+
+function hex2rgb(h) { return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]; }
+function rgb2hex(c) { return "#" + c.map(function (v) { return Math.round(v).toString(16).padStart(2,"0"); }).join(""); }
+function mix(a, b, t) { var A = hex2rgb(a), B = hex2rgb(b); return rgb2hex([0,1,2].map(function (i) { return A[i] + (B[i]-A[i]) * t; })); }
+
+function groundAt(h) {
+  var STOPS = h < NIGHTFALL ? DAY : NIGHT;
+  var i, a, b, t;
+  for (i = 0; i < STOPS.length - 1; i++) {
+    if (h <= STOPS[i+1][0]) {
+      a = STOPS[i]; b = STOPS[i+1];
+      t = (h - a[0]) / (b[0] - a[0]);
+      t = t * t * (3 - 2 * t);
+      return {
+        canvas:    mix(a[1].canvas,    b[1].canvas,    t),
+        surface:   mix(a[1].surface,   b[1].surface,   t),
+        ink:       mix(a[1].ink,       b[1].ink,       t),
+        inkSoft:   mix(a[1].inkSoft,   b[1].inkSoft,   t),
+        accent:    mix(a[1].accent,    b[1].accent,    t),
+        accentInk: mix(a[1].accentInk, b[1].accentInk, t)
+      };
+    }
+  }
+  return STOPS[STOPS.length - 1][1];
+}
+
+var isDark = false;
+
+function paintGround(h) {
+  var g = groundAt(h), r = document.documentElement.style;
+  r.setProperty("--sc-canvas", g.canvas);
+  r.setProperty("--sc-surface", g.surface);
+  r.setProperty("--sc-ink", g.ink);
+  r.setProperty("--sc-ink-soft", g.inkSoft);
+  r.setProperty("--sc-accent", g.accent);
+  r.setProperty("--sc-accent-ink", g.accentInk);
+  // `color` resolves as a computed value, so restate it whenever the ink moves.
+  document.body.style.color = g.ink;
+
+  var dark = h >= NIGHTFALL;
+  if (dark !== isDark) {
+    isDark = dark;
+    var src = dark ? "assets/fandaqah-light.png" : "assets/fandaqah-dark.png";
+    document.getElementById("fdLogo").src = src;
+    document.getElementById("fdLogoFoot").src = src;
+    document.documentElement.style.setProperty("--sc-shadow-color", dark ? "255 30% 4%" : "255 22% 18%");
+  }
+}
+
+/* ============================================================
+   3 · PANELS
+   Each renders from the hour. Nothing here is a static picture.
+   ============================================================ */
+
+var $ = function (id) { return document.getElementById(id); };
+var boardCells = [];
+
+function buildBoard() {
+  var ids = roomIds(), html = "", i;
+  for (i = 0; i < ids.length; i++) {
+    html += '<div class="fd-room" data-s="ready"><span class="fd-room__n">' + ids[i] +
+            '</span><span class="fd-room__s"></span></div>';
+  }
+  $("board").innerHTML = html;
+  boardCells = Array.prototype.slice.call($("board").children);
+  $("boardMeta").textContent = units() + " " + unitWord();
+}
+
+var ST = {
+  occupied: { en: "Occ",   ar: "مشغولة" },
+  arriving: { en: "Arr",   ar: "وصول" },
+  cleaning: { en: "Clean", ar: "تنظيف" },
+  ready:    { en: "Ready", ar: "جاهزة" }
+};
+
+function renderBoard(h) {
+  var n = boardCells.length, occ = inHouse(h), arr = 0, clean = 0, i, s;
+  // arriving = rooms whose guest lands within the next 90 minutes
+  var g = activeGuests();
+  for (i = 0; i < g.length; i++) if (g[i][2] > h && g[i][2] < h + 1.5) arr++;
+  // cleaning = departed rooms not yet turned over (a turnover takes ~2h)
+  for (i = 0; i < departuresTotal(); i++) {
+    var d = 7 + seeded(i + 40) * 5;
+    if (d <= h && h < d + 2) clean++;
+  }
+  for (i = 0; i < n; i++) {
+    if (i < occ) s = "occupied";
+    else if (i < occ + arr) s = "arriving";
+    else if (i < occ + arr + clean) s = "cleaning";
+    else s = "ready";
+    if (boardCells[i].dataset.s !== s) {
+      boardCells[i].dataset.s = s;
+      boardCells[i].lastChild.textContent = ST[s][state.lang];
+    }
+  }
+  $("boardA11y").textContent = occ + " of " + n + " occupied, " + arr + " arriving, " + clean + " in cleaning.";
+}
+
+function renderNow(h) {
+  $("nowClock").textContent  = fmtHour(h);
+  $("figOcc").textContent    = occPct(h);
+  $("figArr").textContent    = arrivalsLeft(h);
+  $("figDep").textContent    = Math.max(0, departuresTotal() - departuresBy(h));
+  $("figRev").textContent    = fmtNum(postedBy(h));
+  $("sbInhouse").textContent = inHouse(h);
+  $("sbOcc").textContent     = occPct(h) + "%";
+  $("sbArr").textContent     = arrivalsLeft(h);
+}
+
+/* --- event log --- */
+function events() {
+  var out = [], g = activeGuests(), i, ids = roomIds();
+  for (i = 0; i < g.length; i++) {
+    out.push({ h: g[i][2] - 0.6, k: "in",
+      en: "<b>" + g[i][4] + "</b> confirmed " + ids[i % ids.length] + " · SAR " + fmtNum(g[i][5]),
+      ar: "<b>" + g[i][4] + "</b> أكّدت " + ids[i % ids.length] + " · " + fmtNum(g[i][5]) + " ريال",
+      tag: { en: "Booking", ar: "حجز" } });
+    out.push({ h: g[i][2], k: "ok",
+      en: "<b>" + g[i][0] + "</b> checked in · " + ids[i % ids.length],
+      ar: "<b>" + g[i][1] + "</b> سجّل الوصول · " + ids[i % ids.length],
+      tag: { en: "Check-in", ar: "وصول" } });
+  }
+  for (i = 0; i < departuresTotal(); i++) {
+    out.push({ h: 7 + seeded(i + 40) * 5, k: "",
+      en: "Checkout " + ids[i % ids.length] + " · folio settled",
+      ar: "مغادرة " + ids[i % ids.length] + " · تمت التسوية",
+      tag: { en: "Checkout", ar: "مغادرة" } });
+  }
+  out.push({ h: 14.05, k: "warn", en: "Walk-in · no <b>Deluxe</b> left, upsell offered", ar: "نزيل بلا حجز · لا توجد <b>ديلوكس</b>، عُرضت ترقية", tag: { en: "Walk-in", ar: "بلا حجز" } });
+  out.push({ h: 14.4,  k: "ok",   en: "Rate pushed to <b>40 channels</b>", ar: "تم دفع السعر إلى <b>٤٠ قناة</b>", tag: { en: "Sync", ar: "مزامنة" } });
+  out.push({ h: 20.1,  k: "ok",   en: "Digital key issued · <b>WhatsApp</b>", ar: "تم إصدار مفتاح رقمي · <b>واتساب</b>", tag: { en: "Guest", ar: "ضيف" } });
+  out.push({ h: 26.0,  k: "",     en: "Night audit started", ar: "بدأ تدقيق الليل", tag: { en: "Audit", ar: "تدقيق" } });
+  return out.sort(function (a, b) { return a.h - b.h; });
+}
+
+var EV = [];
+function renderLog(h) {
+  var shown = EV.filter(function (e) { return e.h <= h; }).slice(-9).reverse(), html = "", i, e;
+  for (i = 0; i < shown.length; i++) {
+    e = shown[i];
+    html += '<div class="fd-row"><span class="fd-row__h">' + fmtHour(e.h) + '</span>' +
+            '<span class="fd-row__b">' + e[state.lang] + '</span>' +
+            '<span class="fd-row__tag" data-k="' + e.k + '">' + e.tag[state.lang] + '</span></div>';
+  }
+  $("log").innerHTML = html;
+  $("logEmpty").style.display = shown.length ? "none" : "block";
+  var total = EV.filter(function (e) { return e.h <= h; }).length;
+  $("logMeta").textContent = total + (state.lang === "ar" ? " حدثًا" : " events");
+}
+
+/* --- channels (act 3) --- */
+var CHANNELS = ["Booking.com","Airbnb","Expedia","Agoda","Trip.com","Vrbo","Almosafer","Hotelbeds","Webbeds","Direct site","Google","Traveloka"];
+var chanEls = [];
+function buildChannels() {
+  var html = "", i;
+  for (i = 0; i < CHANNELS.length; i++) {
+    html += '<span class="fd-chan__i" data-ack="0"><span class="fd-chan__d"></span>' + CHANNELS[i] + '</span>';
+  }
+  $("chan").innerHTML = html;
+  chanEls = Array.prototype.slice.call($("chan").children);
+}
+var chanTimer = null;
+function ackChannels() {
+  if (chanTimer) { clearTimeout(chanTimer); chanTimer = null; }
+  chanEls.forEach(function (el) { el.dataset.ack = "0"; });
+  $("chanMeta").textContent = "0 / " + CHANNELS.length;
+  var i = 0;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function step() {
+    if (i >= chanEls.length) { chanTimer = null; return; }
+    chanEls[i].dataset.ack = "1";
+    i++;
+    $("chanMeta").textContent = i + " / " + CHANNELS.length;
+    chanTimer = setTimeout(step, reduce ? 0 : 70);
+  }
+  step();
+}
+
+/* --- consoles (act 4) --- */
+function renderConsoles(h) {
+  var g = activeGuests(), ids = roomIds(), i, html, n;
+
+  // 1 · front desk: next arrivals and departures
+  html = ""; n = 0;
+  for (i = 0; i < g.length && n < 5; i++) {
+    if (g[i][2] > h) {
+      html += '<div class="fd-row"><span class="fd-row__h">' + fmtHour(g[i][2]) + '</span>' +
+              '<span class="fd-row__b"><b>' + g[i][state.lang === "ar" ? 1 : 0] + '</b><br>' + ids[i % ids.length] + ' · ' + g[i][4] + '</span>' +
+              '<span class="fd-row__tag" data-k="in">' + (state.lang === "ar" ? "وصول" : "Due") + '</span></div>';
+      n++;
+    }
+  }
+  $("c1").innerHTML = html || '<p class="fd-empty">' + (state.lang === "ar" ? "لا وصول متبقٍ. اللوحة نظيفة." : "No arrivals left. The board is clean.") + '</p>';
+  $("c1Meta").textContent = arrivalsLeft(h) + (state.lang === "ar" ? " متبقٍ" : " due");
+
+  // 2 · housekeeping: open turnovers
+  html = ""; n = 0;
+  for (i = 0; i < departuresTotal(); i++) {
+    var d = 7 + seeded(i + 40) * 5;
+    if (d <= h && h < d + 2 && n < 5) {
+      html += '<div class="fd-row"><span class="fd-row__h">' + fmtHour(d) + '</span>' +
+              '<span class="fd-row__b"><b>' + ids[i % ids.length] + '</b><br>' +
+              (state.lang === "ar" ? "تنظيف مغادرة" : "Checkout clean") + '</span>' +
+              '<span class="fd-row__tag" data-k="warn">' + (state.lang === "ar" ? "مفتوح" : "Open") + '</span></div>';
+      n++;
+    }
+  }
+  $("c2").innerHTML = html || '<p class="fd-empty">' + (state.lang === "ar" ? "لا مهام مفتوحة. كل الغرف جاهزة." : "Nothing open. Every room is ready.") + '</p>';
+  $("c2Meta").textContent = n + (state.lang === "ar" ? " مهمة" : " open");
+
+  // 3 · revenue
+  var adr = MODES[state.mode].adr + Math.round((occPct(h) - 60) * 1.8);
+  $("c3Adr").textContent = fmtNum(adr);
+  $("c3Rev").textContent = fmtNum(adr * occPct(h) / 100);
+  $("c3").innerHTML =
+    '<div class="fd-row"><span class="fd-row__h">' + (state.lang === "ar" ? "اقتراح" : "Sugg") + '</span>' +
+    '<span class="fd-row__b">' + (state.lang === "ar" ? "ديلوكس · الليلة" : "Deluxe · tonight") + '</span>' +
+    '<span class="fd-row__tag" data-k="ok">SAR ' + fmtNum(state.rate * 1.14) + '</span></div>' +
+    '<div class="fd-row"><span class="fd-row__h">' + (state.lang === "ar" ? "حجوزات" : "Pickup") + '</span>' +
+    '<span class="fd-row__b">' + (state.lang === "ar" ? "آخر ٢٤ ساعة" : "Last 24h") + '</span>' +
+    '<span class="fd-row__tag" data-k="in">+' + arrivalsBy(h) + '</span></div>';
+  $("c3Meta").textContent = occPct(h) + "%";
+
+  // 4 · guest app
+  var checked = arrivalsBy(h);
+  $("c4").innerHTML =
+    '<div class="fd-row"><span class="fd-row__h">' + (state.lang === "ar" ? "إلكتروني" : "Online") + '</span>' +
+    '<span class="fd-row__b">' + (state.lang === "ar" ? "تسجيل وصول مُنجز" : "Check-ins completed") + '</span>' +
+    '<span class="fd-row__tag" data-k="ok">' + Math.round(checked * 0.72) + '</span></div>' +
+    '<div class="fd-row"><span class="fd-row__h">' + (state.lang === "ar" ? "مفاتيح" : "Keys") + '</span>' +
+    '<span class="fd-row__b">' + (state.lang === "ar" ? "مفاتيح رقمية نشطة" : "Digital keys active") + '</span>' +
+    '<span class="fd-row__tag" data-k="ok">' + inHouse(h) + '</span></div>' +
+    '<div class="fd-row"><span class="fd-row__h">' + (state.lang === "ar" ? "رسائل" : "Msgs") + '</span>' +
+    '<span class="fd-row__b">' + (state.lang === "ar" ? "محادثات واتساب مفتوحة" : "Open WhatsApp threads") + '</span>' +
+    '<span class="fd-row__tag">' + Math.max(0, Math.round(checked * 0.4)) + '</span></div>';
+  $("c4Meta").textContent = checked + (state.lang === "ar" ? " ضيف" : " guests");
+}
+
+/* --- night audit ledger (act 6 · the peak) --- */
+/* The panel is NEVER empty. A pinned stage is visible a full viewport
+   before its own progress starts, so a purely scroll-populated ledger
+   showed a blank panel through the whole entry. Each line therefore has
+   a ground: it accrues live all day, and at its audit hour it posts. */
+var LEDGER = [
+  { at: 25.80, en: "Room charges",               ar: "رسوم الغرف",               share: 0.74 },
+  { at: 25.90, en: "Food and beverage",          ar: "المأكولات والمشروبات",     share: 0.16 },
+  { at: 26.00, en: "Extras and upsells",         ar: "الإضافات والترقيات",       share: 0.10 },
+  { at: 26.08, en: "VAT 15%",                    ar: "ضريبة القيمة المضافة ١٥٪", share: 0.15 },
+  { at: 26.16, en: "Municipality fee 5%",        ar: "رسوم البلدية ٥٪",          share: 0.05 },
+  { at: 26.24, en: "City ledger settled",        ar: "تسوية دفتر الذمم",         share: 0 },
+  { at: 26.32, en: "Tomorrow's arrivals staged", ar: "تجهيز وصولات الغد",        share: 0 }
+];
+var ledEls = [];
+function buildLedger() {
+  var html = "", i;
+  for (i = 0; i < LEDGER.length; i++) {
+    html += '<div class="fd-led" data-on="1"><span class="fd-led__l"></span>' +
+            '<span class="fd-led__v fd-num"></span></div>';
+  }
+  html += '<div class="fd-led fd-led--total" data-on="1"><span class="fd-led__l"></span>' +
+          '<span class="fd-led__v fd-num"></span></div>';
+  $("ledger").innerHTML = html;
+  ledEls = Array.prototype.slice.call($("ledger").children);
+}
+function renderLedger(h) {
+  var i, r, posted, total = 0, el, v, base = postedBy(h), final = postedBy(H1);
+  for (i = 0; i < LEDGER.length; i++) {
+    r = LEDGER[i]; el = ledEls[i];
+    posted = h >= r.at;
+    el.dataset.posted = posted ? "1" : "0";
+    el.firstChild.textContent = r[state.lang];
+    v = r.share * (posted ? final : base);
+    el.lastChild.textContent = r.share
+      ? "SAR " + fmtNum(v)
+      : (posted ? (state.lang === "ar" ? "تم" : "done") : (state.lang === "ar" ? "—" : "—"));
+    total += v;
+  }
+  el = ledEls[ledEls.length - 1];
+  el.dataset.posted = h >= 26.40 ? "1" : "0";
+  el.firstChild.textContent = h >= 26.40
+    ? (state.lang === "ar" ? "إجمالي إيراد اليوم" : "Day total")
+    : (state.lang === "ar" ? "الإجمالي الجاري" : "Running total");
+  el.lastChild.textContent = "SAR " + fmtNum(total);
+  $("auditSeal").dataset.on = h >= 26.45 ? "1" : "0";
+  $("auditMeta").textContent = h >= 26
+    ? (state.lang === "ar" ? "يُرحّل · " : "posting · ") + fmtHour(h)
+    : (state.lang === "ar" ? "يتراكم · يُدقَّق ٠٢:٠٠" : "accruing · audits at 02:00");
+  $("auditDate").textContent = h >= 26.45
+    ? (state.lang === "ar" ? "تاريخ التشغيل ← الغد" : "Business date → tomorrow")
+    : "";
+}
+
+/* ============================================================
+   4 · THE DAY DIAL
+   Scroll writes the hour. So can the visitor's hand.
+   ============================================================ */
+
+var MARKS = [
+  { h: 8,    en: "Departures",  ar: "المغادرات",  to: "#wake" },
+  { h: 14,   en: "The rush",    ar: "الذروة",     to: "#rush" },
+  { h: 14.4, en: "Rate sync",   ar: "مزامنة السعر", to: "#sync" },
+  { h: 18,   en: "Consoles",    ar: "اللوحات",    to: "#consoles" },
+  { h: 21,   en: "Evening",     ar: "المساء",     to: "#range" },
+  { h: 26,   en: "Night audit", ar: "تدقيق الليل", to: "#audit" }
+];
+var markEls = [];
+
+function buildMarks() {
+  var track = $("dialTrack"), i, b, m;
+  markEls.forEach(function (e) { e.remove(); });
+  markEls = [];
+  for (i = 0; i < MARKS.length; i++) {
+    m = MARKS[i];
+    b = document.createElement("button");
+    b.type = "button";
+    b.className = "fd-mark";
+    b.dataset.passed = "0";
+    b.style.insetInlineStart = ((m.h - H0) / (H1 - H0) * 100) + "%";
+    b.innerHTML = '<span class="fd-mark__tip"></span>';
+    b.setAttribute("aria-label", m[state.lang] + " · " + fmtHour(m.h));
+    (function (to) {
+      b.addEventListener("click", function () {
+        var t = document.querySelector(to);
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    })(m.to);
+    track.appendChild(b);
+    markEls.push(b);
+  }
+  labelMarks();
+}
+function labelMarks() {
+  markEls.forEach(function (b, i) {
+    b.firstChild.textContent = MARKS[i][state.lang];
+    b.setAttribute("aria-label", MARKS[i][state.lang] + " · " + fmtHour(MARKS[i].h));
+  });
+}
+
+function renderDial(h) {
+  var pct = (h - H0) / (H1 - H0) * 100;
+  $("dialFill").style.width = pct + "%";
+  $("dialHead").style.insetInlineStart = pct + "%";
+  $("dialTime").textContent = fmtHour(h);
+  $("dialPhase").textContent = phaseOf(h)[state.lang];
+  $("dialTrack").setAttribute("aria-valuenow", h.toFixed(2));
+  $("dialTrack").setAttribute("aria-valuetext", fmtHour(h) + " · " + phaseOf(h)[state.lang]);
+  markEls.forEach(function (b, i) { b.dataset.passed = h >= MARKS[i].h ? "1" : "0"; });
+}
+
+/* --- drag / keyboard: the visitor takes the controls --- */
+function hourFromPointer(clientX) {
+  var r = $("dialTrack").getBoundingClientRect();
+  var t = (clientX - r.left) / r.width;
+  if (document.documentElement.dir === "rtl") t = 1 - t;
+  return H0 + Math.max(0, Math.min(1, t)) * (H1 - H0);
+}
+function hold(on) {
+  state.held = on;
+  $("dial").dataset.held = on ? "1" : "0";
+  $("dialHint").textContent = on
+    ? (state.lang === "ar" ? "أنت تُشغّل اليوم. أفلت للعودة إلى التمرير." : "You are running the day. Release to hand it back to scroll.")
+    : ($("dialHint").dataset[state.lang] || "");
+}
+
+var track = $("dialTrack");
+track.addEventListener("pointerdown", function (e) {
+  track.setPointerCapture(e.pointerId);
+  hold(true);
+  state.hour = hourFromPointer(e.clientX);
+  render();
+});
+track.addEventListener("pointermove", function (e) {
+  if (!state.held) return;
+  state.hour = hourFromPointer(e.clientX);
+  render();
+});
+function release(e) {
+  if (!state.held) return;
+  try { track.releasePointerCapture(e.pointerId); } catch (_) {}
+  hold(false);
+  onScroll();
+}
+track.addEventListener("pointerup", release);
+track.addEventListener("pointercancel", release);
+track.addEventListener("keydown", function (e) {
+  var step = e.shiftKey ? 1 : 0.25, moved = true;
+  if (e.key === "ArrowRight" || e.key === "ArrowUp") state.hour = Math.min(H1, state.hour + step);
+  else if (e.key === "ArrowLeft" || e.key === "ArrowDown") state.hour = Math.max(H0, state.hour - step);
+  else if (e.key === "Home") state.hour = H0;
+  else if (e.key === "End") state.hour = H1;
+  else moved = false;
+  if (moved) { e.preventDefault(); hold(true); render(); }
+});
+track.addEventListener("blur", function () { if (state.held) { hold(false); onScroll(); } });
+
+/* ============================================================
+   5 · SCROLL DRIVES THE CLOCK
+   ============================================================ */
+
+/* The clock is anchored to the ACTS, not to raw page scroll. Mapping it
+   linearly against document height put the night audit act at hour ~20,
+   so the ledger sat empty through its entire span and 03:00 arrived
+   during the signup form. Each act now owns an hour range, and the hour
+   is piecewise-linear between the anchors. */
+var ANCHORS = [
+  ["#wake",      6.0],
+  ["#rush",     13.0],
+  ["#sync",     14.4],
+  ["#consoles", 16.0],
+  ["#range",    21.8],
+  ["#audit",    25.6],
+  ["#firstrun", 27.0]
+];
+var anchorEls = null;
+
+/* offsetTop, not getBoundingClientRect: the engine transforms stages and
+   rails, and a transform moves the client rect while leaving the layout
+   box alone. Measuring rects put the acts up to 2.7 viewports away from
+   where they actually sit, so the clock stopped at 01:55 instead of
+   reaching the 03:00 audit. offsetTop ignores transforms. */
+function docTop(el) {
+  var y = 0;
+  while (el) { y += el.offsetTop; el = el.offsetParent; }
+  return y;
+}
+
+/* Measured LIVE, not cached. A cached table is written before ScrollCraft
+   expands the pinned acts to their spans, and every later invalidation
+   hook (load, fonts, ResizeObserver) still raced it — the clock reached
+   only 19:15 at the bottom of the page. Seven getBoundingClientRect calls
+   inside an already-rAF-throttled handler cost nothing, and cannot go
+   stale. */
+function measureAnchors() {
+  if (!anchorEls) {
+    anchorEls = [];
+    for (var i = 0; i < ANCHORS.length; i++) {
+      var el = document.querySelector(ANCHORS[i][0]);
+      if (el) anchorEls.push([el, ANCHORS[i][1]]);
+    }
+  }
+  var pts = [], j;
+  for (j = 0; j < anchorEls.length; j++) {
+    pts.push([docTop(anchorEls[j][0]), anchorEls[j][1]]);
+  }
+  pts.sort(function (a, b) { return a[0] - b[0]; });
+  return pts;
+}
+
+function hourAtScroll(y) {
+  var anchorPts = measureAnchors();
+  if (!anchorPts.length) return H0;
+  if (y <= anchorPts[0][0]) return anchorPts[0][1];
+  var i, a, b, t;
+  for (i = 0; i < anchorPts.length - 1; i++) {
+    a = anchorPts[i]; b = anchorPts[i + 1];
+    if (y <= b[0]) {
+      t = b[0] === a[0] ? 0 : (y - a[0]) / (b[0] - a[0]);
+      return a[1] + (b[1] - a[1]) * t;
+    }
+  }
+  // past the last anchor: hold the final hour so the close stays at 03:00
+  return anchorPts[anchorPts.length - 1][1];
+}
+
+var ticking = false;
+function onScroll() {
+  if (state.held) return;
+  state.hour = Math.max(H0, Math.min(H1, hourAtScroll(window.scrollY)));
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; render(); });
+  }
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("resize", onScroll);
+window.addEventListener("load", onScroll);
+
+/* rail current-section marker */
+var railLinks = Array.prototype.slice.call(document.querySelectorAll("#fdRail a[data-mod]"));
+var secs = railLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+function markRail() {
+  var best = 0, i, r;
+  for (i = 0; i < secs.length; i++) {
+    if (!secs[i]) continue;
+    r = secs[i].getBoundingClientRect();
+    if (r.top <= window.innerHeight * 0.45) best = i;
+  }
+  railLinks.forEach(function (a, i) { a.setAttribute("aria-current", i === best ? "true" : "false"); });
+}
+
+/* ============================================================
+   6 · RENDER
+   ============================================================ */
+
+function render() {
+  var h = state.hour;
+  paintGround(h);
+  renderBoard(h);
+  renderNow(h);
+  renderLog(h);
+  renderConsoles(h);
+  renderLedger(h);
+  renderDial(h);
+  markRail();
+}
+
+/* ============================================================
+   7 · MODE + LANGUAGE
+   ============================================================ */
+
+function setMode(mode) {
+  state.mode = mode;
+  document.querySelectorAll("[data-mode]").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.dataset.mode === mode ? "true" : "false");
+  });
+  $("fdPropName").textContent = MODES[mode].name[state.lang];
+  EV = events();
+  buildBoard();
+  render();
+  $("live").textContent = MODES[mode].name[state.lang] + " · " + units() + " " + unitWord();
+}
+document.querySelectorAll("[data-mode]").forEach(function (b) {
+  b.addEventListener("click", function () { setMode(b.dataset.mode); });
+});
+
+function applyLang(lang) {
+  state.lang = lang;
+  var html = document.documentElement;
+  html.lang = lang; html.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-en]").forEach(function (el) {
+    var v = el.getAttribute("data-" + lang);
+    if (v !== null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-ph-en]").forEach(function (el) {
+    el.placeholder = el.getAttribute("data-ph-" + lang) || el.placeholder;
+  });
+  $("langToggle").textContent = lang === "ar" ? "English" : "العربية";
+  $("fdPropName").textContent = MODES[state.mode].name[lang];
+  try { localStorage.setItem("fandaqah_lang", lang); } catch (_) {}
+  EV = events();
+  buildBoard();
+  labelMarks();
+  render();
+}
+$("langToggle").addEventListener("click", function () {
+  applyLang(document.documentElement.dir === "rtl" ? "en" : "ar");
+});
+
+/* ============================================================
+   8 · ACT 3 RATE INPUT + ACT 7 FIRST RUN
+   ============================================================ */
+
+var rateInput = $("rateInput"), rateT = null;
+rateInput.addEventListener("input", function () {
+  var v = parseInt(rateInput.value, 10);
+  if (isNaN(v)) return;
+  state.rate = v;
+  clearTimeout(rateT);
+  rateT = setTimeout(function () { ackChannels(); render(); }, 220);
+});
+
+var runForm = $("runForm");
+runForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var name  = $("runName").value.trim();
+  var email = $("runEmail").value.trim();
+  if (!name || !email) {
+    $("runMsg").textContent = state.lang === "ar"
+      ? "أدخل اسم العقار والبريد المهني."
+      : "Enter a property name and a work email.";
+    (!name ? $("runName") : $("runEmail")).focus();
+    return;
+  }
+  MODES[state.mode].name.en = name;
+  MODES[state.mode].name.ar = name;
+  $("fdPropName").textContent = name;
+  $("runMsg").textContent = state.lang === "ar"
+    ? "هذه صفحة تجريبية ولم تُرسل أي بيانات. الصفحة الآن تعمل باسم “" + name + "”. للحجز الفعلي: hello@fandaqah.com"
+    : "This is a demo page and nothing was sent. The board above is now running under “" + name + "”. To book for real: hello@fandaqah.com";
+  window.scrollTo({ top: 0, behavior: "reduce" in window ? "smooth" : "smooth" });
+});
+
+$("runType").addEventListener("change", function () { setMode($("runType").value); });
+$("runUnits").addEventListener("input", function () {
+  var v = parseInt($("runUnits").value, 10);
+  if (isNaN(v) || v < 1) return;
+  MODES[state.mode].units = Math.min(120, v);
+  buildBoard(); render();
+});
+
+/* ============================================================
+   9 · BOOT
+   ============================================================ */
+
+try {
+  var saved = localStorage.getItem("fandaqah_lang");
+  if (saved === "ar") state.lang = "ar";
+} catch (_) {}
+
+EV = events();
+buildBoard();
+buildChannels();
+buildLedger();
+buildMarks();
+$("dialHint").dataset.en = $("dialHint").getAttribute("data-en");
+$("dialHint").dataset.ar = $("dialHint").getAttribute("data-ar");
+if (state.lang === "ar") applyLang("ar"); else applyLang("en");
+setMode("hotel");
+onScroll();
+render();
+ackChannels();
+
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(onScroll);
+
+if (window.ScrollCraft && ScrollCraft.mount) ScrollCraft.mount(document.body);
+
+})();
+</script>
+</body>
+</html>

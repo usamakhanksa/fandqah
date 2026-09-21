@@ -1,0 +1,309 @@
+/* ==========================================================================
+   Fandaqah — Features and About page components.
+
+   Kept in its own sheet so the shared design system (fandaqah.css) stays the
+   thing every page pays for, and these two pages carry their own weight.
+   Every colour here is a palette value or a documented mix of two.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Lead modules: a real product screenshot beside its capability list, sides
+   alternating down the page so the eye is not tracking one column.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 900px) {
+  /* the flip is a visual order swap only; the DOM order still reads
+     heading, then copy, then image, which is the order a screen reader
+     and a no-CSS render should get */
+  .grid--flip > *:first-child { order: 2; }
+  .grid--flip > *:last-child  { order: 1; }
+}
+
+.mod__eyebrow {
+  display: inline-block; font-size: 12.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--brand-deep);
+}
+html[dir="rtl"] .mod__eyebrow { letter-spacing: 0; text-transform: none; font-size: 14px; }
+
+.mod__shot {
+  border-radius: var(--r-lg); overflow: hidden;
+  background: var(--white); border: 1px solid var(--line-soft);
+  box-shadow: var(--sh-3); padding: clamp(18px, 2.4vw, 30px);
+  display: grid; place-items: center;
+}
+.mod__shot img { width: 100%; height: auto; object-fit: contain; border-radius: var(--r); }
+
+/* a shorter band than the home page's, so it punctuates rather than pauses */
+.band--short { min-height: clamp(300px, 34vw, 420px); }
+
+/* --------------------------------------------------------------------------
+   Capability groups
+   -------------------------------------------------------------------------- */
+
+.cap { display: flex; flex-direction: column; }
+.cap__list { margin-top: 14px; display: flex; flex-direction: column; gap: 11px; }
+.cap__list li {
+  position: relative; padding-inline-start: 18px;
+  font-size: 14.5px; line-height: 1.65; color: var(--ink-soft);
+}
+.cap__list li::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: .62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--brand);
+}
+
+/* --------------------------------------------------------------------------
+   Deep features, on the navy ground
+   -------------------------------------------------------------------------- */
+
+.deep { gap: clamp(28px, 3.6vw, 48px); }
+.deep__item {
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(242, 240, 235, .14);
+  border-radius: var(--r-lg);
+  background: rgba(242, 240, 235, .05);
+}
+.deep__fig { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.deep__fig b {
+  font-size: 34px; font-weight: 700; line-height: 1; letter-spacing: -.03em;
+  color: var(--peach); font-variant-numeric: tabular-nums;
+}
+.deep__fig span { font-size: 13px; color: var(--on-dark-dim); }
+.deep__item h3 { margin-bottom: 10px; }
+
+/* --------------------------------------------------------------------------
+   Report name chips. A finance team recognises these by name, so they are
+   listed rather than summarised.
+   -------------------------------------------------------------------------- */
+
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.chip-t {
+  padding: 8px 15px; border-radius: 99px;
+  font-size: 13.5px; font-weight: 500; color: var(--g700);
+  background: var(--g100); border: 1px solid var(--line-soft);
+}
+
+/* --------------------------------------------------------------------------
+   About: fact list
+   -------------------------------------------------------------------------- */
+
+.factlist {
+  margin-top: 8px; display: flex; flex-wrap: wrap; gap: 14px 40px;
+  padding-top: 22px; border-top: 1px solid var(--line-soft);
+}
+.factlist dt { font-size: 12.5px; font-weight: 700; color: var(--g500); margin-bottom: 4px; }
+.factlist dd { margin: 0; font-size: var(--t-sm); font-weight: 700; color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   Vision and mission, given equal weight rather than one as a footnote
+   -------------------------------------------------------------------------- */
+
+.vm { gap: clamp(20px, 2.6vw, 30px); }
+.vm__card {
+  padding: clamp(28px, 3.6vw, 44px);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--sh-1);
+  border-top: 3px solid var(--brand);
+}
+.vm__card--alt { border-top-color: var(--peach); }
+.vm__label {
+  display: block; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--brand-deep); margin-bottom: 14px;
+}
+html[dir="rtl"] .vm__label { letter-spacing: 0; text-transform: none; font-size: 15px; }
+.vm__text { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.72; color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   The pull statement
+   -------------------------------------------------------------------------- */
+
+.pull {
+  max-width: 78ch; margin-inline: auto; text-align: center;
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px);
+}
+.pull__d { margin-top: 16px; font-size: clamp(16px, 1.4vw, 18px); line-height: 1.78; color: var(--ink-soft); }
+
+/* --------------------------------------------------------------------------
+   Values. Five items, so the grid is set to five at the top breakpoint
+   rather than leaving an orphan row of two.
+   -------------------------------------------------------------------------- */
+
+.vals { display: grid; gap: clamp(18px, 2.2vw, 26px); grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .vals { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .vals { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .vals { grid-template-columns: repeat(5, 1fr); } }
+
+.val {
+  padding: clamp(22px, 2.4vw, 28px);
+  border-radius: var(--r-md);
+  background: var(--white); border: 1px solid var(--line-soft);
+  box-shadow: var(--sh-1);
+}
+.val__n {
+  display: block; font-size: 13px; font-weight: 700;
+  color: var(--brand-text); margin-bottom: 12px; font-variant-numeric: tabular-nums;
+}
+.val h3 { margin-bottom: 8px; }
+.val p { font-size: 14.5px; line-height: 1.65; }
+
+/* --------------------------------------------------------------------------
+   Testimonials. Published quotations, so they are marked up as
+   blockquotes and never restyled into marketing slogans.
+   -------------------------------------------------------------------------- */
+
+/* A column flow, not a grid: ten quotations of different lengths in a
+   three-column grid leave a single orphan on the last row. Columns fill
+   naturally and the varying heights read as intended rather than ragged. */
+.voices { columns: 1; column-gap: clamp(18px, 2.2vw, 26px); }
+@media (min-width: 700px)  { .voices { columns: 2; } }
+@media (min-width: 1080px) { .voices { columns: 3; } }
+.voices > li { break-inside: avoid; margin-bottom: clamp(18px, 2.2vw, 26px); }
+
+.voice {
+  display: flex; flex-direction: column; gap: 16px;
+  padding: clamp(24px, 2.6vw, 30px);
+  border-radius: var(--r-lg);
+  background: var(--white); border: 1px solid var(--line-soft);
+  box-shadow: var(--sh-1);
+  position: relative;
+}
+.voice::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: 26px; bottom: 26px;
+  width: 3px; border-radius: 0 3px 3px 0; background: var(--brand);
+  opacity: .55;
+}
+html[dir="rtl"] .voice::before { border-radius: 3px 0 0 3px; }
+.voice__q {
+  margin: 0; font-size: 15.5px; line-height: 1.75; color: var(--ink);
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+html[dir="rtl"] .voice__q { quotes: "\201D" "\201C" "\2019" "\2018"; }
+.voice__q::before { content: open-quote; color: var(--brand); font-weight: 700; }
+.voice__q::after  { content: close-quote; color: var(--brand); font-weight: 700; }
+.voice__by { display: flex; flex-direction: column; gap: 3px; }
+.voice__by b { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+/* the palette green on a light card measures 2.63:1, so the role line
+   uses the green/navy mix instead: 6.0:1 */
+.voice__by span { font-size: 13px; color: var(--ink-soft); }
+
+/* --------------------------------------------------------------------------
+   Closing statement
+   -------------------------------------------------------------------------- */
+
+.closing {
+  max-width: 66ch; margin-inline: auto; text-align: center;
+  font-size: clamp(19px, 2vw, 26px); line-height: 1.6; font-weight: 500;
+  color: var(--ink); text-wrap: balance;
+}
+html[dir="rtl"] .closing { line-height: 1.8; }
+
+/* --------------------------------------------------------------------------
+   Module readouts.
+   The published module art is illustration, not a product capture, so these
+   interfaces are drawn instead. Same rules as the home page story readouts:
+   palette colours only, no images, no layout shift, decorative and
+   aria-hidden with the meaning carried by the copy beside them.
+   -------------------------------------------------------------------------- */
+
+.mod__shot {
+  border-radius: var(--r-lg);
+  background: linear-gradient(160deg, var(--g100), var(--white));
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--sh-3);
+  padding: clamp(18px, 2.4vw, 28px);
+  display: grid; place-items: stretch;
+}
+
+.ui {
+  background: var(--forest); border-radius: var(--r-md);
+  padding: 16px; color: var(--on-dark);
+  box-shadow: 0 18px 40px -22px rgba(42, 39, 60, .55);
+}
+.ui__bar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.ui__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); flex: none; }
+.ui__title { font-size: 13px; font-weight: 700; color: var(--on-dark); }
+.ui__kpi { margin-inline-start: auto; font-size: 12px; color: var(--on-dark-dim); }
+.ui__kpi b { color: var(--peach); font-size: 14px; font-variant-numeric: tabular-nums; }
+.ui__kpi--live {
+  padding: 3px 10px; border-radius: 99px; font-weight: 700;
+  background: rgba(233, 90, 84, .22); color: var(--peach);
+}
+
+/* front desk board */
+.ui__rooms { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+.ui__room {
+  display: grid; place-items: center; height: 30px; border-radius: 5px;
+  font-size: 10.5px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.ui__room--a { background: rgba(233, 90, 84, .34); color: var(--on-dark); }
+.ui__room--b { background: rgba(251, 205, 171, .28); color: var(--peach); }
+.ui__room--c { background: rgba(242, 240, 235, .09); color: var(--on-dark-dim); }
+.ui__foot {
+  display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(242, 240, 235, .12);
+  font-size: 11.5px; color: var(--on-dark-dim);
+}
+.ui__foot b { color: var(--peach); font-size: 15px; margin-inline-end: 4px; }
+.ui__legend { display: inline-flex; align-items: center; gap: 6px; }
+.ui__legend i { width: 9px; height: 9px; border-radius: 3px; flex: none; }
+
+/* channel sync */
+.ui__head, .ui__row {
+  display: grid; grid-template-columns: 1.4fr .6fr 1fr; gap: 10px; align-items: center;
+}
+.ui__head {
+  font-size: 10.5px; letter-spacing: .04em; color: var(--on-dark-dim);
+  padding-bottom: 8px; border-bottom: 1px solid rgba(242, 240, 235, .12); margin-bottom: 10px;
+}
+.ui__row { padding: 7px 0; font-size: 12.5px; }
+.ui__ch { color: var(--on-dark-soft); }
+.ui__rate { color: var(--peach); font-weight: 700; }
+.ui__bar2 { display: block; height: 6px; border-radius: 99px; background: rgba(242, 240, 235, .12); position: relative; }
+.ui__bar2 i {
+  position: absolute; inset-block: 0; inset-inline-start: 0; width: var(--w);
+  border-radius: 99px; background: var(--brand);
+}
+/* an explicit class, not nth-of-type: the row divs share a parent with the
+   title bar and the header row, so nth-of-type counted those too and put the
+   highlight on the wrong channel */
+.ui__row--direct .ui__ch { color: var(--on-dark); font-weight: 700; }
+.ui__row--direct .ui__bar2 i { background: var(--peach); }
+.ui__note { margin-top: 12px; font-size: 11.5px; color: var(--on-dark-dim); }
+
+/* booking widget */
+.ui__fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ui__field {
+  display: flex; flex-direction: column; gap: 4px; padding: 10px;
+  border-radius: 7px; background: rgba(242, 240, 235, .07);
+  border: 1px solid rgba(242, 240, 235, .12);
+}
+.ui__field i { font-style: normal; font-size: 10.5px; color: var(--on-dark-dim); }
+.ui__field b { font-size: 13px; color: var(--on-dark); font-variant-numeric: tabular-nums; }
+.ui__total {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid rgba(242, 240, 235, .12);
+  font-size: 12px; color: var(--on-dark-dim);
+}
+.ui__total b { font-size: 18px; color: var(--on-dark); }
+.ui__cta {
+  display: block; margin-top: 12px; padding: 11px; border-radius: 8px;
+  text-align: center; font-size: 13px; font-weight: 700;
+  /* pure coral under navy ink measures 4.16:1, under the 4.5 AA body
+     threshold. This is the same token the real buttons use: 4.96:1. */
+  background: var(--brand-strong); color: var(--on-dark);
+}
+.ui__pay { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ui__pay span {
+  padding: 4px 9px; border-radius: 5px; font-size: 10.5px;
+  color: var(--on-dark-dim); background: rgba(242, 240, 235, .07);
+  border: 1px solid rgba(242, 240, 235, .12);
+}
+
+@media (max-width: 520px) {
+  .ui__rooms { grid-template-columns: repeat(6, 1fr); }
+  .ui__fields { grid-template-columns: 1fr 1fr; }
+}

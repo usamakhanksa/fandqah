@@ -1,0 +1,16 @@
+{
+  "name": "فندقة | Fandaqah",
+  "short_name": "Fandaqah",
+  "description": "Saudi cloud hospitality management platform: PMS, channel manager and direct booking engine.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f2f0eb",
+  "theme_color": "#e95a54",
+  "icons": [
+    { "src": "/assets/site/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/site/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

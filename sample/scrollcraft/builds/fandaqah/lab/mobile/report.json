@@ -1,0 +1,673 @@
+{
+  "doc": {
+    "height": 12590,
+    "vh": 844,
+    "acts": [
+      "pin",
+      "pan",
+      "pin"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 67,
+      "pct": 1,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 11.43,
+          "mean": 11.43
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2895,
+        7277
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#efe3d6"
+    },
+    {
+      "i": 1,
+      "y": 213,
+      "pct": 2,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 11.61,
+          "mean": 11.61
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2749,
+        7131
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f0e5d9"
+    },
+    {
+      "i": 2,
+      "y": 359,
+      "pct": 3,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 12,
+          "mean": 12
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2603,
+        6985
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f2e9de"
+    },
+    {
+      "i": 3,
+      "y": 505,
+      "pct": 4,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 12.44,
+          "mean": 12.44
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2452,
+        6834
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f4ede5"
+    },
+    {
+      "i": 4,
+      "y": 651,
+      "pct": 6,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 12.78,
+          "mean": 12.78
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2411,
+        6794
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f6f0e9"
+    },
+    {
+      "i": 5,
+      "y": 797,
+      "pct": 7,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ10",
+          "dir": "dark-on-light",
+          "worst": 12.86,
+          "mean": 12.86
+        }
+      ],
+      "cues": [
+        {
+          "t": "Room board 24 rooms 101Occ102Occ103Occ104Occ10",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        2315,
+        6697
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f6f1ea"
+    },
+    {
+      "i": 6,
+      "y": 3016,
+      "pct": 26,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -101
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -2353,
+        96,
+        4478
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f3ece3"
+    },
+    {
+      "i": 7,
+      "y": 3534,
+      "pct": 30,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -285
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -2722,
+        0,
+        4109
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f3ece3"
+    },
+    {
+      "i": 8,
+      "y": 4053,
+      "pct": 35,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -537
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -3227,
+        0,
+        3590
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f3ece3"
+    },
+    {
+      "i": 9,
+      "y": 4572,
+      "pct": 39,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -803
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -3760,
+        0,
+        3057
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#f0e7dd"
+    },
+    {
+      "i": 10,
+      "y": 5090,
+      "pct": 43,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -1053
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -4263,
+        0,
+        2540
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#ebdfd4"
+    },
+    {
+      "i": 11,
+      "y": 5609,
+      "pct": 48,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -1319
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pan",
+      "stages": [
+        -4797,
+        0,
+        2006
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#e7d8cb"
+    },
+    {
+      "i": 12,
+      "y": 7401,
+      "pct": 63,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 14.73,
+          "mean": 14.73
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -6589,
+        -1468,
+        214
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#221e34"
+    },
+    {
+      "i": 13,
+      "y": 7953,
+      "pct": 68,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 15.9,
+          "mean": 15.9
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -7141,
+        -2020,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#1c192e"
+    },
+    {
+      "i": 14,
+      "y": 8504,
+      "pct": 72,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 16.1,
+          "mean": 16.1
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -7692,
+        -2571,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#1a182d"
+    },
+    {
+      "i": 15,
+      "y": 9055,
+      "pct": 77,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 16.4,
+          "mean": 16.4
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -8243,
+        -3122,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#19172c"
+    },
+    {
+      "i": 16,
+      "y": 9606,
+      "pct": 82,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 16.57,
+          "mean": 16.57
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -8794,
+        -3673,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#18162b"
+    },
+    {
+      "i": 17,
+      "y": 10157,
+      "pct": 86,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "03:00 · night audit The day closes itsel",
+          "dir": "light-on-dark",
+          "worst": 16.57,
+          "mean": 16.57
+        }
+      ],
+      "cues": [
+        {
+          "t": "03:00 · night audit The day closes itself. Roo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        -9345,
+        -4224,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#18162b"
+    },
+    {
+      "i": 18,
+      "y": 11746,
+      "pct": 100,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -1346
+      ],
+      "wipes": [
+        "none"
+      ],
+      "act": "-",
+      "stages": [
+        -10934,
+        -5813,
+        -1262
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#17152a"
+    }
+  ],
+  "consoleErrors": [],
+  "failed": []
+}

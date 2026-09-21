@@ -1,0 +1,2229 @@
+Build a light, single-page website that reproduces the exact visual style described below (extracted from www.cloudbeds.com — "#1 Award-Winning Hospitality Management System - Cloudbeds"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, soft layered shadows for depth, CSS grid sections, flexbox layout.
+
+FONTS
+Import from:
+https://www.cloudbeds.com/wp-content/themes/cloudbeds-rebrand/assets/css/fonts.css?ver=1784014249
+- Font families: Host Grotesk, Arial, Times New Roman
+- Body text: 18px / line-height 28.8px, weight 400
+- H1: 12px, weight 500, uppercase, color #261c0a
+- H2: 12px, weight 500, uppercase, color #261c0a
+- H3: 32px, weight 600, color #261c0a
+- Type scale in use: 14px, 16px, 18px, 14.4px, 12px, 32px, 48px, 24px
+
+COLOR THEME (CSS custom properties)
+The page defines these custom properties — reuse them verbatim:
+
+:root {
+  --wp-block-synced-color: #7a00df;
+  --wp-block-synced-color--rgb: 122,0,223;
+  --wp-bound-block-color: var(--wp-block-synced-color);
+  --wp-editor-canvas-background: #ddd;
+  --wp-admin-theme-color: #007cba;
+  --wp-admin-theme-color--rgb: 0,124,186;
+  --wp-admin-theme-color-darker-10: #006ba1;
+  --wp-admin-theme-color-darker-10--rgb: 0,107,160.5;
+  --wp-admin-theme-color-darker-20: #005a87;
+  --wp-admin-theme-color-darker-20--rgb: 0,90,135;
+  --wp-admin-border-width-focus: 2px;
+  --wp--preset--font-size--normal: 16px;
+  --wp--preset--font-size--huge: 42px;
+  --wp-admin--admin-bar--position-offset: var(--wp-admin--admin-bar--height,0px);
+  --qualified-offer-header-height: 0px;
+  --wp--preset--aspect-ratio--square: 1;
+  --wp--preset--aspect-ratio--4-3: 4/3;
+  --wp--preset--aspect-ratio--3-4: 3/4;
+  --wp--preset--aspect-ratio--3-2: 3/2;
+  --wp--preset--aspect-ratio--2-3: 2/3;
+  --wp--preset--aspect-ratio--16-9: 16/9;
+  --wp--preset--aspect-ratio--9-16: 9/16;
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--cyan-bluish-gray: #abb8c3;
+  --wp--preset--color--white: #FFFFFF;
+  --wp--preset--color--pale-pink: #f78da7;
+  --wp--preset--color--vivid-red: #cf2e2e;
+  --wp--preset--color--luminous-vivid-orange: #ff6900;
+  --wp--preset--color--luminous-vivid-amber: #fcb900;
+  --wp--preset--color--light-green-cyan: #7bdcb5;
+  --wp--preset--color--vivid-green-cyan: #00d084;
+  --wp--preset--color--pale-cyan-blue: #8ed1fc;
+  --wp--preset--color--vivid-cyan-blue: #0693e3;
+  --wp--preset--color--vivid-purple: #9b51e0;
+  --wp--preset--color--primary-blue-01: #DFEEFF;
+  --wp--preset--color--primary-blue-03: #BFDEFF;
+  --wp--preset--color--primary-blue-05: #99CBFF;
+  --wp--preset--color--primary-blue-07: #4DA4FF;
+  --wp--preset--color--primary-blue-09: #18317A;
+  --wp--preset--color--primary-yellow-01: #FFFFE4;
+  --wp--preset--color--primary-yellow-03: #FFFCBB;
+  --wp--preset--color--primary-yellow-05: #FFF878;
+  --wp--preset--color--primary-yellow-07: #BFB939;
+  --wp--preset--color--primary-yellow-09: #9C962A;
+  --wp--preset--color--neutral-chalk-01: #FBFBF6;
+  --wp--preset--color--neutral-chalk-03: #F8FBED;
+  --wp--preset--color--neutral-chalk-05: #F2F2E9;
+  --wp--preset--color--neutral-chalk-07: #D9D9CC;
+}
+
+- Accent/brand colors: #261c0a, #99876b, #4da4ff, #c7bba6
+- Surface colors: #ffffff, #fbfbf6, #261c0a1a, #261c0a, #d9d9cc, #261c0ad9
+- Text colors: #000000, #261c0a, #99876b, #f2f2e9, #ffffff
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #000000cc;
+  color: #000000;
+  border: 2px solid null;
+  border-radius: 60px;
+  font-size: 14px;
+}
+
+.card {
+  color: #000000;
+  border-radius: 7.6px;
+  font-size: 18px;
+}
+
+.badge-pill {
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 3.35544e+07px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+.input {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid null;
+  border-radius: 3px;
+  padding: 0px 20px;
+  font-size: 16px;
+}
+
+- Button style 1: background transparent, text #261c0a, radius 0px, padding 8px, font 13px/400
+- Button style 2: background transparent, text #000000, radius 0px, padding 8px, font 18px/400
+- Links: color #000000, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://www.cloudbeds.com/wp-content/uploads/2025/08/logo-footer.svg
+Background/inline videos (autoplay, loop, muted, playsInline):
+  https://fast.wistia.com/embed/medias/q6haobh5ac.m3u8
+  https://fast.wistia.com/embed/medias/iutyahx07n.m3u8
+  https://fast.wistia.com/embed/medias/yo06ly9yrb.m3u8
+  https://fast.wistia.com/embed/medias/bwso7uw64u.m3u8
+Key images (largest first):
+  https://embed-ssl.wistia.com/deliveries/4d4204b0e0ac13864251b37d5c763687.webp?image_crop_resized=1080x1080
+  https://embed-ssl.wistia.com/deliveries/75ce71fa8556fc4460fc6e28440dc2e1.webp?image_crop_resized=1920x1080
+  https://embed-ssl.wistia.com/deliveries/459eff2a5e3e0b642d67cc5c4609e8b7.webp?image_crop_resized=1920x1080
+  https://embed-ssl.wistia.com/deliveries/4da64702088eea36693122676e28b9df.webp?image_crop_resized=1920x1080
+  https://www.cloudbeds.com/wp-content/uploads/2026/06/img-bento-int-912@2x.webp
+  https://www.cloudbeds.com/wp-content/uploads/2026/06/img-bento-dist-912@2x.webp
+
+SECTION-BY-SECTION BREAKDOWN
+1. <section class="js-panel absolute"> — background: transparent
+2. <section class="js-panel pointer-events-none"> — background: transparent, contains imagery
+3. <section class="js-panel pointer-events-none"> — background: transparent, contains imagery
+4. <section class="js-panel pointer-events-none"> — background: transparent, contains imagery
+5. <section class="js-panel absolute"> — background: transparent, contains imagery
+6. <section class="hero"> — "Hospitality management system" — background: #fbfbf6, contains imagery
+7. <section class="value-prop"> — "Built for your ambition" — background: #fff878
+8. <section class="sp-section"> — "What they say" — background: #ffffff, contains imagery
+9. <section class="hm-uvp"> — "The Cloudbeds advantage" — background: #fbfbf6, contains video, contains imagery
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 4px, 1px, 3px, 8px, 6px
+- Shadows: rgb(136, 136, 136) 0px 0px 1px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0
+- Spacing scale (padding/gaps): 8px, 24px, 16px, 4px, 12px, 32px, 20px, 18px
+- Content max-width: 1440px, 549px, 639px
+- Structure: top navigation header, flexbox sections, grid sections, footer.
+
+ANIMATION PATTERNS
+- Named keyframe animations defined on the page: hm-arrowBob, hm-vpMarquee, hm-spLogoMarquee, spin, float-arrow, onetrust-fade-in, slide-down-custom, qualified-offer-element-observer-animation-0
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from ntouch.ai — "Ntouch"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, glassmorphism (backdrop blur) surfaces, soft layered shadows for depth, CSS grid sections, flexbox layout.
+
+FONTS
+- Font families: DMSans, Font Awesome 7 Brands, Font Awesome 7 Free
+- Body text: 16px / line-height 24px, weight 400
+- H1: 48px, weight 300, color #ffffff
+- H2: 60px, weight 700, color #f26336
+- H3: 40px, weight 400, color #212529
+- Type scale in use: 14px, 16px, 18px, 20px, 32px, 24px, 22px, 43px
+
+COLOR THEME (CSS custom properties)
+The page defines these custom properties — reuse them verbatim:
+
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-primary-rgb: 13,110,253;
+  --bs-secondary-rgb: 108,117,125;
+  --bs-success-rgb: 25,135,84;
+  --bs-info-rgb: 13,202,240;
+  --bs-warning-rgb: 255,193,7;
+  --bs-danger-rgb: 220,53,69;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark-rgb: 33,37,41;
+  --bs-primary-text-emphasis: #052c65;
+  --bs-secondary-text-emphasis: #2b2f32;
+  --bs-success-text-emphasis: #0a3622;
+  --bs-info-text-emphasis: #055160;
+  --bs-warning-text-emphasis: #664d03;
+  --bs-danger-text-emphasis: #58151c;
+  --bs-light-text-emphasis: #495057;
+  --bs-dark-text-emphasis: #495057;
+  --bs-primary-bg-subtle: #cfe2ff;
+}
+
+- Accent/brand colors: #f26336, #552110, #dc3545, #0d2624
+- Surface colors: #ffffff, #f26336, #ffffffe6, #068aca, #cccccc, #0d2624
+- Text colors: #222222, #212529, #808080, #ffffff, #000000
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #ffffffe6;
+  color: #666666;
+  border-radius: 50%;
+  font-size: 24px;
+}
+
+.card {
+  color: #212529;
+  border: 10px solid #3e237c14;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.input {
+  background: #ffffff;
+  color: #212529;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 16px;
+}
+
+- Button style 1: background #ffffffe6, text #666666, radius 50%, padding 0px, font 24px/400
+- Button style 2: background #ffffff, text #000000, radius 4px 0px 0px 4px, padding 0px, font 16px/400, border: 1px solid #dcdcdc
+- Links: color #ffffff, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://ntouch-public.oss-me-central-1.aliyuncs.com/Shared/footer_Logo_92660dd64a.png
+Background/inline videos (autoplay, loop, muted, playsInline):
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/bannerVideo.mp4
+Key images (largest first):
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/large_pms_pic.png
+  https://ntouch.ai/_next/image?url=%2Fassets%2Fimg%2FnavbarDropDownImg1.png&w=828&q=75
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/about%20us%20homepage%201%20%281%29.webp
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/all.jpg
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/pricing.png
+  https://ntouch-public.oss-me-central-1.aliyuncs.com/Homepage/tailor.png
+
+SECTION-BY-SECTION BREAKDOWN
+1. <section> — "Elevate Your Hotel's Legacy With Artificial Intelligence" — background: transparent, contains video, contains imagery
+2. <section> — "nTouch PMS:" — background: gradient, contains imagery
+3. <section class="position-relative"> — "Who We Serve" — background: transparent, contains imagery
+4. <section class="ntouch-edge-section"> — "The nTouch Edge" — background: #0d2624, contains imagery
+5. <section class="py-5"> — "A Journey Untold" — background: #f7f5f0, contains imagery
+6. <section class="py-5"> — "50+" — background: image
+7. <section> — "Frequently Asked Questions" — background: #f7f5f0
+8. <footer class="d-flex flex-column"> — "Modern Luxury Hospitality Deserve Intelligent Systems." — background: image, contains imagery
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 50%, 12px, 6px, 5px, 32px
+- Shadows: rgba(0, 0, 0, 0.15) 0px 8px 16px 0px, rgba(0, 0, 0, 0.2) -10px 0px 20px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px
+- Spacing scale (padding/gaps): 8px, 12px, 16px, 20px, 21px, 6px, 56px, 5px
+- Content max-width: 1696px, 800px, 992px
+- Structure: top navigation header, flexbox sections, grid sections, footer.
+
+ANIMATION PATTERNS
+- Named keyframe animations defined on the page: progress-bar-stripes, spinner-border, spinner-grow, placeholder-glow, placeholder-wave, fa-beat, fa-bounce, fa-fade
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from www.roommaster.com — "All-in-one Hotel Management Software | Hospitality Software"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, glassmorphism (backdrop blur) surfaces, soft layered shadows for depth, CSS grid sections, flexbox layout.
+
+FONTS
+- Font families: Gt America Standard, helvetica, Recoleta M
+- Body text: 17.6px / line-height 26.4px, weight 400
+- H1: 14px, weight 400, color #000000
+- H2: 56px, weight 400, color #000000
+- H3: 24px, weight 400, color #ffffff
+- Type scale in use: 16px, 17.6px, 14px, 32px, 12px, 13.6px, 13px, 20px
+
+COLOR THEME (CSS custom properties)
+The page defines these custom properties — reuse them verbatim:
+
+:root {
+  --beige--100-primary: #f7f5f2;
+  --_typography---font-styles--body: "Gt America Standard",Arial,sans-serif;
+  --color-scheme-1--text: var(--_primitives---colors--neutral-darkest);
+  --_typography---body-text--text-size-regular: 1.1rem;
+  --_typography---font-styles--heading: "Recoleta M",Arial,sans-serif;
+  --_typography---headings--h1: 4rem;
+  --_typography---headings--h2: 3.5rem;
+  --_typography---headings--h3: 3rem;
+  --_typography---headings--h4: 2rem;
+  --_typography---headings--h5: 2rem;
+  --_typography---headings--h6: 1.5rem;
+  --_typography---body-text--text-size-medium: 1.1rem;
+  --_primitives---colors--white: #fff;
+  --_primitives---colors--neutral-darkest: black;
+  --_typography---body-text--text-size-tiny: .75rem;
+  --text-color--text-alternate<deleted|relume-variable-text-color-3>: var(--base-color-neutral--white\<deleted\|relume-variable-color-neutral-2\>);
+  --_primitives---opacity--transparent: transparent;
+  --_ui-styles---radius--medium: .5rem;
+  --royal-blue--600-primary: #0156fc;
+  --neutrals--10: white;
+  --_typography---body-text--text-size-small: .875rem;
+  --deep-blue--500-primary: #000a1e;
+  --deep-blue--900: #021d55;
+  --royal-blue--400: #568efd;
+  --color-scheme-1--foreground: var(--_primitives---colors--neutral-lightest);
+  --_ui-styles---radius--small: 10px;
+  --spring-green--400-primary: #35ff69;
+  --_primitives---colors--neutral-lighter: #ccc;
+  --neutrals--100: black;
+  --_primitives---opacity--neutral-darkest-60: #0009;
+  --_primitives---opacity--white-60: #fff9;
+  --_ui-styles---stroke--border-width: 1px;
+  --color-scheme-1--border: var(--_primitives---colors--neutral-darkest);
+  --_typography---body-text--text-size-large: 1.25rem;
+  --background-color--background-secondary<deleted|relume-variable-background-color-2>: var(--base-color-neutral--neutral-lightest\<deleted\|relume-variable-color-neutral-3\>);
+  --border-color--border-primary<deleted|relume-variable-border-color-1>: var(--base-color-neutral--black\<deleted\|relume-variable-color-neutral-1\>);
+  --color-scheme-1--background: var(--_primitives---colors--white);
+  --_primitives---colors--neutral-lightest: var(--_primitives---opacity--transparent);
+  --_ui-styles---radius--large: 1rem;
+  --color-scheme-1--accent: var(--_primitives---colors--neutral-darkest);
+  --_typography---body-text--text-size-xlarge: 1.5rem;
+  --_primitives---opacity--white-15: #ffffff26;
+  --royal-blue--200: #aac7fe;
+  --beige--400: #ebe7e0;
+  --_primitives---opacity--white-50: #ffffff80;
+  --pale-yellow--100-primary: #fcffc4;
+  --royal-blue--60: #d5e2ed;
+  --royal-blue--80: #b9dcff;
+}
+
+- Accent/brand colors: #0156fc, #001f1f, #0148d2, #568efd
+- Surface colors: #ffffff, #0156fc, #f7f5f2, #ebe7e0, #568efd, #d5e2eda3
+- Text colors: #000000, #555c69, #b5b2ad, #ffffff, #6a7878
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #ffffff;
+  color: #000000;
+  border: 3px solid #0156fc;
+  border-radius: 32px;
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.card {
+  background: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  font-size: 17.6px;
+  box-shadow: rgba(37, 9, 9, 0.48) 0px 0px 30px 0px;
+}
+
+.badge-pill {
+  background: #0156fc;
+  color: #ffffff;
+  border: 1px solid #0156fc;
+  border-radius: 16px;
+  padding: 8px 12.8px;
+  font-size: 13.6px;
+  text-transform: uppercase;
+}
+
+.input {
+  background: #ffffff;
+  color: #555c69;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+- Button style 1: background #ffffff, text #000000, radius 32px, padding 16px 20px, font 16px/400, border: 3px solid #0156fc
+- Button style 2: background #0156fc, text #000000, radius 50%, padding 0px, font 17.6px/400
+- Links: color #000000, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68623212ab82ec27beec3e59_roommaster%20logo.svg
+Background/inline videos (autoplay, loop, muted, playsInline):
+  https://assets-roommaster.netlify.app/hero-video.mp4
+Key images (largest first):
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68966778bdddfdfb49020fcc_building-svg.svg
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68a2c353fdc6eb93eb5e29ae_PMS-p-2000.webp
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68a2c48ba156f0ba3105294b_Ai%20Concierge.webp
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/694a64b25c712d11a06339b7_Payments%20(1).png
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68a2c4855dd3ad2de5ad7a7b_Guest%20App-p-2000.webp
+  https://cdn.prod.website-files.com/68620a33d81d6f11f446a73e/68a2c712bb1b4a66721b4375_Booking%20Engine-p-2000.webp
+
+SECTION-BY-SECTION BREAKDOWN
+1. <section class="section_home_header"> — "Hotel Management Software" — background: transparent, contains video
+2. <section class="section_brands"> — "Powering thousands of hotels worldwide" — background: transparent, contains imagery
+3. <section class="section_testimonial"> — background: transparent, contains imagery
+4. <section class="section_benefit"> — "Why hoteliers choose roommaster as their hotel management software" — background: transparent, contains imagery
+5. <section class="section_platform"> — "Daily Operations & Guest Experience Management" — background: #ffffff, contains imagery
+6. <section class="section_platform"> — "AI Revenue Intelligence & Hotel Visibility" — background: #ffffff, contains imagery
+7. <section class="section_prop_try"> — "Hotel Management Software for Every Property Type" — background: transparent, contains imagery
+8. <section class="section_client"> — "Our customers say it the best" — background: transparent, contains imagery
+9. <section class="section_market"> — "Create your perfect technology ecosystem" — background: #ffffff, contains imagery
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 8px, 12px, 10px, 50%, 0%
+- Shadows: rgba(34, 32, 29, 0) 0px 1.27px 2.54px 0px
+- Spacing scale (padding/gaps): 8px, 20px, 16px, 10px, 32px, 24px, 12px, 48px
+- Content max-width: 1312px, 960px, 640px
+- Structure: top navigation header, flexbox sections, grid sections, footer.
+
+ANIMATION PATTERNS
+- Named keyframe animations defined on the page: spin, aioa-placeholder-glow, load3, aioaLineAnim, flip, pulse, marquee-horizontal, rotate-orbit
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from www.siteminder.com — "SiteMinder: We put you in demand."). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, mostly flat surfaces, CSS grid sections, flexbox layout.
+
+FONTS
+- Font families: Source Sans 3, Spline Sans, Times New Roman
+- Body text: 18px / line-height 25px, weight 400
+- H1: 60px, weight 700, color #333333
+- H2: 24px, weight 600, color #333333
+- H3: 24px, weight 600, color #333333
+- Type scale in use: 18px, 16px, 20px, 60px, 32px, 24px, 14px, 48px
+
+COLOR THEME (CSS custom properties)
+The page defines these custom properties — reuse them verbatim:
+
+:root {
+  --wp-block-synced-color: #7a00df;
+  --wp-block-synced-color--rgb: 122,0,223;
+  --wp-bound-block-color: var(--wp-block-synced-color);
+  --wp-editor-canvas-background: #ddd;
+  --wp-admin-theme-color: #007cba;
+  --wp-admin-theme-color--rgb: 0,124,186;
+  --wp-admin-theme-color-darker-10: #006ba1;
+  --wp-admin-theme-color-darker-10--rgb: 0,107,160.5;
+  --wp-admin-theme-color-darker-20: #005a87;
+  --wp-admin-theme-color-darker-20--rgb: 0,90,135;
+  --wp-admin-border-width-focus: 2px;
+  --wp--preset--font-size--normal: 16px;
+  --wp--preset--font-size--huge: 42px;
+  --wp-admin--admin-bar--position-offset: var(--wp-admin--admin-bar--height,0px);
+  --wp--preset--aspect-ratio--square: 1;
+  --wp--preset--aspect-ratio--4-3: 4/3;
+  --wp--preset--aspect-ratio--3-4: 3/4;
+  --wp--preset--aspect-ratio--3-2: 3/2;
+  --wp--preset--aspect-ratio--2-3: 2/3;
+  --wp--preset--aspect-ratio--16-9: 16/9;
+  --wp--preset--aspect-ratio--9-16: 9/16;
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--cyan-bluish-gray: #abb8c3;
+  --wp--preset--color--white: #ffffff;
+  --wp--preset--color--pale-pink: #f78da7;
+  --wp--preset--color--vivid-red: #cf2e2e;
+  --wp--preset--color--luminous-vivid-orange: #ff6900;
+  --wp--preset--color--luminous-vivid-amber: #fcb900;
+  --wp--preset--color--light-green-cyan: #7bdcb5;
+  --wp--preset--color--vivid-green-cyan: #00d084;
+  --wp--preset--color--pale-cyan-blue: #8ed1fc;
+  --wp--preset--color--vivid-cyan-blue: #0693e3;
+  --wp--preset--color--vivid-purple: #9b51e0;
+  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);
+  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);
+  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);
+  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);
+  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);
+  --wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);
+  --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);
+  --wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);
+  --wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);
+  --wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);
+  --wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);
+  --wp--preset--font-size--small: 13px;
+  --wp--preset--font-size--medium: 20px;
+  --wp--preset--font-size--large: 36px;
+  --wp--preset--font-size--x-large: 42px;
+}
+
+- Accent/brand colors: #006dff, #007aff, #7e99a5, #ecffb3
+- Surface colors: #ffffff, #ecffb3, #f8f8f8, #dde6e9, #fffcf8, #f7fafa
+- Text colors: #333333, #ffffff, #006dff, #007aff, #717171
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #006dff;
+  color: #ffffff;
+  border: 1px solid null;
+  border-radius: 4px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+- Button style 1: background transparent, text #ffffff, radius 50%, padding 1px 6px, font 16px/400
+- Button style 2: background #006dff, text #ffffff, radius 4px, padding 10px 24px, font 16px/500, border: 1px solid null
+- Links: color #ffffff, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://resources.siteminder.com/website/new-feature/banner-ai_at_siteminder.svg
+Key images (largest first):
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-channel-manager-1.png
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-channels-plus.png
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-direct-bookings.png
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-metasearch.png
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-global-distribution-system.png
+  https://www.siteminder.com/wp-content/uploads/2025/09/img-DR.png
+
+SECTION-BY-SECTION BREAKDOWN
+1. <footer class="footer"> — background: #002c66, contains imagery
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 10px, 4px, 20px, 112px, 30px
+- Shadows: rgba(24, 58, 108, 0.04) 0px 3px 21.5px 0px, rgba(24, 58, 108, 0.1) 0px 3px 8px -2px, rgba(24, 58, 108, 0.14) 0px 1px 1px -1p
+- Spacing scale (padding/gaps): 24px, 16px, 8px, 27px, 6px, 10px, 48px, 32px
+- Content max-width: 1200px, 1440px, 960px
+- Structure: top navigation header, flexbox sections, grid sections, footer.
+
+ANIMATION PATTERNS
+- Hover/state transitions are used widely — add smooth 150-300ms transitions on interactive elements.
+- Named keyframe animations defined on the page: load8, submitLoaderSpin, show-content-image, turn-on-visibility, turn-off-visibility, lightbox-zoom-in, lightbox-zoom-out, overlay-menu__fade-in-animation
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from www.mews.com — "The Hospitality Management Software of the Future | Mews"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, mostly flat surfaces, flexbox layout.
+
+FONTS
+- Font families: soehne
+- Body text: 16px / line-height 24px, weight 400
+- H1: 13px, weight 700, uppercase, color #c4c9dd
+- H2: 16px, weight 400, color #000000
+- H3: 16px, weight 400, color #000000
+- Type scale in use: 15px, 16px, 18px, 15.008px, 12px, 13px, 14px, 13.008px
+
+COLOR THEME (CSS custom properties)
+Derived from the page's computed styles — define and use these:
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface-1: #f7e1f7;
+  --surface-2: #ffffff;
+  --surface-3: #ff83da;
+  --accent-1: #ff83da;
+  --accent-2: #2a4eef;
+  --accent-3: #ffc5ee;
+  --muted-1: #000000;
+  --muted-2: #00000073;
+  --border: #d6d6d6;
+  --radius: 15px;
+}
+
+- Accent/brand colors: #ff83da, #2a4eef, #ffc5ee
+- Surface colors: #f4f4f4, #f7e1f7, #ffffff, #ff83da, #000000, oklab(0 0 0 / 0.1)
+- Text colors: #141414, #000000, #00000073, #2a4eef
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.card {
+  background: #000000;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 80px;
+  font-size: 16px;
+}
+
+.badge-pill {
+  background: #ff83da;
+  color: #000000;
+  border-radius: 3.35544e+07px;
+  padding: 0px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.39px;
+  text-transform: uppercase;
+}
+
+- Button style 1: background transparent, text #141414, radius 0px, padding 0px 11.25px 0px 0px, font 15px/700, border: 1px solid null
+- Links: color #141414, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://www.mews.com/api/media/file/platfrom-nav.svg?dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+Background/inline videos (autoplay, loop, muted, playsInline):
+  https://www.mews.com/api/media/file/property-management-video.webm
+  https://www.mews.com/api/media/file/revenue-video.webm
+  https://www.mews.com/api/media/file/payments-video.webm
+Key images (largest first):
+  https://www.mews.com/api/media/file/Home-Masthead-4.webp
+  https://www.mews.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Fpos.png&w=828&q=85&dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+  https://www.mews.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Fresource-center-nav.png&w=640&q=85&dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+  https://www.mews.com/api/media/file/platfrom-nav.svg?dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+  https://www.mews.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2F260522-1_Mews%2520Operating%2520System_Website_548x308%25402x.webp&w=640&q=85&dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+  https://www.mews.com/api/media/file/Frame%202147231403a.svg?dpl=dpl_DnxEBYkFXStYrRfyeauC2oybFtpQ
+
+SECTION-BY-SECTION BREAKDOWN
+1. <section class="isolate_ relative"> — "Hospitality Management System" — background: #ffffff, contains video, contains imagery
+2. <section class="isolate_ relative"> — "Join over 15,000 properties from across the world. Meet our customers." — background: #ffffff, contains imagery
+3. <section class="isolate_ relative"> — "See what Mews can do for you" — background: #ffffff, contains imagery
+4. <section class="isolate_ relative"> — "Smarter operations start here" — background: #000000, contains imagery
+5. <section class="isolate_ relative"> — background: #000000
+6. <section class="isolate_ relative"> — "Powering hospitality impact" — background: #ffffff, contains imagery
+7. <section class="isolate_ relative"> — "Build your Mews" — background: #ffffff
+8. <section class="isolate_ relative"> — background: #ffffff, contains imagery
+9. <section class="isolate_ relative"> — "What is Mews?" — background: #fffcf6
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 15px, 60px, 7.5px, 32px, 9999px
+- Spacing scale (padding/gaps): 22.5px, 7.5px, 8px, 10px, 6px, 15px, 32px, 16.875px
+- Content max-width: 1278px, 1440px
+- Structure: top navigation header, flexbox sections, footer.
+
+ANIMATION PATTERNS
+- Named keyframe animations defined on the page: quote-marquee-scroll, marquee-scroll, reveal-from-left, reveal-from-right, reveal-from-bottom, spin, pulse, bounce
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from www.hotelogix.com — "Best Hotel Management Software | Hotelogix Hotel Software Globally Trusted since 2008"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, soft layered shadows for depth, flexbox layout.
+
+FONTS
+- Font families: Inter, wprmenu, Inter var
+- Body text: 16px / line-height 28px, weight 400
+- H1: 60px, weight 400, color #ffffff
+- H2: 44px, weight 700, color #0b141f
+- H3: 24px, weight 700, color #0b141f
+- Type scale in use: 16px, 15.008px, 14px, 13.132px, 44px, 24px, 18px, 15px
+
+COLOR THEME (CSS custom properties)
+The page defines these custom properties — reuse them verbatim:
+
+:root {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-style-family-brands: "Font Awesome 6 Brands";
+  --fa-style-family-classic: "Font Awesome 6 Free";
+  --swiper-theme-color: #007aff;
+  --swiper-navigation-size: 44px;
+  --wp-block-synced-color: #7a00df;
+  --wp-block-synced-color--rgb: 122,0,223;
+  --wp-bound-block-color: var(--wp-block-synced-color);
+  --wp-editor-canvas-background: #ddd;
+  --wp-admin-theme-color: #007cba;
+  --wp-admin-theme-color--rgb: 0,124,186;
+  --wp-admin-theme-color-darker-10: #006ba1;
+  --wp-admin-theme-color-darker-10--rgb: 0,107,160.5;
+  --wp-admin-theme-color-darker-20: #005a87;
+  --wp-admin-theme-color-darker-20--rgb: 0,90,135;
+  --wp-admin-border-width-focus: 2px;
+  --wp--preset--font-size--normal: 16px;
+  --wp--preset--font-size--huge: 42px;
+  --wp-admin--admin-bar--position-offset: var(--wp-admin--admin-bar--height,0px);
+  --wp--preset--aspect-ratio--square: 1;
+  --wp--preset--aspect-ratio--4-3: 4/3;
+  --wp--preset--aspect-ratio--3-4: 3/4;
+  --wp--preset--aspect-ratio--3-2: 3/2;
+  --wp--preset--aspect-ratio--2-3: 2/3;
+  --wp--preset--aspect-ratio--16-9: 16/9;
+  --wp--preset--aspect-ratio--9-16: 9/16;
+  --wp--preset--color--black: #000000;
+  --wp--preset--color--cyan-bluish-gray: #abb8c3;
+  --wp--preset--color--white: #ffffff;
+  --wp--preset--color--pale-pink: #f78da7;
+  --wp--preset--color--vivid-red: #cf2e2e;
+  --wp--preset--color--luminous-vivid-orange: #ff6900;
+  --wp--preset--color--luminous-vivid-amber: #fcb900;
+  --wp--preset--color--light-green-cyan: #7bdcb5;
+  --wp--preset--color--vivid-green-cyan: #00d084;
+  --wp--preset--color--pale-cyan-blue: #8ed1fc;
+  --wp--preset--color--vivid-cyan-blue: #0693e3;
+  --wp--preset--color--vivid-purple: #9b51e0;
+}
+
+- Accent/brand colors: #f7c32e, #2856a2, #ffbf00, #caff1c
+- Surface colors: #ffffff, #0b141f, #020306, #606261, #f6f6f6, #068aca
+- Text colors: #606261, #ffffff, #0b141f, #202124, #9b9b9c
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #1863dc;
+  color: #ffffff;
+  border: 2px solid #1863dc;
+  border-radius: 2px;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card {
+  background: #ffffff;
+  color: #212121;
+  border-radius: 6px;
+  font-size: 16px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 32px 68px 0px;
+}
+
+.input {
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dce0e5;
+  border-radius: 5.008px;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+- Button style 1: background transparent, text #000000, radius 0px, padding 0px, font 16px/400
+- Button style 2: background transparent, text #1863dc, radius 2px, padding 8px, font 14px/500, border: 2px solid #1863dc
+- Links: color #000000, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://www.hotelogix.com/wp-content/themes/hotelogix/images/hotelogix-logo.svg
+Background/inline videos (autoplay, loop, muted, playsInline):
+  https://www.hotelogix.com/wp-content/themes/hotelogix/videos/hotelogix.mp4
+Key images (largest first):
+  https://www.hotelogix.com/wp-content/uploads/2025/10/herobanner.webp
+  https://www.hotelogix.com/wp-content/uploads/2026/05/Banner_web_hlx.png.webp
+  https://www.hotelogix.com/wp-content/uploads/2025/08/tui-blue.png.webp
+  https://www.hotelogix.com/wp-content/uploads/2025/08/the-henry.png.webp
+  https://www.hotelogix.com/wp-content/uploads/2025/08/the-clarks.png.webp
+  https://www.hotelogix.com/wp-content/uploads/2025/08/suba.png.webp
+
+SECTION-BY-SECTION BREAKDOWN
+1. <header class="header-sticky header-absolute"> — background: transparent, contains imagery
+2. <section class="heros-section"> — "All Your Hotel Operations. One Powerful Cloud PMS." — background: transparent, contains imagery
+3. <section class="bg-gray-hlx pt-6"> — "Hotels across 100+ countries trust Hotelogix" — background: #f6f6f6
+4. <section class="outer-bg-container bg-gray-hlx"> — background: #f6f6f6, contains imagery
+5. <section> — background: transparent
+6. <section class="pt-0"> — "Reliable, Round-the-Clock Hotel Management" — background: transparent
+7. <section class="pt-0"> — background: transparent, contains video
+8. <section class="outer-bg-container bg-gray-hlx"> — "All-in-One Hotel PMS" — background: #f6f6f6, contains imagery
+9. <section class="integration-banner py-5"> — "Our Most Trusted Distribution Platform Integration - Axisrooms" — background: transparent, contains imagery
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 50%, 30px, 16px, 50px, 80px
+- Shadows: rgba(117, 117, 117, 0.2) 0px 0px 16px 0px, rgba(255, 255, 255, 0.2) 0px 0px 0px 15px, rgba(172, 171, 171, 0.3) 0px -1px 10px 0px
+- Spacing scale (padding/gaps): 8px, 16px, 14px, 13px, 15px, 20px, 24px, 4.8px
+- Content max-width: 1300px
+- Structure: top navigation header, flexbox sections, footer.
+
+ANIMATION PATTERNS
+- Hover/state transitions are used widely — add smooth 150-300ms transitions on interactive elements.
+- Named keyframe animations defined on the page: fa-beat, fa-bounce, fa-fade, fa-beat-fade, fa-flip, fa-shake, fa-spin, swiper-preloader-spin
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+Build a light, single-page website that reproduces the exact visual style described below (extracted from apaleo.com — "The Open Property Management Platform | Apaleo"). Use React + Tailwind CSS (or plain HTML/CSS if you prefer) and follow every concrete value given here — colors, fonts, radii, shadows, spacing — rather than inventing your own.
+
+OVERALL AESTHETIC
+- light UI, gradient backgrounds, mostly flat surfaces, CSS grid sections, flexbox layout.
+
+FONTS
+- Font families: sans-serif, Inter, Moret
+- Body text: 16px / line-height 24px, weight 400
+- H1: 72px, weight 300, color #030b24
+- H2: 48px, weight 400, color #030b24
+- H3: 30px, weight 600, color #030b24
+- Type scale in use: 15px, 16px, 18px, 12px, 14px, 48px, 30px, 72px
+
+COLOR THEME (CSS custom properties)
+Derived from the page's computed styles — define and use these:
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface-1: #0000000d;
+  --surface-2: #030b24;
+  --surface-3: #fff7ee;
+  --accent-1: #030b24;
+  --accent-2: #008b99;
+  --accent-3: #ffca55;
+  --muted-1: #000000;
+  --muted-2: #d8d8d8;
+  --border: #ffffff;
+  --radius: 15px;
+}
+
+- Accent/brand colors: #030b24, #008b99, #ffca55, #ff6161
+- Surface colors: #ffffff, #0000000d, #030b24, #fff7ee, #f4ece0, #ffca55
+- Text colors: #030b24, #000000, #d8d8d8, #fff7ee, #ffffff
+
+COMPONENT CSS (measured from the live page — reuse these blocks)
+
+.button-primary {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #030b24;
+  border-radius: 3.75px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+.input {
+  background: #fff7ee;
+  color: #000000;
+  border: 1px solid #6b7280;
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+- Button style 1: background transparent, text #030b24, radius 0px, padding 0px 11.25px 0px 0px, font 15px/700, border: 1px solid null
+- Button style 2: background #ffffff, text #000000, radius 3.75px, padding 15px, font 15px/600, border: 2px solid #030b24
+- Links: color #030b24, no underline
+
+ASSETS & MEDIA URLS
+Logo: https://apaleo.com/_next/image?url=%2Fapaleo-logo-dark.png&w=256&q=75
+Key images (largest first):
+  https://images.ctfassets.net/xkk064qjea2b/7rl1qxCxtJv5f0C5HWyM8r/6fbe02c1b551b2872a290264bfcd1a59/The-only-API-hospitality-platform.png?w=3840&q=75&fm=webp
+  https://images.ctfassets.net/xkk064qjea2b/3v1PUUSk6Y1AmEK27Ic4uR/b49b0bcf1bd80160ff3e3af93220c743/Apaleo_Pia_homepage.jpg?w=640&q=75&fm=webp
+  https://images.ctfassets.net/xkk064qjea2b/5vNiOPsS43PV7Whgme3d68/1adeef34272a1586273edc68eefbc5a4/image_69.png?w=384&q=75&fm=webp
+  https://images.ctfassets.net/xkk064qjea2b/5dFb2wb3ukHWtilLUcyOZB/e1e5669225e00b8431cf256ff661d285/Group_7022.png?w=640&q=75&fm=webp
+  https://images.ctfassets.net/xkk064qjea2b/5rmhXAdBPgs8Z1GKYhcXqb/060689ad521b61cd53acdfbd4057185f/Vagabond_blog.png?w=3840&q=75&fm=webp
+  https://images.ctfassets.net/xkk064qjea2b/4nXSrk7NnYZu16U2tQNL3g/f48161bc31fa485408ee55ee6f6226f4/Salt___Rocks_blog.png?w=3840&q=75&fm=webp
+
+SECTION-BY-SECTION BREAKDOWN
+1. <footer class="w-full bg-oxford"> — "Footer" — background: #030b24
+
+SHAPE, DEPTH & SPACING
+- Corner radii: 15px, 60px, 7.5px, 32px, 3.75px
+- Shadows: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, rgba(0, 0, 0, 0.15) 0px 4px 16px 0px
+- Spacing scale (padding/gaps): 22.5px, 7.5px, 15px, 32px, 6px, 16px, 24px, 8px
+- Content max-width: 1280px, 768px, 672px
+- Structure: top navigation header, flexbox sections, grid sections, footer.
+
+ANIMATION PATTERNS
+- Named keyframe animations defined on the page: feedback-slide-in-hs-feedback-left, feedback-slide-out-hs-feedback-left, feedback-slide-in-hs-feedback-right, feedback-slide-out-hs-feedback-right, feedback-slide-in-hs-feedback-top, feedback-slide-out-hs-feedback-top, CookiebotWidgetFadeIn
+
+Follow this system strictly: reuse the exact colors, fonts, radii, shadows and spacing above, reproduce the section structure in order, use the listed asset URLs directly, and match the overall mood of the original design.
+
+'# FANDAqah — Senior Expert Website Redesign, SEO/AEO/GEO Optimization & Full Local Rebuild
+
+## ROLE
+
+Act as a **Senior Product Designer, Senior UI/UX Designer, Creative Director, Frontend Architect, SEO/AEO/GEO Strategist, Content Architect, Accessibility Specialist, and Senior Full-Stack Developer**.
+
+You are responsible for taking the existing Fandaqah website and transforming it into a **premium, modern, highly engaging hospitality technology website** that feels significantly more polished, trustworthy, conversion-focused, and visually distinctive than the existing website.
+
+Do not make a basic redesign.
+
+Create a **new-generation Fandaqah website** with a strong visual identity, premium corporate styling, sophisticated interactions, excellent UX, fast performance, and technically clean HTML/CSS/JS architecture.
+
+---
+
+# 1. PRIMARY OBJECTIVE
+
+Build a completely new version of:
+
+**Fandaqah — Hospitality / Hotel Technology Platform**
+
+Current website:
+
+**https://fandaqah.com/**
+
+Local project:
+
+**C:\laragon\www\dyafa-github\fandaqah**
+
+Existing prompt/reference file:
+
+**C:\laragon\www\dyafa-github\fandaqah\prompt.txt**
+
+You must deeply inspect the existing project before making architectural decisions.
+
+The objective is to:
+
+1. Understand the current website.
+2. Understand its content, structure, messaging, services, and technical implementation.
+3. Analyze competitor websites and high-quality hospitality SaaS/PMS websites.
+4. Identify weak points in the existing design.
+5. Create a significantly more premium visual system.
+6. Preserve useful existing business information.
+7. Improve the information architecture.
+8. Improve SEO, AEO, GEO, accessibility, UX, performance, and conversion paths.
+9. Generate the complete frontend for all required pages.
+10. Make every page functional rather than producing static mockups.
+11. Make the website ready to run on the local development environment.
+12. Produce clear documentation describing the redesign and implementation.
+
+---
+
+# 2. IMPORTANT — READ PROJECT INSTRUCTIONS FIRST
+
+Before making changes:
+
+### Read and follow:
+
+`C:\laragon\www\dyafa-github\fandaqah\claude.md`
+
+Also inspect:
+
+`C:\laragon\www\dyafa-github\fandaqah\prompt.txt`
+
+Do not ignore project-specific instructions.
+
+Follow all applicable requirements from `claude.md`.
+
+If an instruction conflicts with this prompt, prioritize the repository's explicit technical requirements where appropriate while maintaining the design direction and business requirements specified here.
+
+---
+
+# 3. DEEPLY AUDIT THE EXISTING WEBSITE
+
+Do not immediately start coding.
+
+First perform a comprehensive audit of the current Fandaqah website and repository.
+
+Analyze:
+
+### Brand
+
+* Logo
+* Brand language
+* Typography
+* Existing colors
+* Visual consistency
+* Photography
+* Icons
+* Illustration style
+* UI patterns
+* Corporate personality
+
+### UX
+
+Inspect:
+
+* Navigation
+* Header
+* Hero section
+* CTA hierarchy
+* Page hierarchy
+* User journey
+* Mobile navigation
+* Forms
+* Footer
+* Internal linking
+* Content discoverability
+* Conversion paths
+
+### Technical
+
+Inspect:
+
+* HTML
+* CSS
+* JavaScript
+* assets
+* components
+* reusable sections
+* responsive behavior
+* metadata
+* structured data
+* accessibility
+* loading behavior
+* image optimization
+* existing forms
+* scripts
+* analytics placeholders
+* performance problems
+
+### Content
+
+Identify:
+
+* Existing page topics
+* Services
+* Product features
+* Benefits
+* Hospitality terminology
+* FAQs
+* Calls to action
+* Blog/content structure
+* Arabic/English content
+* Duplicate content
+* Thin content
+* Missing topics
+* SEO opportunities
+
+Do not delete useful content simply because the visual design is changing.
+
+---
+
+# 4. COMPETITOR & MARKET RESEARCH
+
+Research current premium hospitality technology websites, hotel PMS platforms, payment platforms, hotel management companies, hospitality SaaS products, and relevant Saudi hospitality businesses.
+
+Use authoritative and current online sources where appropriate.
+
+Research should examine:
+
+* Information architecture
+* Hero layouts
+* Navigation patterns
+* CTA patterns
+* Feature presentation
+* Product storytelling
+* Trust sections
+* Statistics
+* Customer proof
+* Pricing presentation
+* Integrations
+* FAQ structures
+* Blog architectures
+* Conversion funnels
+* Mobile UX
+* Content structures
+* SEO strategies
+* AEO-friendly answers
+* GEO/localized content structures
+* Image usage
+* Animation patterns
+* Scroll storytelling
+
+Do **not copy competitor websites literally**.
+
+Use competitor research for inspiration and benchmarking, then create a **distinct Fandaqah design language**.
+
+Where useful, research Google/Yandex image results and reputable sources for visual references and relevant factual content.
+
+Do not use copyrighted competitor assets as if they belong to Fandaqah.
+
+---
+
+# 5. DESIGN DIRECTION
+
+The new website must feel:
+
+* Premium
+* Modern
+* Trustworthy
+* Corporate
+* Technologically advanced
+* Hospitality-focused
+* Elegant
+* Sophisticated
+* Human
+* High-converting
+* Saudi-market relevant
+* Internationally credible
+
+Avoid:
+
+* Generic SaaS templates
+* Overused startup gradients
+* Excessive glassmorphism
+* Cheap-looking cards
+* Excessive rounded containers
+* Random animations
+* Visual clutter
+* Amateur AI-generated aesthetics
+* Excessive shadows
+* Low-quality stock imagery
+* Too many colors
+* Template-like layouts
+
+The experience should feel like a **premium hospitality technology company**, not a generic software startup.
+
+---
+
+# 6. STRICT COLOR PALETTE
+
+Use ONLY these brand colors throughout the website.
+
+### Primary
+
+**Coral Red**
+`#e95a54`
+
+### Dark
+
+**Dark Navy**
+`#2a273c`
+
+### Background
+
+**Soft Beige**
+`#f2f0eb`
+
+### Secondary Neutral
+
+**Muted Green**
+`#8f9793`
+
+### Accent
+
+**Light Peach**
+`#fbcdab`
+
+Do not introduce additional brand colors.
+
+You may use opacity, transparency, gradients, borders, shadows, and tonal variations derived from these exact colors where technically appropriate, but do not introduce unrelated colors.
+
+The resulting interface must maintain excellent contrast and accessibility.
+
+---
+
+# 7. VISUAL LANGUAGE
+
+Develop a unique visual system around:
+
+### Editorial luxury + hospitality technology
+
+Combine:
+
+* Large editorial typography
+* Strong photography
+* Structured corporate grids
+* Generous whitespace
+* Sharp information hierarchy
+* Elegant asymmetric layouts
+* Product UI compositions
+* Subtle scroll movement
+* Premium micro-interactions
+* Data visualization
+* Hospitality imagery
+* Editorial storytelling
+
+Create a visual rhythm that keeps users interested as they scroll.
+
+---
+
+# 8. CREATE A STRONG SCROLL-STORYTELLING EXPERIENCE
+
+The website should use sophisticated scrolling similar in spirit to premium interactive websites, while remaining fast and accessible.
+
+Use scroll storytelling for important sections.
+
+Potential techniques:
+
+* Sticky storytelling panels
+* Section transitions
+* Image reveals
+* Progressive text reveals
+* Number counters
+* Product UI transformations
+* Horizontal-scroll-inspired visual sequences where appropriate
+* Parallax used sparingly
+* Content cards entering viewport
+* Timeline storytelling
+* Before/after transformations
+* Layered visual compositions
+* Interactive diagrams
+
+Do not over-animate the website.
+
+Every animation must support communication.
+
+Respect:
+
+`prefers-reduced-motion`
+
+---
+
+# 9. WEBSITE INFORMATION ARCHITECTURE
+
+Create a scalable website structure.
+
+At minimum, evaluate and implement appropriate pages such as:
+
+### Main
+
+* Home
+* About Fandaqah
+* Contact
+* Request Demo
+
+### Products / Solutions
+
+* Fandaqah PMS
+* Hotel Management
+* Front Desk
+* Reservations
+* Housekeeping
+* Revenue Management
+* Payment Gateway
+* Payment Links
+* OTA / Virtual Card Collection
+* Reporting & Analytics
+* Integrations
+
+### Hospitality Segments
+
+Potentially:
+
+* Hotels
+* Serviced Apartments
+* Hotel Apartments
+* Boutique Hotels
+* Hospitality Groups
+* Property / Accommodation Operators
+
+### Resources
+
+* Blog
+* Guides
+* Hospitality Insights
+* FAQs
+* Case Studies
+* Knowledge Center
+
+### Company
+
+* About
+* Careers
+* Partners
+* Contact
+
+### Legal
+
+* Privacy Policy
+* Terms & Conditions
+* Cookie Policy
+
+Do not blindly create unnecessary pages.
+
+Use the current website content and SEO opportunity analysis to determine the final information architecture.
+
+---
+
+# 10. HOME PAGE — DESIGN THE COMPLETE EXPERIENCE
+
+Create a highly polished homepage.
+
+Suggested structure:
+
+## Section 01 — Premium Hero
+
+Communicate immediately:
+
+* What Fandaqah is
+* Who it is for
+* Why it matters
+
+Include:
+
+* Powerful headline
+* Supporting statement
+* Primary CTA
+* Secondary CTA
+* Product visual
+* Hospitality imagery or interface composition
+* Trust indicators
+
+The hero should communicate value within seconds.
+
+---
+
+## Section 02 — Trust / Social Proof
+
+Examples:
+
+* Hotels using Fandaqah
+* Number of reservations
+* Properties managed
+* Transactions processed
+* Operational efficiency
+* Customer metrics
+
+Use real data only when verified.
+
+Never invent statistics.
+
+---
+
+## Section 03 — Hospitality Problems
+
+Explain operational problems such as:
+
+* fragmented systems
+* manual workflows
+* payment delays
+* reconciliation challenges
+* OTA complexity
+* operational inefficiency
+* poor visibility
+* disconnected departments
+
+Use a highly visual storytelling layout.
+
+---
+
+## Section 04 — Fandaqah Solution
+
+Show how Fandaqah brings hotel operations together.
+
+Use:
+
+* central product visual
+* connected modules
+* workflow diagram
+* subtle animated relationships
+
+---
+
+## Section 05 — PMS
+
+Create a strong product showcase.
+
+Include:
+
+* dashboard visualization
+* reservations
+* rooms
+* guests
+* billing
+* housekeeping
+* reports
+* operations
+
+Make it feel like a real premium hospitality platform.
+
+---
+
+## Section 06 — Payments
+
+Highlight the payment ecosystem where applicable.
+
+Potential payment methods/content:
+
+* Visa
+* Mastercard
+* Mada
+* Apple Pay
+* Tabby
+* Tamara
+* Card payments
+* Payment links
+* OTA virtual cards
+
+Do not claim integrations unless supported by verified Fandaqah information.
+
+---
+
+## Section 07 — Operational Automation
+
+Visually explain:
+
+Booking → Reservation → Payment → Check-in → Stay → Billing → Checkout → Reporting
+
+Make this section highly engaging.
+
+---
+
+## Section 08 — Departments Working Together
+
+Show:
+
+* Front Desk
+* Reservations
+* Housekeeping
+* Finance
+* Management
+* Revenue
+* Operations
+
+Explain how information flows through the system.
+
+---
+
+## Section 09 — Analytics / Management Intelligence
+
+Create a sophisticated dashboard/data visualization section.
+
+Show examples such as:
+
+* occupancy
+* ADR
+* RevPAR
+* revenue
+* bookings
+* room performance
+* payment status
+* operational KPIs
+
+Use real values only if available.
+
+Otherwise clearly mark demo/mock data in source code and avoid presenting it as company performance.
+
+---
+
+## Section 10 — Why Fandaqah
+
+Create a strong differentiation section.
+
+Possible categories:
+
+* Hospitality-first technology
+* Automation
+* Centralized operations
+* Payment connectivity
+* Real-time visibility
+* Saudi-market relevance
+* Ease of use
+* Scalable architecture
+
+Base claims on verified information.
+
+---
+
+## Section 11 — Integrations
+
+Present the platform ecosystem elegantly.
+
+Potential categories:
+
+* OTAs
+* Payments
+* Accounting
+* Distribution
+* Communication
+* Booking channels
+* Other hospitality technology
+
+Only list real integrations that can be verified.
+
+---
+
+## Section 12 — Testimonials / Case Studies
+
+Use real testimonials when available.
+
+Do not fabricate:
+
+* customer names
+* quotes
+* hotel logos
+* performance statistics
+
+Create a reusable component that can later accept real data.
+
+---
+
+## Section 13 — FAQ
+
+Build an extensive SEO/AEO-friendly FAQ section.
+
+Questions should reflect actual customer intent.
+
+Examples:
+
+* What is Fandaqah?
+* What does Fandaqah PMS do?
+* Who can use Fandaqah?
+* How does hotel payment automation work?
+* Can hotels collect OTA virtual card payments?
+* Can guests pay through payment links?
+* Which payment methods are supported?
+* How does Fandaqah help hotel operations?
+* Can Fandaqah integrate with other systems?
+* How can I request a demo?
+
+Only answer using verified information.
+
+---
+
+## Section 14 — Final CTA
+
+Create a visually powerful closing section.
+
+Primary message:
+
+Move users toward:
+
+**Request a Demo**
+
+Secondary path:
+
+**Talk to Fandaqah**
+
+---
+
+# 11. CONTENT STRATEGY
+
+Rewrite website content where required.
+
+Content should be:
+
+* Clear
+* Professional
+* Persuasive
+* Human
+* Search-friendly
+* Helpful
+* Specific
+* Easy for non-technical users to understand
+
+Avoid keyword stuffing.
+
+Write for humans first.
+
+Use terminology relevant to:
+
+* Saudi hotels
+* hotel managers
+* general managers
+* operations teams
+* finance teams
+* revenue managers
+* hospitality groups
+* property operators
+
+---
+
+# 12. SEO OPTIMIZATION
+
+Implement technical and on-page SEO across the entire website.
+
+Every page must have:
+
+* Unique `<title>`
+* Unique meta description
+* Canonical URL
+* Proper heading hierarchy
+* Open Graph metadata
+* Twitter/X metadata
+* Descriptive image alt text
+* Internal links
+* SEO-friendly URLs
+* Structured content
+* Breadcrumbs where appropriate
+* Mobile-friendly layout
+* Fast loading
+* Semantic HTML
+
+Create:
+
+* `sitemap.xml`
+* `robots.txt`
+* favicon
+* appropriate manifest if applicable
+
+Implement Schema.org structured data where appropriate, such as:
+
+* Organization
+* WebSite
+* WebPage
+* BreadcrumbList
+* FAQPage where eligible
+* Product
+* SoftwareApplication
+* Article
+* LocalBusiness where justified
+
+Do not add structured data that does not accurately represent the page.
+
+---
+
+# 13. AEO — ANSWER ENGINE OPTIMIZATION
+
+Structure content so search and answer engines can understand Fandaqah clearly.
+
+Use:
+
+* concise answer blocks
+* question-based headings
+* explicit definitions
+* FAQ sections
+* structured facts
+* entity relationships
+* descriptive headings
+* short direct answers followed by detail
+
+Important information should be understandable even when extracted as a standalone answer.
+
+---
+
+# 14. GEO — GENERATIVE / LOCAL SEARCH OPTIMIZATION
+
+Optimize content for discovery in AI-powered search and geographic queries.
+
+Include naturally relevant context around:
+
+* Saudi Arabia
+* Riyadh
+* Jeddah
+* Dammam
+* Eastern Province
+* hospitality technology in Saudi Arabia
+* hotel PMS Saudi Arabia
+* hotel management software
+* hotel payment automation
+* Saudi hospitality operations
+
+Do not artificially insert locations.
+
+Use geographic references where genuinely relevant.
+
+---
+
+# 15. IMAGE STRATEGY
+
+Use high-quality hospitality imagery.
+
+Prioritize:
+
+* Saudi hospitality environments
+* premium hotel interiors
+* reception desks
+* hotel managers
+* hotel operations
+* guests
+* technology
+* professional hospitality teams
+* modern architecture
+
+Images should feel:
+
+* authentic
+* premium
+* contemporary
+* realistic
+* corporate
+* regionally relevant
+
+Avoid repetitive stock photography.
+
+Optimize images using:
+
+* WebP/AVIF where supported
+* responsive images
+* lazy loading
+* explicit width/height
+* descriptive filenames
+* alt attributes
+
+Do not allow large images to damage Core Web Vitals.
+
+---
+
+# 16. RESPONSIVE DESIGN
+
+The website must be designed intentionally for:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+Do not simply shrink the desktop layout.
+
+Mobile must have:
+
+* excellent navigation
+* readable typography
+* touch-friendly controls
+* simplified complex interactions
+* logical spacing
+* optimized image cropping
+* strong CTA visibility
+* no horizontal overflow
+
+Test common viewport sizes.
+
+---
+
+# 17. ACCESSIBILITY
+
+Target WCAG 2.2 AA principles where practical.
+
+Implement:
+
+* semantic HTML
+* keyboard navigation
+* visible focus states
+* accessible buttons
+* proper labels
+* alt text
+* sufficient contrast
+* accessible menus
+* accessible dialogs
+* reduced-motion support
+* appropriate ARIA only where needed
+
+Do not use animation as the only way to communicate information.
+
+---
+
+# 18. PERFORMANCE
+
+Optimize aggressively.
+
+Target:
+
+* fast first load
+* minimal blocking JavaScript
+* optimized fonts
+* responsive images
+* lazy-loaded below-fold media
+* minimal dependencies
+* efficient CSS
+* code splitting where appropriate
+* no unnecessary libraries
+
+Pay particular attention to:
+
+* LCP
+* CLS
+* INP
+
+Do not sacrifice performance for decorative effects.
+
+---
+
+# 19. COMPONENT SYSTEM
+
+Build reusable components rather than duplicating code.
+
+Examples:
+
+* Header
+* Mobile menu
+* Hero
+* CTA
+* Feature section
+* Product showcase
+* Metric section
+* Testimonial
+* FAQ
+* Breadcrumbs
+* Footer
+* Blog card
+* Article layout
+* Contact form
+* Demo form
+* Logo cloud
+* Integration card
+* Dashboard visual
+* Scroll-story section
+
+Maintain a consistent design system.
+
+---
+
+# 20. MICRO-INTERACTIONS
+
+Implement polished interactions such as:
+
+* hover transitions
+* button feedback
+* navigation animations
+* subtle card movement
+* image reveals
+* text reveals
+* scroll progress
+* metric counters
+* accordion transitions
+* CTA transitions
+
+Keep them elegant and restrained.
+
+The website should feel expensive, not flashy.
+
+---
+
+# 21. FUNCTIONALITY
+
+Every interactive element must actually work.
+
+Do not create fake buttons.
+
+Ensure:
+
+* navigation links work
+* mobile navigation works
+* FAQ accordion works
+* forms validate
+* forms have useful feedback
+* buttons point to valid destinations
+* internal links resolve
+* language switching works if implemented
+* search works if implemented
+* blog navigation works
+* breadcrumbs work
+* modals close correctly
+* keyboard interactions work
+
+Where backend services do not yet exist, create clean frontend-ready interfaces and clearly document integration points.
+
+---
+
+# 22. FORMS
+
+Design professional forms for:
+
+### Request Demo
+
+Potential fields:
+
+* Name
+* Company
+* Email
+* Phone
+* Number of properties
+* Property type
+* Message
+
+Use only fields that make business sense.
+
+Add:
+
+* validation
+* error states
+* success states
+* loading state
+* accessible labels
+* spam protection architecture
+* backend integration placeholder if required
+
+Do not expose secrets in frontend code.
+
+---
+
+# 23. BILINGUAL / ARABIC SUPPORT
+
+Architect the website so Arabic can be supported properly.
+
+Arabic must not be treated as a simple text replacement.
+
+Consider:
+
+* RTL layout
+* Arabic typography
+* mirrored spacing
+* navigation behavior
+* icons
+* alignment
+* Arabic SEO metadata
+* Arabic headings
+* Arabic URLs where appropriate
+
+Create a reusable localization architecture if bilingual support is required by the existing project.
+
+---
+
+# 24. BLOG / CONTENT ARCHITECTURE
+
+Create a scalable blog structure optimized for SEO/AEO/GEO.
+
+Support:
+
+* categories
+* tags
+* authors
+* publication date
+* updated date
+* featured image
+* article schema
+* breadcrumbs
+* related articles
+* FAQ blocks
+* internal linking
+* social metadata
+
+Content categories should reflect real Fandaqah/hospitality topics.
+
+---
+
+# 25. CODE QUALITY
+
+Use clean production-quality code.
+
+Requirements:
+
+* modular structure
+* reusable components
+* meaningful naming
+* comments only where useful
+* no unnecessary duplication
+* no dead code
+* no console errors
+* no broken links
+* no missing assets
+* no placeholder lorem ipsum
+* no unfinished sections
+
+Do not leave temporary demo code in production paths unless explicitly documented.
+
+---
+
+# 26. SECURITY
+
+Do not expose:
+
+* API keys
+* passwords
+* private tokens
+* credentials
+* secret environment variables
+
+Use environment variables for secrets.
+
+Sanitize and validate form input.
+
+Avoid unsafe HTML injection.
+
+---
+
+# 27. LOCAL HOST REQUIREMENTS
+
+The finished website must work on the local Fandaqah environment.
+
+Before finishing:
+
+1. Determine the current project structure.
+2. Determine the required local server/runtime.
+3. Preserve required existing configuration.
+4. Create all required HTML/CSS/JS/assets/components.
+5. Confirm all pages are reachable.
+6. Confirm assets load correctly.
+7. Confirm responsive behavior.
+8. Confirm no broken routes.
+9. Confirm no console errors.
+
+Do not destroy the old project until the new implementation is complete and validated.
+
+Create the new website in a clean structure so it can replace the existing version safely.
+
+---
+
+# 28. VALIDATION CHECKLIST
+
+Before declaring the project complete, perform a full audit.
+
+### Visual
+
+* Desktop
+* Mobile
+* Tablet
+* Typography
+* Spacing
+* Color usage
+* Images
+* Animations
+* Navigation
+* Footer
+
+### Functional
+
+* Links
+* Buttons
+* Forms
+* Menus
+* Accordions
+* Modals
+* Language switching
+* Blog navigation
+
+### SEO
+
+* Titles
+* Meta descriptions
+* Canonicals
+* Headings
+* Schema
+* Sitemap
+* Robots
+* Internal links
+* Alt text
+
+### AEO/GEO
+
+* Question structures
+* FAQ
+* entity clarity
+* geographic relevance
+* concise answer sections
+* semantic content
+
+### Accessibility
+
+* Keyboard
+* focus
+* contrast
+* semantics
+* labels
+* reduced motion
+
+### Performance
+
+* image optimization
+* unnecessary JS
+* CSS
+* loading
+* layout stability
+
+### Code
+
+* console errors
+* broken imports
+* dead code
+* missing files
+* invalid HTML
+* duplicate IDs
+* broken routes
+
+---
+
+# 29. DELIVERABLES
+
+Create all necessary files for the complete website.
+
+At minimum provide:
+
+### Website
+
+* All required HTML/pages
+* CSS
+* JavaScript
+* reusable components where applicable
+* responsive layouts
+* optimized assets
+* favicon/branding assets
+* sitemap
+* robots
+* structured data
+
+### Documentation
+
+Create:
+
+`DESIGN_UPDATE.md`
+
+This document must thoroughly explain the completed work.
+
+Include:
+
+## 1. Executive Summary
+
+What changed and why.
+
+## 2. Existing Website Audit
+
+Problems identified in the old website.
+
+## 3. New Design Strategy
+
+The new visual and UX direction.
+
+## 4. Brand System
+
+Explain:
+
+* colors
+* typography
+* spacing
+* buttons
+* cards
+* imagery
+* borders
+* shadows
+* animation
+
+## 5. Information Architecture
+
+Complete sitemap and navigation structure.
+
+## 6. Page-by-Page Specification
+
+For every page explain:
+
+* purpose
+* target user
+* sections
+* content
+* CTA
+* SEO strategy
+* UX behavior
+
+## 7. Component System
+
+Document reusable components.
+
+## 8. SEO Strategy
+
+Document:
+
+* title strategy
+* metadata
+* schema
+* internal links
+* content clusters
+
+## 9. AEO Strategy
+
+Document answer-oriented content structures.
+
+## 10. GEO Strategy
+
+Document geographic/entity optimization.
+
+## 11. Accessibility
+
+Document accessibility decisions.
+
+## 12. Performance
+
+Document optimization decisions.
+
+## 13. Responsive Design
+
+Explain desktop/tablet/mobile behavior.
+
+## 14. Technical Architecture
+
+Explain file structure and implementation.
+
+## 15. Backend Integration Points
+
+Document all APIs/forms/backend requirements.
+
+## 16. Testing & Validation
+
+Record what was tested and the results.
+
+## 17. Remaining Work
+
+Clearly identify anything that could not be completed because external credentials, APIs, real customer data, production integrations, or other unavailable resources are required.
+
+---
+
+# 30. IMPORTANT CONTENT INTEGRITY RULE
+
+Never invent company facts.
+
+Do not fabricate:
+
+* customer numbers
+* hotel counts
+* transaction volume
+* testimonials
+* logos
+* awards
+* partnerships
+* integrations
+* certifications
+* financial results
+* performance percentages
+* company history
+
+When information cannot be verified, use neutral placeholder structures and document the required real data.
+
+---
+
+# 31. DESIGN QUALITY BAR
+
+Do not stop at:
+
+“Looks good.”
+
+The final result should feel like a **senior design agency / senior product team created the website**.
+
+Continuously ask:
+
+* Is this visually distinctive?
+* Is the hierarchy obvious?
+* Does each section have a reason to exist?
+* Does the page tell a coherent story?
+* Is the CTA obvious?
+* Does the website communicate hospitality expertise?
+* Does it feel trustworthy?
+* Does it feel premium?
+* Does it look excellent on mobile?
+* Does it load quickly?
+* Does the content answer customer questions?
+* Can Google and AI systems understand the company?
+* Does the site feel original rather than copied from a template?
+
+---
+
+# 32. FINAL EXECUTION RULE
+
+Do not provide only a design proposal.
+
+**Actually implement the website.**
+
+Do not merely describe HTML files.
+
+Create the actual files.
+
+Do not merely describe components.
+
+Implement them.
+
+Do not merely list SEO recommendations.
+
+Implement the SEO.
+
+Do not merely describe mobile UX.
+
+Implement responsive behavior.
+
+Do not merely describe animations.
+
+Implement them appropriately.
+
+Do not copy competitors.
+
+Study them, extract useful patterns, and create a stronger **original Fandaqah visual language**.
+
+The final output should be a complete, polished, functional, maintainable Fandaqah website that can replace the existing local website after validation.
+'

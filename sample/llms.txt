@@ -1,0 +1,74 @@
+# Fandaqah (فندقة)
+
+> Fandaqah is a Saudi cloud hospitality management platform for hotels, serviced
+> apartments, resorts and chalets. It combines a Property Management System (PMS),
+> a channel manager and a direct booking engine in one system, with native
+> integration to Saudi government platforms.
+
+## Company
+- Legal name: Fandaqah Information Technology Company (شركة فندقة لتقنية المعلومات)
+- Head office: Prince Turki Street, Aldugheither Village, Al Khobar 34611, Saudi Arabia
+- Unified phone: 920066456 · WhatsApp: +966555947522
+- Hours: Sunday – Thursday, 9:00 AM – 5:00 PM
+- Languages: Arabic and English (full RTL interface, reports and support)
+
+## Verified scale
+- 800+ partner hotels and properties
+- 250,000+ bookings processed
+- 15 system integrations
+- 92% customer satisfaction
+- 99.9% operational efficiency; 24/7 technical support
+
+## What makes it distinct
+Native compliance with Saudi regulation, built in rather than added on:
+- ZATCA (Zakat, Tax and Customs Authority): Phase 2 e-invoicing, automatic 15% VAT
+- Ministry of Tourism: automatic filing to the National Tourism Monitoring Platform
+- Shomoos platform: guest registration and identity verification
+- Balady platform: disclosure reporting
+
+## Core products
+- Property Management System (PMS): The operating core: a front-desk dashboard, reservations, housekeeping, billing and reporting in one place.
+- Channel Manager: Real-time rate and availability sync across local and global booking platforms, with one-click pricing updates.
+- Website & Booking Engine: Your own property website and a zero-commission direct booking engine, with multiple payment gateways.
+
+## Notable capabilities
+- Dashboard
+- Booking Management
+- Reports
+- Instant Passport & Saudi ID Scanner
+- E-signature via Sign Stay tablets
+- Smart Automation
+- Security & Protection
+- Guest Reviews
+- Communication & Support Hub
+- AI Dynamic Pricing
+- Smart Integrations
+- Guest App & Mobile Operations
+
+## Pricing
+- One-time setup fee: SAR 300
+- VAT: 15% added to the total
+- Subscription: set by property type, unit count and add-ons; quote on request
+- A free trial is available with no credit card
+
+## Pages
+- https://fandaqah.com/ (ar)
+- https://fandaqah.com/features.html (ar)
+- https://fandaqah.com/pricing.html (ar)
+- https://fandaqah.com/about.html (ar)
+- https://fandaqah.com/blog.html (ar)
+- https://fandaqah.com/contact.html (ar)
+- https://fandaqah.com/privacy.html (ar)
+- https://fandaqah.com/terms.html (ar)
+- https://fandaqah.com/en/ (en)
+- https://fandaqah.com/en/features.html (en)
+- https://fandaqah.com/en/pricing.html (en)
+- https://fandaqah.com/en/about.html (en)
+- https://fandaqah.com/en/blog.html (en)
+- https://fandaqah.com/en/contact.html (en)
+- https://fandaqah.com/en/privacy.html (en)
+- https://fandaqah.com/en/terms.html (en)
+
+## Blog
+370+ articles on Saudi hotel operations, ZATCA compliance, Shomoos integration,
+revenue management and direct bookings: https://fandaqah.com/blogs
