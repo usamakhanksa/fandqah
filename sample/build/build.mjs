@@ -17,6 +17,7 @@ import { MODULES, CAPABILITY_GROUPS, DEEP_FEATURES, REPORTS, TESTIMONIALS, ABOUT
   from "./content-extra.mjs";
 import { featuresSections } from "./features-body.mjs";
 import { aboutSections } from "./about-body.mjs";
+import { blogSections } from "./blog-body.mjs";
 import { planCards, planMatrix, costCalc, addonNote } from "./pricing.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -143,7 +144,7 @@ function head(L, key, extraLd = []) {
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pre}assets/css/fandaqah.css">
 <link rel="stylesheet" href="${pre}assets/css/fandaqah-parts.css">
-${["features", "about"].includes(key) ? `<link rel="stylesheet" href="${pre}assets/css/fandaqah-pages.css">` : ""}
+${["features", "about", "blog"].includes(key) ? `<link rel="stylesheet" href="${pre}assets/css/fandaqah-pages.css">` : ""}
 ${key === "home" ? `<link rel="preload" as="image" type="image/webp"
       imagesrcset="${pre}assets/site/about-photo-640.webp 640w, ${pre}assets/site/about-photo-960.webp 960w, ${pre}assets/site/about-photo-1280.webp 1280w, ${pre}assets/site/about-photo-1536.webp 1536w"
       imagesizes="(max-width: 900px) 92vw, 46vw" fetchpriority="high">` : ""}
@@ -971,36 +972,15 @@ ${ctaBand(L)}
 }
 
 function blogBody(L) {
+  const pre = P(L);
+  const { lead, archive, band } = blogSections({ L, pre, esc, T, photo });
   return `
 <main id="main">
 ${crumbs(L, "blog")}
 ${pageHero(L, "blog")}
-
-<section class="sec sec--tight">
-  <div class="wrap">
-    ${BLOG_TOPICS.map((topic, i) => `
-    <section style="margin-bottom:56px">
-      <div class="stack rv" style="margin-bottom:26px">
-        <h2 class="h3">${esc(T(topic.t, L))}</h2>
-        <p class="body">${esc(T(topic.d, L))}</p>
-      </div>
-      <div class="grid grid--3">
-        ${topic.posts.map((post, j) => `
-        <article class="card card--lift rv" data-rv="${j * 80}">
-          <h3 class="h4" style="line-height:1.4">
-            <a href="${SITE.blogRoot.replace("/blogs", "")}${post.url}" rel="noopener">${esc(T(post, L))}</a>
-          </h3>
-          <p class="small" style="margin-top:14px;color:var(--brand-deep);font-weight:700">${esc(T(UI.readMore, L))} →</p>
-        </article>`).join("")}
-      </div>
-    </section>`).join("")}
-
-    <div class="center rv">
-      <a class="btn btn--primary" href="${SITE.blogRoot}" rel="noopener">${esc(T(UI.allPosts, L))}</a>
-    </div>
-  </div>
-</section>
-
+${lead}
+${archive}
+${band}
 ${ctaBand(L)}
 </main>`;
 }

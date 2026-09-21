@@ -6,7 +6,7 @@ import { chromium } from "playwright-core";
 const B = "http://localhost:4700";
 const b = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe" });
 for (const [tag, url] of [["ar home", "/index.html"], ["en home", "/en/index.html"],
-   ["features", "/features.html"], ["about", "/about.html"], ["contact", "/contact.html"]]) {
+   ["features", "/features.html"], ["about", "/about.html"], ["blog", "/blog.html"], ["contact", "/contact.html"]]) {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   const bytes = {}; let total = 0;

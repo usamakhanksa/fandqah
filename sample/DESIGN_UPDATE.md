@@ -380,8 +380,57 @@ is added here.
 
 ### Blog
 
-A styled index into the 370 posts that remain on the live site; their URLs are
-preserved in the sitemap. `Blog` + `BlogPosting`.
+Rebuilt as a **working archive tool**, not a feed. **2,972 words, 184 cards.**
+
+Fandaqah publishes **370 posts, 185 Arabic and 185 English**, as bilingual pairs.
+They live on fandaqah.com (`/blogs/` for Arabic, `/en/blogs/` for English) and are
+not being moved, so this page indexes them rather than copying them. The previous
+version showed nine hand-picked posts and a "see all" button, which left 361
+articles unreachable from the site.
+
+#### Competitor scan
+
+| Pattern | Mews | SiteMinder | Cloudbeds | Taken |
+|---|---|---|---|---|
+| Search | yes | no | yes | **yes** |
+| Topic filter rail | yes (content type + tags) | no | no | **yes, as chips with counts** |
+| Topic-clustered hubs | no | **yes** ("Read more on ai", "…on hotel distribution") | no | folded into the chips |
+| Featured lead article | yes, 2-up | yes, "latest" | — | **yes, one** |
+| Read time on cards | yes | no | — | **no** (see integrity below) |
+
+Cloudbeds returned a 403 to a headless browser and renders its index client-side,
+so only its search could be confirmed. SiteMinder's topic hubs were the most
+useful idea in the set: an archive this size needs to be entered by subject, not
+scrolled. Mews's persistent filter rail solves the same problem more directly, so
+the build uses chips carrying live counts rather than a static hub per topic.
+
+#### How it works
+
+- **The entire archive for the current language is rendered server side.** With
+  scripts off, all 184 cards are present, linked and crawlable, and the search and
+  pager simply hide themselves. Nothing is gated behind JavaScript.
+- With scripts on, the same markup is filtered by topic and by a text search, and
+  paged 24 at a time. Filtering toggles the `hidden` attribute; it never
+  re-renders, so no link is ever destroyed and no layout is rebuilt.
+- The Arabic search **folds orthographic variants** (diacritics, tatweel,
+  alef/yaa/taa-marbuta spellings), so "زاتكا" matches regardless of how a title
+  happens to be written.
+- The lead article is chosen by rule, not by hand: a title that announces a
+  complete guide, in compliance or technology, longest as the tie-break. Picking
+  purely by length surfaced a landing-page slogan, so the guide marker was added.
+
+#### Content integrity on this page
+
+The page states in its own body that **topics are inferred from titles rather
+than hand-curated**, because they are: `build/blog-index.json` is produced by
+keyword rules over the real slugs, not by editorial metadata. Nine topics, no
+orphan category.
+
+There are **no dates and no read times** on the cards. Both would have looked
+better and neither can be known from a published URL, so neither is asserted.
+There are also **no per-post thumbnails**: 370 unrelated stock images would be
+dishonest padding and would ruin the page weight. Photography appears where it
+carries meaning, on the lead article and the band.
 
 ### Contact
 
@@ -497,7 +546,15 @@ Target: WCAG 2.2 AA where practical.
 | Home first load (ar / en) | — | **551 kB / 294 kB** |
 | Home full scroll (ar / en) | — | **794 kB / 538 kB** |
 | Features first load / full scroll | — | **467 kB / 703 kB** |
-| About first load / full scroll | — | **653 kB / 771 kB** |
+| About first load / full scroll | — | **661 kB / 780 kB** |
+| Blog first load / full scroll | — | **653 kB / 939 kB** |
+
+**The blog page ships its whole archive as HTML, and that needs compression on.**
+184 cards of repetitive markup measure 168 kB raw and **19 kB gzipped, 14 kB with
+brotli**: about nine to one. Measured, not assumed. That trade buys a fully
+crawlable archive and instant client-side search with no API and no backend, but
+it depends on the server compressing HTML. If compression is off, the page costs
+168 kB instead of 14. See §15.
 
 The wide band photographs are encoded at lower WebP quality than the card art,
 because they sit under a heavy scrim and detail beneath the copy is never read
@@ -562,6 +619,8 @@ build/
   content-extra.mjs  Features/About content, with provenance for every string
   features-body.mjs  the Features page body and its three interface readouts
   about-body.mjs     the About page body
+  blog-body.mjs      the Blog archive, its taxonomy and the lead-article rule
+  blog-index.json    370 real posts parsed from the published URLs, with topics
   verify.mjs       render, console, 404s, SEO head, h1, hreflang, overflow
   contrast.mjs     every text run against its effective background
   a11y.mjs         heading order, labels, landmarks, duplicate ids, focus, targets
@@ -570,6 +629,7 @@ build/
   degraded.mjs     JS-disabled, reduced-motion, chevron orientation
   story.mjs        pinning and step advance at seven scroll positions
   hero.mjs         hero plane separation, and stillness under reduced motion
+  blog.mjs         the blog archive: filter, search, pager, no-JS fallback
   photocontrast.mjs  contrast of text on photographs, measured on real pixels
   perf.mjs         payload by type and LCP element
   scrape-*.mjs     how the live plan data was recovered (kept for provenance)
@@ -601,6 +661,8 @@ Editing any page by hand is a mistake: `node build/build.mjs` overwrites all 16.
 | 4 | **Pricing** | Hard-coded from the live checkout at build time | If plans change, update `PLANS` in `build/content.mjs` and rebuild. A future option is to read the store API at build time |
 | 5 | **Blog** | Index links to the 370 live posts | If posts move in-house, `BlogPosting` schema and the card component are already in place |
 | 6 | **Analytics** | **Not installed.** No tag, no consent banner | Decide on a provider; a consent gate is required before any non-essential cookie |
+| 7 | **HTTP compression** | Assumed, not configured here | Enable gzip or brotli for `text/html`. The blog archive is 168 kB raw and 14 kB brotli; every other page benefits too. This is the single cheapest performance action left |
+| 8 | **Blog taxonomy** | Nine topics inferred by keyword rules over post titles | If the CMS can expose a real category per post, replace `build/blog-index.json` with that export and the page needs no other change. The heuristic is honest but it is still a heuristic |
 
 No API key, token or credential appears anywhere in the frontend.
 
@@ -620,6 +682,7 @@ All harnesses run against `http://localhost:4700` in headless Chrome.
 | `degraded.mjs` | JS disabled and reduced motion: all six panels and readouts render, nothing stuck at `opacity: 0`, stage un-pins, FAQ still works; chevron rotation in both scripts | **all pass** |
 | `story.mjs` | pinning and step advance at 7 scroll positions | stage holds `top: 0`, steps and panels move 0→5 in lockstep, exactly one panel visible |
 | `hero.mjs` | the four hero planes travel by different amounts, and none moves when motion is reduced | glow −27.9 px, photograph −11.4 px, figure chip −39.3 px over a 420 px scroll; all static under `prefers-reduced-motion` |
+| `blog.mjs` | archive filter, search, pager, empty state, every card linking to a real post, and the no-JS fallback, in both languages | **all pass** |
 | `photocontrast.mjs` | text over photography on home, Features and About, graded on composited pixels at 1440 px and 390 px in both languages | **72 runs, 0 failing** |
 | `perf.mjs` | payload by resource type, LCP element and time | LCP element is the 42 kB WebP |
 
@@ -713,10 +776,14 @@ available.
    the same file stems and run `node build/photos.mjs && node build/build.mjs`.
    The markup references stems, not files, so nothing else changes. Rewrite the
    alt text to describe the real property when you do.
-9. **Pages deliberately not built** (§5): per-module product pages, per-segment
+9. **Blog post dates.** The published URLs carry no date, so the archive sorts by
+   post id and shows no date. If the CMS can export published dates, the cards can
+   carry them and the archive can offer newest-first, which is the one control a
+   reader of 185 articles will expect next.
+10. **Pages deliberately not built** (§5): per-module product pages, per-segment
    pages, Careers, Partners, Case Studies, Cookie Policy. Each needs real content
    first. The sections and anchors that would seed them already exist.
-10. **Illustrative values are labelled as such.** Two readouts show specimen numbers
+11. **Illustrative values are labelled as such.** Two readouts show specimen numbers
    rather than company data: the invoice slip (1,200 + 180 + 15% VAT = 1,587) and
    the occupancy bars. The arithmetic is internally correct and the VAT rate is the
    real Saudi rate, but these are **interface specimens, not Fandaqah performance

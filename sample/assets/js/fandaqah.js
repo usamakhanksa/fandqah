@@ -236,6 +236,80 @@
     });
   }
 
+
+  /* ---------------- blog archive: filter, search, page ----------------
+     The whole archive is already in the DOM, rendered by the build, so
+     with scripts off every post is present and crawlable. This only
+     narrows what is shown. Filtering is a hidden attribute toggle, not a
+     re-render, so no layout is rebuilt and no link is ever destroyed.   */
+  var arc = document.getElementById("arc");
+  if (arc) {
+    var PAGE = 24;
+    var posts  = [].slice.call(arc.querySelectorAll(".post"));
+    var chips  = [].slice.call(document.querySelectorAll(".chipf"));
+    var q      = document.getElementById("q");
+    var more   = document.getElementById("arc-more");
+    var empty  = document.getElementById("arc-empty");
+    var count  = document.getElementById("arc-count");
+    var AR     = document.documentElement.lang === "ar";
+    var cat = "all", term = "", shown = PAGE;
+
+    var norm = function (s) {
+      /* fold Arabic orthographic variants so a search for "زاتكا" also
+         matches "زاتكا،" and alef/yaa spelling differences */
+      return (s || "").toLowerCase()
+        .replace(/[ً-ْـ]/g, "")
+        .replace(/[أإآ]/g, "ا")
+        .replace(/ى/g, "ي")
+        .replace(/ة/g, "ه");
+    };
+
+    var apply = function () {
+      var hits = 0;
+      posts.forEach(function (el) {
+        var okCat = cat === "all" || el.getAttribute("data-cat") === cat;
+        var okTerm = !term || norm(el.getAttribute("data-t")).indexOf(term) > -1;
+        var match = okCat && okTerm;
+        if (match) { hits++; el.hidden = hits > shown; }
+        else el.hidden = true;
+      });
+      empty.hidden = hits !== 0;
+      more.hidden = hits <= shown;
+      count.hidden = (cat === "all" && !term);
+      if (!count.hidden) {
+        count.textContent = AR
+          ? hits + " مقالًا مطابقًا"
+          : hits + (hits === 1 ? " article" : " articles") + " match";
+      }
+    };
+
+    chips.forEach(function (c) {
+      c.addEventListener("click", function () {
+        cat = c.getAttribute("data-cat");
+        shown = PAGE;
+        chips.forEach(function (o) { o.setAttribute("aria-pressed", String(o === c)); });
+        apply();
+      });
+    });
+
+    var timer;
+    q.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { term = norm(q.value.trim()); shown = PAGE; apply(); }, 140);
+    });
+
+    more.addEventListener("click", function () {
+      shown += PAGE;
+      apply();
+      /* move focus to the first newly revealed card so the keyboard does
+         not get dumped back at the top of the list */
+      var next = posts.filter(function (el) { return !el.hidden; })[shown - PAGE];
+      if (next) { var a = next.querySelector("a"); if (a) a.focus(); }
+    });
+
+    apply();
+  }
+
   /* ---------------- pricing: show what a plan really costs ----------------
      Adds VAT and the one-time setup fee to the selected plan, using the
      figures published on the store. Nothing is estimated here: the rates
