@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n-title>ربط البيانات المالية مع منصة السياحة | فندقة</title>
+<meta name="description" id="metaDesc" content="تعرف على كيفية ربط دليل الحسابات والقيود المالية مع منصة السياحة، ومزامنة البيانات وإعداد التقارير المالية بدقة وسهولة.">
+<link rel="canonical" href="https://fandaqah.com/ar/financial-integration">
+<link rel="alternate" hreflang="ar" href="https://fandaqah.com/ar/financial-integration">
+<link rel="alternate" hreflang="en" href="https://fandaqah.com/en/financial-integration">
+<link rel="alternate" hreflang="x-default" href="https://fandaqah.com/financial-integration">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fandaqah">
+<meta property="og:title" id="ogTitle" content="ربط البيانات المالية مع منصة السياحة | فندقة">
+<meta property="og:description" id="ogDesc" content="تعرف على كيفية ربط دليل الحسابات والقيود المالية مع منصة السياحة، ومزامنة البيانات وإعداد التقارير المالية بدقة وسهولة.">
+<meta property="og:url" content="https://fandaqah.com/financial-integration">
+<meta property="og:locale" id="ogLocale" content="ar_SA">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="ربط البيانات المالية مع منصة السياحة | فندقة">
+<meta name="twitter:description" id="twDesc" content="تعرف على كيفية ربط دليل الحسابات والقيود المالية مع منصة السياحة، ومزامنة البيانات وإعداد التقارير المالية بدقة وسهولة.">
+<meta name="theme-color" content="#2a273c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json" id="ldFaq"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Fandaqah","item":"https://fandaqah.com/"},
+{"@type":"ListItem","position":2,"name":"Financial Integration","item":"https://fandaqah.com/financial-integration"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Fandaqah PMS","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://fandaqah.com/","publisher":{"@type":"Organization","name":"Fandaqah","url":"https://fandaqah.com/"}}
+</script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --coral:#e95a54; --navy:#2a273c; --beige:#f2f0eb; --green:#8f9793; --peach:#fbcdab;
+  --navy-70:rgba(42,39,60,.7); --navy-45:rgba(42,39,60,.45); --navy-18:rgba(42,39,60,.18); --navy-08:rgba(42,39,60,.08); --navy-04:rgba(42,39,60,.04);
+  --beige-70:rgba(242,240,235,.7); --beige-50:rgba(242,240,235,.5); --beige-18:rgba(242,240,235,.18); --beige-08:rgba(242,240,235,.08); --beige-04:rgba(242,240,235,.04);
+  --coral-18:rgba(233,90,84,.18); --green-25:rgba(143,151,147,.25); --green-50:rgba(143,151,147,.5); --peach-45:rgba(251,205,171,.45);
+  --font:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  --gutter:clamp(1.1rem,4vw,4rem); --section:clamp(4.5rem,10vw,9rem); --measure:60ch;
+  --r-s:6px; --r-m:12px; --r-l:20px;
+  --dur:.6s; --ease:cubic-bezier(.22,.8,.26,1);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(5.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--navy);color:var(--beige);font-family:var(--font);font-size:clamp(1rem,.95rem + .25vw,1.125rem);line-height:1.7;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;inset-inline-start:1rem;top:-4rem;background:var(--coral);color:var(--navy);padding:.6rem 1rem;border-radius:var(--r-s);z-index:100;font-weight:600}
+.skip:focus{top:1rem}
+.wrap{width:min(1240px,100% - 2*var(--gutter));margin-inline:auto}
+.sec{padding-block:var(--section)}
+.dark{background:var(--navy);color:var(--beige)}
+.light{background:var(--beige);color:var(--navy)}
+.peachy{background:var(--peach);color:var(--navy)}
+.lead{color:var(--beige-70)} .light .lead,.peachy .lead{color:var(--navy-70)}
+.t-xl{font-size:clamp(2.2rem,1.6rem + 3vw,4.4rem);font-weight:600;line-height:1.08}
+.t-l{font-size:clamp(1.75rem,1.3rem + 2vw,3rem);font-weight:600}
+.t-m{font-size:clamp(1.35rem,1.1rem + 1vw,1.9rem);font-weight:600}
+.step-num{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;color:var(--coral);font-size:.95rem;margin-bottom:1rem}
+.step-num i{display:inline-block;width:2.2rem;height:2px;background:var(--coral)}
+.copy{max-width:var(--measure)}
+.copy p{margin-top:1rem;font-size:1.05em}
+.grid2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,5rem);align-items:center}
+.grid2.swap>.copy{order:2}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.grid2.swap>.copy{order:0}}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.5rem;border-radius:var(--r-s);font-weight:600;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s}
+.btn svg{width:1.1em;height:1.1em;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover svg{transform:translateX(3px)} [dir=rtl] .btn:hover svg{transform:translateX(-3px)}
+[dir=rtl] .btn svg{transform:scaleX(-1)} [dir=rtl] .btn:hover svg{transform:scaleX(-1) translateX(3px)}
+.btn-primary{background:var(--coral);color:var(--navy);box-shadow:0 8px 24px -10px rgba(233,90,84,.6)}
+.btn-primary:hover{box-shadow:0 14px 28px -10px rgba(233,90,84,.7)}
+.btn-ghost{border:1.5px solid var(--beige-18);color:var(--beige)}
+.btn-ghost:hover{border-color:var(--beige-50)}
+.light .btn-ghost,.peachy .btn-ghost{border-color:var(--navy-18);color:var(--navy)} .light .btn-ghost:hover{border-color:var(--navy-45)}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;inset-inline:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,box-shadow .4s,backdrop-filter .4s}
+.nav.solid{background:rgba(42,39,60,.92);box-shadow:0 1px 0 var(--beige-08);backdrop-filter:blur(10px)}
+.nav.solid.on-light{background:rgba(242,240,235,.94);color:var(--navy);box-shadow:0 1px 0 var(--navy-08)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;height:4.6rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;font-size:1.15rem;letter-spacing:0}
+.brand svg{width:2.1rem;height:2.1rem}
+.brand .mark{fill:var(--coral)} .brand .markb{fill:currentColor}
+.nav-links{display:flex;gap:1.6rem;margin-inline-start:auto;list-style:none;padding:0;margin-block:0}
+.nav-links a{text-decoration:none;font-size:.95rem;opacity:.85;position:relative;padding:.3rem 0}
+.nav-links a::after{content:"";position:absolute;inset-inline:0;bottom:-2px;height:2px;background:var(--coral);transform:scaleX(0);transform-origin:var(--tx,left);transition:transform .3s var(--ease)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a:hover{opacity:1}
+.lang{display:inline-flex;border:1.5px solid currentColor;border-radius:999px;padding:3px;gap:2px;opacity:.9}
+.lang button{padding:.3rem .75rem;border-radius:999px;font-size:.85rem;font-weight:600;transition:background .25s,color .25s}
+.lang button[aria-pressed=true]{background:var(--coral);color:var(--navy)}
+.nav .btn{padding:.65rem 1.1rem;font-size:.95rem}
+.burger{display:none;width:2.6rem;height:2.6rem;border-radius:var(--r-s);align-items:center;justify-content:center}
+.burger span{display:block;width:1.3rem;height:2px;background:currentColor;position:relative;transition:transform .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;inset-inline:0;height:2px;background:currentColor;transition:transform .3s,top .3s}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded=true] span{background:transparent}
+.burger[aria-expanded=true] span::before{top:0;transform:rotate(45deg)}.burger[aria-expanded=true] span::after{top:0;transform:rotate(-45deg)}
+.drawer{display:none}
+@media (max-width:1060px){
+  .nav-links,.nav .btn{display:none}
+  .burger{display:inline-flex;margin-inline-start:auto}
+  .lang{margin-inline-start:auto} .burger{margin-inline-start:0}
+  .drawer{display:block;position:fixed;top:0;inset-inline:0;bottom:0;background:var(--navy);color:var(--beige);z-index:49;padding:calc(6rem + env(safe-area-inset-top,0px)) var(--gutter) 3rem;transform:translateY(-100%);transition:transform .5s var(--ease);overflow:auto}
+  .drawer.open{transform:none}
+  .drawer ul{list-style:none;padding:0;margin:0;display:grid;gap:.4rem}
+  .drawer a{display:block;padding:.9rem 0;font-size:1.35rem;text-decoration:none;border-bottom:1px solid var(--beige-08)}
+  .drawer .btn{margin-top:2rem;width:100%;justify-content:center}
+}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.1s}.rv[data-d="2"]{transition-delay:.2s}.rv[data-d="3"]{transition-delay:.3s}.rv[data-d="4"]{transition-delay:.4s}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding-top:6rem;padding-bottom:4rem}
+.hero-bg{position:absolute;inset:-10% 0;pointer-events:none}
+.hero-bg .ledger{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,var(--beige-04) 0 1px,transparent 1px 56px),repeating-linear-gradient(90deg,var(--beige-04) 0 1px,transparent 1px 56px);mask-image:radial-gradient(ellipse 70% 60% at 65% 50%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 65% 50%,#000 30%,transparent 80%);transform:translateY(calc(var(--sy,0)*.15px))}
+.hero-bg .glow{position:absolute;width:60vmax;height:60vmax;border-radius:50%;background:radial-gradient(circle,rgba(233,90,84,.16),transparent 60%);inset-inline-end:-20vmax;top:-10vmax;transform:translate(calc(var(--mx,0)*-14px),calc(var(--my,0)*-14px + var(--sy,0)*.08px))}
+.hero-bg .glow2{position:absolute;width:40vmax;height:40vmax;border-radius:50%;background:radial-gradient(circle,rgba(251,205,171,.10),transparent 60%);inset-inline-start:-10vmax;bottom:-10vmax;transform:translate(calc(var(--mx,0)*10px),calc(var(--my,0)*10px))}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(2rem,5vw,5rem);align-items:center;position:relative}
+.hero h1{font-size:clamp(2.3rem,1.4rem + 3.6vw,4.6rem);font-weight:600;line-height:1.1;max-width:14ch}
+[lang=en] .hero h1{font-size:clamp(2rem,1.2rem + 3vw,3.9rem);max-width:17ch}
+.light .step-num,.peachy .step-num{color:var(--navy)}
+.acct code,.sheet .code{font-weight:700}
+@media (max-width:640px){.conn-diagram{flex-direction:column}.conn-diagram .conn-line{width:2px;height:2rem;flex:0 0 auto;min-width:0}.conn-diagram .conn-line i{transform:scaleY(0);transform-origin:top}.in .conn-diagram .conn-line i{transform:scaleY(1)}}
+.hero .lead{margin-top:1.5rem;max-width:48ch;font-size:clamp(1.05rem,1rem + .35vw,1.3rem)}
+.hero .ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:2.4rem}
+.hero .trust{display:flex;gap:1.6rem;margin-top:3rem;flex-wrap:wrap;color:var(--beige-70);font-size:.9rem}
+.hero .trust span{display:inline-flex;align-items:center;gap:.5rem}
+.hero .trust b{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero h1{font-size:clamp(2.1rem,1.5rem+4vw,3rem);max-width:none}.hero{padding-top:7rem}}
+
+/* hero visual: planes */
+.hv{position:relative;height:min(560px,70vw);perspective:1200px}
+.hv .plane{position:absolute;inset:0;transform:translate(calc(var(--mx,0)*var(--k)*1px),calc(var(--my,0)*var(--k)*1px + var(--sy,0)*var(--ks)*1px));transition:transform .08s linear}
+.hv .p-back{--k:-6;--ks:.05} .hv .p-mid{--k:4;--ks:-.02} .hv .p-front{--k:14;--ks:-.06}
+.hv svg.flow{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hv .wire{fill:none;stroke:var(--beige-18);stroke-width:1.5}
+.hv .wire-on{fill:none;stroke:var(--coral);stroke-width:2;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.2s var(--ease) .4s forwards}
+.hv .dot{fill:var(--coral);offset-path:path("M 150 150 C 260 150 240 420 390 420");animation:travel 3.2s linear 1.2s infinite}
+.hv .dot.d2{animation-delay:2.2s;fill:var(--peach)} .hv .dot.d3{animation-delay:3.1s;fill:var(--green)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes travel{0%{offset-distance:0%;opacity:0}8%{opacity:1}92%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.ui{background:var(--beige);color:var(--navy);border-radius:var(--r-m);box-shadow:0 30px 60px -30px rgba(0,0,0,.55),0 2px 0 rgba(255,255,255,.4) inset;font-size:.85rem;overflow:hidden}
+.ui .ui-head{display:flex;align-items:center;gap:.5rem;padding:.65rem .9rem;border-bottom:1px solid var(--navy-08);font-weight:600;font-size:.8rem}
+.ui .ui-head .dots{display:flex;gap:4px;margin-inline-end:.3rem}
+.ui .ui-head .dots i{width:7px;height:7px;border-radius:50%;background:var(--navy-18)}
+.ui .ui-head .dots i:first-child{background:var(--coral)}
+.ui-dark{background:var(--navy);color:var(--beige);box-shadow:0 30px 60px -30px rgba(0,0,0,.7),0 0 0 1px var(--beige-18)}
+.ui-dark .ui-head{border-color:var(--beige-08)}
+.ui-dark .ui-head .dots i{background:var(--beige-18)}
+.hv .card-src{position:absolute;inset-inline-start:0;top:4%;width:min(300px,62%);animation:floaty 7s ease-in-out infinite}
+.hv .card-dst{position:absolute;inset-inline-end:0;bottom:6%;width:min(300px,62%);animation:floaty 8s ease-in-out 1s infinite reverse}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.acct{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .9rem;border-bottom:1px solid var(--navy-08);font-variant-numeric:tabular-nums}
+.ui-dark .acct{border-color:var(--beige-08)}
+.acct:last-child{border-bottom:0}
+.acct code{font-family:inherit;font-weight:600;color:var(--coral)}
+.acct .amt{color:var(--navy-70)} .ui-dark .acct .amt{color:var(--beige-70)}
+.badge{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;line-height:1}
+.badge-ok{background:var(--green-25);color:var(--navy)} .ui-dark .badge-ok,.dark .badge-ok{color:var(--beige)}
+.badge-live{background:var(--coral-18);color:var(--coral)}
+.badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 var(--green-50);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(143,151,147,0)}100%{box-shadow:0 0 0 0 rgba(143,151,147,0)}}
+.hv .float-badge{position:absolute;padding:.55rem .85rem;border-radius:var(--r-s);background:var(--peach);color:var(--navy);font-weight:600;font-size:.8rem;box-shadow:0 18px 30px -18px rgba(0,0,0,.6);display:flex;gap:.5rem;align-items:center}
+.hv .fb1{top:46%;inset-inline-start:30%;animation:floaty 6s ease-in-out .5s infinite}
+.hv .fb2{top:8%;inset-inline-end:8%;background:var(--navy);color:var(--beige);border:1px solid var(--beige-18);animation:floaty 9s ease-in-out 2s infinite}
+.hv .fb3{bottom:4%;inset-inline-start:4%;background:var(--green);color:var(--navy);animation:floaty 7.5s ease-in-out 1.5s infinite}
+.sync-label{position:absolute;top:50%;inset-inline-start:50%;transform:translate(-50%,-50%);font-size:.72rem;letter-spacing:.08em;color:var(--beige-70);font-weight:600}
+[dir=rtl] .sync-label{transform:translate(50%,-50%)}
+[dir=rtl] .hv svg.flow{transform:scaleX(-1)}
+@media (max-width:900px){.hv{height:min(520px,120vw);margin-top:1rem}}
+@media (max-width:480px){.hv .card-src,.hv .card-dst{width:72%}.hv .fb1{display:none}}
+
+/* ============ OVERVIEW TIMELINE ============ */
+.timeline{margin-top:3.5rem;position:relative}
+.tl-rail{position:relative;display:grid;grid-template-columns:repeat(10,1fr);gap:.6rem}
+.tl-rail::before{content:"";position:absolute;top:1.05rem;inset-inline:5%;height:2px;background:var(--navy-18)}
+.tl-rail::after{content:"";position:absolute;top:1.05rem;inset-inline-start:5%;width:90%;height:2px;background:var(--coral);transform:scaleX(var(--tp,0));transform-origin:var(--tx,left) center;transition:transform .2s linear}
+.tl-item{position:relative;text-align:center;padding-top:3rem}
+.tl-item .n{position:absolute;top:0;inset-inline-start:50%;transform:translateX(-50%) scale(.85);width:2.2rem;height:2.2rem;border-radius:50%;background:var(--beige);border:2px solid var(--navy-18);display:grid;place-items:center;font-size:.8rem;font-weight:700;color:var(--navy-70);transition:all .4s var(--ease);z-index:1}
+[dir=rtl] .tl-item .n{transform:translateX(50%) scale(.85)}
+.tl-item.on .n{background:var(--coral);border-color:var(--coral);color:var(--navy);transform:translateX(-50%) scale(1)}
+[dir=rtl] .tl-item.on .n{transform:translateX(50%) scale(1)}
+.tl-item .ic{width:2rem;height:2rem;margin:0 auto .5rem;color:var(--navy-45);transition:color .4s}
+.tl-item.on .ic{color:var(--navy)}
+.tl-item span{display:block;font-size:.82rem;font-weight:500;line-height:1.3;color:var(--navy-70)}
+.tl-item.on span{color:var(--navy)}
+@media (max-width:1000px){
+  .tl-rail{grid-template-columns:1fr;gap:0;padding-inline-start:1.2rem}
+  .tl-rail::before,.tl-rail::after{top:0;bottom:0;height:auto;width:2px;inset-inline:auto;inset-inline-start:calc(1.2rem + 1.05rem);}
+  .tl-rail::after{transform:scaleY(var(--tp,0));transform-origin:top}
+  .tl-item{text-align:start;padding:0 0 1.6rem 0;padding-inline-start:3.4rem;min-height:3.5rem}
+  .tl-item .n,[dir=rtl] .tl-item .n{inset-inline-start:0;transform:none;top:-.1rem} .tl-item.on .n,[dir=rtl] .tl-item.on .n{transform:none}
+  .tl-item .ic{margin:0 0 .3rem}
+  .tl-item span{font-size:1rem}
+}
+
+/* ============ STICKY STORY (data flow) ============ */
+.story{position:relative;height:520vh;--p:0}
+.story .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:color-mix(in srgb,var(--navy) calc(100% - var(--mix,0)*1%),var(--beige));color:var(--beige);transition:background .3s linear}
+.story .stage.lightish{color:var(--navy)}
+.story .wrap{height:100%;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:3rem;align-items:center;padding-top:4rem}
+.story .texts{position:relative;min-height:16rem}
+.story .txt{position:absolute;inset:0;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease);pointer-events:none}
+.story .txt.on{opacity:1;transform:none;pointer-events:auto}
+.story .txt h3{font-size:clamp(1.8rem,1.3rem + 2vw,3rem);font-weight:600}
+.story .txt p{margin-top:1rem;max-width:40ch;opacity:.85}
+.story .steps-mini{display:flex;gap:.6rem;margin-top:2rem;flex-wrap:wrap}
+.story .steps-mini span{font-size:.78rem;font-weight:600;padding:.35rem .7rem;border-radius:999px;border:1.5px solid currentColor;opacity:.4;transition:all .3s}
+.story .steps-mini span.on{opacity:1;background:var(--coral);border-color:var(--coral);color:var(--navy)}
+.story .steps-mini span.done{opacity:.85;border-color:var(--green);color:inherit}
+.scene{position:relative;height:min(520px,60vh)}
+.scn{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.96);transition:opacity .5s var(--ease),transform .5s var(--ease);pointer-events:none}
+.scn.on{opacity:1;transform:none;pointer-events:auto}
+.scn .ui{width:min(100%,520px)}
+@media (max-width:900px){
+  .story{height:auto}
+  .story .stage{position:relative;height:auto;overflow:visible;background:var(--navy)}
+  .story .wrap{display:block;padding-block:var(--section)}
+  .story .texts{min-height:0}
+  .story .txt{position:relative;opacity:1;transform:none;pointer-events:auto;margin-top:3rem}
+  .story .txt:first-child{margin-top:0}
+  .story .steps-mini{display:none}
+  .scene{display:none}
+  .story .txt .m-scene{display:block;margin-top:1.5rem}
+}
+.m-scene{display:none}
+
+/* flow pipeline graphics */
+.pipe{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.pipe .node{padding:.75rem 1.1rem;border-radius:var(--r-s);border:1.5px solid var(--beige-18);font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:.5rem;transition:all .4s var(--ease);background:var(--beige-04)}
+.light .pipe .node,.peachy .pipe .node{border-color:var(--navy-18);background:var(--beige)}
+.pipe .node.on{border-color:var(--coral);background:var(--coral-18)}
+.pipe .node.ok{border-color:var(--green);background:var(--green-25)}
+.pipe .arr{width:2.2rem;height:2px;background:var(--beige-18);position:relative;flex:0 0 auto}
+.light .pipe .arr,.peachy .pipe .arr{background:var(--navy-18)}
+.pipe .arr::after{content:"";position:absolute;inset-inline-end:-1px;top:-4px;border:5px solid transparent;border-inline-start-color:inherit;border-inline-start:6px solid var(--beige-18)}
+.light .pipe .arr::after,.peachy .pipe .arr::after{border-inline-start-color:var(--navy-18)}
+.pipe .arr.on{background:var(--coral)} .pipe .arr.on::after{border-inline-start-color:var(--coral)}
+.pipe.vert{flex-direction:column}
+.pipe.vert .arr{width:2px;height:1.8rem}
+.pipe.vert .arr::after{inset-inline-end:auto;left:-4px;top:auto;bottom:-1px;border:5px solid transparent;border-top:6px solid var(--beige-18);border-inline-start-color:transparent}
+.light .pipe.vert .arr::after{border-top-color:var(--navy-18)} .pipe.vert .arr.on::after{border-top-color:var(--coral)}
+@media (max-width:640px){.pipe:not(.keep){flex-direction:column}.pipe:not(.keep) .arr{width:2px;height:1.6rem}.pipe:not(.keep) .arr::after{inset-inline-end:auto;left:-4px;top:auto;bottom:-1px;border:5px solid transparent;border-top:6px solid var(--beige-18);border-inline-start-color:transparent}.light .pipe:not(.keep) .arr::after{border-top-color:var(--navy-18)}.pipe:not(.keep) .arr.on::after{border-top-color:var(--coral)}}
+.chk{width:1.1em;height:1.1em;border-radius:50%;background:var(--green);color:var(--navy);display:inline-grid;place-items:center;font-size:.7em;font-weight:700;flex:0 0 auto}
+
+/* ============ SYSTEM MODAL (step 01) ============ */
+.modal-ui{background:#fff;color:var(--navy);border-radius:var(--r-m);box-shadow:0 40px 80px -40px rgba(42,39,60,.5),0 0 0 1px var(--navy-08);max-width:560px;margin-inline:auto;font-size:.9rem;overflow:hidden}
+.modal-ui .mh{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid var(--navy-08);font-weight:600;font-size:1.05rem}
+.modal-ui .mh button{width:2rem;height:2rem;display:grid;place-items:center;border-radius:var(--r-s);opacity:.7}
+.modal-ui .mb{padding:1.2rem}
+.modal-ui .status{text-align:center;margin-bottom:1rem}
+.modal-ui .note{background:var(--peach-45);border-inline-start:3px solid var(--coral);padding:.9rem 1rem;border-radius:var(--r-s);font-size:.88rem;margin-bottom:1.2rem}
+.modal-ui label{display:block;font-weight:500;margin:.9rem 0 .4rem}
+.modal-ui .inp{height:2.7rem;border:1px solid var(--navy-18);border-radius:var(--r-s);background:var(--beige);display:flex;align-items:center;padding-inline:.9rem;color:var(--navy-70);position:relative;overflow:hidden}
+.modal-ui .inp .typed{font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.modal-ui .inp.pw .typed{letter-spacing:.2em}
+.modal-ui .mbtn{margin-top:1.4rem;width:100%;height:2.9rem;border-radius:var(--r-s);background:var(--coral);color:var(--navy);font-weight:600;display:grid;place-items:center;transition:background .3s}
+.modal-ui .mbtn.ok{background:var(--green)}
+.conn-diagram{margin-top:2.5rem}
+.conn-line{position:relative;height:2px;background:var(--navy-18);flex:1;min-width:3rem;overflow:hidden}
+.conn-line i{position:absolute;inset:0;background:var(--coral);transform:scaleX(0);transform-origin:var(--tx,left);transition:transform 1.4s var(--ease)}
+.in .conn-line i{transform:scaleX(1)}
+
+/* ============ DASHBOARD UI (step 02) ============ */
+.dash{display:grid;grid-template-columns:200px 1fr;min-height:320px}
+.dash .side{background:var(--navy);color:var(--beige);padding:1rem .8rem;display:grid;align-content:start;gap:.2rem;font-size:.85rem}
+.dash .side .ttl{font-weight:600;font-size:.78rem;color:var(--beige-70);padding:.4rem .6rem .6rem}
+.dash .side a{padding:.55rem .7rem;border-radius:var(--r-s);text-decoration:none;display:flex;align-items:center;gap:.6rem;opacity:.75;position:relative;transition:all .4s}
+.dash .side a svg{width:1rem;height:1rem;flex:0 0 auto}
+.dash .side a.active{background:var(--coral);color:var(--navy);opacity:1;font-weight:600}
+.dash .side a.active::after{content:"";position:absolute;inset:-4px;border:2px solid var(--coral);border-radius:9px;opacity:0;animation:focusring 1.6s ease-out .9s 2}
+@keyframes focusring{0%{opacity:0;transform:scale(1)}30%{opacity:1}100%{opacity:0;transform:scale(1.06)}}
+.dash .main{padding:1.1rem}
+.dash .main .bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.dash .main .bar h4{font-size:1rem}
+.dash .mini-btns{display:flex;gap:.5rem}
+.dash .mini-btns span{padding:.45rem .8rem;border-radius:var(--r-s);font-size:.8rem;font-weight:600;border:1.5px solid var(--navy-18)}
+.dash .mini-btns span.hot{background:var(--coral);color:var(--navy);border-color:var(--coral);animation:hotpulse 2s ease-in-out 1.2s 3}
+@keyframes hotpulse{50%{transform:translateY(-2px);box-shadow:0 8px 16px -8px rgba(233,90,84,.8)}}
+.dash table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.82rem}
+.dash th,.dash td{text-align:start;padding:.55rem .5rem;border-bottom:1px solid var(--navy-08)}
+.dash th{color:var(--navy-70);font-weight:600}
+@media (max-width:560px){.dash{grid-template-columns:1fr}.dash .side{display:flex;flex-wrap:wrap}}
+
+/* ============ SPREADSHEET (step 03, 08) ============ */
+.sheet{font-size:.85rem}
+.sheet table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sheet th,.sheet td{padding:.6rem .8rem;text-align:start;border:1px solid var(--navy-08)}
+.sheet th{background:var(--navy-04);font-weight:600;color:var(--navy-70);font-size:.78rem}
+.sheet tbody tr{opacity:0;transform:translateX(var(--rx,-12px));transition:opacity .5s var(--ease),transform .5s var(--ease)}
+[dir=rtl] .sheet tbody tr{--rx:12px}
+.in .sheet tbody tr{opacity:1;transform:none}
+.in .sheet tbody tr:nth-child(1){transition-delay:.3s}.in .sheet tbody tr:nth-child(2){transition-delay:.55s}.in .sheet tbody tr:nth-child(3){transition-delay:.8s}.in .sheet tbody tr:nth-child(4){transition-delay:1.05s}
+.sheet td.hl{position:relative}
+.sheet td.hl::after{content:"";position:absolute;inset:0;background:var(--peach-45);opacity:0;animation:cellhl 1.6s ease-out forwards;animation-delay:inherit}
+.in .sheet tbody tr:nth-child(1) td.hl::after{animation-delay:.9s}.in .sheet tbody tr:nth-child(2) td.hl::after{animation-delay:1.15s}.in .sheet tbody tr:nth-child(3) td.hl::after{animation-delay:1.4s}.in .sheet tbody tr:nth-child(4) td.hl::after{animation-delay:1.65s}
+@keyframes cellhl{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.sheet .code{color:var(--coral);font-weight:600}
+.dl-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--navy);color:var(--beige);border-radius:var(--r-m);margin-top:1rem;font-size:.9rem}
+.dl-row .fileic{width:2.4rem;height:2.4rem;border-radius:var(--r-s);background:var(--green-25);display:grid;place-items:center;color:var(--beige)}
+.dl-row .fileic svg{width:1.2rem;height:1.2rem}
+.dl-row .meta{flex:1} .dl-row .meta small{display:block;color:var(--beige-70);font-size:.78rem}
+.dl-row .dbtn{padding:.5rem .9rem;background:var(--coral);color:var(--navy);border-radius:var(--r-s);font-weight:600;font-size:.82rem}
+
+/* ============ PEAK: MAPPING ============ */
+.peak{position:relative;height:380vh;--p:0}
+.peak .stage{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.peak .wrap{width:min(1240px,100% - 2*var(--gutter))}
+.peak .head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem;align-items:end;margin-bottom:2.5rem}
+.map{display:grid;grid-template-columns:minmax(0,1fr) clamp(80px,14vw,200px) minmax(0,1fr);align-items:stretch;gap:0}
+.map .col{display:grid;gap:.75rem;align-content:center}
+.map .col h4{font-size:.8rem;letter-spacing:.06em;color:var(--beige-70);margin-bottom:.3rem;font-weight:600}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.9rem 1.1rem;border-radius:var(--r-s);border:1.5px solid var(--beige-18);background:var(--beige-04);font-weight:500;transition:all .5s var(--ease);min-height:3.6rem}
+.mrow code{font-family:inherit;font-weight:600;color:var(--coral);font-variant-numeric:tabular-nums}
+.mrow .mb{opacity:0;transform:scale(.7);transition:all .4s var(--ease)}
+.mrow.on{border-color:var(--green);background:var(--green-25)}
+.mrow.on .mb{opacity:1;transform:none}
+.map .mid{position:relative}
+.map .mid svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+[dir=rtl] .map .mid svg{transform:scaleX(-1)}
+.map .mid path{fill:none;stroke:var(--coral);stroke-width:2;stroke-linecap:round;stroke-dasharray:1 1;pathLength:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s linear}
+.map .mid path.g{stroke:var(--beige-18);stroke-dasharray:none;stroke-dashoffset:0}
+.map .mid circle{fill:var(--coral);opacity:0;transition:opacity .3s}
+.peak .counter{display:flex;gap:2rem;margin-top:2rem;font-variant-numeric:tabular-nums}
+.peak .counter div b{display:block;font-size:2rem;font-weight:600;line-height:1}
+.peak .counter div span{font-size:.85rem;color:var(--beige-70)}
+@media (max-width:900px){
+  .peak{height:auto}.peak .stage{position:relative;height:auto;padding-block:var(--section)}
+  .peak .head{grid-template-columns:1fr;margin-bottom:2rem}
+  .map{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr)}
+  .mrow{padding:.7rem .7rem;font-size:.85rem;flex-direction:column;align-items:flex-start;gap:.3rem}
+}
+
+/* ============ UPLOAD (step 05) ============ */
+.upload{background:var(--navy);color:var(--beige);border-radius:var(--r-m);padding:1.4rem;font-variant-numeric:tabular-nums}
+.upload .uh{display:flex;justify-content:space-between;align-items:center;gap:1rem;font-weight:600;margin-bottom:1rem}
+.upload .uh .pct{color:var(--coral);font-size:1.4rem}
+.upload .track{height:10px;border-radius:999px;background:var(--beige-08);overflow:hidden}
+.upload .track i{display:block;height:100%;width:0;background:var(--coral);border-radius:999px;transition:width 2.4s cubic-bezier(.3,.9,.4,1)}
+.in .upload .track i{width:100%}
+.upload ul{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.5rem}
+.upload li{display:flex;align-items:center;gap:.6rem;opacity:0;transform:translateY(8px);transition:all .4s var(--ease)}
+.in .upload li{opacity:1;transform:none}
+.in .upload li:nth-child(1){transition-delay:1.9s}.in .upload li:nth-child(2){transition-delay:2.3s}.in .upload li:nth-child(3){transition-delay:2.7s}
+.upload li b{font-weight:600}
+.pipe.upl{margin-top:1.5rem}
+
+/* ============ FORM UI (step 06, 09) ============ */
+.form-ui{background:#fff;color:var(--navy);border-radius:var(--r-m);box-shadow:0 40px 80px -40px rgba(42,39,60,.45),0 0 0 1px var(--navy-08);padding:1.4rem;font-size:.9rem;max-width:520px;margin-inline:auto}
+.form-ui .fh{font-weight:600;font-size:1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+.form-ui .grid{display:grid;gap:.9rem;grid-template-columns:1fr 1fr}
+.form-ui .f.full{grid-column:1/-1}
+.form-ui label{display:block;font-size:.8rem;font-weight:500;color:var(--navy-70);margin-bottom:.35rem}
+.form-ui .inp{height:2.6rem;border:1px solid var(--navy-18);border-radius:var(--r-s);background:var(--beige);display:flex;align-items:center;justify-content:space-between;padding-inline:.8rem;font-variant-numeric:tabular-nums;position:relative;overflow:hidden}
+.form-ui .inp .val{opacity:0;transform:translateY(6px);transition:all .4s var(--ease)}
+.form-ui .inp.filled .val{opacity:1;transform:none}
+.form-ui .inp.filled{border-color:var(--navy-45)}
+.form-ui .inp .caret{position:absolute;inset-inline-start:.8rem;width:1.5px;height:1.1rem;background:var(--coral);opacity:0}
+.form-ui .inp.typing .caret{opacity:1;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.form-ui .inp .chev{width:.9rem;height:.9rem;opacity:.5}
+.form-ui .fbtn{margin-top:1.2rem;height:2.8rem;border-radius:var(--r-s);background:var(--coral);color:var(--navy);font-weight:600;display:grid;place-items:center;transition:background .3s,transform .2s;width:100%}
+.form-ui .fbtn:hover{transform:translateY(-1px)}
+.form-ui .fbtn.saving{background:var(--peach)}
+.form-ui .fbtn.done{background:var(--green)}
+.form-ui .toast{margin-top:.9rem;display:flex;align-items:center;gap:.5rem;font-weight:600;opacity:0;transform:translateY(6px);transition:all .4s var(--ease)}
+.form-ui .toast.show{opacity:1;transform:none}
+@media (max-width:480px){.form-ui .grid{grid-template-columns:1fr}}
+
+/* ============ SYNC (step 07) ============ */
+.sync-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem}
+.sync-ring{position:relative;width:min(260px,60vw);height:min(260px,60vw);margin-inline:auto}
+.sync-ring svg{width:100%;height:100%;overflow:visible}
+.sync-ring .track{fill:none;stroke:var(--beige-18);stroke-width:2}
+.sync-ring .arc{fill:none;stroke:var(--coral);stroke-width:4;stroke-linecap:round;stroke-dasharray:140 600;transform-origin:center;animation:spin 2.6s linear infinite}
+.sync-ring .arc2{stroke:var(--green);stroke-dasharray:60 600;animation-duration:3.8s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sync-ring .core{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.sync-ring .core b{font-size:2rem;font-weight:600;line-height:1}
+.sync-ring .core span{font-size:.8rem;color:var(--beige-70)}
+.in .sync-ring .arc{animation-iteration-count:3}
+.sync-ring.done .arc,.sync-ring.done .arc2{animation:none;stroke-dasharray:none;stroke:var(--green)}
+.stack{display:grid;gap:.7rem}
+.stack .node{padding:1rem 1.2rem;border-radius:var(--r-s);border:1.5px solid var(--beige-18);background:var(--beige-04);font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:all .5s}
+.stack .node small{font-weight:400;color:var(--beige-70);display:block;font-size:.8rem}
+.stack .node.ok{border-color:var(--green)}
+.stack .updown{text-align:center;color:var(--coral);height:1rem;line-height:1;position:relative}
+.stack .updown::before,.stack .updown::after{content:"";position:absolute;left:50%;width:2px;height:100%;background:var(--beige-18)}
+.stack .updown i{position:absolute;left:50%;top:0;width:6px;height:6px;margin-left:-2px;border-radius:50%;background:var(--coral);animation:updown 1.4s ease-in-out infinite}
+@keyframes updown{0%{transform:translateY(-2px)}50%{transform:translateY(12px)}100%{transform:translateY(-2px)}}
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particles i{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--peach);opacity:0;animation:pfly 4s linear infinite}
+@keyframes pfly{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}90%{opacity:.6}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+@media (max-width:900px){.sync-wrap{grid-template-columns:1fr}}
+
+/* ============ BALANCE (step 10) ============ */
+.balance{position:relative;height:300vh;--p:0}
+.balance .stage{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.scale{width:min(620px,92vw);margin-inline:auto}
+.scale svg{width:100%;overflow:visible}
+.scale .beam{transform-origin:300px 90px;transform:rotate(calc(var(--tilt,0)*1deg));transition:transform .25s linear}
+.scale .pan{transition:transform .25s linear}
+.scale .pan-l{transform:translateY(calc(var(--tilt,0)*-2.2px))} .scale .pan-r{transform:translateY(calc(var(--tilt,0)*2.2px))}
+.scale text{font-family:var(--font);fill:var(--beige);font-weight:600}
+.scale .stroke{stroke:var(--beige);stroke-width:2;fill:none}
+.scale .fill{fill:var(--beige-08)}
+.scale .ok{opacity:0;transition:opacity .5s}
+.balance.ok .scale .ok{opacity:1}
+.totals{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem;margin-top:2rem;text-align:center;font-variant-numeric:tabular-nums}
+.totals b{display:block;font-size:clamp(1.6rem,1.2rem + 2vw,2.6rem);font-weight:600;line-height:1}
+.totals span{font-size:.85rem;color:var(--beige-70);display:block;margin-bottom:.4rem}
+.totals .eq{font-size:2rem;color:var(--beige-70);transition:color .4s}
+.balance.ok .totals .eq{color:var(--green)}
+.balance .verdict{display:flex;justify-content:center;margin-top:1.5rem}
+.balance .verdict .badge{font-size:.95rem;padding:.6rem 1.1rem;opacity:.35;transition:all .5s var(--ease);background:var(--beige-08);color:var(--beige)}
+.balance.ok .verdict .badge{opacity:1;background:var(--green);color:var(--navy)}
+@media (max-width:900px){.balance{height:auto}.balance .stage{position:relative;height:auto;padding-block:var(--section)}}
+
+/* ============ REPORTS ============ */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--beige-18);border:1px solid var(--beige-18);border-radius:var(--r-m);overflow:hidden}
+.metric{background:var(--navy);padding:1.4rem;font-variant-numeric:tabular-nums}
+.metric span{font-size:.82rem;color:var(--beige-70);display:block}
+.metric b{display:block;font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem);font-weight:600;line-height:1.1;margin-top:.4rem}
+.metric b.coral{color:var(--coral)} .metric b.green{color:var(--green)}
+.charts{display:grid;grid-template-columns:2fr 1fr;gap:1.2rem;margin-top:1.2rem}
+.chart{border:1px solid var(--beige-18);border-radius:var(--r-m);padding:1.2rem}
+.chart h4{font-size:.9rem;font-weight:600;color:var(--beige-70);margin-bottom:.8rem;display:flex;justify-content:space-between;gap:1rem}
+.chart h4 small{font-weight:400;font-size:.75rem}
+.chart svg{width:100%;height:auto;overflow:visible}
+.chart .ln{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease)}
+.in .chart .ln{stroke-dashoffset:0}
+.chart .ln.rev{stroke:var(--coral)} .chart .ln.exp{stroke:var(--green)}
+.chart .area{fill:var(--coral);opacity:0;transition:opacity 1.2s .6s}
+.in .chart .area{opacity:.12}
+.chart .bar{fill:var(--peach);transform:scaleY(0);transform-origin:bottom;transition:transform .9s var(--ease)}
+.in .chart .bar{transform:scaleY(1)}
+.in .chart .bar:nth-child(2){transition-delay:.1s}.in .chart .bar:nth-child(3){transition-delay:.2s}.in .chart .bar:nth-child(4){transition-delay:.3s}.in .chart .bar:nth-child(5){transition-delay:.4s}.in .chart .bar:nth-child(6){transition-delay:.5s}.in .chart .bar:nth-child(7){transition-delay:.6s}
+.chart .grid line{stroke:var(--beige-08)}
+.chart .ring{fill:none;stroke:var(--green);stroke-width:8;stroke-linecap:round;pathLength:100;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.8s var(--ease) .3s;transform:rotate(-90deg);transform-origin:center}
+.in .chart .ring{stroke-dashoffset:calc(100 - var(--v))}
+.chart .ring-bg{fill:none;stroke:var(--beige-08);stroke-width:8}
+.legend{display:flex;gap:1.2rem;font-size:.8rem;color:var(--beige-70);margin-top:.6rem}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.legend i{width:14px;height:3px;border-radius:2px;background:var(--coral)} .legend i.g{background:var(--green)}
+.chart .hbar{height:10px;background:var(--beige-08);border-radius:999px;overflow:hidden;margin-top:.5rem}
+.chart .hbar i{display:block;height:100%;width:0;background:var(--coral);border-radius:999px;transition:width 1.6s var(--ease) .2s}
+.in .chart .hbar i{width:var(--v)}
+.sample{font-size:.78rem;color:var(--beige-70);margin-top:1rem}
+@media (max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}}
+
+/* ============ VIDEO ============ */
+.video-frame{position:relative;border-radius:var(--r-l);padding:clamp(.6rem,1.5vw,1.2rem);background:var(--navy);box-shadow:0 50px 100px -50px rgba(42,39,60,.6)}
+.video-frame::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid var(--beige-18);pointer-events:none}
+.video-box{position:relative;aspect-ratio:16/9;border-radius:calc(var(--r-l) - .5rem);overflow:hidden;background:var(--navy)}
+.video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.poster{position:absolute;inset:0;display:grid;place-items:center;background:
+  radial-gradient(ellipse at 70% 30%,rgba(233,90,84,.25),transparent 55%),
+  radial-gradient(ellipse at 20% 80%,rgba(251,205,171,.14),transparent 55%),
+  repeating-linear-gradient(0deg,var(--beige-04) 0 1px,transparent 1px 48px),var(--navy)}
+.poster .pl{width:5.2rem;height:5.2rem;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center;box-shadow:0 20px 40px -16px rgba(233,90,84,.8);transition:transform .3s var(--ease)}
+.poster .pl svg{width:1.8rem;height:1.8rem;margin-inline-start:.25rem}
+.poster:hover .pl{transform:scale(1.06)}
+.poster .cap{position:absolute;bottom:1.2rem;inset-inline:1.2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--beige-70);font-size:.85rem}
+.poster .cap .badge{background:var(--beige-08);color:var(--beige)}
+.vid-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;font-size:.9rem}
+.vid-links a{color:var(--navy-70)}
+
+/* ============ FAQ ============ */
+.faq{max-width:820px;margin-inline:auto;margin-top:2.5rem;border-top:1px solid var(--navy-18)}
+.faq-item{border-bottom:1px solid var(--navy-18)}
+.faq-item button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.3rem 0;text-align:start;font-weight:600;font-size:1.05rem}
+.faq-item button .pm{width:1.8rem;height:1.8rem;border-radius:50%;border:1.5px solid var(--navy-18);display:grid;place-items:center;flex:0 0 auto;transition:all .3s}
+.faq-item button .pm::before,.faq-item button .pm::after{content:"";position:absolute;width:.8rem;height:1.5px;background:currentColor;transition:transform .3s}
+.faq-item button .pm::after{transform:rotate(90deg)}
+.faq-item button[aria-expanded=true] .pm{background:var(--coral);border-color:var(--coral)}
+.faq-item button[aria-expanded=true] .pm::after{transform:rotate(0)}
+.faq-item .pm{position:relative}
+.faq-item .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.faq-item .ans>div{overflow:hidden}
+.faq-item .ans p{padding-bottom:1.3rem;color:var(--navy-70);max-width:62ch}
+.faq-item.open .ans{grid-template-rows:1fr}
+
+/* ============ FINAL ============ */
+.final{position:relative;overflow:hidden}
+.final .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:3rem;align-items:center}
+.done-card{border:1px solid var(--beige-18);border-radius:var(--r-m);padding:1.6rem;background:var(--beige-04);position:relative;overflow:hidden}
+.done-card h4{font-size:.85rem;letter-spacing:.06em;color:var(--beige-70);font-weight:600}
+.done-card ul{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem}
+.done-card li{display:flex;align-items:center;gap:.8rem;font-weight:600;font-size:1.05rem;opacity:0;transform:translateX(var(--rx,-10px));transition:all .5s var(--ease)}
+[dir=rtl] .done-card li{--rx:10px}
+.in .done-card li{opacity:1;transform:none}
+.in .done-card li:nth-child(1){transition-delay:.2s}.in .done-card li:nth-child(2){transition-delay:.5s}.in .done-card li:nth-child(3){transition-delay:.8s}.in .done-card li:nth-child(4){transition-delay:1.1s}.in .done-card li:nth-child(5){transition-delay:1.4s}
+.done-card li .chk{width:1.6rem;height:1.6rem;font-size:.85rem;transform:scale(0);transition:transform .4s var(--ease)}
+.in .done-card li .chk{transform:none}
+.in .done-card li:nth-child(1) .chk{transition-delay:.3s}.in .done-card li:nth-child(2) .chk{transition-delay:.6s}.in .done-card li:nth-child(3) .chk{transition-delay:.9s}.in .done-card li:nth-child(4) .chk{transition-delay:1.2s}.in .done-card li:nth-child(5) .chk{transition-delay:1.5s}
+.done-card .ready{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--beige-18);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.done-card .ready b{display:block;font-size:1.2rem}
+.done-card .ready span{color:var(--beige-70);font-size:.85rem}
+.done-card .node-dot{width:3rem;height:3rem;border-radius:50%;background:var(--coral);display:grid;place-items:center;color:var(--navy);position:relative}
+.done-card .node-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--coral);opacity:0;animation:focusring 2.2s ease-out infinite}
+.done-card .stream{position:absolute;inset-inline-start:2rem;bottom:2.4rem;width:calc(100% - 7rem);height:2px;pointer-events:none}
+.done-card .stream i{position:absolute;top:-1px;width:14px;height:4px;border-radius:2px;background:var(--peach);opacity:0;animation:stream 2.6s linear infinite}
+.done-card .stream i:nth-child(2){animation-delay:.9s;background:var(--green)}.done-card .stream i:nth-child(3){animation-delay:1.7s;background:var(--coral)}
+@keyframes stream{0%{inset-inline-start:0;opacity:0}10%{opacity:1}85%{opacity:1}100%{inset-inline-start:100%;opacity:0}}
+.final .ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+@media (max-width:900px){.final .wrap{grid-template-columns:1fr}}
+
+/* ============ FOOTER ============ */
+footer{background:var(--navy);color:var(--beige);border-top:1px solid var(--beige-08);padding:3.5rem 0 2rem}
+footer .top{display:grid;grid-template-columns:minmax(0,2fr) repeat(2,minmax(0,1fr));gap:2.5rem}
+footer p{color:var(--beige-70);max-width:40ch;margin-top:1rem}
+footer h4{font-size:.9rem;font-weight:600;color:var(--beige-70);margin-bottom:1rem}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.6rem}
+footer a{text-decoration:none;opacity:.85} footer a:hover{opacity:1;text-decoration:underline}
+footer .bottom{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--beige-08);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--beige-70);font-size:.85rem}
+@media (max-width:760px){footer .top{grid-template-columns:1fr 1fr}footer .top>div:first-child{grid-column:1/-1}}
+
+/* ============ PROGRESS INDICATOR (signature) ============ */
+.prog{position:fixed;z-index:40;inset-inline-end:1.2rem;top:50%;transform:translateY(-50%);display:grid;gap:.6rem;opacity:0;transition:opacity .4s;pointer-events:none}
+.prog.show{opacity:1;pointer-events:auto}
+.prog a{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--beige);font-size:.75rem;font-weight:600}
+.prog.on-light a{color:var(--navy)}
+.prog a span{opacity:0;transform:translateX(6px);transition:all .3s;white-space:nowrap;order:-1}
+[dir=rtl] .prog a span{transform:translateX(-6px)}
+.prog:hover a span,.prog a.active span{opacity:.8;transform:none}
+.prog a i{width:10px;height:10px;border-radius:50%;border:2px solid currentColor;opacity:.4;transition:all .3s;flex:0 0 auto}
+.prog a.active i{background:var(--coral);border-color:var(--coral);opacity:1;transform:scale(1.25)}
+.prog a.done i{background:var(--green);border-color:var(--green);opacity:.9}
+.prog .ln{position:absolute;inset-inline-end:4px;top:8px;bottom:8px;width:2px;background:currentColor;opacity:.12;z-index:-1}
+@media (max-width:900px){
+  .prog{inset-inline:1rem;top:auto;bottom:calc(1rem + env(safe-area-inset-bottom,0px));transform:none;display:flex;justify-content:space-between;background:rgba(42,39,60,.9);backdrop-filter:blur(8px);padding:.6rem .9rem;border-radius:999px;border:1px solid var(--beige-18);gap:.3rem}
+  .prog.on-light{background:rgba(42,39,60,.9)} .prog.on-light a{color:var(--beige)}
+  .prog a span{display:none}.prog a i{width:9px;height:9px}
+  .prog .ln{display:none}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rv,.sheet tbody tr,.upload li,.done-card li,.story .txt,.scn{opacity:1!important;transform:none!important}
+  .hv .wire-on{stroke-dashoffset:0} .map .mid path{stroke-dashoffset:0!important} .map .mid circle{opacity:1!important}
+  .mrow .mb{opacity:1!important;transform:none!important} .mrow{border-color:var(--green)!important;background:var(--green-25)!important}
+  .chart .ln{stroke-dashoffset:0!important}.chart .bar{transform:none!important}.chart .area{opacity:.12!important}
+  .upload .track i{width:100%!important} .done-card li .chk{transform:none!important}
+  .story,.peak,.balance{height:auto!important} .story .stage,.peak .stage,.balance .stage{position:relative!important;height:auto!important;padding-block:var(--section)}
+  .story .txt{position:relative!important;margin-top:2rem} .scene{display:none} .m-scene{display:block;margin-top:1rem}
+  .story .steps-mini{display:none}
+  .form-ui .inp .val{opacity:1!important;transform:none!important}
+  .scale .beam,.scale .pan{transform:none!important} .scale .ok,.balance .verdict .badge{opacity:1!important}
+  .balance .totals .eq{color:var(--green)} .balance .verdict .badge{background:var(--green)!important;color:var(--navy)!important}
+  .hero-bg .glow,.hero-bg .glow2,.hv .plane{transform:none!important}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">تخطي إلى المحتوى</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Fandaqah">
+      <!-- Replace this inline mark with <img src="fandaqah-simple.png" alt="فندقة"> once the logo file is available
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="12" width="36" height="26" rx="3" class="mark"/><path d="M8 12V8a12 12 0 0 1 24 0v4h-5V8a7 7 0 0 0-14 0v4z" class="markb"/><rect x="11" y="19" width="6" height="6" rx="1" fill="#2a273c"/><rect x="23" y="19" width="6" height="6" rx="1" fill="#2a273c"/><rect x="17" y="27" width="6" height="11" rx="1" fill="#2a273c"/></svg>
+      <span data-i18n="brand">فندقة</span> -->
+      <img src="https://fandaqah.com/assets/images/fandaqah-hotel-white.png" alt="فندقة"  height="40">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview" data-i18n="nav.overview">نظرة عامة</a></li>
+      <li><a href="#integration" data-i18n="nav.integration">الربط</a></li>
+      <li><a href="#coa" data-i18n="nav.coa">دليل الحسابات</a></li>
+      <li><a href="#journal" data-i18n="nav.journal">دفتر القيود</a></li>
+      <li><a href="#reports" data-i18n="nav.reports">التقارير</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">الأسئلة الشائعة</a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ar" aria-pressed="true" lang="ar">العربية</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">English</button>
+    </div>
+    <a href="#integration" class="btn btn-primary" data-i18n="cta.start">ابدأ الربط</a>
+    <button class="burger" aria-expanded="false" aria-controls="drawer" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <ul>
+    <li><a href="#overview" data-i18n="nav.overview">نظرة عامة</a></li>
+    <li><a href="#integration" data-i18n="nav.integration">الربط</a></li>
+    <li><a href="#coa" data-i18n="nav.coa">دليل الحسابات</a></li>
+    <li><a href="#journal" data-i18n="nav.journal">دفتر القيود</a></li>
+    <li><a href="#reports" data-i18n="nav.reports">التقارير</a></li>
+    <li><a href="#faq" data-i18n="nav.faq">الأسئلة الشائعة</a></li>
+  </ul>
+  <a href="#integration" class="btn btn-primary" data-i18n="cta.start">ابدأ الربط</a>
+</nav>
+
+<nav class="prog" id="prog" aria-label="Workflow progress">
+  <i class="ln"></i>
+  <a href="#integration" data-phase="1"><span data-i18n="ph.connect">الربط</span><i></i></a>
+  <a href="#coa" data-phase="2"><span data-i18n="ph.map">المطابقة</span><i></i></a>
+  <a href="#sync" data-phase="3"><span data-i18n="ph.sync">المزامنة</span><i></i></a>
+  <a href="#journal" data-phase="4"><span data-i18n="ph.validate">التحقق</span><i></i></a>
+  <a href="#reports" data-phase="5"><span data-i18n="ph.report">التقارير</span><i></i></a>
+</nav>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero dark" id="top" data-theme="dark" data-phase="0">
+  <div class="hero-bg" aria-hidden="true"><div class="ledger"></div><div class="glow"></div><div class="glow2"></div></div>
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="hero.h1">اربط بياناتك المالية مع منصة السياحة بسهولة ودقة</h1>
+      <p class="lead" data-i18n="hero.lead">تعرف على خطوات ربط دليل الحسابات والقيود المالية ومزامنتها مع منصة السياحة لضمان دقة البيانات وسهولة إعداد التقارير المالية.</p>
+      <div class="ctas">
+        <a href="#integration" class="btn btn-primary"><span data-i18n="cta.start">ابدأ الربط</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#overview" class="btn btn-ghost" data-i18n="cta.explore">استكشف الخطوات</a>
+      </div>
+      <div class="trust">
+        <span><b></b><em style="font-style:normal" data-i18n="hero.t1">دليل حسابات موحد</em></span>
+        <span><b></b><em style="font-style:normal" data-i18n="hero.t2">قيود متوازنة ومعتمدة</em></span>
+        <span><b></b><em style="font-style:normal" data-i18n="hero.t3">مزامنة مع الرصد السياحي</em></span>
+      </div>
+    </div>
+    <div class="hv" id="hv" aria-hidden="true">
+      <div class="plane p-back">
+        <svg class="flow" viewBox="0 0 540 560" preserveAspectRatio="xMidYMid meet">
+          <path class="wire" d="M 150 150 C 260 150 240 420 390 420"/>
+          <path class="wire-on" d="M 150 150 C 260 150 240 420 390 420"/>
+          <circle class="dot" r="4"/><circle class="dot d2" r="3"/><circle class="dot d3" r="3"/>
+        </svg>
+      </div>
+      <div class="plane p-mid">
+        <div class="ui card-src">
+          <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span><span data-i18n="hero.src">بيانات الفندق المالية</span></div>
+          <div class="acct"><span><code>1001</code> <span data-i18n="acc.cash">النقدية</span></span><span class="amt">SAR 42,300</span></div>
+          <div class="acct"><span><code>1100</code> <span data-i18n="acc.recv">العملاء</span></span><span class="amt">SAR 118,900</span></div>
+          <div class="acct"><span><code>4001</code> <span data-i18n="acc.room">إيرادات الغرف</span></span><span class="amt">SAR 1,280,000</span></div>
+          <div class="acct"><span><code>5001</code> <span data-i18n="acc.exp">المصروفات التشغيلية</span></span><span class="amt">SAR 620,000</span></div>
+        </div>
+        <div class="ui ui-dark card-dst">
+          <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span><span data-i18n="hero.dst">أكواد الرصد السياحي</span></div>
+          <div class="acct"><span data-i18n="st.matched">تمت المطابقة</span><span class="badge badge-ok"><span class="chk">✓</span>48/48</span></div>
+          <div class="acct"><span data-i18n="st.validated">تم التحقق</span><span class="badge badge-ok"><span class="chk">✓</span>100%</span></div>
+          <div class="acct"><span data-i18n="st.synced">تمت المزامنة</span><span class="badge badge-ok"><span class="pulse"></span><span data-i18n="st.live">مباشر</span></span></div>
+        </div>
+        <span class="sync-label" data-i18n="hero.sync">مزامنة البيانات</span>
+      </div>
+      <div class="plane p-front">
+        <div class="float-badge fb1"><span class="chk">✓</span><span data-i18n="hero.fb1">T-4001 إيرادات الغرف</span></div>
+        <div class="float-badge fb2"><span class="pulse" style="width:7px;height:7px;border-radius:50%;background:var(--coral)"></span><span data-i18n="hero.fb2">الربط نشط</span></div>
+        <div class="float-badge fb3"><span data-i18n="hero.fb3">المدين = الدائن</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OVERVIEW TIMELINE ================= -->
+<section class="sec light" id="overview" data-theme="light" data-phase="0">
+  <div class="wrap">
+    <div class="copy rv">
+      <h2 class="t-l" data-i18n="ov.h2">رحلة الربط المالي في 10 خطوات</h2>
+      <p class="lead" data-i18n="ov.p">من إكمال الربط حتى تقارير الرصد السياحي: كل خطوة لها شاشة واضحة ونتيجة محددة. مرّر للأسفل لتراها تحدث أمامك.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <ol class="tl-rail" style="list-style:none;padding:0;margin:0">
+        <li class="tl-item"><span class="n">01</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 14a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6l-1 1"/><path d="M14 10a4 4 0 0 0-5.6 0l-3 3a4 4 0 0 0 5.6 5.6l1-1"/></svg><span data-i18n="tl.1">الربط</span></li>
+        <li class="tl-item"><span class="n">02</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"/><path d="M4 10h16M9 10v9"/></svg><span data-i18n="tl.2">دليل الحسابات</span></li>
+        <li class="tl-item"><span class="n">03</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 17v3h16v-3"/></svg><span data-i18n="tl.3">قالب الاستيراد</span></li>
+        <li class="tl-item"><span class="n">04</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h6M4 12h6M4 18h6M14 6h6M14 12h6M14 18h6"/><path d="M10 6c2 0 2 6 4 6M10 12c2 0 2 6 4 6"/></svg><span data-i18n="tl.4">مطابقة الأكواد</span></li>
+        <li class="tl-item"><span class="n">05</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15V5m0 0L8 9m4-4 4 4"/><path d="M4 17v3h16v-3"/></svg><span data-i18n="tl.5">الحفظ والرفع</span></li>
+        <li class="tl-item"><span class="n">06</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span data-i18n="tl.6">حساب جديد</span></li>
+        <li class="tl-item"><span class="n">07</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 12a8 8 0 0 1 14-5.3L20 9"/></svg><span data-i18n="tl.7">المزامنة</span></li>
+        <li class="tl-item"><span class="n">08</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></svg><span data-i18n="tl.8">استيراد القيود</span></li>
+        <li class="tl-item"><span class="n">09</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M4 8l8-3 8 3"/><path d="M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z"/></svg><span data-i18n="tl.9">التحقق والاعتماد</span></li>
+        <li class="tl-item"><span class="n">10</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span data-i18n="tl.10">الرصد السياحي</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STICKY DATA FLOW STORY ================= -->
+<section class="story" id="story" data-phase="0" aria-label="Data flow">
+  <div class="stage" id="stage">
+    <div class="wrap">
+      <div class="texts">
+        <div class="txt on" data-s="0">
+          <h3 data-i18n="s0.h">تدخل البيانات</h3>
+          <p data-i18n="s0.p">نظامك المالي يحتفظ بالنقدية والعملاء والإيرادات والمصروفات. الربط يبدأ من هنا، بلا إعادة إدخال.</p>
+          <div class="m-scene"><div class="ui"><div class="ui-head"><span class="dots"><i></i><i></i><i></i></span><span data-i18n="hero.src">بيانات الفندق المالية</span></div><div class="acct"><span><code>1001</code> <span data-i18n="acc.cash">النقدية</span></span><span class="amt">SAR 42,300</span></div><div class="acct"><span><code>4001</code> <span data-i18n="acc.room">إيرادات الغرف</span></span><span class="amt">SAR 1,280,000</span></div></div></div>
+          <div class="steps-mini"><span class="on" data-i18n="ph.connect">الربط</span><span data-i18n="ph.map">المطابقة</span><span data-i18n="ph.validate">التحقق</span><span data-i18n="ph.sync">المزامنة</span><span data-i18n="ph.report">التقارير</span></div>
+        </div>
+        <div class="txt" data-s="1">
+          <h3 data-i18n="s1.h">تُطابَق مع أكواد الرصد</h3>
+          <p data-i18n="s1.p">كل حساب في دليلك يرتبط بكود موحد في منصة السياحة. مرة واحدة، ثم تُستخدم تلقائيًا في كل قيد.</p>
+          <div class="m-scene"><div class="pipe keep"><span class="node">4001</span><i class="arr on"></i><span class="node ok"><span class="chk">✓</span>T-4001</span></div></div>
+          <div class="steps-mini"><span class="done" data-i18n="ph.connect">الربط</span><span class="on" data-i18n="ph.map">المطابقة</span><span data-i18n="ph.validate">التحقق</span><span data-i18n="ph.sync">المزامنة</span><span data-i18n="ph.report">التقارير</span></div>
+        </div>
+        <div class="txt" data-s="2">
+          <h3 data-i18n="s2.h">تُتحقق قبل الاعتماد</h3>
+          <p data-i18n="s2.p">إجمالي المدين يساوي إجمالي الدائن قبل حفظ أي قيد. لا يصل إلى الرصد السياحي إلا قيد متوازن ومعتمد.</p>
+          <div class="m-scene"><div class="pipe keep"><span class="node">SAR 8,500</span><span style="font-size:1.4rem;opacity:.7">=</span><span class="node ok"><span class="chk">✓</span>SAR 8,500</span></div></div>
+          <div class="steps-mini"><span class="done" data-i18n="ph.connect">الربط</span><span class="done" data-i18n="ph.map">المطابقة</span><span class="on" data-i18n="ph.validate">التحقق</span><span data-i18n="ph.sync">المزامنة</span><span data-i18n="ph.report">التقارير</span></div>
+        </div>
+        <div class="txt" data-s="3">
+          <h3 data-i18n="s3.h">تُزامَن مع المنصة</h3>
+          <p data-i18n="s3.p">المزامنة تحدّث دليل الحسابات وترسل القيود المعتمدة إلى الرصد السياحي، وتعرض لك حالة كل عملية.</p>
+          <div class="m-scene"><div class="pipe vert" style="align-items:stretch"><span class="node ok" data-i18n="sync.db">قاعدة بيانات الفندق</span><i class="arr on"></i><span class="node ok" data-i18n="sync.map">مطابقة الحسابات</span><i class="arr on"></i><span class="node ok" data-i18n="sync.codes">أكواد الرصد السياحي</span></div></div>
+          <div class="steps-mini"><span class="done" data-i18n="ph.connect">الربط</span><span class="done" data-i18n="ph.map">المطابقة</span><span class="done" data-i18n="ph.validate">التحقق</span><span class="on" data-i18n="ph.sync">المزامنة</span><span data-i18n="ph.report">التقارير</span></div>
+        </div>
+        <div class="txt" data-s="4">
+          <h3 data-i18n="s4.h">تُقرأ في التقارير</h3>
+          <p data-i18n="s4.p">دفتر اليومية والتقارير المالية وتقارير الرصد السياحي في مكان واحد، لمراجعة الأداء والتأكد من صحة الربط.</p>
+          <div class="m-scene"><div class="metrics" style="grid-template-columns:1fr 1fr"><div class="metric"><span data-i18n="rp.m5">تقارير الرصد</span><b class="green">98%</b></div><div class="metric"><span data-i18n="rp.m6">دقة البيانات</span><b class="coral">99.8%</b></div></div></div>
+          <div class="steps-mini"><span class="done" data-i18n="ph.connect">الربط</span><span class="done" data-i18n="ph.map">المطابقة</span><span class="done" data-i18n="ph.validate">التحقق</span><span class="done" data-i18n="ph.sync">المزامنة</span><span class="on" data-i18n="ph.report">التقارير</span></div>
+        </div>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <div class="scn on" data-s="0">
+          <div class="ui" style="width:min(100%,440px)">
+            <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span><span data-i18n="hero.src">بيانات الفندق المالية</span></div>
+            <div class="acct"><span><code>1001</code> <span data-i18n="acc.cash">النقدية</span></span><span class="amt">SAR 42,300</span></div>
+            <div class="acct"><span><code>1100</code> <span data-i18n="acc.recv">العملاء</span></span><span class="amt">SAR 118,900</span></div>
+            <div class="acct"><span><code>4001</code> <span data-i18n="acc.room">إيرادات الغرف</span></span><span class="amt">SAR 1,280,000</span></div>
+            <div class="acct"><span><code>5001</code> <span data-i18n="acc.exp">المصروفات التشغيلية</span></span><span class="amt">SAR 620,000</span></div>
+          </div>
+        </div>
+        <div class="scn" data-s="1">
+          <div style="display:grid;gap:.7rem;width:min(100%,520px)">
+            <div class="pipe keep"><span class="node" style="min-width:12rem;justify-content:space-between"><code style="color:var(--coral)">1001</code><span data-i18n="acc.cash">النقدية</span></span><i class="arr on"></i><span class="node ok"><span class="chk">✓</span>T-1001</span></div>
+            <div class="pipe keep"><span class="node" style="min-width:12rem;justify-content:space-between"><code style="color:var(--coral)">1100</code><span data-i18n="acc.recv">العملاء</span></span><i class="arr on"></i><span class="node ok"><span class="chk">✓</span>T-1100</span></div>
+            <div class="pipe keep"><span class="node" style="min-width:12rem;justify-content:space-between"><code style="color:var(--coral)">4001</code><span data-i18n="acc.room">إيرادات الغرف</span></span><i class="arr on"></i><span class="node ok"><span class="chk">✓</span>T-4001</span></div>
+            <div class="pipe keep"><span class="node" style="min-width:12rem;justify-content:space-between"><code style="color:var(--coral)">5001</code><span data-i18n="acc.exp">المصروفات</span></span><i class="arr on"></i><span class="node ok"><span class="chk">✓</span>T-5001</span></div>
+          </div>
+        </div>
+        <div class="scn" data-s="2">
+          <div class="ui ui-dark" style="width:min(100%,460px);border:1px solid var(--beige-18)">
+            <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span>JV-2045</div>
+            <div class="acct"><span data-i18n="je.debit">حساب المدين</span><span data-i18n="acc.recvfull">الذمم المدينة</span></div>
+            <div class="acct"><span data-i18n="je.credit">حساب الدائن</span><span data-i18n="acc.room">إيرادات الغرف</span></div>
+            <div class="acct" style="font-size:1.1rem"><span><b>SAR 8,500</b></span><span style="color:var(--green)">=</span><span><b>SAR 8,500</b></span></div>
+            <div class="acct" style="justify-content:center"><span class="badge badge-ok"><span class="chk">✓</span><span data-i18n="bal.ok">متوازن</span></span></div>
+          </div>
+        </div>
+        <div class="scn" data-s="3">
+          <div class="sync-ring" style="width:260px;height:260px">
+            <svg viewBox="0 0 200 200"><circle class="track" cx="100" cy="100" r="88"/><circle class="arc" cx="100" cy="100" r="88"/><circle class="arc arc2" cx="100" cy="100" r="70"/></svg>
+            <div class="core"><div><b>184</b><span data-i18n="rp.m4">حسابات متزامنة</span></div></div>
+          </div>
+        </div>
+        <div class="scn in" data-s="4">
+          <div class="metrics" style="width:min(100%,520px)">
+            <div class="metric"><span data-i18n="rp.m1">الإيرادات</span><b class="coral">SAR 1.28M</b></div>
+            <div class="metric"><span data-i18n="rp.m3">القيود</span><b>1,245</b></div>
+            <div class="metric"><span data-i18n="rp.m6">دقة البيانات</span><b class="green">99.8%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 01 CONNECTION ================= -->
+<section class="sec light" id="integration" data-theme="light" data-phase="1">
+  <div class="wrap grid2">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.1">الخطوة 01</span></div>
+      <h2 class="t-l" data-i18n="st1.h">إكمال الربط مع منصة السياحة</h2>
+      <p class="lead" data-i18n="st1.p">بعد إكمال إعداد الربط بين النظام المالي ومنصة السياحة، انتقل إلى الإدارة المالية للبدء في إعداد دليل الحسابات ومطابقة الحسابات.</p>
+      <p data-i18n="st1.p2">أدخل مُعرّف المنشأة والمفتاح السري اللذين زوّدتك بهما المنصة الوطنية للرصد السياحي، ثم اضغط تحديث. يتحول مؤشر الحالة إلى «متصل».</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="modal-ui" role="img" aria-label="Fandaqah connection dialog">
+        <div class="mh"><span data-i18n="m.title">الربط المالي مع المرصد السياحي</span><button type="button" aria-hidden="true" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2 2 12"/></svg></button></div>
+        <div class="mb">
+          <div class="status"><span class="badge badge-ok" id="mStatus"><span class="pulse"></span><span data-i18n="m.connected">متصل</span></span></div>
+          <div class="note" data-i18n="m.note">قم بتعبئة بيانات الربط المالي التي تم تزويدكم بها من قبل المنصة الوطنية للرصد السياحي</div>
+          <label data-i18n="m.l1">معرف المنشأة</label>
+          <div class="inp"><span class="typed" data-type="FQ-2208-7731"></span></div>
+          <label data-i18n="m.l2">المفتاح السري للمنشأة</label>
+          <div class="inp pw"><span class="typed" data-type="••••••••••••"></span></div>
+          <div class="mbtn" id="mBtn" data-i18n="m.btn">تحديث</div>
+        </div>
+      </div>
+      <div class="conn-diagram pipe keep" aria-hidden="true">
+        <span class="node on" data-i18n="c.fin">النظام المالي</span>
+        <span class="conn-line"><i></i></span>
+        <span class="node" data-i18n="c.link">الربط</span>
+        <span class="conn-line"><i style="transition-delay:.5s"></i></span>
+        <span class="node ok"><span class="chk">✓</span><span data-i18n="c.tour">منصة السياحة</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 02 CHART OF ACCOUNTS ================= -->
+<section class="sec dark" id="coa" data-theme="dark" data-phase="2">
+  <div class="wrap grid2 swap">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.2">الخطوة 02</span></div>
+      <h2 class="t-l" data-i18n="st2.h">دليل الحسابات</h2>
+      <p class="lead" data-i18n="st2.p">انتقل إلى الإدارة المالية ثم افتح دليل الحسابات واختر خيار الاستيراد لتنزيل القالب المخصص لمطابقة الحسابات.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="ui dash" role="img" aria-label="Financial Management dashboard">
+        <nav class="side" aria-hidden="true">
+          <span class="ttl" data-i18n="d.fm">الإدارة المالية</span>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span data-i18n="d.dash">لوحة التحكم</span></a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18v10H3z"/><path d="M3 11h18"/></svg><span data-i18n="d.acc">الحسابات</span></a>
+          <a class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4z"/><path d="M4 10h16M9 10v9"/></svg><span data-i18n="d.coa">دليل الحسابات</span></a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></svg><span data-i18n="d.je">دفتر القيود</span></a>
+          <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span data-i18n="d.rep">التقارير</span></a>
+        </nav>
+        <div class="main">
+          <div class="bar"><h4 data-i18n="d.coa">دليل الحسابات</h4><div class="mini-btns"><span class="hot" data-i18n="d.import">استيراد</span><span data-i18n="d.export">تصدير</span></div></div>
+          <table>
+            <thead><tr><th data-i18n="t.no">رقم الحساب</th><th data-i18n="t.name">اسم الحساب</th><th data-i18n="t.code">كود الرصد</th><th data-i18n="t.status">الحالة</th></tr></thead>
+            <tbody>
+              <tr><td>1001</td><td data-i18n="acc.cash">النقدية</td><td style="color:var(--coral);font-weight:600">T-1001</td><td><span class="badge badge-ok"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></td></tr>
+              <tr><td>1100</td><td data-i18n="acc.recv">العملاء</td><td style="color:var(--coral);font-weight:600">T-1100</td><td><span class="badge badge-ok"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></td></tr>
+              <tr><td>4001</td><td data-i18n="acc.room">إيرادات الغرف</td><td style="color:var(--coral);font-weight:600">T-4001</td><td><span class="badge badge-ok"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></td></tr>
+              <tr><td>4002</td><td data-i18n="acc.rs">إيرادات خدمة الغرف</td><td style="color:var(--navy-45)">—</td><td><span class="badge" style="background:var(--peach-45)" data-i18n="st.pending">بانتظار المطابقة</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 03 TEMPLATE ================= -->
+<section class="sec light" data-theme="light" data-phase="2">
+  <div class="wrap grid2">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.3">الخطوة 03</span></div>
+      <h2 class="t-l" data-i18n="st3.h">تنزيل قالب الاستيراد</h2>
+      <p class="lead" data-i18n="st3.p">قم بتنزيل الملف المخصص للاستيراد واستخدمه لإدخال ومطابقة بيانات الحسابات.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="ui sheet">
+        <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span>account-mapping-template.xlsx</div>
+        <table>
+          <thead><tr><th data-i18n="t.no">رقم الحساب</th><th data-i18n="t.hotel">حساب الفندق</th><th data-i18n="t.code">كود الرصد</th><th data-i18n="t.status">الحالة</th></tr></thead>
+          <tbody>
+            <tr><td>1001</td><td data-i18n="acc.cash">النقدية</td><td class="code hl">T-1001</td><td><span class="chk">✓</span></td></tr>
+            <tr><td>1100</td><td data-i18n="acc.recv">العملاء</td><td class="code hl">T-1100</td><td><span class="chk">✓</span></td></tr>
+            <tr><td>4001</td><td data-i18n="acc.room">إيرادات الغرف</td><td class="code hl">T-4001</td><td><span class="chk">✓</span></td></tr>
+            <tr><td>5001</td><td data-i18n="acc.exp">المصروفات</td><td class="code hl">T-5001</td><td><span class="chk">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dl-row">
+        <span class="fileic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M8 13h8M8 17h8M8 9h3"/></svg></span>
+        <span class="meta"><span data-i18n="dl.name">قالب مطابقة الحسابات</span><small>XLSX · 24 KB</small></span>
+        <span class="dbtn" data-i18n="dl.btn">تنزيل</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 04 MATCH (PEAK) ================= -->
+<section class="peak dark" id="peak" data-theme="dark" data-phase="2">
+  <div class="stage">
+    <div class="wrap">
+      <div class="head">
+        <div class="copy">
+          <div class="step-num"><i></i><span data-i18n="step.4">الخطوة 04</span></div>
+          <h2 class="t-l" data-i18n="st4.h">مطابقة أكواد دليل الحسابات</h2>
+        </div>
+        <p class="lead" style="max-width:52ch" data-i18n="st4.p">قم بمطابقة أكواد دليل الحسابات الخاصة بالفندق مع أكواد الرصد السياحي، وذلك من خلال ربط كل حساب بالكود المناسب له داخل القالب.</p>
+      </div>
+      <div class="map" id="map">
+        <div class="col">
+          <h4 data-i18n="map.hotel">حسابات الفندق</h4>
+          <div class="mrow" data-i="0"><span><code>1001</code> <span data-i18n="acc.cash">النقدية</span></span></div>
+          <div class="mrow" data-i="1"><span><code>1100</code> <span data-i18n="acc.recv">العملاء</span></span></div>
+          <div class="mrow" data-i="2"><span><code>4001</code> <span data-i18n="acc.room">إيرادات الغرف</span></span></div>
+          <div class="mrow" data-i="3"><span><code>5001</code> <span data-i18n="acc.exp">المصروفات</span></span></div>
+        </div>
+        <div class="mid" aria-hidden="true">
+          <svg viewBox="0 0 100 400" preserveAspectRatio="none">
+            <path class="g" d="M0 50 C 50 50 50 50 100 50"/><path class="g" d="M0 150 C 50 150 50 150 100 150"/><path class="g" d="M0 250 C 50 250 50 250 100 250"/><path class="g" d="M0 350 C 50 350 50 350 100 350"/>
+            <path data-i="0" d="M0 50 C 50 50 50 50 100 50"/><path data-i="1" d="M0 150 C 50 150 50 150 100 150"/><path data-i="2" d="M0 250 C 50 250 50 250 100 250"/><path data-i="3" d="M0 350 C 50 350 50 350 100 350"/>
+            <circle data-i="0" cx="100" cy="50" r="4"/><circle data-i="1" cx="100" cy="150" r="4"/><circle data-i="2" cx="100" cy="250" r="4"/><circle data-i="3" cx="100" cy="350" r="4"/>
+          </svg>
+        </div>
+        <div class="col">
+          <h4 data-i18n="map.codes">أكواد الرصد السياحي</h4>
+          <div class="mrow" data-i="0"><span><code>T-1001</code></span><span class="badge badge-ok mb"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></div>
+          <div class="mrow" data-i="1"><span><code>T-1100</code></span><span class="badge badge-ok mb"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></div>
+          <div class="mrow" data-i="2"><span><code>T-4001</code></span><span class="badge badge-ok mb"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></div>
+          <div class="mrow" data-i="3"><span><code>T-5001</code></span><span class="badge badge-ok mb"><span class="chk">✓</span><span data-i18n="st.matched">تمت المطابقة</span></span></div>
+        </div>
+      </div>
+      <div class="counter" aria-live="polite">
+        <div><b id="mapCount">0</b><span data-i18n="map.c1">حسابات مطابَقة</span></div>
+        <div><b id="mapLeft">4</b><span data-i18n="map.c2">متبقية</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 05 UPLOAD ================= -->
+<section class="sec light" data-theme="light" data-phase="2">
+  <div class="wrap grid2 swap">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.5">الخطوة 05</span></div>
+      <h2 class="t-l" data-i18n="st5.h">الحفظ والرفع</h2>
+      <p class="lead" data-i18n="st5.p">بعد الانتهاء من مطابقة الحسابات، احفظ الملف وارفعه إلى النظام لإضافة وربط الحسابات.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="upload">
+        <div class="uh"><span data-i18n="up.h">جارٍ رفع ملف مطابقة الحسابات</span><span class="pct" id="upPct">0%</span></div>
+        <div class="track"><i></i></div>
+        <ul>
+          <li><span class="chk">✓</span><span><b>48</b> <span data-i18n="up.1">حسابًا تمت معالجتها</span></span></li>
+          <li><span class="chk">✓</span><span><b>48</b> <span data-i18n="up.2">حسابًا تمت مطابقتها</span></span></li>
+          <li><span class="chk">✓</span><span><b>0</b> <span data-i18n="up.3">أخطاء</span></span></li>
+        </ul>
+      </div>
+      <div class="pipe upl" id="uplPipe" aria-hidden="true">
+        <span class="node">Excel / CSV</span><i class="arr"></i><span class="node" data-i18n="up.s2">التحقق</span><i class="arr"></i><span class="node" data-i18n="up.s3">الرفع</span><i class="arr"></i><span class="node" data-i18n="up.s4">المعالجة</span><i class="arr"></i><span class="node"><span class="chk">✓</span><span data-i18n="up.s5">اكتمل</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 06 ADD ACCOUNT ================= -->
+<section class="sec peachy" data-theme="light" data-phase="2">
+  <div class="wrap grid2">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.6">الخطوة 06</span></div>
+      <h2 class="t-l" data-i18n="st6.h">إضافة حساب جديد</h2>
+      <p class="lead" data-i18n="st6.p">لإضافة حساب جديد في دليل الحسابات، حدد الحساب الرئيسي وأدخل بيانات الحساب الجديد، بما في ذلك رقم الحساب واسمه، ثم اربطه بحساب الدليل الموحد المناسب واحفظ البيانات.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="form-ui" id="formAcc">
+        <div class="fh"><span data-i18n="f.newacc">حساب جديد</span><span class="badge" style="background:var(--navy-08)" data-i18n="d.coa">دليل الحسابات</span></div>
+        <div class="grid">
+          <div class="f"><label data-i18n="f.parent">الحساب الرئيسي</label><div class="inp" data-seq="0"><span class="caret"></span><span class="val" data-i18n="acc.revenue">الإيرادات</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
+          <div class="f"><label data-i18n="f.no">رقم الحساب</label><div class="inp" data-seq="1"><span class="caret"></span><span class="val">4002</span></div></div>
+          <div class="f full"><label data-i18n="f.name">اسم الحساب</label><div class="inp" data-seq="2"><span class="caret"></span><span class="val" data-i18n="acc.rs">إيرادات خدمة الغرف</span></div></div>
+          <div class="f full"><label data-i18n="f.unified">حساب الدليل الموحد</label><div class="inp" data-seq="3"><span class="caret"></span><span class="val" style="color:var(--coral);font-weight:600">T-4002</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
+        </div>
+        <button type="button" class="fbtn" data-label="f.save" data-i18n="f.save">حفظ الحساب</button>
+        <div class="toast"><span class="chk">✓</span><span data-i18n="f.created">تم إنشاء الحساب</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 07 SYNC ================= -->
+<section class="sec dark" id="sync" data-theme="dark" data-phase="3" style="position:relative;overflow:hidden">
+  <div class="particles" id="particles" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="copy rv" style="text-align:center;margin-inline:auto">
+      <div class="step-num" style="justify-content:center"><i></i><span data-i18n="step.7">الخطوة 07</span></div>
+      <h2 class="t-l" data-i18n="st7.h">مزامنة دليل الحسابات</h2>
+      <p class="lead" data-i18n="st7.p">بعد إضافة الحسابات، قم بتنفيذ عملية المزامنة لتحديث دليل الحسابات وضمان توافقه مع أكواد الرصد السياحي.</p>
+    </div>
+    <div class="sync-wrap rv" data-d="1" style="margin-top:3rem" id="syncWrap">
+      <div class="stack" aria-hidden="true">
+        <div class="node ok"><span><span data-i18n="sync.db">قاعدة بيانات الفندق</span><small>184 <span data-i18n="sync.accs">حسابًا</span></small></span><span class="chk">✓</span></div>
+        <div class="updown"><i></i></div>
+        <div class="node ok"><span><span data-i18n="sync.map">مطابقة الحسابات</span><small>184 / 184</small></span><span class="chk">✓</span></div>
+        <div class="updown"><i style="animation-delay:.7s"></i></div>
+        <div class="node ok"><span><span data-i18n="sync.codes">أكواد الرصد السياحي</span><small data-i18n="sync.upd">محدّثة الآن</small></span><span class="chk">✓</span></div>
+      </div>
+      <div class="sync-ring" id="syncRing">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><circle class="track" cx="100" cy="100" r="88"/><circle class="arc" cx="100" cy="100" r="88"/><circle class="arc arc2" cx="100" cy="100" r="70"/></svg>
+        <div class="core"><div><b id="syncPct">0%</b><span id="syncLbl" data-i18n="sync.running">جارٍ المزامنة</span></div></div>
+      </div>
+      <div style="display:grid;gap:.8rem;justify-items:start">
+        <span class="badge badge-ok" id="syncBadge" style="font-size:.95rem;padding:.6rem 1rem"><span class="chk">✓</span><span data-i18n="sync.done">تمت المزامنة بنجاح</span></span>
+        <p class="lead" style="font-size:.95rem;max-width:34ch" data-i18n="sync.note">تُحدَّث أكواد الحسابات المضافة، وتُعرض حالة كل حساب في دليل الحسابات بعد انتهاء العملية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 08 JOURNAL IMPORT ================= -->
+<section class="sec light" id="journal" data-theme="light" data-phase="4">
+  <div class="wrap grid2">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.8">الخطوة 08</span></div>
+      <h2 class="t-l" data-i18n="st8.h">استيراد القيود من دفتر القيود</h2>
+      <p class="lead" data-i18n="st8.p">من دفتر القيود اختر خيار الاستيراد، ثم قم بتنزيل الملف وإدخال بيانات القيود ورفع الملف إلى النظام.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="ui sheet">
+        <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span>journal-entries-import.xlsx</div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th data-i18n="j.ref">المرجع</th><th data-i18n="j.date">التاريخ</th><th data-i18n="j.desc">الوصف</th><th data-i18n="j.debit">مدين</th><th data-i18n="j.credit">دائن</th></tr></thead>
+          <tbody>
+            <tr><td class="code">JV-1001</td><td>2026-01-10</td><td data-i18n="acc.room">إيرادات الغرف</td><td>0</td><td class="hl">5,000</td></tr>
+            <tr><td class="code">JV-1002</td><td>2026-01-11</td><td data-i18n="j.hexp">مصروفات الفندق</td><td class="hl">2,000</td><td>0</td></tr>
+            <tr><td class="code">JV-1003</td><td>2026-01-12</td><td data-i18n="j.fb">إيرادات الأغذية والمشروبات</td><td>0</td><td class="hl">3,200</td></tr>
+            <tr><td class="code">JV-1004</td><td>2026-01-12</td><td data-i18n="j.sal">رواتب</td><td class="hl">6,400</td><td>0</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="upload" style="margin-top:1rem;padding:1rem 1.2rem">
+        <div class="uh" style="margin-bottom:.6rem"><span data-i18n="j.uploading">رفع ملف القيود</span><span class="pct" style="font-size:1.1rem" id="jPct">0%</span></div>
+        <div class="track"><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 09 CREATE JOURNAL ENTRY ================= -->
+<section class="sec peachy" data-theme="light" data-phase="4">
+  <div class="wrap grid2 swap">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.9">الخطوة 09</span></div>
+      <h2 class="t-l" data-i18n="st9.h">إنشاء قيد جديد</h2>
+      <p class="lead" data-i18n="st9.p">لإضافة قيد جديد، أدخل الرقم المرجعي وتاريخ القيد والوصف، ثم حدد حسابي المدين والدائن والمبالغ المسجلة.</p>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="form-ui" id="formJE">
+        <div class="fh"><span data-i18n="je.new">قيد جديد</span><span class="badge" style="background:var(--navy-08)" data-i18n="d.je">دفتر القيود</span></div>
+        <div class="grid">
+          <div class="f"><label data-i18n="j.ref">الرقم المرجعي</label><div class="inp" data-seq="0"><span class="caret"></span><span class="val" style="font-weight:600">JV-2045</span></div></div>
+          <div class="f"><label data-i18n="je.date">تاريخ القيد</label><div class="inp" data-seq="1"><span class="caret"></span><span class="val">06 / 10 / 2026</span></div></div>
+          <div class="f full"><label data-i18n="j.desc">الوصف</label><div class="inp" data-seq="2"><span class="caret"></span><span class="val" data-i18n="je.descv">إيرادات غرف الفندق</span></div></div>
+          <div class="f"><label data-i18n="je.debit">حساب المدين</label><div class="inp" data-seq="3"><span class="caret"></span><span class="val" data-i18n="acc.recvfull">الذمم المدينة</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
+          <div class="f"><label data-i18n="je.credit">حساب الدائن</label><div class="inp" data-seq="4"><span class="caret"></span><span class="val" data-i18n="acc.room">إيرادات الغرف</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
+          <div class="f full"><label data-i18n="je.amount">المبلغ</label><div class="inp" data-seq="5"><span class="caret"></span><span class="val" style="font-weight:600;color:var(--coral)">SAR 8,500</span></div></div>
+        </div>
+        <button type="button" class="fbtn" data-label="je.save" data-i18n="je.save">حفظ القيد</button>
+        <div class="toast"><span class="chk">✓</span><span data-i18n="je.saved">تم حفظ القيد وهو جاهز للاعتماد</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 10 BALANCE ================= -->
+<section class="balance dark" id="balance" data-theme="dark" data-phase="4">
+  <div class="stage">
+    <div class="wrap">
+      <div class="copy" style="text-align:center;margin-inline:auto">
+        <div class="step-num" style="justify-content:center"><i></i><span data-i18n="step.10">الخطوة 10</span></div>
+        <h2 class="t-l" data-i18n="st10.h">التأكد من تساوي المدين والدائن</h2>
+        <p class="lead" data-i18n="st10.p">تأكد من تساوي إجمالي المدين والدائن قبل حفظ القيد واعتماده.</p>
+      </div>
+      <div class="scale" aria-hidden="true">
+        <svg viewBox="0 0 600 300">
+          <path class="stroke" d="M300 40v200M250 240h100" stroke-linecap="round"/>
+          <path class="fill stroke" d="M270 260h60l10 14H260z"/>
+          <g class="beam"><path class="stroke" d="M120 90h360" stroke-width="4" stroke-linecap="round"/><circle cx="300" cy="90" r="9" fill="#e95a54"/><circle cx="120" cy="90" r="5" fill="#fbcdab"/><circle cx="480" cy="90" r="5" fill="#fbcdab"/></g>
+          <g class="pan pan-l"><path class="stroke" d="M120 90l-50 90M120 90l50 90" opacity=".6"/><path class="fill stroke" d="M60 180h120l-14 24H74z"/><text x="120" y="226" text-anchor="middle" font-size="12" fill="#f2f0eb" opacity=".7" id="lblDebit">المدين</text><text x="120" y="246" text-anchor="middle" font-size="16" fill="#f2f0eb">SAR 8,500</text></g>
+          <g class="pan pan-r"><path class="stroke" d="M480 90l-50 90M480 90l50 90" opacity=".6"/><path class="fill stroke" d="M420 180h120l-14 24H434z"/><text x="480" y="226" text-anchor="middle" font-size="12" fill="#f2f0eb" opacity=".7" id="lblCredit">الدائن</text><text x="480" y="246" text-anchor="middle" font-size="16" fill="#f2f0eb">SAR 8,500</text></g>
+          <g class="ok"><circle cx="300" cy="40" r="16" fill="#8f9793"/><path d="M292 40l6 6 10-11" fill="none" stroke="#2a273c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+        </svg>
+      </div>
+      <div class="totals">
+        <div><span data-i18n="bal.td">إجمالي المدين</span><b>SAR 8,500</b></div>
+        <div class="eq">=</div>
+        <div><span data-i18n="bal.tc">إجمالي الدائن</span><b>SAR 8,500</b></div>
+      </div>
+      <div class="verdict"><span class="badge"><span class="chk">✓</span><span data-i18n="bal.okfull">متوازن: جاهز للحفظ والاعتماد</span></span></div>
+      <p class="lead" style="text-align:center;font-size:.85rem;margin-top:1.2rem;max-width:52ch;margin-inline:auto" data-i18n="bal.note">توضيح تعليمي فقط. القيد غير المتوازن لا يُعتمد.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 11 APPROVE & SEND ================= -->
+<section class="sec light" id="send" data-theme="light" data-phase="4">
+  <div class="wrap">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.11">الخطوة 11</span></div>
+      <h2 class="t-l" data-i18n="st11.h">اعتماد القيد وإرساله إلى الرصد السياحي</h2>
+      <p class="lead" data-i18n="st11.p">بعد التأكد من صحة القيد واعتماده، اختر إرسال إلى الرصد السياحي لإكمال عملية مزامنة البيانات.</p>
+    </div>
+    <div class="pipe rv" data-d="1" id="sendPipe" style="margin-top:3rem;justify-content:flex-start;gap:.6rem" aria-label="Approval pipeline">
+      <span class="node" data-i18n="sp.1">القيد</span><i class="arr"></i>
+      <span class="node"><span class="chk">✓</span><span data-i18n="sp.2">تم التحقق</span></span><i class="arr"></i>
+      <span class="node"><span class="chk">✓</span><span data-i18n="sp.3">تم الاعتماد</span></span><i class="arr"></i>
+      <span class="node" data-i18n="sp.4">إرسال</span><i class="arr"></i>
+      <span class="node" data-i18n="sp.5">الرصد السياحي</span><i class="arr"></i>
+      <span class="node"><span class="chk">✓</span><span data-i18n="sp.6">تم الاستلام</span></span>
+    </div>
+    <div class="rv" data-d="2" style="margin-top:2.5rem;max-width:620px">
+      <div class="ui" style="font-size:.9rem">
+        <div class="ui-head"><span class="dots"><i></i><i></i><i></i></span>JV-2045 · <span data-i18n="je.descv">إيرادات غرف الفندق</span></div>
+        <div class="acct"><span data-i18n="t.status">الحالة</span><span class="badge badge-ok" id="sendBadge"><span class="chk">✓</span><span data-i18n="sp.approved">معتمد</span></span></div>
+        <div class="acct" style="justify-content:flex-end;gap:.6rem"><span class="badge" style="background:var(--navy-08)" data-i18n="sp.edit">تعديل</span><span class="badge" style="background:var(--coral);color:var(--navy);padding:.5rem .9rem" id="sendBtn" data-i18n="sp.sendbtn">إرسال إلى الرصد السياحي</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REPORTS ================= -->
+<section class="sec dark" id="reports" data-theme="dark" data-phase="5">
+  <div class="wrap">
+    <div class="copy rv">
+      <div class="step-num"><i></i><span data-i18n="step.final">المرحلة الأخيرة</span></div>
+      <h2 class="t-l" data-i18n="rp.h">التقارير والمتابعة</h2>
+      <p class="lead" data-i18n="rp.p">في النهاية، يمكنك الاستفادة من تقارير دفتر اليومية والتقارير المالية، بالإضافة إلى تقارير الرصد السياحي، لمراجعة البيانات المالية ومتابعة أداء الفندق والتأكد من صحة الربط ودقة البيانات.</p>
+    </div>
+    <div class="rv" data-d="1" style="margin-top:3rem" id="reportsVis">
+      <div class="metrics">
+        <div class="metric"><span data-i18n="rp.m1">الإيرادات</span><b class="coral"><span data-count="1.28" data-dec="2" data-pre="SAR " data-suf="M">SAR 0.00M</span></b></div>
+        <div class="metric"><span data-i18n="rp.m2">المصروفات</span><b><span data-count="620" data-pre="SAR " data-suf="K">SAR 0K</span></b></div>
+        <div class="metric"><span data-i18n="rp.m3">القيود</span><b><span data-count="1245">0</span></b></div>
+        <div class="metric"><span data-i18n="rp.m4">حسابات متزامنة</span><b><span data-count="184">0</span></b></div>
+        <div class="metric"><span data-i18n="rp.m5">تقارير الرصد</span><b class="green"><span data-count="98" data-suf="%">0%</span></b></div>
+        <div class="metric"><span data-i18n="rp.m6">دقة البيانات</span><b class="green"><span data-count="99.8" data-dec="1" data-suf="%">0%</span></b></div>
+      </div>
+      <div class="charts">
+        <div class="chart">
+          <h4><span data-i18n="rp.c1">اتجاه الإيرادات والمصروفات</span><small>SAR K</small></h4>
+          <svg viewBox="0 0 600 220" aria-hidden="true">
+            <g class="grid"><line x1="0" y1="40" x2="600" y2="40"/><line x1="0" y1="100" x2="600" y2="100"/><line x1="0" y1="160" x2="600" y2="160"/><line x1="0" y1="220" x2="600" y2="220"/></g>
+            <path class="area" d="M0 150 L75 140 L150 120 L225 128 L300 95 L375 80 L450 70 L525 48 L600 40 V220 H0z"/>
+            <path class="ln rev" d="M0 150 L75 140 L150 120 L225 128 L300 95 L375 80 L450 70 L525 48 L600 40"/>
+            <path class="ln exp" d="M0 190 L75 186 L150 180 L225 178 L300 172 L375 170 L450 164 L525 160 L600 158"/>
+          </svg>
+          <div class="legend"><span><i></i><span data-i18n="rp.m1">الإيرادات</span></span><span><i class="g"></i><span data-i18n="rp.m2">المصروفات</span></span></div>
+        </div>
+        <div style="display:grid;gap:1.2rem">
+          <div class="chart">
+            <h4><span data-i18n="rp.c2">حجم القيود الشهري</span></h4>
+            <svg viewBox="0 0 240 120" aria-hidden="true"><g><rect class="bar" x="8" y="60" width="26" height="60"/><rect class="bar" x="42" y="48" width="26" height="72"/><rect class="bar" x="76" y="70" width="26" height="50"/><rect class="bar" x="110" y="36" width="26" height="84"/><rect class="bar" x="144" y="30" width="26" height="90"/><rect class="bar" x="178" y="22" width="26" height="98"/><rect class="bar" x="212" y="12" width="26" height="108"/></g></svg>
+          </div>
+          <div class="chart" style="display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center">
+            <svg viewBox="0 0 80 80" style="width:72px" aria-hidden="true"><circle class="ring-bg" cx="40" cy="40" r="32"/><circle class="ring" cx="40" cy="40" r="32" style="--v:98"/></svg>
+            <div><h4 style="margin:0" data-i18n="rp.c3">حالة المزامنة</h4><b style="font-size:1.4rem">98%</b><div class="hbar"><i style="--v:94%"></i></div><small style="color:var(--beige-70);font-size:.78rem" data-i18n="rp.c4">اكتمال التقارير 94%</small></div>
+          </div>
+        </div>
+      </div>
+      <p class="sample" data-i18n="rp.sample">الأرقام أعلاه توضيحية لعرض شكل لوحة التقارير، وليست بيانات فعلية.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEO ================= -->
+<section class="sec light" id="video" data-theme="light" data-phase="5">
+  <div class="wrap">
+    <div class="copy rv" style="text-align:center;margin-inline:auto">
+      <h2 class="t-l" data-i18n="vd.h">شاهد طريقة ربط البيانات المالية خطوة بخطوة</h2>
+      <p class="lead" data-i18n="vd.p">الشرح الكامل بالصوت والصورة، من إكمال الربط حتى تقارير الرصد السياحي.</p>
+    </div>
+    <div class="video-frame rv" data-d="1" style="margin-top:2.5rem">
+      <div class="video-box" id="videoBox">
+        <button type="button" class="poster" id="playBtn" aria-label="Play video">
+          <span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span>
+          <span class="cap"><span class="badge" data-i18n="vd.cap">ترجمة عربية وإنجليزية</span><span>YouTube · 16:9</span></span>
+        </button>
+      </div>
+    </div>
+    <div class="vid-links">
+      <a href="https://youtu.be/4B8zfaIHSiM" target="_blank" rel="noopener" data-i18n="vd.open">فتح الفيديو على YouTube</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec light" id="faq" data-theme="light" data-phase="5" style="padding-top:0">
+  <div class="wrap">
+    <div class="copy rv"><h2 class="t-l" data-i18n="fq.h">الأسئلة الشائعة</h2></div>
+    <div class="faq rv" data-d="1" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA + SUCCESS ================= -->
+<section class="sec dark final" id="cta" data-theme="dark" data-phase="5">
+  <div class="wrap">
+    <div class="copy rv">
+      <h2 class="t-xl" data-i18n="ct.h">جاهز لربط بياناتك المالية؟</h2>
+      <p class="lead" data-i18n="ct.p">ابدأ الآن واجعل إدارة البيانات المالية والرصد السياحي أكثر وضوحاً ودقة.</p>
+      <div class="ctas">
+        <a href="https://fandaqah.com/" class="btn btn-primary"><span data-i18n="ct.btn">ابدأ الربط الآن</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#top" class="btn btn-ghost" data-i18n="ct.top">العودة إلى البداية</a>
+      </div>
+    </div>
+    <div class="rv" data-d="1">
+      <div class="done-card">
+        <h4 data-i18n="dn.h">الربط المالي</h4>
+        <ul>
+          <li><span class="chk">✓</span><span data-i18n="dn.1">تم الربط</span></li>
+          <li><span class="chk">✓</span><span data-i18n="dn.2">تمت المطابقة</span></li>
+          <li><span class="chk">✓</span><span data-i18n="dn.3">تمت المزامنة</span></li>
+          <li><span class="chk">✓</span><span data-i18n="dn.4">تم التحقق</span></li>
+          <li><span class="chk">✓</span><span data-i18n="dn.5">تم الإرسال للرصد</span></li>
+        </ul>
+        <div class="ready">
+          <div><b data-i18n="dn.ready">الرصد السياحي جاهز</b><span data-i18n="dn.sub">كل القيود المعتمدة وصلت إلى المنصة</span></div>
+          <span class="node-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
+        </div>
+        <div class="stream" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer data-theme="dark" data-phase="5">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <a href="#top" class="brand">
+          
+                <img src="https://fandaqah.com/assets/images/fandaqah-hotel-white.png" alt="فندقة"  height="40">
+
+        </a>
+        <p data-i18n="ft.p">فندقة — حلول تقنية متقدمة لإدارة الفنادق والبيانات المالية والتشغيل الفندقي.</p>
+        <div class="lang" role="group" aria-label="Language" style="margin-top:1.2rem"><button type="button" data-lang="ar" aria-pressed="true" lang="ar">العربية</button><button type="button" data-lang="en" aria-pressed="false" lang="en">English</button></div>
+      </div>
+      <div>
+        <h4 data-i18n="ft.nav">الصفحة</h4>
+        <ul>
+          <li><a href="#overview" data-i18n="nav.overview">نظرة عامة</a></li>
+          <li><a href="#integration" data-i18n="nav.integration">الربط</a></li>
+          <li><a href="#coa" data-i18n="nav.coa">دليل الحسابات</a></li>
+          <li><a href="#journal" data-i18n="nav.journal">دفتر القيود</a></li>
+          <li><a href="#reports" data-i18n="nav.reports">التقارير</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft.co">فندقة</h4>
+        <ul>
+          <li><a href="https://fandaqah.com/" data-i18n="ft.site">الموقع الرئيسي</a></li>
+          <li><a href="https://fandaqah.com/contact" data-i18n="ft.contact">تواصل معنا</a></li>
+          <li><a href="https://fandaqah.com/privacy" data-i18n="ft.privacy">سياسة الخصوصية</a></li>
+          <li><a href="https://fandaqah.com/terms" data-i18n="ft.terms">الشروط والأحكام</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span data-i18n="ft.copy">© 2026 فندقة. جميع الحقوق محفوظة.</span>
+      <span data-i18n="ft.made">صُنع في المملكة العربية السعودية</span>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+"use strict";
+/* ============ TRANSLATIONS ============ */
+const T = {
+ar:{
+  skip:"تخطي إلى المحتوى", brand:"فندقة",
+  "nav.overview":"نظرة عامة","nav.integration":"الربط","nav.coa":"دليل الحسابات","nav.journal":"دفتر القيود","nav.reports":"التقارير","nav.faq":"الأسئلة الشائعة",
+  "cta.start":"ابدأ الربط","cta.explore":"استكشف الخطوات",
+  "ph.connect":"الربط","ph.map":"المطابقة","ph.validate":"التحقق","ph.sync":"المزامنة","ph.report":"التقارير",
+  "hero.h1":"اربط بياناتك المالية مع منصة السياحة بسهولة ودقة",
+  "hero.lead":"تعرف على خطوات ربط دليل الحسابات والقيود المالية ومزامنتها مع منصة السياحة لضمان دقة البيانات وسهولة إعداد التقارير المالية.",
+  "hero.t1":"دليل حسابات موحد","hero.t2":"قيود متوازنة ومعتمدة","hero.t3":"مزامنة مع الرصد السياحي",
+  "hero.src":"بيانات الفندق المالية","hero.dst":"أكواد الرصد السياحي","hero.sync":"مزامنة البيانات",
+  "hero.fb1":"T-4001 إيرادات الغرف","hero.fb2":"الربط نشط","hero.fb3":"المدين = الدائن",
+  "acc.cash":"النقدية","acc.recv":"العملاء","acc.room":"إيرادات الغرف","acc.exp":"المصروفات التشغيلية","acc.rs":"إيرادات خدمة الغرف","acc.revenue":"الإيرادات","acc.recvfull":"الذمم المدينة",
+  "st.matched":"تمت المطابقة","st.validated":"تم التحقق","st.synced":"تمت المزامنة","st.live":"مباشر","st.pending":"بانتظار المطابقة",
+  "ov.h2":"رحلة الربط المالي في 10 خطوات","ov.p":"من إكمال الربط حتى تقارير الرصد السياحي: كل خطوة لها شاشة واضحة ونتيجة محددة. مرّر للأسفل لتراها تحدث أمامك.",
+  "tl.1":"الربط","tl.2":"دليل الحسابات","tl.3":"قالب الاستيراد","tl.4":"مطابقة الأكواد","tl.5":"الحفظ والرفع","tl.6":"حساب جديد","tl.7":"المزامنة","tl.8":"استيراد القيود","tl.9":"التحقق والاعتماد","tl.10":"الرصد السياحي",
+  "s0.h":"تدخل البيانات","s0.p":"نظامك المالي يحتفظ بالنقدية والعملاء والإيرادات والمصروفات. الربط يبدأ من هنا، بلا إعادة إدخال.",
+  "s1.h":"تُطابَق مع أكواد الرصد","s1.p":"كل حساب في دليلك يرتبط بكود موحد في منصة السياحة. مرة واحدة، ثم تُستخدم تلقائيًا في كل قيد.",
+  "s2.h":"تُتحقق قبل الاعتماد","s2.p":"إجمالي المدين يساوي إجمالي الدائن قبل حفظ أي قيد. لا يصل إلى الرصد السياحي إلا قيد متوازن ومعتمد.",
+  "s3.h":"تُزامَن مع المنصة","s3.p":"المزامنة تحدّث دليل الحسابات وترسل القيود المعتمدة إلى الرصد السياحي، وتعرض لك حالة كل عملية.",
+  "s4.h":"تُقرأ في التقارير","s4.p":"دفتر اليومية والتقارير المالية وتقارير الرصد السياحي في مكان واحد، لمراجعة الأداء والتأكد من صحة الربط.",
+  "step.1":"الخطوة 01","step.2":"الخطوة 02","step.3":"الخطوة 03","step.4":"الخطوة 04","step.5":"الخطوة 05","step.6":"الخطوة 06","step.7":"الخطوة 07","step.8":"الخطوة 08","step.9":"الخطوة 09","step.10":"الخطوة 10","step.11":"الخطوة 11","step.final":"المرحلة الأخيرة",
+  "st1.h":"إكمال الربط مع منصة السياحة","st1.p":"بعد إكمال إعداد الربط بين النظام المالي ومنصة السياحة، انتقل إلى الإدارة المالية للبدء في إعداد دليل الحسابات ومطابقة الحسابات.",
+  "st1.p2":"أدخل مُعرّف المنشأة والمفتاح السري اللذين زوّدتك بهما المنصة الوطنية للرصد السياحي، ثم اضغط تحديث. يتحول مؤشر الحالة إلى «متصل».",
+  "m.title":"الربط المالي مع المرصد السياحي","m.connected":"متصل","m.note":"قم بتعبئة بيانات الربط المالي التي تم تزويدكم بها من قبل المنصة الوطنية للرصد السياحي","m.l1":"معرف المنشأة","m.l2":"المفتاح السري للمنشأة","m.btn":"تحديث","m.saved":"تم التحديث",
+  "c.fin":"النظام المالي","c.link":"الربط","c.tour":"منصة السياحة",
+  "st2.h":"دليل الحسابات","st2.p":"انتقل إلى الإدارة المالية ثم افتح دليل الحسابات واختر خيار الاستيراد لتنزيل القالب المخصص لمطابقة الحسابات.",
+  "d.fm":"الإدارة المالية","d.dash":"لوحة التحكم","d.acc":"الحسابات","d.coa":"دليل الحسابات","d.je":"دفتر القيود","d.rep":"التقارير","d.import":"استيراد","d.export":"تصدير",
+  "t.no":"رقم الحساب","t.name":"اسم الحساب","t.code":"كود الرصد","t.status":"الحالة","t.hotel":"حساب الفندق",
+  "st3.h":"تنزيل قالب الاستيراد","st3.p":"قم بتنزيل الملف المخصص للاستيراد واستخدمه لإدخال ومطابقة بيانات الحسابات.",
+  "dl.name":"قالب مطابقة الحسابات","dl.btn":"تنزيل",
+  "st4.h":"مطابقة أكواد دليل الحسابات","st4.p":"قم بمطابقة أكواد دليل الحسابات الخاصة بالفندق مع أكواد الرصد السياحي، وذلك من خلال ربط كل حساب بالكود المناسب له داخل القالب.",
+  "map.hotel":"حسابات الفندق","map.codes":"أكواد الرصد السياحي","map.c1":"حسابات مطابَقة","map.c2":"متبقية",
+  "st5.h":"الحفظ والرفع","st5.p":"بعد الانتهاء من مطابقة الحسابات، احفظ الملف وارفعه إلى النظام لإضافة وربط الحسابات.",
+  "up.h":"جارٍ رفع ملف مطابقة الحسابات","up.1":"حسابًا تمت معالجتها","up.2":"حسابًا تمت مطابقتها","up.3":"أخطاء","up.s2":"التحقق","up.s3":"الرفع","up.s4":"المعالجة","up.s5":"اكتمل",
+  "st6.h":"إضافة حساب جديد","st6.p":"لإضافة حساب جديد في دليل الحسابات، حدد الحساب الرئيسي وأدخل بيانات الحساب الجديد، بما في ذلك رقم الحساب واسمه، ثم اربطه بحساب الدليل الموحد المناسب واحفظ البيانات.",
+  "f.newacc":"حساب جديد","f.parent":"الحساب الرئيسي","f.no":"رقم الحساب","f.name":"اسم الحساب","f.unified":"حساب الدليل الموحد","f.save":"حفظ الحساب","f.saving":"جارٍ الحفظ...","f.created":"تم إنشاء الحساب","f.done":"تم إنشاء الحساب ✓",
+  "st7.h":"مزامنة دليل الحسابات","st7.p":"بعد إضافة الحسابات، قم بتنفيذ عملية المزامنة لتحديث دليل الحسابات وضمان توافقه مع أكواد الرصد السياحي.",
+  "sync.db":"قاعدة بيانات الفندق","sync.map":"مطابقة الحسابات","sync.codes":"أكواد الرصد السياحي","sync.accs":"حسابًا","sync.upd":"محدّثة الآن","sync.running":"جارٍ المزامنة","sync.done":"تمت المزامنة بنجاح","sync.complete":"اكتملت","sync.note":"تُحدَّث أكواد الحسابات المضافة، وتُعرض حالة كل حساب في دليل الحسابات بعد انتهاء العملية.",
+  "st8.h":"استيراد القيود من دفتر القيود","st8.p":"من دفتر القيود اختر خيار الاستيراد، ثم قم بتنزيل الملف وإدخال بيانات القيود ورفع الملف إلى النظام.",
+  "j.ref":"المرجع","j.date":"التاريخ","j.desc":"الوصف","j.debit":"مدين","j.credit":"دائن","j.hexp":"مصروفات الفندق","j.fb":"إيرادات الأغذية والمشروبات","j.sal":"رواتب","j.uploading":"رفع ملف القيود",
+  "st9.h":"إنشاء قيد جديد","st9.p":"لإضافة قيد جديد، أدخل الرقم المرجعي وتاريخ القيد والوصف، ثم حدد حسابي المدين والدائن والمبالغ المسجلة.",
+  "je.new":"قيد جديد","je.date":"تاريخ القيد","je.descv":"إيرادات غرف الفندق","je.debit":"حساب المدين","je.credit":"حساب الدائن","je.amount":"المبلغ","je.save":"حفظ القيد","je.saved":"تم حفظ القيد وهو جاهز للاعتماد","je.saving":"جارٍ الحفظ...","je.done":"تم الحفظ ✓",
+  "st10.h":"التأكد من تساوي المدين والدائن","st10.p":"تأكد من تساوي إجمالي المدين والدائن قبل حفظ القيد واعتماده.",
+  "bal.td":"إجمالي المدين","bal.tc":"إجمالي الدائن","bal.ok":"متوازن","bal.okfull":"متوازن: جاهز للحفظ والاعتماد","bal.note":"توضيح تعليمي فقط. القيد غير المتوازن لا يُعتمد.","bal.debit":"المدين","bal.credit":"الدائن",
+  "st11.h":"اعتماد القيد وإرساله إلى الرصد السياحي","st11.p":"بعد التأكد من صحة القيد واعتماده، اختر إرسال إلى الرصد السياحي لإكمال عملية مزامنة البيانات.",
+  "sp.1":"القيد","sp.2":"تم التحقق","sp.3":"تم الاعتماد","sp.4":"إرسال","sp.5":"الرصد السياحي","sp.6":"تم الاستلام","sp.approved":"معتمد","sp.edit":"تعديل","sp.sendbtn":"إرسال إلى الرصد السياحي","sp.sent":"تم الإرسال ✓",
+  "rp.h":"التقارير والمتابعة","rp.p":"في النهاية، يمكنك الاستفادة من تقارير دفتر اليومية والتقارير المالية، بالإضافة إلى تقارير الرصد السياحي، لمراجعة البيانات المالية ومتابعة أداء الفندق والتأكد من صحة الربط ودقة البيانات.",
+  "rp.m1":"الإيرادات","rp.m2":"المصروفات","rp.m3":"القيود","rp.m4":"حسابات متزامنة","rp.m5":"تقارير الرصد","rp.m6":"دقة البيانات",
+  "rp.c1":"اتجاه الإيرادات والمصروفات","rp.c2":"حجم القيود الشهري","rp.c3":"حالة المزامنة","rp.c4":"اكتمال التقارير 94%","rp.sample":"الأرقام أعلاه توضيحية لعرض شكل لوحة التقارير، وليست بيانات فعلية.",
+  "vd.h":"شاهد طريقة ربط البيانات المالية خطوة بخطوة","vd.p":"الشرح الكامل بالصوت والصورة، من إكمال الربط حتى تقارير الرصد السياحي.","vd.cap":"ترجمة عربية وإنجليزية","vd.open":"فتح الفيديو على YouTube",
+  "fq.h":"الأسئلة الشائعة",
+  "ct.h":"جاهز لربط بياناتك المالية؟","ct.p":"ابدأ الآن واجعل إدارة البيانات المالية والرصد السياحي أكثر وضوحاً ودقة.","ct.btn":"ابدأ الربط الآن","ct.top":"العودة إلى البداية",
+  "dn.h":"الربط المالي","dn.1":"تم الربط","dn.2":"تمت المطابقة","dn.3":"تمت المزامنة","dn.4":"تم التحقق","dn.5":"تم الإرسال للرصد","dn.ready":"الرصد السياحي جاهز","dn.sub":"كل القيود المعتمدة وصلت إلى المنصة",
+  "ft.p":"فندقة، حلول تقنية متقدمة لإدارة الفنادق والبيانات المالية والتشغيل الفندقي.","ft.nav":"الصفحة","ft.co":"فندقة","ft.site":"الموقع الرئيسي","ft.contact":"تواصل معنا","ft.privacy":"سياسة الخصوصية","ft.terms":"الشروط والأحكام","ft.copy":"© 2026 فندقة. جميع الحقوق محفوظة.","ft.made":"صُنع في المملكة العربية السعودية",
+  "meta.title":"ربط البيانات المالية مع منصة السياحة | فندقة","meta.desc":"تعرف على كيفية ربط دليل الحسابات والقيود المالية مع منصة السياحة، ومزامنة البيانات وإعداد التقارير المالية بدقة وسهولة.",
+  faq:[
+   ["ما هو ربط البيانات المالية مع منصة السياحة؟","هو ربط النظام المالي للفندق في فندقة بمنصة الرصد السياحي، بحيث تُطابَق حسابات الفندق مع الأكواد الموحدة وتُرسل القيود المعتمدة إلى المنصة مباشرة، دون إعادة إدخال يدوي."],
+   ["لماذا يجب مطابقة أكواد دليل الحسابات؟","لأن منصة السياحة تقرأ البيانات وفق دليل حسابات موحد. المطابقة تربط كل حساب في دليلك بالكود المقابل له، فتُصنَّف إيراداتك ومصروفاتك بشكل صحيح في تقارير الرصد."],
+   ["كيف يتم استيراد الحسابات؟","من الإدارة المالية افتح دليل الحسابات واختر استيراد، ثم نزّل القالب، وأدخل كل حساب مع كود الرصد المناسب، واحفظ الملف وارفعه. يضيف النظام الحسابات ويربطها تلقائيًا."],
+   ["كيف تتم مزامنة دليل الحسابات؟","بعد إضافة الحسابات أو تعديلها، نفّذ عملية المزامنة من دليل الحسابات. تُحدَّث الأكواد وتُعرض حالة كل حساب، وتظهر رسالة «تمت المزامنة بنجاح» عند الانتهاء."],
+   ["كيف أستورد دفتر القيود؟","من دفتر القيود اختر استيراد، ونزّل القالب، وأدخل المرجع والتاريخ والوصف والمدين والدائن لكل قيد، ثم ارفع الملف إلى النظام."],
+   ["لماذا يجب أن يتساوى إجمالي المدين والدائن؟","لأن القيد المحاسبي الصحيح يجب أن يكون متوازنًا. القيد غير المتوازن لا يُحفظ ولا يُعتمد، وبالتالي لا يُرسل إلى الرصد السياحي."],
+   ["كيف يتم إرسال القيود إلى الرصد السياحي؟","بعد حفظ القيد والتأكد من توازنه واعتماده، اختر «إرسال إلى الرصد السياحي». تُنقل بيانات القيد وفق الأكواد المطابقة وتظهر حالة الاستلام."],
+   ["ما التقارير التي يمكن استخدامها للمراجعة؟","تقارير دفتر اليومية، والتقارير المالية (الإيرادات والمصروفات)، وتقارير الرصد السياحي التي تعرض ما تم إرساله وحالته، للتأكد من صحة الربط ودقة البيانات."]
+  ]
+},
+en:{
+  skip:"Skip to content", brand:"Fandaqah",
+  "nav.overview":"Overview","nav.integration":"Integration","nav.coa":"Chart of Accounts","nav.journal":"Journal Entries","nav.reports":"Reports","nav.faq":"FAQ",
+  "cta.start":"Start Integration","cta.explore":"Explore the Process",
+  "ph.connect":"Connect","ph.map":"Map","ph.validate":"Validate","ph.sync":"Sync","ph.report":"Report",
+  "hero.h1":"Connect Your Hotel Financial Data with the Tourism Platform, Easily and Accurately",
+  "hero.lead":"Learn how to connect your chart of accounts and financial journal entries with the tourism platform, synchronize your data, and maintain accurate financial reporting.",
+  "hero.t1":"Unified chart of accounts","hero.t2":"Balanced, approved entries","hero.t3":"Synced with tourism reporting",
+  "hero.src":"Hotel financial data","hero.dst":"Tourism account codes","hero.sync":"SYNC DATA",
+  "hero.fb1":"T-4001 Room Revenue","hero.fb2":"Connection active","hero.fb3":"Debit = Credit",
+  "acc.cash":"Cash","acc.recv":"Receivables","acc.room":"Room Revenue","acc.exp":"Operating Cost","acc.rs":"Room Service Revenue","acc.revenue":"Revenue","acc.recvfull":"Accounts Receivable",
+  "st.matched":"Matched","st.validated":"Validated","st.synced":"Synchronized","st.live":"Live","st.pending":"Pending mapping",
+  "ov.h2":"The Financial Integration Journey in 10 Steps","ov.p":"From completing the connection to tourism reports: each step has a clear screen and a defined result. Scroll to watch it happen.",
+  "tl.1":"Connection","tl.2":"Chart of Accounts","tl.3":"Import Template","tl.4":"Account Mapping","tl.5":"Upload","tl.6":"New Account","tl.7":"Synchronization","tl.8":"Journal Import","tl.9":"Validation & Approval","tl.10":"Tourism Reporting",
+  "s0.h":"Data enters","s0.p":"Your financial system already holds cash, receivables, revenue and costs. Integration starts here, with no re-entry.",
+  "s1.h":"Gets mapped to tourism codes","s1.p":"Every account in your chart links to a unified tourism code. Map once, then it is applied automatically to every entry.",
+  "s2.h":"Validated before approval","s2.p":"Total debit must equal total credit before any entry is saved. Only balanced, approved entries reach tourism reporting.",
+  "s3.h":"Synchronized with the platform","s3.p":"Synchronization updates the chart of accounts, sends approved entries to tourism reporting, and shows the status of each run.",
+  "s4.h":"Read in reports","s4.p":"Journal, financial and tourism reporting reports in one place, to monitor performance and confirm the integration is accurate.",
+  "step.1":"Step 01","step.2":"Step 02","step.3":"Step 03","step.4":"Step 04","step.5":"Step 05","step.6":"Step 06","step.7":"Step 07","step.8":"Step 08","step.9":"Step 09","step.10":"Step 10","step.11":"Step 11","step.final":"Final stage",
+  "st1.h":"Complete the Tourism Platform Connection","st1.p":"After completing the connection between the financial system and the tourism platform, open Financial Management to configure the chart of accounts and match the hotel accounts with the appropriate tourism account codes.",
+  "st1.p2":"Enter the establishment ID and secret key provided by the National Tourism Monitoring Platform, then press Update. The status indicator turns to Connected.",
+  "m.title":"Financial link with the Tourism Observatory","m.connected":"Connected","m.note":"Fill in the financial link details provided to you by the National Tourism Monitoring Platform","m.l1":"Establishment ID","m.l2":"Establishment secret key","m.btn":"Update","m.saved":"Updated",
+  "c.fin":"Financial System","c.link":"Connection","c.tour":"Tourism Platform",
+  "st2.h":"Chart of Accounts","st2.p":"Go to Financial Management, open the Chart of Accounts, and select Import to download the dedicated account-mapping template.",
+  "d.fm":"Financial Management","d.dash":"Dashboard","d.acc":"Accounts","d.coa":"Chart of Accounts","d.je":"Journal Entries","d.rep":"Reports","d.import":"Import","d.export":"Export",
+  "t.no":"Account No.","t.name":"Account Name","t.code":"Tourism Code","t.status":"Status","t.hotel":"Hotel Account",
+  "st3.h":"Download the Import Template","st3.p":"Download the dedicated import file and use it to enter and map the account information.",
+  "dl.name":"Account mapping template","dl.btn":"Download",
+  "st4.h":"Match Your Account Codes","st4.p":"Match the hotel's chart-of-accounts codes with the tourism reporting account codes by linking each account to the appropriate code in the template.",
+  "map.hotel":"HOTEL ACCOUNTS","map.codes":"TOURISM CODES","map.c1":"accounts matched","map.c2":"remaining",
+  "st5.h":"Save and Upload","st5.p":"After completing the account mapping, save the file and upload it to the system to add and link the accounts.",
+  "up.h":"Uploading account mapping","up.1":"accounts processed","up.2":"accounts matched","up.3":"errors","up.s2":"Validate","up.s3":"Upload","up.s4":"Processing","up.s5":"Completed",
+  "st6.h":"Add a New Account","st6.p":"To add a new account to the Chart of Accounts, select the parent account and enter the new account details, including the account number and name. Then link it to the appropriate unified account and save the data.",
+  "f.newacc":"New account","f.parent":"Parent Account","f.no":"Account Number","f.name":"Account Name","f.unified":"Unified Account","f.save":"Save Account","f.saving":"Saving...","f.created":"Account Created","f.done":"Account Created ✓",
+  "st7.h":"Synchronize the Chart of Accounts","st7.p":"After adding the accounts, run the synchronization process to update the Chart of Accounts and ensure compatibility with the tourism reporting codes.",
+  "sync.db":"HOTEL DATABASE","sync.map":"ACCOUNT MAPPING","sync.codes":"TOURISM CODES","sync.accs":"accounts","sync.upd":"Updated now","sync.running":"Synchronizing","sync.done":"Synchronization Completed","sync.complete":"Complete","sync.note":"Newly added account codes are updated, and the status of each account is shown in the Chart of Accounts once the run finishes.",
+  "st8.h":"Import Journal Entries","st8.p":"From Journal Entries, select Import, download the template, enter the journal-entry information, and upload the completed file to the system.",
+  "j.ref":"Reference","j.date":"Date","j.desc":"Description","j.debit":"Debit","j.credit":"Credit","j.hexp":"Hotel Expense","j.fb":"F&B Revenue","j.sal":"Salaries","j.uploading":"Uploading journal file",
+  "st9.h":"Create a New Journal Entry","st9.p":"To create a new journal entry, enter the reference number, journal date, and description, then select the debit and credit accounts and enter the corresponding amounts.",
+  "je.new":"New journal entry","je.date":"Journal Date","je.descv":"Hotel Room Revenue","je.debit":"Debit Account","je.credit":"Credit Account","je.amount":"Amount","je.save":"Save Entry","je.saved":"Entry saved and ready for approval","je.saving":"Saving...","je.done":"Saved ✓",
+  "st10.h":"Verify Debit and Credit Balance","st10.p":"Make sure the total debit and credit amounts are equal before saving and approving the journal entry.",
+  "bal.td":"TOTAL DEBIT","bal.tc":"TOTAL CREDIT","bal.ok":"Balanced","bal.okfull":"Balanced: ready to save and approve","bal.note":"Instructional visualization only. An unbalanced entry is not approved.","bal.debit":"DEBIT","bal.credit":"CREDIT",
+  "st11.h":"Approve and Send to Tourism Reporting","st11.p":"After verifying and approving the journal entry, select Send to Tourism Reporting to complete the data synchronization process.",
+  "sp.1":"Journal Entry","sp.2":"Validated","sp.3":"Approved","sp.4":"Send","sp.5":"Tourism Reporting","sp.6":"Received","sp.approved":"Approved","sp.edit":"Edit","sp.sendbtn":"Send to Tourism Reporting","sp.sent":"Sent ✓",
+  "rp.h":"Reports & Monitoring","rp.p":"Finally, use Journal Reports, Financial Reports, and Tourism Reporting reports to review financial data, monitor hotel performance, verify the integration, and maintain accurate reporting.",
+  "rp.m1":"Revenue","rp.m2":"Expenses","rp.m3":"Journal Entries","rp.m4":"Synced Accounts","rp.m5":"Tourism Reports","rp.m6":"Data Accuracy",
+  "rp.c1":"Revenue and expense trend","rp.c2":"Monthly journal volume","rp.c3":"Synchronization status","rp.c4":"Reporting completion 94%","rp.sample":"Figures above are illustrative to show the reporting dashboard layout, not live data.",
+  "vd.h":"Watch the Financial Integration Process Step by Step","vd.p":"The full walkthrough with narration, from completing the connection to tourism reports.","vd.cap":"Arabic and English subtitles","vd.open":"Open the video on YouTube",
+  "fq.h":"Frequently Asked Questions",
+  "ct.h":"Ready to Connect Your Financial Data?","ct.p":"Start now and make financial data management and tourism reporting clearer, more accurate, and easier to monitor.","ct.btn":"Start Integration","ct.top":"Back to top",
+  "dn.h":"FINANCIAL INTEGRATION","dn.1":"Connected","dn.2":"Mapped","dn.3":"Synchronized","dn.4":"Validated","dn.5":"Reported","dn.ready":"Tourism Reporting ready","dn.sub":"Every approved entry has reached the platform",
+  "ft.p":"Fandaqah, advanced technology solutions for hotel management, financial data, and hospitality operations.","ft.nav":"Page","ft.co":"Fandaqah","ft.site":"Main website","ft.contact":"Contact","ft.privacy":"Privacy Policy","ft.terms":"Terms","ft.copy":"© 2026 Fandaqah. All rights reserved.","ft.made":"Made in Saudi Arabia",
+  "meta.title":"Financial Data Integration with Tourism Reporting | Fandaqah","meta.desc":"Learn how to connect your hotel chart of accounts and journal entries with tourism reporting, synchronize financial data, and maintain accurate reports.",
+  faq:[
+   ["What is financial integration with the tourism platform?","It links the hotel's financial system in Fandaqah with the tourism reporting platform: hotel accounts are mapped to unified codes and approved journal entries are sent to the platform directly, with no manual re-entry."],
+   ["Why should account codes be mapped?","The tourism platform reads data against a unified chart of accounts. Mapping links each of your accounts to its counterpart code, so revenue and expenses are classified correctly in tourism reports."],
+   ["How do I import accounts?","In Financial Management open the Chart of Accounts and select Import, download the template, enter each account with its tourism code, then save and upload the file. The system adds and links the accounts automatically."],
+   ["How does chart-of-accounts synchronization work?","After adding or editing accounts, run Synchronize from the Chart of Accounts. Codes are updated, each account's status is shown, and a Synchronization Completed message confirms the run."],
+   ["How do I import journal entries?","From Journal Entries select Import, download the template, enter reference, date, description, debit and credit for each entry, then upload the file to the system."],
+   ["Why must total debit equal total credit?","A valid accounting entry must balance. An unbalanced entry cannot be saved or approved, and therefore is never sent to tourism reporting."],
+   ["How are journal entries sent to tourism reporting?","After saving, balancing and approving the entry, select Send to Tourism Reporting. The entry is transferred using the mapped codes and its received status is shown."],
+   ["Which reports can be used for review?","Journal reports, financial reports (revenue and expenses), and tourism reporting reports that show what was sent and its status, to confirm the integration and data accuracy."]
+  ]
+}};
+
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let lang="ar";
+
+/* ============ FAQ RENDER ============ */
+function renderFaq(){
+  const list=$("#faqList"); list.innerHTML="";
+  T[lang].faq.forEach((q,i)=>{
+    const item=document.createElement("div"); item.className="faq-item";
+    item.innerHTML=`<h3 style="font-size:inherit;font-weight:inherit;margin:0"><button type="button" aria-expanded="false" aria-controls="faq-a${i}" id="faq-q${i}"><span>${q[0]}</span><span class="pm" aria-hidden="true"></span></button></h3><div class="ans" id="faq-a${i}" role="region" aria-labelledby="faq-q${i}"><div><p>${q[1]}</p></div></div>`;
+    const b=$("button",item);
+    b.addEventListener("click",()=>{const open=item.classList.toggle("open");b.setAttribute("aria-expanded",open);});
+    list.appendChild(item);
+  });
+  $("#ldFaq").textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":T[lang].faq.map(q=>({"@type":"Question","name":q[0],"acceptedAnswer":{"@type":"Answer","text":q[1]}}))});
+}
+
+/* ============ I18N APPLY ============ */
+function applyLang(l){
+  lang=l; const d=T[l];
+  document.documentElement.lang=l; document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  document.documentElement.style.setProperty("--tx", l==="ar"?"right":"left");
+  $$("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(d[k]!=null) el.textContent=d[k];});
+  document.title=d["meta.title"];
+  ["metaDesc","ogDesc","twDesc"].forEach(id=>$("#"+id).setAttribute("content",d["meta.desc"]));
+  ["ogTitle","twTitle"].forEach(id=>$("#"+id).setAttribute("content",d["meta.title"]));
+  $("#ogLocale").setAttribute("content", l==="ar"?"ar_SA":"en_US");
+  $("link[rel=canonical]").href=`https://fandaqah.com/${l}/financial-integration`;
+  $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===l));
+  if($("#mBtn").classList.contains("ok")) $("#mBtn").textContent=d["m.saved"];
+  $("#lblDebit").textContent=d["bal.debit"]; $("#lblCredit").textContent=d["bal.credit"];
+  $$(".fbtn").forEach(b=>{ if(!b.classList.contains("done")&&!b.classList.contains("saving")) b.textContent=d[b.dataset.label]; });
+  renderFaq();
+  try{ history.replaceState(null,"",location.pathname+location.search+(location.hash||"")); }catch(e){}
+  try{ localStorage.setItem("fq-lang",l); }catch(e){}
+}
+$$("[data-lang]").forEach(b=>b.addEventListener("click",()=>{ if(b.dataset.lang!==lang){ const y=scrollY; applyLang(b.dataset.lang); requestAnimationFrame(()=>scrollTo(0,y)); }}));
+let saved=null; try{ saved=localStorage.getItem("fq-lang"); }catch(e){}
+if(/[?&]lang=en/.test(location.search)) saved="en"; else if(/[?&]lang=ar/.test(location.search)) saved="ar";
+applyLang(saved==="en"?"en":"ar");
+
+/* ============ NAV ============ */
+const nav=$("#nav"), burger=$(".burger"), drawer=$("#drawer");
+burger.addEventListener("click",()=>{const o=drawer.classList.toggle("open");burger.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";});
+$$("a",drawer).forEach(a=>a.addEventListener("click",()=>{drawer.classList.remove("open");burger.setAttribute("aria-expanded","false");document.body.style.overflow="";}));
+
+/* ============ REVEALS ============ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); e.target.dispatchEvent(new CustomEvent("reveal")); }}),{threshold:.18,rootMargin:"0px 0px -8% 0px"});
+$$(".rv").forEach(el=>io.observe(el));
+if(reduced) $$(".rv").forEach(el=>el.classList.add("in"));
+
+/* ============ HERO PARALLAX (pointer) ============ */
+const hv=$("#hv");
+if(!reduced && matchMedia("(pointer:fine)").matches){
+  addEventListener("pointermove",e=>{
+    const x=(e.clientX/innerWidth-.5)*2, y=(e.clientY/innerHeight-.5)*2;
+    hv.style.setProperty("--mx",x.toFixed(3)); hv.style.setProperty("--my",y.toFixed(3));
+    $(".hero-bg").style.setProperty("--mx",x.toFixed(3)); $(".hero-bg").style.setProperty("--my",y.toFixed(3));
+  },{passive:true});
+}
+
+/* ============ TYPING (step 01 modal) ============ */
+function typeInto(el,text,delay=0){
+  if(reduced){el.textContent=text;return Promise.resolve();}
+  return new Promise(res=>{ setTimeout(()=>{ let i=0; const t=setInterval(()=>{ el.textContent=text.slice(0,++i); if(i>=text.length){clearInterval(t);res();} },55); },delay); });
+}
+const modalWrap=$(".modal-ui").closest(".rv");
+modalWrap.addEventListener("reveal",async()=>{
+  const [a,b]=$$(".typed"); const btn=$("#mBtn");
+  await typeInto(a,a.dataset.type,400); await typeInto(b,b.dataset.type,150);
+  if(!reduced){ setTimeout(()=>{ btn.classList.add("ok"); btn.textContent=T[lang]["m.saved"]; },500); }
+});
+
+/* ============ FORMS (step 06 & 09) ============ */
+function animateForm(form){
+  const inps=$$(".inp",form); const btn=$(".fbtn",form); const toast=$(".toast",form);
+  const isJE=form.id==="formJE";
+  if(reduced){ inps.forEach(i=>i.classList.add("filled")); btn.classList.add("done"); btn.textContent=T[lang][isJE?"je.done":"f.done"]; toast.classList.add("show"); return; }
+  inps.forEach(i=>i.classList.remove("filled","typing")); btn.className="fbtn"; btn.textContent=T[lang][isJE?"je.save":"f.save"]; toast.classList.remove("show");
+  inps.forEach((inp,i)=>{ setTimeout(()=>inp.classList.add("typing"),400+i*520); setTimeout(()=>{inp.classList.remove("typing");inp.classList.add("filled");},400+i*520+420); });
+  const end=400+inps.length*520+300;
+  setTimeout(()=>{btn.classList.add("saving");btn.textContent=T[lang][isJE?"je.saving":"f.saving"];},end);
+  setTimeout(()=>{btn.classList.remove("saving");btn.classList.add("done");btn.textContent=T[lang][isJE?"je.done":"f.done"];toast.classList.add("show");},end+1100);
+}
+$$(".form-ui").forEach(f=>{ f.closest(".rv").addEventListener("reveal",()=>animateForm(f)); $(".fbtn",f).addEventListener("click",()=>animateForm(f)); });
+
+/* ============ UPLOAD % + pipeline (step 05, 08) ============ */
+function countTo(el,to,dur,fmt){ if(reduced){el.textContent=fmt(to);return;} const t0=performance.now(); (function tick(now){ const p=Math.min(1,(now-t0)/dur); const e=1-Math.pow(1-p,3); el.textContent=fmt(to*e); if(p<1) requestAnimationFrame(tick); })(t0); }
+$("#upPct").closest(".rv").addEventListener("reveal",()=>{
+  countTo($("#upPct"),100,2400,v=>Math.round(v)+"%");
+  const nodes=$$("#uplPipe .node"), arrs=$$("#uplPipe .arr");
+  nodes.forEach((n,i)=>setTimeout(()=>{ n.classList.add(i===nodes.length-1?"ok":"on"); if(arrs[i]) arrs[i].classList.add("on"); }, reduced?0:300+i*520));
+});
+$("#jPct").closest(".rv").addEventListener("reveal",()=>countTo($("#jPct"),100,2400,v=>Math.round(v)+"%"));
+
+/* ============ SYNC (step 07) ============ */
+$("#syncWrap").addEventListener("reveal",()=>{
+  const ring=$("#syncRing"), pct=$("#syncPct"), lbl=$("#syncLbl"), badge=$("#syncBadge");
+  badge.style.opacity=reduced?"1":"0"; badge.style.transition="opacity .5s";
+  countTo(pct,100,reduced?0:5200,v=>Math.round(v)+"%");
+  setTimeout(()=>{ ring.classList.add("done"); lbl.textContent=T[lang]["sync.complete"]; badge.style.opacity="1"; }, reduced?0:5300);
+});
+/* particles */
+if(!reduced){ const P=$("#particles"); for(let i=0;i<22;i++){ const s=document.createElement("i"); s.style.left=Math.random()*100+"%"; s.style.top=Math.random()*100+"%"; s.style.setProperty("--dx",(Math.random()*240-120)+"px"); s.style.setProperty("--dy",(Math.random()*240-120)+"px"); s.style.animationDelay=(Math.random()*4)+"s"; s.style.animationDuration=(3+Math.random()*3)+"s"; P.appendChild(s);} }
+
+/* ============ SEND PIPELINE (step 11) ============ */
+$("#sendPipe").addEventListener("reveal",()=>{
+  const nodes=$$("#sendPipe .node"), arrs=$$("#sendPipe .arr");
+  nodes.forEach((n,i)=>setTimeout(()=>{ n.classList.add(i>=nodes.length-1||i===1||i===2?"ok":"on"); if(arrs[i]) arrs[i].classList.add("on"); }, reduced?0:300+i*450));
+  setTimeout(()=>{ $("#sendBtn").textContent=T[lang]["sp.sent"]; $("#sendBtn").style.background="var(--green)"; }, reduced?0:300+nodes.length*450+400);
+});
+$("#sendBtn").addEventListener("click",()=>{ $("#sendBtn").textContent=T[lang]["sp.sent"]; $("#sendBtn").style.background="var(--green)"; });
+
+/* ============ REPORT COUNTERS ============ */
+$("#reportsVis").addEventListener("reveal",()=>{
+  $$("[data-count]").forEach(el=>{ const to=parseFloat(el.dataset.count), dec=+(el.dataset.dec||0), pre=el.dataset.pre||"", suf=el.dataset.suf||"";
+    countTo(el,to,1800,v=>pre+(dec?v.toFixed(dec):Math.round(v).toLocaleString("en-US"))+suf); });
+});
+
+/* ============ VIDEO ============ */
+$("#playBtn").addEventListener("click",()=>{
+  const box=$("#videoBox"); const f=document.createElement("iframe");
+  f.src="https://www.youtube-nocookie.com/embed/4B8zfaIHSiM?autoplay=1&rel=0&cc_load_policy=1&cc_lang_pref="+lang+"&hl="+lang;
+  f.title="Fandaqah financial integration video"; f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; f.allowFullscreen=true; f.loading="lazy";
+  box.innerHTML=""; box.appendChild(f);
+});
+
+/* ============ SCROLL ENGINE ============ */
+const story=$("#story"), stage=$("#stage"), peak=$("#peak"), bal=$("#balance"), tl=$("#timeline");
+const txts=$$(".story .txt"), scns=$$(".scn"), mapRows=$$(".mrow"), mapPaths=$$(".map .mid path:not(.g)"), mapDots=$$(".map .mid circle");
+const progLinks=$$("#prog a"); const prog=$("#prog");
+const sections=$$("[data-theme]"); const tlItems=$$(".tl-item"); const navLinks=$$(".nav-links a");
+const isDesk=()=>innerWidth>900;
+let ticking=false, lastStory=-1, balDone=false;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function pinProgress(el){ const r=el.getBoundingClientRect(); const total=el.offsetHeight-innerHeight; return clamp(-r.top/total,0,1); }
+
+function update(){
+  ticking=false; const y=scrollY; const vh=innerHeight;
+  // nav
+  nav.classList.toggle("solid",y>40);
+  // hero parallax by scroll
+  if(y<vh*1.2){ hv.style.setProperty("--sy",y.toFixed(1)); $(".hero-bg").style.setProperty("--sy",y.toFixed(1)); }
+  // theme detection for nav & progress (what's under the top bar)
+  let theme="dark", phase=0;
+  for(const s of sections){ const r=s.getBoundingClientRect(); if(r.top<=80 && r.bottom>80){ theme=s.dataset.theme; phase=+s.dataset.phase; break; } }
+  nav.classList.toggle("on-light",theme==="light"); prog.classList.toggle("on-light",theme==="light");
+  prog.classList.toggle("show", y>vh*.6 && y<document.body.scrollHeight-vh*1.3);
+  progLinks.forEach(a=>{const p=+a.dataset.phase; a.classList.toggle("active",p===phase); a.classList.toggle("done",p<phase);});
+  // active nav link
+  let cur=null; for(const a of navLinks){ const t=$(a.getAttribute("href")); if(t && t.getBoundingClientRect().top<=120) cur=a; }
+  navLinks.forEach(a=>a.classList.toggle("active",a===cur));
+  // timeline draw
+  { const r=tl.getBoundingClientRect(); const p=clamp((vh*.9-r.top)/(r.height*.9),0,1); tl.style.setProperty("--tp",p.toFixed(3)); tlItems.forEach((it,i)=>it.classList.toggle("on",p>=(i+1)/10-.02)); }
+  // story
+  if(isDesk() && !reduced){
+    const p=pinProgress(story); const idx=clamp(Math.floor(p*5),0,4);
+    if(idx!==lastStory){ lastStory=idx; txts.forEach(t=>t.classList.toggle("on",+t.dataset.s===idx)); scns.forEach(s=>s.classList.toggle("on",+s.dataset.s===idx)); }
+    // background mix navy->beige across middle then back
+    const mix=p<.5? p*2*22 : (1-p)*2*22; stage.style.setProperty("--mix",mix.toFixed(1));
+  }
+  // peak mapping
+  { const p=isDesk()&&!reduced? pinProgress(peak) : clamp((vh*.85-peak.getBoundingClientRect().top)/(vh*.9),0,1);
+    let done=0;
+    mapRows.forEach(r=>{ const i=+r.dataset.i; const seg=clamp((p-.08-i*.2)/.16,0,1); if(seg>=1) done=Math.max(done,i+1); r.classList.toggle("on",seg>=1); });
+    mapPaths.forEach(pt=>{ const i=+pt.dataset.i; const seg=clamp((p-.08-i*.2)/.16,0,1); pt.style.strokeDashoffset=(1-seg).toFixed(3); });
+    mapDots.forEach(d=>{ const i=+d.dataset.i; d.style.opacity=(p-.08-i*.2)/.16>=1?1:0; });
+    const cnt=mapRows.filter(r=>r.classList.contains("on")).length/2;
+    $("#mapCount").textContent=cnt; $("#mapLeft").textContent=4-cnt;
+  }
+  // balance
+  { const p=isDesk()&&!reduced? pinProgress(bal) : clamp((vh*.8-bal.getBoundingClientRect().top)/(vh*.8),0,1);
+    const settle=clamp((p-.15)/.55,0,1); const tilt=(1-settle)*Math.sin(p*18)*6*(1-settle);
+    bal.style.setProperty("--tilt",tilt.toFixed(2)); bal.classList.toggle("ok",settle>=1); }
+}
+function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
+addEventListener("scroll",onScroll,{passive:true}); addEventListener("resize",onScroll,{passive:true}); update();
+if(reduced){ mapRows.forEach(r=>r.classList.add("on")); bal.classList.add("ok"); $("#mapCount").textContent=4; $("#mapLeft").textContent=0; }
+})();
+</script>
+</body>
+</html>
