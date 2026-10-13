@@ -1,0 +1,2795 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2a273c">
+
+<!-- ============================================================
+     SEO
+     ============================================================ -->
+<title>Fandaqah PMS — Housekeeping, Maintenance & Inventory for Hotels</title>
+<meta name="description" content="Fandaqah PMS unifies housekeeping, maintenance, and inventory operations in one premium hotel management suite. Book a demo for Saudi Arabian hotels and resorts.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://fandaqah.com/landing/pms-feature.php">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fandaqah PMS — Hotel Operations, Unified">
+<meta property="og:description" content="Housekeeping, Maintenance & Inventory in one premium hotel management suite.">
+<meta property="og:url" content="https://fandaqah.com/landing/pms-feature.php">
+<meta property="og:image" content="https://fandaqah.com/assets/images/fandaqah-simple.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fandaqah PMS — Hotel Operations, Unified">
+<meta name="twitter:description" content="Housekeeping, Maintenance & Inventory in one premium hotel management suite.">
+
+<link rel="icon" href="https://fandaqah.com/assets/images/fandaqah-simple.png">
+<link rel="apple-touch-icon" href="https://fandaqah.com/assets/images/fandaqah-simple.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fandaqah PMS",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Hotel management suite for housekeeping, maintenance, and inventory operations.",
+  "url": "https://fandaqah.com/landing/pms-feature.php",
+  "image": "https://fandaqah.com/assets/images/fandaqah-simple.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "SAR",
+    "description": "Book a personalized demo"
+  },
+  "areaServed": { "@type": "Country", "name": "Saudi Arabia" }
+}
+</script>
+
+<!-- ============================================================
+     FONTS
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
+<style>
+:root{
+  /* Brand palette (strict) */
+  --coral:#e95a54;
+  --coral-600:#d94a44;
+  --coral-700:#bf3b35;
+  --navy:#2a273c;
+  --navy-700:#3a3652;
+  --beige:#f2f0eb;
+  --beige-2:#ece9e1;
+  --green:#8f9793;
+  --green-700:#5d6663;
+  --peach:#fbcdab;
+  --peach-700:#f5b183;
+  --white:#ffffff;
+
+  /* Derived */
+  --line:rgba(42,39,60,.10);
+  --line-2:rgba(42,39,60,.06);
+  --navy-04:rgba(42,39,60,.04);
+  --coral-soft:rgba(233,90,84,.10);
+  --green-soft:rgba(143,151,147,.14);
+  --peach-soft:rgba(251,205,171,.32);
+
+  /* Radii */
+  --r-xs:6px;
+  --r-sm:10px;
+  --r:14px;
+  --r-lg:20px;
+  --r-xl:28px;
+  --r-pill:999px;
+
+  /* Shadows */
+  --sh-1:0 1px 2px rgba(42,39,60,.05), 0 1px 3px rgba(42,39,60,.04);
+  --sh-2:0 6px 18px rgba(42,39,60,.07), 0 2px 6px rgba(42,39,60,.04);
+  --sh-3:0 18px 48px rgba(42,39,60,.12), 0 6px 16px rgba(42,39,60,.06);
+  --sh-4:0 32px 80px rgba(42,39,60,.18), 0 12px 32px rgba(42,39,60,.08);
+  --sh-coral:0 8px 24px rgba(233,90,84,.28);
+
+  /* Motion */
+  --ease:cubic-bezier(.32,.72,.35,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+
+  /* Layout */
+  --container:1200px;
+  --header-h:72px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html[dir="rtl"] body{font-family:'IBM Plex Sans Arabic','Inter',Tahoma,sans-serif}
+
+body{
+  margin:0;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  color:var(--navy);
+  background:var(--beige);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4,h5,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--peach);color:var(--navy)}
+
+/* ---------- Accessibility ---------- */
+.skip-link{
+  position:absolute;top:-100px;left:12px;z-index:9999;
+  background:var(--navy);color:#fff;
+  padding:10px 16px;border-radius:8px;
+  font-size:14px;font-weight:600;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+
+/* ---------- Layout ---------- */
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+@media(max-width:640px){.container{padding-inline:18px}}
+
+section{position:relative}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--header-h);
+  background:rgba(242,240,235,.82);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid transparent;
+  transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease);
+}
+.site-header.scrolled{
+  border-bottom-color:var(--line);
+  background:rgba(242,240,235,.94);
+  box-shadow:0 1px 0 rgba(42,39,60,.02);
+}
+.header-inner{
+  height:100%;
+  display:flex;align-items:center;gap:20px;
+}
+.brand{
+  display:inline-flex;align-items:center;gap:10px;
+  flex:none;
+}
+.brand svg{height:34px;width:auto}
+.brand-text{
+  display:flex;flex-direction:column;line-height:1;
+}
+.brand-text b{
+  font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--navy);
+}
+.brand-text span{
+  font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green);margin-top:2px;
+}
+
+.main-nav{
+  display:flex;align-items:center;gap:4px;
+  margin-inline-start:auto;
+}
+.nav-link{
+  padding:9px 14px;
+  border-radius:9px;
+  font-size:14px;font-weight:500;
+  color:var(--navy);
+  transition:background .18s var(--ease),color .18s var(--ease);
+}
+.nav-link:hover{background:var(--navy-04)}
+
+.header-actions{
+  display:flex;align-items:center;gap:10px;
+  flex:none;
+}
+.lang-toggle{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 12px;border-radius:9px;
+  font-size:13px;font-weight:700;letter-spacing:.02em;
+  color:var(--navy);
+  border:1px solid var(--line);
+  background:var(--white);
+  transition:border-color .18s var(--ease),background .18s var(--ease),transform .12s var(--ease);
+}
+.lang-toggle:hover{border-color:var(--line-strong, rgba(42,39,60,.2));background:#fff}
+.lang-toggle:active{transform:scale(.97)}
+.lang-toggle svg{width:14px;height:14px;color:var(--green)}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;
+  border-radius:11px;
+  font-size:14.5px;font-weight:600;letter-spacing:-.005em;
+  line-height:1;
+  border:1px solid transparent;
+  white-space:nowrap;
+  transition:background .2s var(--ease),color .2s var(--ease),box-shadow .25s var(--ease),transform .12s var(--ease),border-color .2s var(--ease);
+  cursor:pointer;
+}
+.btn:active{transform:translateY(1px)}
+.btn svg{flex:none}
+
+.btn-primary{
+  background:var(--coral);color:#fff;
+  box-shadow:var(--sh-coral);
+}
+.btn-primary:hover{background:var(--coral-600);box-shadow:0 12px 32px rgba(233,90,84,.36)}
+.btn-primary:disabled{opacity:.65;cursor:not-allowed;box-shadow:none}
+
+.btn-navy{
+  background:var(--navy);color:#fff;
+}
+.btn-navy:hover{background:var(--navy-700);box-shadow:var(--sh-2)}
+
+.btn-ghost{
+  background:var(--white);color:var(--navy);
+  border-color:var(--line);
+}
+.btn-ghost:hover{border-color:rgba(42,39,60,.2);box-shadow:var(--sh-1)}
+
+.btn-lg{padding:15px 26px;font-size:15.5px;border-radius:12px}
+.btn-sm{padding:9px 15px;font-size:13px;border-radius:9px}
+.btn-block{width:100%}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  padding-top:calc(var(--header-h) + 72px);
+  padding-bottom:80px;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 55% at 78% 8%, rgba(251,205,171,.55), transparent 62%),
+    radial-gradient(ellipse 50% 50% at 12% 25%, rgba(143,151,147,.14), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 110%, rgba(233,90,84,.10), transparent 65%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(42,39,60,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,39,60,.028) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%);
+  pointer-events:none;
+}
+.hero .container{position:relative;z-index:2}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:56px;
+  align-items:center;
+}
+@media(max-width:1040px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 14px 7px 8px;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-pill);
+  font-size:12.5px;font-weight:600;
+  color:var(--navy);
+  box-shadow:var(--sh-1);
+  margin-bottom:26px;
+}
+.eyebrow .tag{
+  background:var(--coral);color:#fff;
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;
+  padding:4px 9px;border-radius:var(--r-pill);
+  text-transform:uppercase;
+}
+.eyebrow .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  margin-inline-end:2px;
+}
+
+.hero h1{
+  font-size:clamp(34px, 5vw, 58px);
+  line-height:1.05;
+  letter-spacing:-.035em;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:22px;
+}
+.hero h1 .accent{
+  color:var(--coral);
+  position:relative;
+  display:inline-block;
+}
+.hero h1 .accent::after{
+  content:'';
+  position:absolute;left:0;right:0;bottom:.06em;
+  height:.18em;
+  background:var(--peach);
+  z-index:-1;
+  border-radius:3px;
+  transform:scaleX(0);
+  transform-origin:left;
+  animation:underline .9s .5s var(--ease-out) forwards;
+}
+@keyframes underline{to{transform:scaleX(1)}}
+
+.hero p.lede{
+  font-size:clamp(16px, 1.6vw, 18.5px);
+  line-height:1.6;
+  color:var(--green-700);
+  max-width:56ch;
+  margin-bottom:34px;
+}
+.hero p.lede strong{color:var(--navy);font-weight:600}
+
+.hero-ctas{
+  display:flex;gap:12px;flex-wrap:wrap;
+  align-items:center;
+  margin-bottom:26px;
+}
+.hero-trust{
+  display:flex;align-items:center;gap:14px;
+  flex-wrap:wrap;
+  font-size:13px;color:var(--green-700);
+}
+.hero-trust .check{
+  display:inline-flex;align-items:center;gap:7px;
+}
+.hero-trust .check svg{width:15px;height:15px;color:var(--green);flex:none}
+
+/* ---------- Hero dashboard preview ---------- */
+.hero-visual{
+  position:relative;
+  perspective:1600px;
+}
+.preview-frame{
+  position:relative;
+  background:linear-gradient(180deg,#ffffff, #fbfaf7);
+  border:1px solid var(--line);
+  border-radius:var(--r-xl);
+  box-shadow:var(--sh-4);
+  overflow:hidden;
+  transform:rotateY(-4deg) rotateX(2deg);
+  transition:transform .8s var(--ease);
+}
+.hero-visual:hover .preview-frame{transform:rotateY(-1.5deg) rotateX(1deg)}
+@media(max-width:1040px){
+  .preview-frame{transform:none!important}
+}
+
+.preview-chrome{
+  display:flex;align-items:center;gap:6px;
+  padding:12px 16px;
+  background:rgba(242,240,235,.6);
+  border-bottom:1px solid var(--line);
+}
+.preview-chrome .dot{width:9px;height:9px;border-radius:50%}
+.preview-chrome .dot.r{background:#e95a54}
+.preview-chrome .dot.y{background:#fbcdab}
+.preview-chrome .dot.g{background:#8f9793}
+.preview-chrome .url{
+  margin-inline-start:14px;
+  flex:1;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:4px 10px;
+  font-size:10.5px;font-weight:500;
+  color:var(--green-700);
+  letter-spacing:.01em;
+  display:flex;align-items:center;gap:6px;
+}
+.preview-chrome .url svg{width:10px;height:10px}
+
+.preview-body{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  min-height:400px;
+}
+.preview-side{
+  background:var(--navy);
+  padding:14px 0;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.preview-side .ps-item{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;
+  color:rgba(255,255,255,.55);
+  transition:background .2s,color .2s;
+}
+.preview-side .ps-item.active{
+  background:rgba(233,90,84,.18);
+  color:#fff;
+  position:relative;
+}
+.preview-side .ps-item.active::before{
+  content:'';position:absolute;
+  inset-inline-start:-14px;top:50%;transform:translateY(-50%);
+  width:3px;height:18px;border-radius:3px;background:var(--coral);
+}
+.preview-side .ps-item svg{width:17px;height:17px}
+
+.preview-main{
+  padding:18px;
+  background:var(--beige);
+  display:flex;flex-direction:column;gap:14px;
+  min-width:0;
+}
+
+.pv-head{
+  display:flex;align-items:center;gap:10px;
+}
+.pv-head h4{
+  font-size:14px;font-weight:700;color:var(--navy);letter-spacing:-.01em;
+}
+.pv-head .pv-sub{
+  font-size:10.5px;color:var(--green-700);
+}
+.pv-head .pv-actions{
+  margin-inline-start:auto;
+  display:flex;gap:6px;
+}
+.pv-pill{
+  font-size:9.5px;font-weight:700;letter-spacing:.03em;
+  padding:4px 9px;border-radius:999px;
+  background:var(--white);border:1px solid var(--line);
+  color:var(--navy);
+}
+.pv-pill.coral{background:var(--coral);color:#fff;border-color:var(--coral)}
+.pv-pill.green{background:var(--green-soft);color:var(--green-700);border-color:transparent}
+.pv-pill.peach{background:var(--peach);color:#8f4f1c;border-color:transparent}
+
+.pv-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.pv-stat{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:9px 10px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.pv-stat .k{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-700)}
+.pv-stat .v{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1}
+.pv-stat.coral .v{color:var(--coral)}
+.pv-stat.green .v{color:var(--green-700)}
+.pv-stat.peach .v{color:#a2622c}
+
+.pv-rooms{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;
+}
+.pv-room{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-inline-start:3px solid var(--green);
+  border-radius:8px;
+  padding:8px 9px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.pv-room.dirty{border-inline-start-color:var(--coral)}
+.pv-room.insp{border-inline-start-color:var(--peach)}
+.pv-room.occ{border-inline-start-color:var(--navy)}
+.pv-room .n{font-size:12px;font-weight:800;color:var(--navy);letter-spacing:-.01em;display:flex;align-items:center;justify-content:space-between}
+.pv-room .n .b{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.pv-room.dirty .n .b{background:var(--coral)}
+.pv-room.insp .n .b{background:var(--peach)}
+.pv-room.occ .n .b{background:var(--navy)}
+.pv-room .m{font-size:8.5px;color:var(--green-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.pv-bottom{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.pv-panel{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 11px;
+}
+.pv-panel .h{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-700);margin-bottom:8px}
+.pv-bars{display:flex;flex-direction:column;gap:5px}
+.pv-bar{display:grid;grid-template-columns:34px 1fr;gap:6px;align-items:center;font-size:8.5px;color:var(--green-700)}
+.pv-bar .t{height:5px;border-radius:3px;background:var(--beige-2);overflow:hidden}
+.pv-bar .t i{display:block;height:100%;border-radius:3px}
+
+.pv-donut{
+  display:flex;align-items:center;gap:10px;
+}
+.pv-donut .ring{
+  width:44px;height:44px;border-radius:50%;
+  background:conic-gradient(var(--coral) 0 62%, var(--peach) 62% 84%, var(--green) 84% 100%);
+  position:relative;flex:none;
+}
+.pv-donut .ring::after{
+  content:'';position:absolute;inset:8px;border-radius:50%;background:#fff;
+}
+.pv-donut .lg{font-size:8.5px;color:var(--green-700);display:flex;flex-direction:column;gap:3px}
+.pv-donut .lg span{display:flex;align-items:center;gap:5px}
+.pv-donut .lg i{width:6px;height:6px;border-radius:2px;flex:none}
+
+/* Floating chips on hero visual */
+.float-chip{
+  position:absolute;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 13px;
+  box-shadow:var(--sh-3);
+  display:flex;align-items:center;gap:9px;
+  font-size:12px;font-weight:600;color:var(--navy);
+  animation:float 5.5s ease-in-out infinite;
+  z-index:3;
+}
+.float-chip .ic{
+  width:28px;height:28px;border-radius:8px;
+  display:grid;place-items:center;flex:none;
+}
+.float-chip .ic.coral{background:var(--coral-soft);color:var(--coral-700)}
+.float-chip .ic.green{background:var(--green-soft);color:var(--green-700)}
+.float-chip .ic.peach{background:var(--peach-soft);color:#a2622c}
+.float-chip small{display:block;font-size:10px;font-weight:500;color:var(--green-700);margin-top:1px}
+
+.float-chip.fc-1{top:8%;inset-inline-end:-28px;animation-delay:0s}
+.float-chip.fc-2{bottom:22%;inset-inline-start:-34px;animation-delay:-1.8s}
+.float-chip.fc-3{bottom:2%;inset-inline-end:12%;animation-delay:-3.4s}
+@media(max-width:1040px){.float-chip{display:none}}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+}
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 56px;
+}
+.section-head .kicker{
+  display:inline-block;
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--coral);
+  margin-bottom:14px;
+}
+.section-head h2{
+  font-size:clamp(28px, 3.4vw, 44px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  color:var(--navy);
+  margin-bottom:16px;
+}
+.section-head p{
+  font-size:17px;
+  color:var(--green-700);
+  max-width:60ch;
+  margin-inline:auto;
+}
+
+/* ============================================================
+   FEATURE TABS
+   ============================================================ */
+.features{
+  padding:96px 0;
+  background:var(--white);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+@media(max-width:768px){.features{padding:64px 0}}
+
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:44px;
+  flex-wrap:wrap;
+  position:relative;
+}
+.tab{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 22px;
+  border-radius:12px;
+  font-size:14.5px;font-weight:600;
+  color:var(--green-700);
+  background:var(--beige);
+  border:1px solid transparent;
+  transition:background .22s var(--ease),color .22s var(--ease),box-shadow .25s var(--ease),transform .14s var(--ease),border-color .22s var(--ease);
+}
+.tab:hover{color:var(--navy);background:var(--beige-2)}
+.tab:active{transform:translateY(1px)}
+.tab .tab-ic{
+  width:22px;height:22px;border-radius:6px;
+  display:grid;place-items:center;
+  background:var(--white);
+  color:var(--navy);
+  flex:none;
+  transition:background .22s var(--ease),color .22s var(--ease);
+}
+.tab .tab-ic svg{width:13px;height:13px}
+.tab[aria-selected="true"]{
+  background:var(--navy);color:#fff;
+  box-shadow:var(--sh-3);
+}
+.tab[aria-selected="true"] .tab-ic{
+  background:var(--coral);color:#fff;
+}
+.tab .tab-ar{
+  font-size:11px;font-weight:500;opacity:.65;margin-inline-start:2px;
+  font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif;
+}
+
+.tab-panels{position:relative}
+.tab-panel{
+  display:none;
+  animation:panelIn .48s var(--ease-out);
+}
+.tab-panel.active{display:block}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:none}
+}
+
+.panel-grid{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:56px;
+  align-items:center;
+}
+@media(max-width:960px){
+  .panel-grid{grid-template-columns:1fr;gap:40px}
+  .panel-grid .panel-visual{order:-1}
+}
+
+.panel-copy .panel-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--coral);
+  margin-bottom:14px;
+}
+.panel-copy h3{
+  font-size:clamp(24px, 2.8vw, 34px);
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1.15;
+  color:var(--navy);
+  margin-bottom:16px;
+}
+.panel-copy h3 .ar{
+  display:block;
+  font-size:15px;
+  font-weight:600;
+  color:var(--green-700);
+  margin-top:6px;
+  font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif;
+  letter-spacing:0;
+}
+.panel-copy > p{
+  font-size:16px;
+  line-height:1.65;
+  color:var(--green-700);
+  margin-bottom:26px;
+}
+
+.feature-list{
+  display:flex;flex-direction:column;gap:14px;
+  margin-bottom:30px;
+}
+.feature-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14.5px;
+  color:var(--navy);
+  line-height:1.5;
+}
+.feature-list .fl-ic{
+  width:24px;height:24px;border-radius:7px;
+  display:grid;place-items:center;flex:none;
+  background:var(--green-soft);color:var(--green-700);
+  margin-top:1px;
+}
+.feature-list .fl-ic svg{width:13px;height:13px}
+.feature-list li.coral .fl-ic{background:var(--coral-soft);color:var(--coral-700)}
+.feature-list li.peach .fl-ic{background:var(--peach-soft);color:#a2622c}
+.feature-list li b{font-weight:600;color:var(--navy)}
+.feature-list li span{color:var(--green-700)}
+
+/* ---------- Panel visual (mockup) ---------- */
+.panel-visual{
+  position:relative;
+}
+.mockup{
+  background:var(--beige);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--sh-3);
+}
+.mockup-head{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+}
+.mockup-head .mh-title{
+  font-size:13.5px;font-weight:700;color:var(--navy);
+  display:flex;align-items:center;gap:8px;
+}
+.mockup-head .mh-title svg{width:15px;height:15px;color:var(--coral)}
+.mockup-head .mh-sub{
+  font-size:11px;color:var(--green-700);margin-inline-start:2px;
+}
+.mockup-head .mh-actions{
+  margin-inline-start:auto;
+  display:flex;gap:6px;align-items:center;
+}
+.mockup-head .mh-btn{
+  font-size:10.5px;font-weight:600;
+  padding:5px 10px;border-radius:7px;
+  background:var(--beige);color:var(--navy);
+  border:1px solid var(--line);
+}
+.mockup-head .mh-btn.coral{background:var(--coral);color:#fff;border-color:var(--coral)}
+
+.mockup-body{
+  padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  background:var(--beige);
+}
+
+/* Legend bar */
+.mk-legend{
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.mk-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:.02em;
+  padding:5px 10px;border-radius:999px;
+  background:var(--white);
+  border:1px solid var(--line);
+  color:var(--navy);
+}
+.mk-chip .sw{width:7px;height:7px;border-radius:2px;flex:none}
+
+/* Room grid */
+.mk-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+@media(max-width:520px){.mk-grid{grid-template-columns:repeat(2,1fr)}}
+.mk-room{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-inline-start:3px solid var(--green);
+  border-radius:10px;
+  padding:10px 11px;
+  display:flex;flex-direction:column;gap:5px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.mk-room:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+.mk-room.dirty{border-inline-start-color:var(--coral)}
+.mk-room.insp{border-inline-start-color:var(--peach)}
+.mk-room.occ{border-inline-start-color:var(--navy)}
+.mk-room .top{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.mk-room .top b{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.mk-room .pill{
+  font-size:8.5px;font-weight:700;letter-spacing:.02em;
+  padding:3px 7px;border-radius:999px;
+}
+.mk-room .pill.green{background:var(--green-soft);color:var(--green-700)}
+.mk-room .pill.coral{background:var(--coral-soft);color:var(--coral-700)}
+.mk-room .pill.peach{background:var(--peach);color:#8f4f1c}
+.mk-room .pill.navy{background:var(--navy);color:#fff}
+.mk-room .meta{font-size:9.5px;color:var(--green-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-room .who{font-size:9.5px;color:var(--navy);font-weight:500;display:flex;align-items:center;gap:4px}
+.mk-room .who i{width:5px;height:5px;border-radius:50%;background:var(--green);flex:none;font-style:normal}
+.mk-room.dirty .who i{background:var(--coral)}
+.mk-room.insp .who i{background:var(--peach)}
+
+/* Kanban */
+.mk-kanban{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+}
+@media(max-width:640px){.mk-kanban{grid-template-columns:1fr}}
+.mk-col{
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+}
+.mk-col .col-h{
+  display:flex;align-items:center;gap:6px;
+  font-size:10.5px;font-weight:700;color:var(--navy);
+  margin-bottom:8px;
+}
+.mk-col .col-h .d{width:6px;height:6px;border-radius:2px;flex:none}
+.mk-col .col-h .n{
+  margin-inline-start:auto;
+  font-size:9.5px;font-weight:700;color:var(--green-700);
+  background:var(--white);border:1px solid var(--line);
+  padding:1px 6px;border-radius:999px;
+}
+.mk-task{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:9px 10px;
+  margin-bottom:6px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.mk-task:last-child{margin-bottom:0}
+.mk-task .tk-top{display:flex;align-items:center;justify-content:space-between}
+.mk-task .tk-id{font-size:9px;font-weight:700;color:var(--green-700);letter-spacing:.03em}
+.mk-task .tk-pri{
+  font-size:8.5px;font-weight:700;
+  padding:2px 7px;border-radius:999px;
+}
+.mk-task .tk-pri.urgent{background:var(--coral);color:#fff}
+.mk-task .tk-pri.high{background:var(--peach);color:#8f4f1c}
+.mk-task .tk-pri.routine{background:var(--green-soft);color:var(--green-700)}
+.mk-task .tk-title{
+  font-size:11px;font-weight:600;color:var(--navy);line-height:1.35;
+}
+.mk-task .tk-meta{
+  display:flex;align-items:center;gap:8px;
+  font-size:9px;color:var(--green-700);
+}
+.mk-task .tk-meta span{display:inline-flex;align-items:center;gap:3px}
+
+/* Inventory table */
+.mk-table{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+}
+.mk-table table{width:100%;border-collapse:collapse}
+.mk-table th{
+  font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--green-700);
+  text-align:start;
+  padding:9px 12px;
+  background:var(--beige);
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+.mk-table td{
+  padding:9px 12px;
+  font-size:11px;
+  color:var(--navy);
+  border-bottom:1px solid var(--line-2);
+  vertical-align:middle;
+}
+.mk-table tr:last-child td{border-bottom:0}
+.mk-table tr:nth-child(even) td{background:#faf9f6}
+.mk-table td .nm{font-weight:600;display:block;line-height:1.25}
+.mk-table td .sku{font-size:9px;color:var(--green-700);letter-spacing:.03em}
+.mk-table td.num{font-variant-numeric:tabular-nums;font-weight:600}
+.mk-table .st{
+  font-size:9px;font-weight:700;
+  padding:3px 8px;border-radius:999px;
+  display:inline-block;
+}
+.mk-table .st.ok{background:var(--green-soft);color:var(--green-700)}
+.mk-table .st.low{background:var(--coral-soft);color:var(--coral-700)}
+.mk-table .st.reorder{background:var(--peach);color:#8f4f1c}
+.mk-alert{
+  display:flex;align-items:center;gap:9px;
+  background:var(--peach);
+  border-radius:10px;
+  padding:10px 13px;
+  font-size:11px;
+  color:var(--navy);
+}
+.mk-alert svg{width:15px;height:15px;color:#8f4f1c;flex:none}
+.mk-alert b{font-weight:700}
+.mk-alert .lk{
+  margin-inline-start:auto;
+  font-weight:700;color:var(--coral-700);
+  font-size:10.5px;
+  text-decoration:underline;text-underline-offset:2px;
+}
+
+/* Panel CTA */
+.panel-cta{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+
+/* ============================================================
+   BENEFITS
+   ============================================================ */
+.benefits{
+  padding:96px 0;
+  background:var(--beige);
+}
+@media(max-width:768px){.benefits{padding:64px 0}}
+
+.benefit-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+@media(max-width:900px){.benefit-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.benefit-grid{grid-template-columns:1fr}}
+
+.benefit-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:30px 28px;
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+  position:relative;
+  overflow:hidden;
+}
+.benefit-card::before{
+  content:'';
+  position:absolute;inset-inline-end:-40px;top:-40px;
+  width:140px;height:140px;border-radius:50%;
+  background:var(--beige);
+  opacity:.65;
+  transition:transform .5s var(--ease),opacity .5s var(--ease);
+}
+.benefit-card:hover{transform:translateY(-4px);box-shadow:var(--sh-3);border-color:rgba(42,39,60,.14)}
+.benefit-card:hover::before{transform:scale(1.25);opacity:.85}
+.benefit-card > *{position:relative}
+
+.benefit-ic{
+  width:48px;height:48px;border-radius:13px;
+  display:grid;place-items:center;
+  margin-bottom:20px;
+  background:var(--beige);
+  color:var(--navy);
+}
+.benefit-ic svg{width:22px;height:22px}
+.benefit-card:nth-child(1) .benefit-ic{background:var(--coral-soft);color:var(--coral-700)}
+.benefit-card:nth-child(2) .benefit-ic{background:var(--peach-soft);color:#a2622c}
+.benefit-card:nth-child(3) .benefit-ic{background:var(--green-soft);color:var(--green-700)}
+.benefit-card:nth-child(4) .benefit-ic{background:var(--coral-soft);color:var(--coral-700)}
+.benefit-card:nth-child(5) .benefit-ic{background:var(--peach-soft);color:#a2622c}
+.benefit-card:nth-child(6) .benefit-ic{background:var(--green-soft);color:var(--green-700)}
+
+.benefit-card h3{
+  font-size:17.5px;
+  font-weight:700;
+  letter-spacing:-.015em;
+  color:var(--navy);
+  margin-bottom:10px;
+  line-height:1.3;
+}
+.benefit-card p{
+  font-size:14.5px;
+  line-height:1.6;
+  color:var(--green-700);
+}
+
+/* ============================================================
+   DEMO FORM
+   ============================================================ */
+.demo-section{
+  padding:96px 0;
+  background:var(--navy);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.demo-section::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 60% at 88% 12%, rgba(233,90,84,.20), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 8% 88%, rgba(251,205,171,.14), transparent 60%);
+  pointer-events:none;
+}
+.demo-section .container{position:relative;z-index:2}
+@media(max-width:768px){.demo-section{padding:64px 0}}
+
+.demo-grid{
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  gap:64px;
+  align-items:start;
+}
+@media(max-width:960px){.demo-grid{grid-template-columns:1fr;gap:44px}}
+
+.demo-copy .kicker{
+  display:inline-block;
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--peach);
+  margin-bottom:14px;
+}
+.demo-copy h2{
+  font-size:clamp(28px, 3.4vw, 42px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  margin-bottom:20px;
+}
+.demo-copy > p{
+  font-size:16.5px;
+  line-height:1.65;
+  color:rgba(255,255,255,.72);
+  margin-bottom:32px;
+}
+.demo-points{
+  display:flex;flex-direction:column;gap:16px;
+}
+.demo-points li{
+  display:flex;align-items:flex-start;gap:13px;
+  font-size:14.5px;
+  color:rgba(255,255,255,.9);
+  line-height:1.5;
+}
+.demo-points .dp-ic{
+  width:26px;height:26px;border-radius:8px;
+  display:grid;place-items:center;flex:none;
+  background:rgba(255,255,255,.1);
+  color:var(--peach);
+  margin-top:1px;
+}
+.demo-points .dp-ic svg{width:14px;height:14px}
+
+/* Form card */
+.form-card{
+  background:var(--beige);
+  border-radius:var(--r-xl);
+  padding:36px 34px;
+  color:var(--navy);
+  box-shadow:var(--sh-4);
+}
+@media(max-width:520px){.form-card{padding:26px 20px}}
+
+.form-card h3{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+.form-card .fc-sub{
+  font-size:13.5px;
+  color:var(--green-700);
+  margin-bottom:26px;
+}
+
+.form-row{
+  margin-bottom:16px;
+}
+.form-row label{
+  display:block;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+.form-row label .req{color:var(--coral);margin-inline-start:2px}
+.form-row input,
+.form-row select,
+.form-row textarea{
+  width:100%;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:14.5px;
+  color:var(--navy);
+  outline:none;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease);
+  appearance:none;
+  -webkit-appearance:none;
+}
+.form-row select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238f9793' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-inline-end:38px;
+  cursor:pointer;
+}
+html[dir="rtl"] .form-row select{
+  background-position:left 14px center;
+  padding-inline-end:14px;
+  padding-inline-start:38px;
+}
+.form-row input::placeholder,
+.form-row textarea::placeholder{color:var(--green);opacity:.8}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{
+  border-color:var(--peach);
+  box-shadow:0 0 0 4px var(--peach-soft);
+  background:#fff;
+}
+.form-row.error input,
+.form-row.error select{
+  border-color:var(--coral);
+  box-shadow:0 0 0 4px var(--coral-soft);
+}
+.form-row textarea{resize:vertical;min-height:80px;font-family:inherit;line-height:1.5}
+
+.field-error{
+  display:none;
+  font-size:12px;
+  color:var(--coral-700);
+  margin-top:6px;
+  font-weight:500;
+}
+.form-row.error .field-error{display:block}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+@media(max-width:520px){.form-grid{grid-template-columns:1fr}}
+
+.form-consent{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:12.5px;
+  color:var(--green-700);
+  line-height:1.5;
+  margin:6px 0 22px;
+  cursor:pointer;
+  user-select:none;
+}
+.form-consent input{
+  appearance:none;-webkit-appearance:none;
+  width:18px;height:18px;flex:none;
+  border:1.8px solid rgba(42,39,60,.22);
+  border-radius:5px;
+  background:#fff;
+  margin-top:1px;
+  cursor:pointer;
+  position:relative;
+  transition:background .18s var(--ease),border-color .18s var(--ease);
+}
+.form-consent input:checked{background:var(--coral);border-color:var(--coral)}
+.form-consent input:checked::after{
+  content:'';position:absolute;left:5px;top:1.5px;
+  width:5px;height:10px;
+  border:solid #fff;border-width:0 2px 2px 0;
+  transform:rotate(43deg);
+}
+.form-consent a{color:var(--coral-700);text-decoration:underline;text-underline-offset:2px}
+
+.form-submit{
+  width:100%;
+  padding:15px 24px;
+  font-size:15.5px;
+  border-radius:11px;
+  position:relative;
+}
+.form-submit.loading{pointer-events:none;color:transparent}
+.form-submit .spinner{
+  position:absolute;top:50%;left:50%;
+  width:18px;height:18px;
+  margin:-9px 0 0 -9px;
+  border:2.5px solid rgba(255,255,255,.35);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  display:none;
+}
+.form-submit.loading .spinner{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.form-foot{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:16px;
+  font-size:12px;
+  color:var(--green-700);
+  text-align:center;
+}
+.form-foot svg{width:13px;height:13px;flex:none;color:var(--green)}
+
+/* Form success state */
+.form-success{
+  display:none;
+  text-align:center;
+  padding:20px 0;
+}
+.form-success.show{display:block;animation:panelIn .5s var(--ease-out)}
+.form-success .fs-ic{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--green-soft);
+  color:var(--green-700);
+  display:grid;place-items:center;
+  margin:0 auto 18px;
+}
+.form-success .fs-ic svg{width:30px;height:30px}
+.form-success h4{
+  font-size:20px;font-weight:800;color:var(--navy);
+  letter-spacing:-.02em;margin-bottom:8px;
+}
+.form-success p{
+  font-size:14px;color:var(--green-700);line-height:1.6;max-width:36ch;margin:0 auto 20px;
+}
+
+/* Form error banner */
+.form-banner{
+  display:none;
+  align-items:flex-start;gap:11px;
+  background:var(--coral-soft);
+  border:1px solid rgba(233,90,84,.25);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:18px;
+  font-size:13px;
+  color:var(--coral-700);
+  line-height:1.45;
+}
+.form-banner.show{display:flex;animation:panelIn .3s var(--ease-out)}
+.form-banner svg{width:16px;height:16px;flex:none;margin-top:2px}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta{
+  padding:88px 0;
+  background:var(--beige);
+  text-align:center;
+  border-top:1px solid var(--line);
+}
+@media(max-width:768px){.final-cta{padding:60px 0}}
+
+.final-cta .container{
+  max-width:820px;
+}
+.final-cta h2{
+  font-size:clamp(26px, 3.2vw, 40px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  color:var(--navy);
+  margin-bottom:18px;
+}
+.final-cta p{
+  font-size:17px;
+  color:var(--green-700);
+  max-width:56ch;
+  margin:0 auto 32px;
+}
+.final-cta .hero-ctas{justify-content:center}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{
+  background:var(--navy);
+  color:rgba(255,255,255,.62);
+  padding:56px 0 28px;
+  font-size:13.5px;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:40px;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+@media(max-width:840px){
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:520px){
+  .footer-top{grid-template-columns:1fr}
+}
+
+.footer-brand{
+  display:flex;flex-direction:column;gap:14px;
+}
+.footer-brand svg{height:32px;width:auto;color:#fff}
+.footer-brand svg text{fill:#fff}
+.footer-brand p{
+  font-size:13px;
+  line-height:1.6;
+  color:rgba(255,255,255,.55);
+  max-width:36ch;
+}
+
+.footer-col h4{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.42);
+  margin-bottom:16px;
+}
+.footer-col ul{display:flex;flex-direction:column;gap:11px}
+.footer-col a{
+  font-size:13.5px;
+  color:rgba(255,255,255,.72);
+  transition:color .18s var(--ease);
+}
+.footer-col a:hover{color:#fff}
+
+.footer-bottom{
+  padding-top:26px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  font-size:12.5px;
+  color:rgba(255,255,255,.45);
+}
+.footer-bottom .socials{display:flex;gap:8px}
+.footer-bottom .socials a{
+  width:34px;height:34px;border-radius:9px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.7);
+  transition:background .18s var(--ease),color .18s var(--ease),transform .12s var(--ease);
+}
+.footer-bottom .socials a:hover{background:var(--coral);color:#fff;transform:translateY(-2px)}
+.footer-bottom .socials svg{width:15px;height:15px}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast-stack{
+  position:fixed;
+  bottom:22px;
+  inset-inline-end:22px;
+  z-index:9999;
+  display:flex;flex-direction:column;gap:10px;
+  max-width:min(380px, calc(100vw - 44px));
+  pointer-events:none;
+}
+.toast{
+  pointer-events:auto;
+  display:flex;align-items:flex-start;gap:11px;
+  background:var(--peach);
+  color:var(--navy);
+  border-radius:13px;
+  padding:13px 14px;
+  box-shadow:var(--sh-3);
+  transform:translateY(16px) scale(.97);
+  opacity:0;
+  transition:transform .3s var(--ease),opacity .3s var(--ease);
+}
+.toast.in{transform:none;opacity:1}
+.toast.success{background:var(--green);color:#fff}
+.toast.error{background:var(--coral);color:#fff}
+.toast.navy{background:var(--navy);color:#fff}
+.toast .t-ic{
+  width:26px;height:26px;border-radius:8px;
+  display:grid;place-items:center;flex:none;
+  background:rgba(255,255,255,.25);
+}
+.toast.navy .t-ic{background:rgba(255,255,255,.12)}
+.toast .t-ic svg{width:14px;height:14px}
+.toast .t-body{min-width:0;flex:1}
+.toast .t-body b{display:block;font-size:13px;font-weight:700;line-height:1.3}
+.toast .t-body span{display:block;font-size:12.5px;opacity:.88;margin-top:2px;line-height:1.45}
+.toast .t-x{
+  width:22px;height:22px;border-radius:6px;
+  display:grid;place-items:center;
+  color:inherit;opacity:.6;flex:none;
+  transition:opacity .16s,background .16s;
+}
+.toast .t-x:hover{opacity:1;background:rgba(0,0,0,.08)}
+.toast .t-x svg{width:12px;height:12px}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+  .float-chip{animation:none}
+  .hero h1 .accent::after{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Fandaqah — Home">
+      <svg viewBox="0 0 220 58" role="img" aria-label="Fandaqah logo">
+        <text x="2" y="25" font-size="30" font-weight="700" fill="#2a273c"
+              font-family="'IBM Plex Sans Arabic', Tahoma, sans-serif">فندقة</text>
+        <text x="2" y="52" font-size="23" font-weight="700" fill="#2a273c"
+              letter-spacing="-0.6" font-family="Inter, sans-serif">fandaqah</text>
+        <g transform="translate(176,2)">
+          <path d="M2 48 V20 A19 19 0 0 1 40 20 V48 A6 6 0 0 1 34 54 H8 A6 6 0 0 1 2 48 Z" fill="#e95a54"/>
+          <circle cx="14" cy="24" r="7" fill="#8f9793"/>
+        </g>
+      </svg>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a class="nav-link" href="#features" data-i18n="navFeatures">Features</a>
+      <a class="nav-link" href="#benefits" data-i18n="navBenefits">Benefits</a>
+      <a class="nav-link" href="#demo" data-i18n="navDemo">Book a Demo</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg>
+        <span id="langLabel">العربية</span>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#demo" id="headerCta" data-i18n="bookDemo">Book a Demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="tag" data-i18n="newBadge">New</span>
+          <span class="dot"></span>
+          <span data-i18n="eyebrow">Hotel Operations Suite · Housekeeping · Maintenance · Inventory</span>
+        </div>
+
+        <h1 id="heroTitle">
+          <span data-i18n="heroLine1">Run your hotel like</span><br>
+          <span class="accent" data-i18n="heroLine2">one calm system.</span>
+        </h1>
+
+        <p class="lede" data-i18n="heroLede">
+          Fandaqah unifies <strong>housekeeping</strong>, <strong>maintenance</strong> and <strong>inventory</strong>
+          into a single premium workspace — so your team stops chasing spreadsheets and starts
+          delivering five-star operations, every shift.
+        </p>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary btn-lg" href="#demo" id="heroCta" data-cta="hero">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span data-i18n="bookDemo">Book a Demo</span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#features" data-i18n="exploreFeatures">Explore Features</a>
+        </div>
+
+        <div class="hero-trust">
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="trust1">Built for Saudi hospitality</span>
+          </span>
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="trust2">Arabic & English (RTL)</span>
+          </span>
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="trust3">Live in minutes</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Dashboard preview -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="preview-frame">
+          <div class="preview-chrome">
+            <span class="dot r"></span>
+            <span class="dot y"></span>
+            <span class="dot g"></span>
+            <div class="url">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              app.fandaqah.com/dashboard
+            </div>
+          </div>
+          <div class="preview-body">
+            <aside class="preview-side">
+              <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/></svg></div>
+              <div class="ps-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.6 4.9 4.9 1.6-4.9 1.6L12 15.5l-1.6-4.9L5.5 9l4.9-1.6z"/><path d="M18.5 15.5l.8 2.4 2.4.8-2.4.8-.8 2.4-.8-2.4-2.4-.8 2.4-.8z"/></svg></div>
+              <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+              <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+              <div class="ps-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+            </aside>
+            <div class="preview-main">
+              <div class="pv-head">
+                <div>
+                  <h4>Housekeeping</h4>
+                  <div class="pv-sub">Floor 10–13 · live room board</div>
+                </div>
+                <div class="pv-actions">
+                  <span class="pv-pill">Today</span>
+                  <span class="pv-pill coral">+ Request</span>
+                </div>
+              </div>
+
+              <div class="pv-stats">
+                <div class="pv-stat green"><span class="k">Ready</span><span class="v">54</span></div>
+                <div class="pv-stat coral"><span class="k">Dirty</span><span class="v">4</span></div>
+                <div class="pv-stat peach"><span class="k">Inspect</span><span class="v">1</span></div>
+                <div class="pv-stat"><span class="k">Occupied</span><span class="v">4</span></div>
+              </div>
+
+              <div class="pv-rooms">
+                <div class="pv-room"><div class="n">1001<span class="b"></span></div><div class="m">Deep Clean</div></div>
+                <div class="pv-room dirty"><div class="n">1002<span class="b"></span></div><div class="m">Dirty · Pending</div></div>
+                <div class="pv-room"><div class="n">1003<span class="b"></span></div><div class="m">Inspection</div></div>
+                <div class="pv-room insp"><div class="n">1004<span class="b"></span></div><div class="m">Awaiting</div></div>
+                <div class="pv-room occ"><div class="n">1005<span class="b"></span></div><div class="m">Occupied</div></div>
+                <div class="pv-room"><div class="n">1006<span class="b"></span></div><div class="m">Ready</div></div>
+                <div class="pv-room dirty"><div class="n">1007<span class="b"></span></div><div class="m">Dirty · Overdue</div></div>
+                <div class="pv-room"><div class="n">1008<span class="b"></span></div><div class="m">Ready</div></div>
+              </div>
+
+              <div class="pv-bottom">
+                <div class="pv-panel">
+                  <div class="h">Cleaning Progress</div>
+                  <div class="pv-bars">
+                    <div class="pv-bar"><span>F10</span><span class="t"><i style="width:82%;background:#8f9793"></i></span></div>
+                    <div class="pv-bar"><span>F11</span><span class="t"><i style="width:64%;background:#8f9793"></i></span></div>
+                    <div class="pv-bar"><span>F12</span><span class="t"><i style="width:38%;background:#fbcdab"></i></span></div>
+                    <div class="pv-bar"><span>F13</span><span class="t"><i style="width:22%;background:#e95a54"></i></span></div>
+                  </div>
+                </div>
+                <div class="pv-panel">
+                  <div class="h">Room Status</div>
+                  <div class="pv-donut">
+                    <div class="ring"></div>
+                    <div class="lg">
+                      <span><i style="background:#8f9793"></i> Ready</span>
+                      <span><i style="background:#e95a54"></i> Dirty</span>
+                      <span><i style="background:#fbcdab"></i> Inspect</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating chips -->
+        <div class="float-chip fc-1">
+          <span class="ic coral"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div>Room 1002<small>Overdue cleaning</small></div>
+        </div>
+        <div class="float-chip fc-2">
+          <span class="ic green"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div>Floor 11 cleared<small>All rooms ready</small></div>
+        </div>
+        <div class="float-chip fc-3">
+          <span class="ic peach"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4L7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></span>
+          <div>5 items low<small>Reorder suggested</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURES — TABS
+     ============================================================ -->
+<section class="features" id="features" aria-labelledby="featuresTitle">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-i18n="featuresKicker">Three modules. One workspace.</span>
+      <h2 id="featuresTitle" data-i18n="featuresTitle">Everything your operations team touches, finally connected.</h2>
+      <p data-i18n="featuresSub">Switch between modules below to see how Fandaqah replaces fragmented tools with a single, beautifully consistent system.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Product modules">
+      <button class="tab" role="tab" id="tab-hk" aria-controls="panel-hk" aria-selected="true" tabindex="0" data-tab="hk">
+        <span class="tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.6 4.9 4.9 1.6-4.9 1.6L12 15.5l-1.6-4.9L5.5 9l4.9-1.6z"/><path d="M18.5 15.5l.8 2.4 2.4.8-2.4.8-.8 2.4-.8-2.4-2.4-.8 2.4-.8z"/></svg></span>
+        <span data-i18n="tabHousekeeping">Housekeeping</span>
+        <span class="tab-ar">التدبير</span>
+      </button>
+      <button class="tab" role="tab" id="tab-mt" aria-controls="panel-mt" aria-selected="false" tabindex="-1" data-tab="mt">
+        <span class="tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <span data-i18n="tabMaintenance">Maintenance</span>
+        <span class="tab-ar">الصيانة</span>
+      </button>
+      <button class="tab" role="tab" id="tab-in" aria-controls="panel-in" aria-selected="false" tabindex="-1" data-tab="in">
+        <span class="tab-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span>
+        <span data-i18n="tabInventory">Inventory</span>
+        <span class="tab-ar">المخزون</span>
+      </button>
+    </div>
+
+    <!-- Panels -->
+    <div class="tab-panels">
+
+      <!-- HOUSEKEEPING -->
+      <div class="tab-panel active" id="panel-hk" role="tabpanel" aria-labelledby="tab-hk" tabindex="0">
+        <div class="panel-grid">
+          <div class="panel-copy">
+            <span class="panel-kicker">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l1.6 4.9 4.9 1.6-4.9 1.6L12 15.5l-1.6-4.9L5.5 9l4.9-1.6z"/></svg>
+              <span data-i18n="hkKicker">Module 01</span>
+            </span>
+            <h3>
+              <span data-i18n="hkTitle">Housekeeping command center</span>
+              <span class="ar">إدارة التدبير الفندقي</span>
+            </h3>
+            <p data-i18n="hkDesc">Replace the paper trail and radio calls with a live room board your whole team can trust — from the front desk to the linen room.</p>
+
+            <ul class="feature-list">
+              <li>
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="hkF1t">Live room-status board</b> <span data-i18n="hkF1s">— dirty, clean, inspected and occupied in one glance.</span></span>
+              </li>
+              <li class="peach">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="hkF2t">Attendant assignments</b> <span data-i18n="hkF2s">— tasks routed automatically to the right person, floor by floor.</span></span>
+              </li>
+              <li class="coral">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="hkF3t">Inspections & discrepancies</b> <span data-i18n="hkF3s">— catch room disputes before they reach the guest.</span></span>
+              </li>
+            </ul>
+
+            <div class="panel-cta">
+              <a class="btn btn-primary" href="#demo" data-feature="housekeeping" data-cta="feature-hk">
+                <span data-i18n="bookDemo">Book a Demo</span>
+              </a>
+              <span style="font-size:13px;color:var(--green-700)" data-i18n="hkNote">See it live on your own room layout.</span>
+            </div>
+          </div>
+
+          <div class="panel-visual">
+            <div class="mockup" aria-hidden="true">
+              <div class="mockup-head">
+                <div class="mh-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.6 4.9 4.9 1.6-4.9 1.6L12 15.5l-1.6-4.9L5.5 9l4.9-1.6z"/></svg>
+                  Housekeeping
+                </div>
+                <div class="mh-sub">· Floor 10</div>
+                <div class="mh-actions">
+                  <span class="mh-btn">Filter</span>
+                  <span class="mh-btn coral">+ New</span>
+                </div>
+              </div>
+              <div class="mockup-body">
+                <div class="mk-legend">
+                  <span class="mk-chip"><span class="sw" style="background:#8f9793"></span> Ready · 54</span>
+                  <span class="mk-chip"><span class="sw" style="background:#e95a54"></span> Dirty · 4</span>
+                  <span class="mk-chip"><span class="sw" style="background:#fbcdab"></span> Inspect · 1</span>
+                  <span class="mk-chip"><span class="sw" style="background:#2a273c"></span> Occupied · 4</span>
+                </div>
+
+                <div class="mk-grid">
+                  <div class="mk-room">
+                    <div class="top"><b>1001</b><span class="pill green">Ready</span></div>
+                    <div class="meta">Inspection complete</div>
+                    <div class="who"><i></i>Abdullah A.</div>
+                  </div>
+                  <div class="mk-room dirty">
+                    <div class="top"><b>1002</b><span class="pill coral">Dirty</span></div>
+                    <div class="meta">Deep Clean · Overdue</div>
+                    <div class="who"><i></i>Fatima Z.</div>
+                  </div>
+                  <div class="mk-room">
+                    <div class="top"><b>1003</b><span class="pill green">Ready</span></div>
+                    <div class="meta">Linen changed</div>
+                    <div class="who"><i></i>Yusuf I.</div>
+                  </div>
+                  <div class="mk-room insp">
+                    <div class="top"><b>1004</b><span class="pill peach">Inspect</span></div>
+                    <div class="meta">Awaiting supervisor</div>
+                    <div class="who"><i></i>Layla H.</div>
+                  </div>
+                  <div class="mk-room occ">
+                    <div class="top"><b>1005</b><span class="pill navy">Occupied</span></div>
+                    <div class="meta">Turndown · 18:00</div>
+                    <div class="who"><i></i>Omar K.</div>
+                  </div>
+                  <div class="mk-room">
+                    <div class="top"><b>1006</b><span class="pill green">Ready</span></div>
+                    <div class="meta">Standard clean</div>
+                    <div class="who"><i></i>Nour M.</div>
+                  </div>
+                  <div class="mk-room dirty">
+                    <div class="top"><b>1007</b><span class="pill coral">Dirty</span></div>
+                    <div class="meta">Bathroom refresh</div>
+                    <div class="who"><i></i>Sara N.</div>
+                  </div>
+                  <div class="mk-room">
+                    <div class="top"><b>1008</b><span class="pill green">Ready</span></div>
+                    <div class="meta">Sanitization</div>
+                    <div class="who"><i></i>Abdullah A.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAINTENANCE -->
+      <div class="tab-panel" id="panel-mt" role="tabpanel" aria-labelledby="tab-mt" tabindex="0" hidden>
+        <div class="panel-grid">
+          <div class="panel-copy">
+            <span class="panel-kicker">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span data-i18n="mtKicker">Module 02</span>
+            </span>
+            <h3>
+              <span data-i18n="mtTitle">Maintenance without the guesswork</span>
+              <span class="ar">إدارة الصيانة</span>
+            </h3>
+            <p data-i18n="mtDesc">From a guest complaint to a closed work order — track every job, every priority and every hour, without losing track of a single repair.</p>
+
+            <ul class="feature-list">
+              <li class="coral">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="mtF1t">Priority-driven work orders</b> <span data-i18n="mtF1s">— urgent issues escalate visually, so nothing sits idle.</span></span>
+              </li>
+              <li>
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="mtF2t">Kanban & calendar views</b> <span data-i18n="mtF2s">— drag jobs across stages, or plan preventive work by date.</span></span>
+              </li>
+              <li class="peach">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="mtF3t">Downtime & MTTR tracking</b> <span data-i18n="mtF3s">— see which areas cost you the most unplanned hours.</span></span>
+              </li>
+            </ul>
+
+            <div class="panel-cta">
+              <a class="btn btn-primary" href="#demo" data-feature="maintenance" data-cta="feature-mt">
+                <span data-i18n="bookDemo">Book a Demo</span>
+              </a>
+              <span style="font-size:13px;color:var(--green-700)" data-i18n="mtNote">Bring your own assets & SLAs.</span>
+            </div>
+          </div>
+
+          <div class="panel-visual">
+            <div class="mockup" aria-hidden="true">
+              <div class="mockup-head">
+                <div class="mh-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  Maintenance
+                </div>
+                <div class="mh-sub">· Work orders</div>
+                <div class="mh-actions">
+                  <span class="mh-btn">Calendar</span>
+                  <span class="mh-btn coral">+ New</span>
+                </div>
+              </div>
+              <div class="mockup-body">
+                <div class="mk-kanban">
+                  <div class="mk-col">
+                    <div class="col-h"><span class="d" style="background:#e95a54"></span>New<span class="n">4</span></div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1087</span><span class="tk-pri urgent">Urgent</span></div>
+                      <div class="tk-title">AC not cooling — guest complaint</div>
+                      <div class="tk-meta"><span>Room 1204</span><span>· Khalid R.</span></div>
+                    </div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1088</span><span class="tk-pri high">High</span></div>
+                      <div class="tk-title">Automatic door sensor fault</div>
+                      <div class="tk-meta"><span>Lobby</span><span>· Sara M.</span></div>
+                    </div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1089</span><span class="tk-pri routine">Routine</span></div>
+                      <div class="tk-title">Shower drain slow</div>
+                      <div class="tk-meta"><span>Room 0712</span><span>· Omar T.</span></div>
+                    </div>
+                  </div>
+                  <div class="mk-col">
+                    <div class="col-h"><span class="d" style="background:#fbcdab"></span>In Progress<span class="n">3</span></div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1082</span><span class="tk-pri urgent">Urgent</span></div>
+                      <div class="tk-title">Walk-in fridge temperature alarm</div>
+                      <div class="tk-meta"><span>Kitchen</span><span>· Khalid R.</span></div>
+                    </div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1083</span><span class="tk-pri high">High</span></div>
+                      <div class="tk-title">Leaking faucet — bathroom</div>
+                      <div class="tk-meta"><span>Room 1108</span><span>· Omar T.</span></div>
+                    </div>
+                  </div>
+                  <div class="mk-col">
+                    <div class="col-h"><span class="d" style="background:#8f9793"></span>Awaiting Parts<span class="n">2</span></div>
+                    <div class="mk-task">
+                      <div class="tk-top"><span class="tk-id">MT-1076</span><span class="tk-pri high">High</span></div>
+                      <div class="tk-title">Dryer belt replacement</div>
+                      <div class="tk-meta"><span>Laundry</span><span>· Nour M.</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVENTORY -->
+      <div class="tab-panel" id="panel-in" role="tabpanel" aria-labelledby="tab-in" tabindex="0" hidden>
+        <div class="panel-grid">
+          <div class="panel-copy">
+            <span class="panel-kicker">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>
+              <span data-i18n="inKicker">Module 03</span>
+            </span>
+            <h3>
+              <span data-i18n="inTitle">Inventory you can actually control</span>
+              <span class="ar">إدارة المخزون</span>
+            </h3>
+            <p data-i18n="inDesc">Know what you have, what you're running out of, and what it costs — with receiving, issuing and reorder workflows built into one clean table.</p>
+
+            <ul class="feature-list">
+              <li class="peach">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="inF1t">Live stock levels & low-stock alerts</b> <span data-i18n="inF1s">— never discover an empty linen room mid-shift again.</span></span>
+              </li>
+              <li>
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="inF2t">Receive & issue in one click</b> <span data-i18n="inF2s">— every movement is logged with a reference and an owner.</span></span>
+              </li>
+              <li class="coral">
+                <span class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span><b data-i18n="inF3t">Purchase orders & cost control</b> <span data-i18n="inF3s">— generate a PO from low-stock items in seconds.</span></span>
+              </li>
+            </ul>
+
+            <div class="panel-cta">
+              <a class="btn btn-primary" href="#demo" data-feature="inventory" data-cta="feature-in">
+                <span data-i18n="bookDemo">Book a Demo</span>
+              </a>
+              <span style="font-size:13px;color:var(--green-700)" data-i18n="inNote">Import your item catalogue.</span>
+            </div>
+          </div>
+
+          <div class="panel-visual">
+            <div class="mockup" aria-hidden="true">
+              <div class="mockup-head">
+                <div class="mh-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+                  Inventory
+                </div>
+                <div class="mh-sub">· All categories</div>
+                <div class="mh-actions">
+                  <span class="mh-btn">Export</span>
+                  <span class="mh-btn coral">+ Receive</span>
+                </div>
+              </div>
+              <div class="mockup-body">
+                <div class="mk-alert">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span><b>5 items</b> below minimum stock</span>
+                  <span class="lk">View items</span>
+                </div>
+
+                <div class="mk-table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th style="text-align:end">On Hand</th>
+                        <th style="text-align:end">Min</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="nm">Bath Towels (White)</span><span class="sku">LIN-001</span></td>
+                        <td>Linens</td>
+                        <td class="num" style="text-align:end">420</td>
+                        <td class="num" style="text-align:end;color:#8f9793">200</td>
+                        <td><span class="st ok">OK</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="nm">Amenity Kit</span><span class="sku">AME-001</span></td>
+                        <td>Amenities</td>
+                        <td class="num" style="text-align:end;color:#bf3b35">45</td>
+                        <td class="num" style="text-align:end;color:#8f9793">120</td>
+                        <td><span class="st low">Low Stock</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="nm">Shampoo 30ml</span><span class="sku">AME-002</span></td>
+                        <td>Amenities</td>
+                        <td class="num" style="text-align:end;color:#bf3b35">80</td>
+                        <td class="num" style="text-align:end;color:#8f9793">150</td>
+                        <td><span class="st low">Low Stock</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="nm">Bottled Water 500ml</span><span class="sku">FB-003</span></td>
+                        <td>F&amp;B</td>
+                        <td class="num" style="text-align:end">1240</td>
+                        <td class="num" style="text-align:end;color:#8f9793">600</td>
+                        <td><span class="st ok">OK</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="nm">Laundry Detergent</span><span class="sku">LND-001</span></td>
+                        <td>Laundry</td>
+                        <td class="num" style="text-align:end;color:#a2622c">88</td>
+                        <td class="num" style="text-align:end;color:#8f9793">110</td>
+                        <td><span class="st reorder">Reorder Placed</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BENEFITS
+     ============================================================ -->
+<section class="benefits" id="benefits" aria-labelledby="benefitsTitle">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker" data-i18n="benefitsKicker">Why teams switch</span>
+      <h2 id="benefitsTitle" data-i18n="benefitsTitle">Operational clarity, shift after shift.</h2>
+      <p data-i18n="benefitsSub">Fandaqah is designed around the reality of hotel operations — not generic project management software.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 data-i18n="b1t">Full operational visibility</h3>
+        <p data-i18n="b1s">One live view of rooms, work orders and stock — so managers stop asking "what's the status?" and start acting on it.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3 data-i18n="b2t">Faster task coordination</h3>
+        <p data-i18n="b2s">Tasks route to the right person instantly. No radio chains, no sticky notes, no shift-handover gaps.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+        <h3 data-i18n="b3t">Better inventory control</h3>
+        <p data-i18n="b3s">Track every movement in and out. Catch shortages before they become guest-facing problems.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+        <h3 data-i18n="b4t">Less manual work</h3>
+        <p data-i18n="b4s">Replace spreadsheets, WhatsApp groups and paper checklists with one system your team actually wants to use.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 data-i18n="b5t">Improved accountability</h3>
+        <p data-i18n="b5s">Every task has an owner, a timestamp and a status. Reviews and shift handovers become painless.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3 data-i18n="b6t">Faster onboarding</h3>
+        <p data-i18n="b6s">New team members learn one interface, not five. Bilingual Arabic & English with full RTL support.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO FORM
+     ============================================================ -->
+<section class="demo-section" id="demo" aria-labelledby="demoTitle">
+  <div class="container">
+    <div class="demo-grid">
+      <div class="demo-copy">
+        <span class="kicker" data-i18n="demoKicker">Book a demo</span>
+        <h2 id="demoTitle" data-i18n="demoTitle">See Fandaqah on your own operation.</h2>
+        <p data-i18n="demoSub">A 30-minute personalized walkthrough — no slides. We'll show you Housekeeping, Maintenance and Inventory using a layout that mirrors your property.</p>
+
+        <ul class="demo-points">
+          <li>
+            <span class="dp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span data-i18n="demoP1">Tailored to your hotel size and structure</span>
+          </li>
+          <li>
+            <span class="dp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span data-i18n="demoP2">Arabic and English delivered on request</span>
+          </li>
+          <li>
+            <span class="dp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span data-i18n="demoP3">Clear next steps — no obligation</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <h3 data-i18n="formTitle">Request your demo</h3>
+        <p class="fc-sub" data-i18n="formSub">We'll get back to you within one business day.</p>
+
+        <div class="form-banner" id="formBanner" role="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span id="formBannerMsg" data-i18n="formErrBanner">Something went wrong. Please try again, or email us directly at hello@fandaqah.com.</span>
+        </div>
+
+        <form id="demoForm" novalidate>
+          <div class="form-row">
+            <label for="fName" data-i18n="fName">Full name<span class="req">*</span></label>
+            <input type="text" id="fName" name="name" autocomplete="name" required
+                   data-i18n-ph="fNamePh" placeholder="e.g. Abdullah Ahmed">
+            <div class="field-error" data-i18n="fNameErr">Please enter your full name.</div>
+          </div>
+
+          <div class="form-row">
+            <label for="fEmail" data-i18n="fEmail">Work email<span class="req">*</span></label>
+            <input type="email" id="fEmail" name="email" autocomplete="email" required
+                   inputmode="email" dir="ltr"
+                   data-i18n-ph="fEmailPh" placeholder="you@hotel.com">
+            <div class="field-error" data-i18n="fEmailErr">Please enter a valid work email address.</div>
+          </div>
+
+          <div class="form-row">
+            <label for="fCompany" data-i18n="fCompany">Hotel / company name<span class="req">*</span></label>
+            <input type="text" id="fCompany" name="company" autocomplete="organization" required
+                   data-i18n-ph="fCompanyPh" placeholder="e.g. Al Noor Hotel Riyadh">
+            <div class="field-error" data-i18n="fCompanyErr">Please enter your hotel or company name.</div>
+          </div>
+
+          <div class="form-row">
+            <label for="fPhone" data-i18n="fPhone">Phone number<span class="req">*</span></label>
+            <input type="tel" id="fPhone" name="phone" autocomplete="tel" required
+                   inputmode="tel" dir="ltr"
+                   data-i18n-ph="fPhonePh" placeholder="+966 5X XXX XXXX">
+            <div class="field-error" data-i18n="fPhoneErr">Please enter a valid phone number.</div>
+          </div>
+
+          <div class="form-row">
+            <label for="fFeature" data-i18n="fFeature">Preferred feature<span class="req">*</span></label>
+            <select id="fFeature" name="feature" required>
+              <option value="" data-i18n="fFeatureDefault">Select a module</option>
+              <option value="housekeeping" data-i18n="tabHousekeeping">Housekeeping</option>
+              <option value="maintenance" data-i18n="tabMaintenance">Maintenance</option>
+              <option value="inventory" data-i18n="tabInventory">Inventory</option>
+              <option value="all" data-i18n="fFeatureAll">All three modules</option>
+            </select>
+            <div class="field-error" data-i18n="fFeatureErr">Please choose a module.</div>
+          </div>
+
+          <label class="form-consent">
+            <input type="checkbox" id="fConsent" name="consent" required>
+            <span>
+              <span data-i18n="consentText">I agree to be contacted by Fandaqah about my demo request.</span>
+              <a href="/privacy" data-i18n="consentLink">Privacy Policy</a>
+            </span>
+          </label>
+
+          <button type="submit" class="btn btn-primary form-submit" id="formSubmit">
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="submitLabel" data-i18n="submitBtn">Request Demo</span>
+          </button>
+
+          <div class="form-foot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span data-i18n="formSecure">Your details are kept confidential and never shared.</span>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="fs-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4 data-i18n="successTitle">Thank you — request received.</h4>
+          <p data-i18n="successText">Our team will contact you within one business day to schedule your personalized demo.</p>
+          <button type="button" class="btn btn-ghost btn-sm" id="resetForm" data-i18n="sendAnother">Submit another request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section class="final-cta">
+  <div class="container">
+    <h2 data-i18n="finalTitle">Ready to see your hotel run calmer?</h2>
+    <p data-i18n="finalSub">Book a personalized demo and see exactly how Fandaqah fits your rooms, your team and your shift patterns.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="#demo" data-cta="final">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span data-i18n="bookDemo">Book a Demo</span>
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#features" data-i18n="revisitFeatures">Revisit features</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg viewBox="0 0 220 58" role="img" aria-label="Fandaqah">
+          <text x="2" y="25" font-size="30" font-weight="700" fill="#ffffff"
+                font-family="'IBM Plex Sans Arabic', Tahoma, sans-serif">فندقة</text>
+          <text x="2" y="52" font-size="23" font-weight="700" fill="#ffffff"
+                letter-spacing="-0.6" font-family="Inter, sans-serif">fandaqah</text>
+          <g transform="translate(176,2)">
+            <path d="M2 48 V20 A19 19 0 0 1 40 20 V48 A6 6 0 0 1 34 54 H8 A6 6 0 0 1 2 48 Z" fill="#e95a54"/>
+            <circle cx="14" cy="24" r="7" fill="#8f9793"/>
+          </g>
+        </svg>
+        <p data-i18n="footerTag">Premium hotel management suite for housekeeping, maintenance and inventory — built for Saudi hospitality.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footerProduct">Product</h4>
+        <ul>
+          <li><a href="#features" data-i18n="tabHousekeeping">Housekeeping</a></li>
+          <li><a href="#features" data-i18n="tabMaintenance">Maintenance</a></li>
+          <li><a href="#features" data-i18n="tabInventory">Inventory</a></li>
+          <li><a href="#benefits" data-i18n="navBenefits">Benefits</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footerCompany">Company</h4>
+        <ul>
+          <li><a href="/about" data-i18n="footerAbout">About</a></li>
+          <li><a href="/contact" data-i18n="footerContact">Contact</a></li>
+          <li><a href="/privacy" data-i18n="footerPrivacy">Privacy Policy</a></li>
+          <li><a href="/terms" data-i18n="footerTerms">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footerSupport">Support</h4>
+        <ul>
+          <li><a href="mailto:hello@fandaqah.com">hello@fandaqah.com</a></li>
+          <li><a href="#demo" data-i18n="bookDemo">Book a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footerRights">© 2026 Fandaqah. All rights reserved.</span>
+      <div class="socials" aria-label="Social links">
+        <a href="https://linkedin.com" aria-label="LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://x.com" aria-label="X" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7.5 9L4 20h2l6.5-7.8L18 20h2l-7.6-9L20 4h-2l-6.2 7.4L6 4H4z"/></svg>
+        </a>
+        <a href="https://instagram.com" aria-label="Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toasts -->
+<div class="toast-stack" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ============================================================
+     ANALYTICS — GA4 / Google Ads
+     Replace G-XXXXXXX and AW-XXXXXXX with your real IDs.
+     These stubs are safe no-ops if gtag.js isn't loaded.
+     ============================================================ -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ window.dataLayer.push(arguments); }
+  gtag('js', new Date());
+  /* gtag('config', 'G-XXXXXXX'); */
+  /* gtag('config', 'AW-XXXXXXX'); */
+</script>
+
+<script>
+"use strict";
+/* ============================================================
+   FANDAQAH LANDING — APPLICATION SCRIPT
+   ============================================================ */
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+/* ============================================================
+   I18N DICTIONARY
+   ============================================================ */
+const I18N = {
+  en: {
+    navFeatures:'Features', navBenefits:'Benefits', navDemo:'Book a Demo',
+    bookDemo:'Book a Demo',
+    newBadge:'New',
+    eyebrow:'Hotel Operations Suite · Housekeeping · Maintenance · Inventory',
+    heroLine1:'Run your hotel like',
+    heroLine2:'one calm system.',
+    heroLede:'Fandaqah unifies housekeeping, maintenance and inventory into a single premium workspace — so your team stops chasing spreadsheets and starts delivering five-star operations, every shift.',
+    exploreFeatures:'Explore Features',
+    trust1:'Built for Saudi hospitality',
+    trust2:'Arabic & English (RTL)',
+    trust3:'Live in minutes',
+
+    featuresKicker:'Three modules. One workspace.',
+    featuresTitle:'Everything your operations team touches, finally connected.',
+    featuresSub:'Switch between modules below to see how Fandaqah replaces fragmented tools with a single, beautifully consistent system.',
+    tabHousekeeping:'Housekeeping', tabMaintenance:'Maintenance', tabInventory:'Inventory',
+
+    hkKicker:'Module 01',
+    hkTitle:'Housekeeping command center',
+    hkDesc:'Replace the paper trail and radio calls with a live room board your whole team can trust — from the front desk to the linen room.',
+    hkF1t:'Live room-status board', hkF1s:'— dirty, clean, inspected and occupied in one glance.',
+    hkF2t:'Attendant assignments', hkF2s:'— tasks routed automatically to the right person, floor by floor.',
+    hkF3t:'Inspections & discrepancies', hkF3s:'— catch room disputes before they reach the guest.',
+    hkNote:'See it live on your own room layout.',
+
+    mtKicker:'Module 02',
+    mtTitle:'Maintenance without the guesswork',
+    mtDesc:'From a guest complaint to a closed work order — track every job, every priority and every hour, without losing track of a single repair.',
+    mtF1t:'Priority-driven work orders', mtF1s:'— urgent issues escalate visually, so nothing sits idle.',
+    mtF2t:'Kanban & calendar views', mtF2s:'— drag jobs across stages, or plan preventive work by date.',
+    mtF3t:'Downtime & MTTR tracking', mtF3s:'— see which areas cost you the most unplanned hours.',
+    mtNote:'Bring your own assets & SLAs.',
+
+    inKicker:'Module 03',
+    inTitle:'Inventory you can actually control',
+    inDesc:'Know what you have, what you\'re running out of, and what it costs — with receiving, issuing and reorder workflows built into one clean table.',
+    inF1t:'Live stock levels & low-stock alerts', inF1s:'— never discover an empty linen room mid-shift again.',
+    inF2t:'Receive & issue in one click', inF2s:'— every movement is logged with a reference and an owner.',
+    inF3t:'Purchase orders & cost control', inF3s:'— generate a PO from low-stock items in seconds.',
+    inNote:'Import your item catalogue.',
+
+    benefitsKicker:'Why teams switch',
+    benefitsTitle:'Operational clarity, shift after shift.',
+    benefitsSub:'Fandaqah is designed around the reality of hotel operations — not generic project management software.',
+    b1t:'Full operational visibility', b1s:'One live view of rooms, work orders and stock — so managers stop asking "what\'s the status?" and start acting on it.',
+    b2t:'Faster task coordination', b2s:'Tasks route to the right person instantly. No radio chains, no sticky notes, no shift-handover gaps.',
+    b3t:'Better inventory control', b3s:'Track every movement in and out. Catch shortages before they become guest-facing problems.',
+    b4t:'Less manual work', b4s:'Replace spreadsheets, WhatsApp groups and paper checklists with one system your team actually wants to use.',
+    b5t:'Improved accountability', b5s:'Every task has an owner, a timestamp and a status. Reviews and shift handovers become painless.',
+    b6t:'Faster onboarding', b6s:'New team members learn one interface, not five. Bilingual Arabic & English with full RTL support.',
+
+    demoKicker:'Book a demo',
+    demoTitle:'See Fandaqah on your own operation.',
+    demoSub:'A 30-minute personalized walkthrough — no slides. We\'ll show you Housekeeping, Maintenance and Inventory using a layout that mirrors your property.',
+    demoP1:'Tailored to your hotel size and structure',
+    demoP2:'Arabic and English delivered on request',
+    demoP3:'Clear next steps — no obligation',
+
+    formTitle:'Request your demo',
+    formSub:'We\'ll get back to you within one business day.',
+    fName:'Full name', fNamePh:'e.g. Abdullah Ahmed', fNameErr:'Please enter your full name.',
+    fEmail:'Work email', fEmailPh:'you@hotel.com', fEmailErr:'Please enter a valid work email address.',
+    fCompany:'Hotel / company name', fCompanyPh:'e.g. Al Noor Hotel Riyadh', fCompanyErr:'Please enter your hotel or company name.',
+    fPhone:'Phone number', fPhonePh:'+966 5X XXX XXXX', fPhoneErr:'Please enter a valid phone number.',
+    fFeature:'Preferred feature', fFeatureDefault:'Select a module', fFeatureAll:'All three modules', fFeatureErr:'Please choose a module.',
+    consentText:'I agree to be contacted by Fandaqah about my demo request.',
+    consentLink:'Privacy Policy',
+    consentErr:'Please accept the privacy policy to continue.',
+    submitBtn:'Request Demo',
+    formSecure:'Your details are kept confidential and never shared.',
+    formErrBanner:'Something went wrong. Please try again, or email us directly at hello@fandaqah.com.',
+    successTitle:'Thank you — request received.',
+    successText:'Our team will contact you within one business day to schedule your personalized demo.',
+    sendAnother:'Submit another request',
+
+    finalTitle:'Ready to see your hotel run calmer?',
+    finalSub:'Book a personalized demo and see exactly how Fandaqah fits your rooms, your team and your shift patterns.',
+    revisitFeatures:'Revisit features',
+
+    footerTag:'Premium hotel management suite for housekeeping, maintenance and inventory — built for Saudi hospitality.',
+    footerProduct:'Product', footerCompany:'Company', footerSupport:'Support',
+    footerAbout:'About', footerContact:'Contact', footerPrivacy:'Privacy Policy', footerTerms:'Terms of Service',
+    footerRights:'© 2026 Fandaqah. All rights reserved.',
+
+    toastSuccess:'Demo request sent',
+    toastError:'Submission failed',
+    toastLang:'Language switched to English'
+  },
+  ar: {
+    navFeatures:'المميزات', navBenefits:'الفوائد', navDemo:'احجز عرضاً',
+    bookDemo:'احجز عرضاً',
+    newBadge:'جديد',
+    eyebrow:'منظومة العمليات الفندقية · التدبير · الصيانة · المخزون',
+    heroLine1:'أدر فندقك كأنه',
+    heroLine2:'منظومة واحدة هادئة.',
+    heroLede:'توحّد فندقة عمليات التدبير الفندقي والصيانة والمخزون في مساحة عمل واحدة فاخرة — ليتوقف فريقك عن مطاردة الجداول ويبدأ بتقديم عمليات بمستوى خمس نجوم في كل وردية.',
+    exploreFeatures:'استكشف المميزات',
+    trust1:'مصمم لقطاع الضيافة السعودي',
+    trust2:'عربي وإنجليزي (RTL)',
+    trust3:'جاهز خلال دقائق',
+
+    featuresKicker:'ثلاث وحدات. مساحة واحدة.',
+    featuresTitle:'كل ما يلمسه فريق العمليات لديك، متصل أخيراً.',
+    featuresSub:'تنقّل بين الوحدات أدناه لترى كيف تستبدل فندقة الأدوات المتفرقة بمنظومة واحدة أنيقة ومتسقة.',
+    tabHousekeeping:'التدبير الفندقي', tabMaintenance:'الصيانة', tabInventory:'المخزون',
+
+    hkKicker:'الوحدة ٠١',
+    hkTitle:'مركز قيادة التدبير الفندقي',
+    hkDesc:'استبدل الأوراق والاتصالات اللاسلكية بلوحة غرف حية يثق بها فريقك بالكامل — من الاستقبال إلى مخزن المفروشات.',
+    hkF1t:'لوحة حالة الغرف المباشرة', hkF1s:'— غير نظيفة، جاهزة، مفتّشة ومشغولة في لمحة واحدة.',
+    hkF2t:'توزيع المهام على العاملين', hkF2s:'— تُوجَّه المهام تلقائياً للشخص المناسب، طابقاً بطابق.',
+    hkF3t:'التفتيش والفروقات', hkF3s:'— اكتشف خلافات الغرف قبل أن تصل إلى الضيف.',
+    hkNote:'شاهدها مباشرة على مخطط غرفك.',
+
+    mtKicker:'الوحدة ٠٢',
+    mtTitle:'صيانة بلا تخمين',
+    mtDesc:'من شكوى ضيف إلى أمر عمل مغلق — تتبّع كل مهمة، كل أولوية، وكل ساعة، دون أن تفقد أثر أي إصلاح.',
+    mtF1t:'أوامر عمل حسب الأولوية', mtF1s:'— تتصاعد المشكلات العاجلة بصرياً، فلا يبقى شيء معلقاً.',
+    mtF2t:'لوحة كانبان والتقويم', mtF2s:'— اسحب المهام بين المراحل، أو خطّط الصيانة الوقائية بالتاريخ.',
+    mtF3t:'تتبع التوقف ومتوسط الإصلاح', mtF3s:'— اعرف القطاعات التي تستهلك أكبر عدد من الساعات غير المخططة.',
+    mtNote:'أحضر أصولك واتفاقيات مستوى الخدمة.',
+
+    inKicker:'الوحدة ٠٣',
+    inTitle:'مخزون يمكنك التحكم به فعلاً',
+    inDesc:'اعرف ما لديك، وما ينفد، وكم يكلّفك — مع سير عمل الاستلام والصرف وإعادة الطلب في جدول واحد أنيق.',
+    inF1t:'مستويات مخزون مباشرة وتنبيهات النقص', inF1s:'— لا تكتشف مخزناً فارغاً في منتصف الوردية مرة أخرى.',
+    inF2t:'استلام وصرف بنقرة واحدة', inF2s:'— كل حركة موثقة بمرجع ومسؤول.',
+    inF3t:'أوامر الشراء وضبط التكاليف', inF3s:'— أنشئ أمر شراء من الأصناف المنخفضة في ثوانٍ.',
+    inNote:'استورد قائمة أصنافك.',
+
+    benefitsKicker:'لماذا ينتقل الفرق إلينا',
+    benefitsTitle:'وضوح تشغيلي، وردية بعد وردية.',
+    benefitsSub:'صُممت فندقة حول واقع العمليات الفندقية — لا حول برامج إدارة المشاريع العامة.',
+    b1t:'رؤية تشغيلية كاملة', b1s:'عرض مباشر واحد للغرف وأوامر العمل والمخزون — ليتوقف المديرون عن السؤال «ما الوضع؟» ويبدأوا التصرف.',
+    b2t:'تنسيق أسرع للمهام', b2s:'تُوجَّه المهام للشخص المناسب فوراً. لا سلاسل اتصال، لا ملاحظات لاصقة، لا فراغات في تسليم الورديات.',
+    b3t:'تحكم أفضل بالمخزون', b3s:'تتبّع كل حركة دخول وخروج. اكتشف النقص قبل أن يتحول إلى مشكلة أمام الضيف.',
+    b4t:'عمل يدوي أقل', b4s:'استبدل الجداول ومجموعات الواتساب وقوائم الورق بمنظومة واحدة يرغب فريقك فعلاً باستخدامها.',
+    b5t:'مساءلة محسّنة', b5s:'كل مهمة لها مسؤول وطابع زمني وحالة. تصبح المراجعات وتسليم الورديات سهلة.',
+    b6t:'تهيئة أسرع', b6s:'يتعلم الأعضاء الجدد واجهة واحدة، لا خمساً. ثنائي اللغة عربي وإنجليزي مع دعم كامل للاتجاه.',
+
+    demoKicker:'احجز عرضاً',
+    demoTitle:'شاهد فندقة على عملياتك الخاصة.',
+    demoSub:'جولة مخصصة مدتها ٣٠ دقيقة — بلا شرائح. سنعرض عليك التدبير والصيانة والمخزون باستخدام مخطط يحاكي فندقك.',
+    demoP1:'مصمّمة على مقاس فندقك وهيكله',
+    demoP2:'تُقدَّم بالعربية أو الإنجليزية عند الطلب',
+    demoP3:'خطوات تالية واضحة — بلا التزام',
+
+    formTitle:'اطلب عرضك التوضيحي',
+    formSub:'سنعود إليك خلال يوم عمل واحد.',
+    fName:'الاسم الكامل', fNamePh:'مثال: عبدالله أحمد', fNameErr:'يرجى إدخال اسمك الكامل.',
+    fEmail:'البريد الإلكتروني للعمل', fEmailPh:'you@hotel.com', fEmailErr:'يرجى إدخال بريد إلكتروني صالح للعمل.',
+    fCompany:'اسم الفندق / الشركة', fCompanyPh:'مثال: فندق النور الرياض', fCompanyErr:'يرجى إدخال اسم الفندق أو الشركة.',
+    fPhone:'رقم الهاتف', fPhonePh:'+966 5X XXX XXXX', fPhoneErr:'يرجى إدخال رقم هاتف صالح.',
+    fFeature:'الميزة المفضلة', fFeatureDefault:'اختر وحدة', fFeatureAll:'الوحدات الثلاث', fFeatureErr:'يرجى اختيار وحدة.',
+    consentText:'أوافق على أن تتواصل معي فندقة بخصوص طلب العرض.',
+    consentLink:'سياسة الخصوصية',
+    consentErr:'يرجى الموافقة على سياسة الخصوصية للمتابعة.',
+    submitBtn:'اطلب العرض',
+    formSecure:'تُحفظ بياناتك بسرية ولا تُشارك مع أي طرف.',
+    formErrBanner:'حدث خطأ ما. يرجى المحاولة مجدداً، أو مراسلتنا على hello@fandaqah.com.',
+    successTitle:'شكراً لك — تم استلام الطلب.',
+    successText:'سيتواصل معك فريقنا خلال يوم عمل واحد لتحديد موعد عرضك التوضيحي.',
+    sendAnother:'إرسال طلب آخر',
+
+    finalTitle:'مستعد لترى فندقك يعمل بهدوء أكبر؟',
+    finalSub:'احجز عرضاً توضيحياً مخصصاً وشاهد كيف تتلاءم فندقة مع غرفك وفريقك وأنماط وردياتك.',
+    revisitFeatures:'عُد إلى المميزات',
+
+    footerTag:'منظومة إدارة فندقية فاخرة للتدبير والصيانة والمخزون — مصممة لقطاع الضيافة السعودي.',
+    footerProduct:'المنتج', footerCompany:'الشركة', footerSupport:'الدعم',
+    footerAbout:'من نحن', footerContact:'اتصل بنا', footerPrivacy:'سياسة الخصوصية', footerTerms:'شروط الخدمة',
+    footerRights:'© ٢٠٢٦ فندقة. جميع الحقوق محفوظة.',
+
+    toastSuccess:'تم إرسال طلب العرض',
+    toastError:'فشل الإرسال',
+    toastLang:'تم التبديل إلى العربية'
+  }
+};
+
+let currentLang = 'en';
+const t = (key) => (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+
+/* ============================================================
+   TOASTS
+   ============================================================ */
+function toast(title, message, type) {
+  type = type || 'info';
+  const stack = $('#toasts');
+  const node = document.createElement('div');
+  node.className = 'toast ' + (type === 'success' ? 'success' : type === 'error' ? 'error' : type === 'navy' ? 'navy' : '');
+  const ic = type === 'success'
+    ? '<polyline points="20 6 9 17 4 12"/>'
+    : type === 'error'
+      ? '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+      : '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>';
+
+  node.innerHTML =
+    '<div class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' + ic + '</svg></div>' +
+    '<div class="t-body"><b></b><span></span></div>' +
+    '<button class="t-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+
+  node.querySelector('b').textContent = title;
+  node.querySelector('span').textContent = message;
+  stack.appendChild(node);
+  requestAnimationFrame(() => node.classList.add('in'));
+
+  const remove = () => {
+    node.classList.remove('in');
+    setTimeout(() => node.remove(), 320);
+  };
+  node.querySelector('.t-x').addEventListener('click', remove);
+  setTimeout(remove, 5200);
+}
+
+/* ============================================================
+   ANALYTICS — safe wrappers
+   ============================================================ */
+function trackEvent(eventName, params) {
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params || {});
+    }
+    // Debug visibility
+    if (window.console && console.debug) {
+      console.debug('[analytics]', eventName, params || {});
+    }
+  } catch (e) { /* never block the UI on analytics */ }
+}
+
+function trackConversion(label, params) {
+  try {
+    if (typeof window.gtag === 'function') {
+      // Google Ads conversion — replace AW-XXXXXXX/XXXX with real values.
+      window.gtag('event', 'conversion', Object.assign({
+        send_to: 'AW-XXXXXXX/XXXX'
+      }, params || {}));
+    }
+    if (window.console && console.debug) {
+      console.debug('[conversion]', label, params || {});
+    }
+  } catch (e) { /* noop */ }
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+function initTabs() {
+  const tabs = $$('.tab[role="tab"]');
+  const panels = $$('.tab-panel');
+
+  function activate(tabEl, focus) {
+    const id = tabEl.dataset.tab;
+    tabs.forEach(tb => {
+      const selected = tb === tabEl;
+      tb.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tb.setAttribute('tabindex', selected ? '0' : '-1');
+    });
+    panels.forEach(p => {
+      const match = p.id === 'panel-' + id;
+      p.classList.toggle('active', match);
+      if (match) { p.removeAttribute('hidden'); }
+      else { p.setAttribute('hidden', ''); }
+    });
+    if (focus) tabEl.focus();
+    trackEvent('feature_tab_view', { feature: id });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activate(tab, false));
+    tab.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(tab);
+      let next = -1;
+      const rtl = document.documentElement.dir === 'rtl';
+      if (e.key === 'ArrowRight') next = rtl ? (i - 1 + tabs.length) % tabs.length : (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  next = rtl ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End')  next = tabs.length - 1;
+      if (next >= 0) {
+        e.preventDefault();
+        activate(tabs[next], true);
+      }
+    });
+  });
+
+  // Deep-link: allow ?feature=maintenance or hash
+  const params = new URLSearchParams(window.location.search);
+  const feat = params.get('feature');
+  if (feat) {
+    const target = tabs.find(tb => tb.dataset.tab === feat);
+    if (target) activate(target, false);
+  }
+}
+
+/* ============================================================
+   HEADER SCROLL STATE
+   ============================================================ */
+function initHeaderScroll() {
+  const header = $('#siteHeader');
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ============================================================
+   LANGUAGE TOGGLE (EN ↔ AR with RTL)
+   ============================================================ */
+function applyI18n() {
+  // Text nodes
+  $$('[data-i18n]').forEach(n => {
+    const k = n.dataset.i18n;
+    if (!k) return;
+    n.textContent = t(k);
+  });
+  // Placeholders
+  $$('[data-i18n-ph]').forEach(n => {
+    const k = n.dataset.i18nPh;
+    if (!k) return;
+    n.setAttribute('placeholder', t(k));
+  });
+  // <option> elements with data-i18n already handled above (textContent)
+  // Update language toggle label
+  $('#langLabel').textContent = currentLang === 'en' ? 'العربية' : 'English';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  const dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = dir;
+  document.title = currentLang === 'ar'
+    ? 'فندقة — التدبير والصيانة والمخزون للفنادق'
+    : 'Fandaqah PMS — Housekeeping, Maintenance & Inventory for Hotels';
+  applyI18n();
+  toast('Fandaqah', t('toastLang'), 'navy');
+  trackEvent('language_switch', { language: currentLang });
+}
+
+/* ============================================================
+   DEMO FORM
+   ============================================================ */
+const FORM_ENDPOINT = null; // ← set to your backend endpoint, e.g. '/api/leads'
+
+function setFieldError(row, hasError) {
+  row.classList.toggle('error', hasError);
+}
+
+function validateForm() {
+  const name    = $('#fName');
+  const email   = $('#fEmail');
+  const company = $('#fCompany');
+  const phone   = $('#fPhone');
+  const feature = $('#fFeature');
+  const consent = $('#fConsent');
+
+  let ok = true;
+
+  // Name
+  const nameRow = name.closest('.form-row');
+  const nameOk = name.value.trim().length >= 2;
+  setFieldError(nameRow, !nameOk);
+  if (!nameOk) ok = false;
+
+  // Email
+  const emailRow = email.closest('.form-row');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const emailOk = emailRe.test(email.value.trim());
+  setFieldError(emailRow, !emailOk);
+  if (!emailOk) ok = false;
+
+  // Company
+  const compRow = company.closest('.form-row');
+  const compOk = company.value.trim().length >= 2;
+  setFieldError(compRow, !compOk);
+  if (!compOk) ok = false;
+
+  // Phone
+  const phoneRow = phone.closest('.form-row');
+  const phoneClean = phone.value.replace(/[\s\-()]/g, '');
+  const phoneRe = /^\+?[0-9]{7,15}$/;
+  const phoneOk = phoneRe.test(phoneClean);
+  setFieldError(phoneRow, !phoneOk);
+  if (!phoneOk) ok = false;
+
+  // Feature
+  const featRow = feature.closest('.form-row');
+  const featOk = feature.value !== '';
+  setFieldError(featRow, !featOk);
+  if (!featOk) ok = false;
+
+  // Consent — not a .form-row, show inline alert via banner
+  if (!consent.checked) {
+    ok = false;
+    showFormBanner(t('consentErr'));
+  } else {
+    hideFormBanner();
+  }
+
+  // Focus first invalid
+  if (!ok) {
+    const firstInvalid = $('.form-row.error input, .form-row.error select');
+    if (firstInvalid) firstInvalid.focus();
+  }
+
+  return ok;
+}
+
+function showFormBanner(msg) {
+  const b = $('#formBanner');
+  $('#formBannerMsg').textContent = msg;
+  b.classList.add('show');
+}
+function hideFormBanner() {
+  $('#formBanner').classList.remove('show');
+}
+
+function setSubmitting(on) {
+  const btn = $('#formSubmit');
+  btn.classList.toggle('loading', on);
+  btn.disabled = on;
+  const label = $('#submitLabel');
+  if (on) {
+    label.textContent = currentLang === 'ar' ? 'جارٍ الإرسال…' : 'Sending…';
+  } else {
+    label.textContent = t('submitBtn');
+  }
+}
+
+async function submitDemoForm(e) {
+  e.preventDefault();
+  hideFormBanner();
+
+  if (!validateForm()) {
+    trackEvent('form_validation_failed', {});
+    return;
+  }
+
+  setSubmitting(true);
+
+  const payload = {
+    name:    $('#fName').value.trim(),
+    email:   $('#fEmail').value.trim(),
+    company: $('#fCompany').value.trim(),
+    phone:   $('#fPhone').value.trim(),
+    feature: $('#fFeature').value,
+    consent: $('#fConsent').checked,
+    language: currentLang,
+    page:    window.location.href,
+    ts:      new Date().toISOString()
+  };
+
+  try {
+    if (FORM_ENDPOINT) {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    } else {
+      // No endpoint configured in this preview — simulate a secure round-trip.
+      await new Promise(r => setTimeout(r, 900));
+    }
+
+    // Success
+    $('#demoForm').style.display = 'none';
+    $('#formSuccess').classList.add('show');
+
+    toast('Fandaqah', t('toastSuccess'), 'success');
+
+    // Analytics: only after confirmed success
+    trackEvent('generate_lead', {
+      feature: payload.feature,
+      language: payload.language,
+      value: 1,
+      currency: 'SAR'
+    });
+    trackEvent('demo_request_submitted', { feature: payload.feature });
+    trackConversion('demo_lead', { feature: payload.feature });
+
+  } catch (err) {
+    // Failure
+    showFormBanner(t('formErrBanner'));
+    toast('Fandaqah', t('toastError'), 'error');
+    trackEvent('form_submit_error', { message: String(err && err.message || err) });
+  } finally {
+    setSubmitting(false);
+  }
+}
+
+function resetForm() {
+  $('#demoForm').reset();
+  $$('.form-row').forEach(r => r.classList.remove('error'));
+  hideFormBanner();
+  $('#formSuccess').classList.remove('show');
+  $('#demoForm').style.display = '';
+  $('#fName').focus();
+}
+
+/* ============================================================
+   CTA TRACKING
+   ============================================================ */
+function initCtaTracking() {
+  $$('[data-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      const where = el.dataset.cta;
+      const feature = el.dataset.feature || null;
+      trackEvent('cta_click', { cta_location: where, feature: feature || 'none' });
+      if (where === 'hero' || where === 'final') {
+        trackEvent('demo_cta_click', { cta_location: where });
+      }
+    });
+  });
+
+  // Header CTA
+  const headerCta = $('#headerCta');
+  if (headerCta) {
+    headerCta.addEventListener('click', () => {
+      trackEvent('cta_click', { cta_location: 'header' });
+    });
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init() {
+  initHeaderScroll();
+  initTabs();
+  initCtaTracking();
+
+  // Language
+  $('#langToggle').addEventListener('click', toggleLang);
+
+  // Form
+  $('#demoForm').addEventListener('submit', submitDemoForm);
+  $('#resetForm').addEventListener('click', resetForm);
+
+  // Live-clear errors as the user fixes them
+  $$('#demoForm input, #demoForm select').forEach(el => {
+    const evt = el.type === 'checkbox' ? 'change' : 'input';
+    el.addEventListener(evt, () => {
+      const row = el.closest('.form-row');
+      if (row) row.classList.remove('error');
+      if (el.id === 'fConsent' && el.checked) hideFormBanner();
+    });
+  });
+
+  // Ensure initial i18n + ARIA states
+  applyI18n();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
