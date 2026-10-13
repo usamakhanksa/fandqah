@@ -1,7 +1,13 @@
+<!DOCTYPE html>
 <html lang="en" dir="ltr" style="margin:0;padding:0;scroll-behavior:smooth;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f0eb">
+<title>Fandaqah Operations Suite | Housekeeping, Maintenance & Inventory</title>
+<meta name="description" content="Run housekeeping, maintenance and inventory from one bilingual hotel operations platform built for Saudi hospitality.">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4/fonts/remixicon.css">
-<script src="https://cdn.tailwindcss.com"></script>
 <script>
 (function(){
   var s=document.createElement('style');
@@ -46,7 +52,112 @@
   document.head.appendChild(s);
 })();
 </script>
-<div style="background-color:transparent;box-sizing:border-box;">
+<style id="responsive-bilingual-fixes">
+  html { scroll-padding-top: 84px; }
+  body { overflow-x: hidden; }
+  img, svg, video, canvas { max-width: 100%; height: auto; }
+  button, input, select, textarea { font: inherit; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  .mobile-menu-btn { display:none; }
+  .mobile-nav { display:none; }
+  .responsive-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .responsive-dashboard-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .responsive-work-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .responsive-inventory-row { display:grid; grid-template-columns:2fr 1fr 1fr; }
+  .desktop-nav { display:flex; }
+  .nav-actions { margin-inline-start:auto; display:flex; align-items:center; gap:10px; }
+  .desktop-nav { margin-inline-start:20px; }
+  .hero-actions, .hero-trust { display:flex; flex-wrap:wrap; }
+  [dir="rtl"] body { text-align:right; }
+  [dir="rtl"] .eyebrow { letter-spacing:0; text-transform:none; }
+  [dir="rtl"] .mini-room { border-left:0 !important; border-right:3px solid #ccc; }
+  [dir="rtl"] .mini-card { text-align:right; }
+  [dir="rtl"] .benefit-icon { margin-left:auto; margin-right:0; }
+  [dir="rtl"] select.input {
+    background-position:left 12px center !important;
+    padding-left:32px !important;
+    padding-right:14px !important;
+  }
+  [dir="rtl"] input[type="tel"], [dir="rtl"] input[type="email"] { direction:ltr; text-align:right; }
+  [dir="rtl"] .urlbar { direction:ltr; }
+  [dir="rtl"] .dashboard-ltr, [dir="rtl"] .inventory-ltr { direction:ltr; text-align:left; }
+  [dir="rtl"] .dashboard-ltr .t, [dir="rtl"] .inventory-ltr .t { direction:rtl; unicode-bidi:isolate; }
+  [dir="rtl"] .track-cta i, [dir="rtl"] .btn i { transform:none; }
+
+  @media (max-width: 900px) {
+    .desktop-nav { display:none !important; }
+    .mobile-menu-btn {
+      display:inline-flex;
+      width:42px;height:42px;
+      align-items:center;justify-content:center;
+      background:#fff;border:1.5px solid var(--border);
+      border-radius:10px;color:var(--navy);
+      cursor:pointer;font-size:21px;flex:0 0 auto;
+    }
+    .mobile-nav.open {
+      display:grid;
+      gap:8px;
+      padding:8px 20px 16px;
+      border-top:1px solid var(--border);
+      background:rgba(242,240,235,.98);
+    }
+    .mobile-nav a {
+      color:var(--navy);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:600;
+      padding:11px 12px;
+      border-radius:10px;
+      background:rgba(255,255,255,.72);
+    }
+    header > div { padding-inline:16px !important; }
+    section { padding-inline:18px !important; }
+    .float-badge { right:10px !important; }
+  }
+
+  @media (max-width: 700px) {
+    .nav-actions .nav-demo { display:none; }
+    .hero-actions { display:grid !important; grid-template-columns:1fr; }
+    .hero-actions .btn { width:100%; justify-content:center; }
+    .hero-trust { display:grid !important; gap:10px !important; }
+    .tab-btn { min-width:100% !important; justify-content:flex-start !important; }
+    [dir="rtl"] .tab-btn { justify-content:flex-start !important; }
+    .responsive-form-grid,
+    .responsive-dashboard-grid,
+    .responsive-work-grid { grid-template-columns:1fr !important; }
+    .responsive-inventory-row { grid-template-columns:minmax(130px,2fr) 70px 82px !important; }
+    .browser-bar { padding:8px 10px !important; }
+    .urlbar { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .benefit-card { padding:20px !important; }
+    .stat-num { font-size:34px !important; }
+    .mobile-stack-card { padding:20px !important; border-radius:16px !important; }
+    footer > div { justify-content:center !important; text-align:center; }
+    footer span[style*="display:flex"] { justify-content:center; flex-wrap:wrap; }
+  }
+
+  @media (max-width: 480px) {
+    header img { max-width:112px !important; height:30px !important; }
+    #langToggle { padding:7px 9px !important; }
+    .mobile-menu-btn { width:38px; height:38px; }
+    section { padding-inline:14px !important; }
+    h1 { font-size:clamp(30px,10vw,40px) !important; }
+    .eyebrow { max-width:100%; white-space:normal; line-height:1.4; }
+    .btn { white-space:normal !important; text-align:center; }
+    .responsive-inventory-row { grid-template-columns:minmax(105px,1.7fr) 54px 72px !important; font-size:10px !important; }
+    .pill { font-size:9px !important; padding:2px 6px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+</style>
+</head>
+<body><div style="background-color:transparent;box-sizing:border-box;">
 <div style="background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;overflow-x:hidden;">
 
 <!-- ============ NAV ============ -->
@@ -55,17 +166,24 @@
     <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
       <img src="https://fandaqah.com/assets/images/fandaqah-simple.png" alt="Fandaqah" style="height:34px;max-width:150px;object-fit:contain;" onerror="this.style.display='none'">
     </a>
-    <nav style="display:flex;gap:22px;margin-left:20px;" class="hidden md:flex">
+    <nav style="display:flex;gap:22px;" class="desktop-nav" aria-label="Primary navigation">
       <a href="#features" class="t" data-en="Features" data-ar="الميزات" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">Features</a>
       <a href="#benefits" class="t" data-en="Benefits" data-ar="المزايا" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">Benefits</a>
       <a href="#how" class="t" data-en="How it works" data-ar="كيف يعمل" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">How it works</a>
       <a href="#demo" class="t" data-en="Pricing" data-ar="الأسعار" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;display:none;">Pricing</a>
     </nav>
-    <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+    <div class="nav-actions">
       <button id="langToggle" onclick="toggleLang()" style="background:#fff;border:1.5px solid var(--border);border-radius:9px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;">العربية</button>
-      <a href="#demo" class="btn btn-coral track-cta" data-cta="nav_book_demo" style="padding:9px 18px;font-size:13px;"><span class="t" data-en="Book a Demo" data-ar="احجز عرضاً">Book a Demo</span></a>
+      <a href="#demo" class="btn btn-coral track-cta nav-demo" data-cta="nav_book_demo" style="padding:9px 18px;font-size:13px;"><span class="t" data-en="Book a Demo" data-ar="احجز عرضاً">Book a Demo</span></a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu" onclick="toggleMobileMenu()"><i class="ri-menu-3-line"></i></button>
     </div>
   </div>
+  <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#features" class="t" data-en="Features" data-ar="الميزات" onclick="closeMobileMenu()">Features</a>
+    <a href="#benefits" class="t" data-en="Benefits" data-ar="المزايا" onclick="closeMobileMenu()">Benefits</a>
+    <a href="#how" class="t" data-en="How it works" data-ar="كيف يعمل" onclick="closeMobileMenu()">How it works</a>
+    <a href="#demo" class="t" data-en="Book a Demo" data-ar="احجز عرضاً" onclick="closeMobileMenu()">Book a Demo</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -80,12 +198,12 @@
         <h1 style="font-size:clamp(32px,4.6vw,52px);font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:20px 0 16px;color:var(--navy);">
           <span class="t" data-en="Every room, every repair, every supply — " data-ar="كل غرفة، كل صيانة، كل مستلزم — ">Every room, every repair, every supply — </span><span style="background:linear-gradient(100deg,var(--accent),#c94a44);-webkit-background-clip:text;background-clip:text;color:transparent;" class="t" data-en="finally in one place." data-ar="في مكان واحد أخيراً.">finally in one place.</span>
         </h1>
-        <p style="font-size:17px;line-height:1.7;color:#4a465c;max-width:520px;margin:0 0 28px;" class="t" data-en="Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains." data-ar="تحوّل وحدات التدبير الفندقي والصيانة والمخزون الجديدة من فندقة عمليات الفندق المتفرقة إلى مركز تحكم لحظي واحد هادئ — مصمم للفنادق وسلاسل الفنادق في السعودية.">Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;">
+        <p style="font-size:17px;line-height:1.7;color:#4a465c;max-width:520px;margin:0 0 28px;" class="t" data-en="Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains." data-ar="تحوّل وحدات التدبير الفندقي والصيانة والمخزون الجديدة في فندقة العمليات المتفرقة إلى مركز تحكم لحظي موحّد — مصمم للفنادق وسلاسل الفنادق في السعودية.">Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains.</p>
+        <div class="hero-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;">
           <a href="#demo" class="btn btn-coral track-cta" data-cta="hero_book_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="Book a free demo" data-ar="احجز عرضاً مجانياً">Book a free demo</span></a>
           <a href="#features" class="btn btn-ghost track-cta" data-cta="hero_see_it"><i class="ri-play-circle-line"></i><span class="t" data-en="See it in action" data-ar="شاهده يعمل">See it in action</span></a>
         </div>
-        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);">
+        <div class="hero-trust" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);">
           <span style="display:flex;align-items:center;gap:6px;"><i class="ri-shield-check-line" style="color:var(--green);"></i><span class="t" data-en="Government compliant" data-ar="متوافق مع الأنظمة الحكومية">Government compliant</span></span>
           <span style="display:flex;align-items:center;gap:6px;"><i class="ri-customer-service-2-line" style="color:var(--green);"></i><span class="t" data-en="24/7 local support" data-ar="دعم محلي على مدار الساعة">24/7 local support</span></span>
           <span style="display:flex;align-items:center;gap:6px;"><i class="ri-building-2-line" style="color:var(--green);"></i><span class="t" data-en="800+ hotels trust Fandaqah" data-ar="أكثر من 800 فندق يثق بفندقة">800+ hotels trust Fandaqah</span></span>
@@ -95,7 +213,7 @@
       <!-- Dashboard preview mockup -->
       <div style="flex:1 1 460px;min-width:0;position:relative;" class="reveal">
         <div class="float-badge" style="position:absolute;top:-14px;right:14px;z-index:5;background:var(--navy);color:var(--peach);padding:8px 14px;border-radius:10px;font-size:12px;font-weight:700;box-shadow:0 8px 24px rgba(42,39,60,.3);"><i class="ri-flashlight-line"></i> <span class="t" data-en="3 modules · 1 platform" data-ar="٣ وحدات · منصة واحدة">3 modules · 1 platform</span></div>
-        <div style="background:#fff;border-radius:16px;box-shadow:0 30px 70px rgba(42,39,60,.22);overflow:hidden;border:1px solid var(--border);">
+        <div class="dashboard-ltr" style="background:#fff;border-radius:16px;box-shadow:0 30px 70px rgba(42,39,60,.22);overflow:hidden;border:1px solid var(--border);">
           <div class="browser-bar">
             <span class="dot" style="background:#e95a54;"></span><span class="dot" style="background:#fbcdab;"></span><span class="dot" style="background:#8f9793;"></span>
             <span class="urlbar"><i class="ri-lock-line"></i> app.fandaqah.com/dashboard</span>
@@ -111,20 +229,20 @@
                 <span style="font-size:12px;font-weight:700;color:var(--navy);" class="t" data-en="Today's Overview" data-ar="نظرة اليوم">Today's Overview</span>
                 <span class="pill pill-coral"><i class="ri-error-warning-line"></i> 4 <span class="t" data-en="urgent" data-ar="عاجلة">urgent</span></span>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="responsive-dashboard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div>
                   <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;" class="t" data-en="Room Board" data-ar="لوحة الغرف">Room Board</div>
                   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                    <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:11px;font-weight:700;">1001</div><span class="pill pill-green">Ready</span></div>
-                    <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:11px;font-weight:700;">1002</div><span class="pill pill-coral">Dirty</span></div>
-                    <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:11px;font-weight:700;">1003</div><span class="pill pill-peach">Inspect</span></div>
-                    <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:11px;font-weight:700;">1004</div><span class="pill pill-navy">Occupied</span></div>
+                    <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:11px;font-weight:700;">1001</div><span class="pill pill-green"><span class="t" data-en="Ready" data-ar="جاهزة">Ready</span></span></div>
+                    <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:11px;font-weight:700;">1002</div><span class="pill pill-coral"><span class="t" data-en="Dirty" data-ar="متسخة">Dirty</span></span></div>
+                    <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:11px;font-weight:700;">1003</div><span class="pill pill-peach"><span class="t" data-en="Inspect" data-ar="للتفتيش">Inspect</span></span></div>
+                    <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:11px;font-weight:700;">1004</div><span class="pill pill-navy"><span class="t" data-en="Occupied" data-ar="مشغولة">Occupied</span></span></div>
                   </div>
                 </div>
                 <div>
                   <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;" class="t" data-en="Work Orders" data-ar="أوامر العمل">Work Orders</div>
-                  <div class="mini-card"><span class="pill pill-coral" style="margin-bottom:4px;">Urgent</span><div style="font-weight:600;color:var(--navy);margin-top:4px;">AC not cooling · Rm 1207</div></div>
-                  <div class="mini-card"><span class="pill pill-peach" style="margin-bottom:4px;">High</span><div style="font-weight:600;color:var(--navy);margin-top:4px;">Heater leak · Rm 1102</div></div>
+                  <div class="mini-card"><span class="pill pill-coral" style="margin-bottom:4px;"><span class="t" data-en="Urgent" data-ar="عاجل">Urgent</span></span><div style="font-weight:600;color:var(--navy);margin-top:4px;">AC not cooling · Rm 1207</div></div>
+                  <div class="mini-card"><span class="pill pill-peach" style="margin-bottom:4px;"><span class="t" data-en="High" data-ar="مرتفع">High</span></span><div style="font-weight:600;color:var(--navy);margin-top:4px;">Heater leak · Rm 1102</div></div>
                   <div style="font-size:9px;color:var(--muted);margin-top:8px;" class="t" data-en="Inventory: 5 items low stock" data-ar="المخزون: ٥ أصناف منخفضة">Inventory: 5 items low stock</div>
                   <div style="height:6px;background:rgba(42,39,60,.08);border-radius:4px;margin-top:6px;overflow:hidden;"><div style="width:68%;height:100%;background:linear-gradient(90deg,#8f9793,#fbcdab);border-radius:4px;"></div></div>
                 </div>
@@ -154,7 +272,7 @@
 
     <!-- HK PANEL -->
     <div role="tabpanel" id="panel-hk" aria-labelledby="tab-hk" class="tab-panel active">
-      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+      <div class="mobile-stack-card" style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
         <div style="flex:1 1 360px;min-width:0;">
           <span class="pill pill-green" style="margin-bottom:14px;"><i class="ri-checkbox-circle-line"></i> <span class="t" data-en="Real-time room board" data-ar="لوحة غرف لحظية">Real-time room board</span></span>
           <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Housekeeping that runs at the speed of check-out." data-ar="تدبير فندقي يواكب سرعة تسجيل المغادرة.">Housekeeping that runs at the speed of check-out.</h3>
@@ -171,14 +289,14 @@
             <span class="pill pill-green">Ready · 54</span><span class="pill pill-coral">Dirty · 4</span><span class="pill pill-peach">Inspect · 1</span><span class="pill pill-navy">Occupied · 4</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;">
-            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1001</div><span class="pill pill-green">Ready</span></div>
-            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1002</div><span class="pill pill-coral">Dirty</span></div>
-            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1003</div><span class="pill pill-peach">Inspect</span></div>
-            <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:12px;font-weight:700;">1004</div><span class="pill pill-navy">Occupied</span></div>
-            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1005</div><span class="pill pill-green">Ready</span></div>
-            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1006</div><span class="pill pill-coral">Dirty</span></div>
-            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1008</div><span class="pill pill-green">Ready</span></div>
-            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1009</div><span class="pill pill-peach">Inspect</span></div>
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1001</div><span class="pill pill-green"><span class="t" data-en="Ready" data-ar="جاهزة">Ready</span></span></div>
+            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1002</div><span class="pill pill-coral"><span class="t" data-en="Dirty" data-ar="متسخة">Dirty</span></span></div>
+            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1003</div><span class="pill pill-peach"><span class="t" data-en="Inspect" data-ar="للتفتيش">Inspect</span></span></div>
+            <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:12px;font-weight:700;">1004</div><span class="pill pill-navy"><span class="t" data-en="Occupied" data-ar="مشغولة">Occupied</span></span></div>
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1005</div><span class="pill pill-green"><span class="t" data-en="Ready" data-ar="جاهزة">Ready</span></span></div>
+            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1006</div><span class="pill pill-coral"><span class="t" data-en="Dirty" data-ar="متسخة">Dirty</span></span></div>
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1008</div><span class="pill pill-green"><span class="t" data-en="Ready" data-ar="جاهزة">Ready</span></span></div>
+            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1009</div><span class="pill pill-peach"><span class="t" data-en="Inspect" data-ar="للتفتيش">Inspect</span></span></div>
           </div>
           <div style="margin-top:12px;padding:10px 12px;background:#fff;border-radius:10px;font-size:11px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;border-left:3px solid #e95a54;">
             <span><strong>1002</strong> · <span class="t" data-en="Deep Clean · Abdullah A." data-ar="تنظيف عميق · عبدالله أ.">Deep Clean · Abdullah A.</span></span>
@@ -190,7 +308,7 @@
 
     <!-- MT PANEL -->
     <div role="tabpanel" id="panel-mt" aria-labelledby="tab-mt" class="tab-panel">
-      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+      <div class="mobile-stack-card" style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
         <div style="flex:1 1 360px;min-width:0;">
           <span class="pill pill-peach" style="margin-bottom:14px;"><i class="ri-calendar-line"></i> <span class="t" data-en="Preventive + corrective" data-ar="وقائية + علاجية">Preventive + corrective</span></span>
           <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Fix issues before guests notice them." data-ar="أصلح المشاكل قبل أن يلاحظها النزلاء.">Fix issues before guests notice them.</h3>
@@ -203,16 +321,16 @@
           <a href="#demo" class="btn btn-coral track-cta" data-cta="mt_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="See Maintenance in a demo" data-ar="شاهد الصيانة في عرض">See Maintenance in a demo</span></a>
         </div>
         <div style="flex:1 1 380px;min-width:0;background:var(--bg);border-radius:14px;padding:16px;border:1px solid var(--border);">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="responsive-work-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <div>
               <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;" class="t" data-en="New Requests" data-ar="طلبات جديدة">New Requests</div>
-              <div class="mini-card"><span class="pill pill-coral">Urgent</span><div style="font-weight:600;margin-top:5px;">AC not cooling · Rm 1207</div></div>
-              <div class="mini-card"><span class="pill pill-green">Routine</span><div style="font-weight:600;margin-top:5px;">Lobby lamp · Lobby</div></div>
+              <div class="mini-card"><span class="pill pill-coral"><span class="t" data-en="Urgent" data-ar="عاجل">Urgent</span></span><div style="font-weight:600;margin-top:5px;">AC not cooling · Rm 1207</div></div>
+              <div class="mini-card"><span class="pill pill-green"><span class="t" data-en="Routine" data-ar="روتيني">Routine</span></span><div style="font-weight:600;margin-top:5px;">Lobby lamp · Lobby</div></div>
             </div>
             <div>
               <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;" class="t" data-en="In Progress" data-ar="قيد التنفيذ">In Progress</div>
-              <div class="mini-card"><span class="pill pill-peach">High</span><div style="font-weight:600;margin-top:5px;">Heater leak · Rm 1102</div><div style="color:var(--muted);font-size:9px;margin-top:4px;">Khalid M. · 40m</div></div>
-              <div class="mini-card"><span class="pill pill-green">Routine</span><div style="font-weight:600;margin-top:5px;">Oven thermostat · Kitchen</div></div>
+              <div class="mini-card"><span class="pill pill-peach"><span class="t" data-en="High" data-ar="مرتفع">High</span></span><div style="font-weight:600;margin-top:5px;">Heater leak · Rm 1102</div><div style="color:var(--muted);font-size:9px;margin-top:4px;">Khalid M. · 40m</div></div>
+              <div class="mini-card"><span class="pill pill-green"><span class="t" data-en="Routine" data-ar="روتيني">Routine</span></span><div style="font-weight:600;margin-top:5px;">Oven thermostat · Kitchen</div></div>
             </div>
           </div>
           <div style="margin-top:10px;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
@@ -225,7 +343,7 @@
 
     <!-- INV PANEL -->
     <div role="tabpanel" id="panel-inv" aria-labelledby="tab-inv" class="tab-panel">
-      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+      <div class="mobile-stack-card" style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
         <div style="flex:1 1 360px;min-width:0;">
           <span class="pill pill-coral" style="margin-bottom:14px;"><i class="ri-error-warning-line"></i> <span class="t" data-en="Low-stock alerts" data-ar="تنبيهات النقص">Low-stock alerts</span></span>
           <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Never run out of the things guests expect." data-ar="لا تنفد أبداً من الأشياء التي يتوقعها النزلاء.">Never run out of the things guests expect.</h3>
@@ -239,14 +357,14 @@
         </div>
         <div style="flex:1 1 380px;min-width:0;background:var(--bg);border-radius:14px;padding:16px;border:1px solid var(--border);">
           <div style="background:var(--peach);color:var(--navy);border-radius:9px;padding:8px 12px;font-size:11px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;"><span><i class="ri-alert-line"></i> <span class="t" data-en="5 items below minimum stock" data-ar="٥ أصناف تحت الحد الأدنى">5 items below minimum stock</span></span><span style="color:var(--accent);font-weight:700;cursor:pointer;" class="t" data-en="View →" data-ar="عرض ←">View →</span></div>
-          <div style="background:#fff;border-radius:10px;overflow:hidden;font-size:11px;">
-            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--bg);color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:9px;">
+          <div class="inventory-ltr" style="background:#fff;border-radius:10px;overflow:hidden;font-size:11px;">
+            <div class="responsive-inventory-row" style="display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--bg);color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:9px;">
               <span style="padding:8px 10px;" class="t" data-en="Item" data-ar="الصنف">Item</span><span style="padding:8px;text-align:right;" class="t" data-en="Stock" data-ar="المخزون">Stock</span><span style="padding:8px 10px;text-align:right;" class="t" data-en="Status" data-ar="الحالة">Status</span>
             </div>
-            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Mini Shampoo</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">4</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral">Low</span></span></div>
-            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Bath Towels</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">12</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral">Low</span></span></div>
-            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Coffee Pods</span><span style="padding:8px;text-align:right;">80</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-green">OK</span></span></div>
-            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Light Bulbs E27</span><span style="padding:8px;text-align:right;">18</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-peach">Reorder</span></span></div>
+            <div class="responsive-inventory-row" style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Mini Shampoo</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">4</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral"><span class="t" data-en="Low" data-ar="منخفض">Low</span></span></span></div>
+            <div class="responsive-inventory-row" style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Bath Towels</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">12</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral"><span class="t" data-en="Low" data-ar="منخفض">Low</span></span></span></div>
+            <div class="responsive-inventory-row" style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Coffee Pods</span><span style="padding:8px;text-align:right;">80</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-green"><span class="t" data-en="OK" data-ar="جيد">OK</span></span></span></div>
+            <div class="responsive-inventory-row" style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Light Bulbs E27</span><span style="padding:8px;text-align:right;">18</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-peach"><span class="t" data-en="Reorder" data-ar="إعادة طلب">Reorder</span></span></span></div>
           </div>
           <div style="margin-top:12px;display:flex;gap:8px;">
             <button class="btn btn-coral" style="flex:1;justify-content:center;padding:9px;font-size:12px;"><i class="ri-inbox-line"></i><span class="t" data-en="Receive Stock" data-ar="استلام مخزون">Receive Stock</span></button>
@@ -270,8 +388,8 @@
       <div class="benefit-card"><div class="benefit-icon"><i class="ri-flashlight-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Faster coordination" data-ar="تنسيق أسرع">Faster coordination</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Tasks move between housekeeping, maintenance and the front desk without phone calls." data-ar="تنتقل المهام بين التدبير والصيانة والاستقبال دون مكالمات هاتفية.">Tasks move between housekeeping, maintenance and the front desk without phone calls.</p></div>
       <div class="benefit-card"><div class="benefit-icon"><i class="ri-coins-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Cost control" data-ar="التحكم بالتكلفة">Cost control</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="See stock value and consumption trends before budgets slip." data-ar="شاهد قيمة المخزون وأنماط الاستهلاك قبل خروج الميزانية عن المسار.">See stock value and consumption trends before budgets slip.</p></div>
       <div class="benefit-card"><div class="benefit-icon"><i class="ri-file-list-3-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Less manual work" data-ar="عمل يدوي أقل">Less manual work</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Automated alerts and logs replace paper checklists and end-of-shift reports." data-ar="تحل التنبيهات والسجلات الآلية محل القوائم الورقية وتقارير نهاية الوردية.">Automated alerts and logs replace paper checklists and end-of-shift reports.</p></div>
-      <div class="benefit-card"><div class="benefit-icon"><i class="ri-user-follow-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Clear accountability" data-ar="مساءلة واضحة">Clear accountability</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Every task is assigned, timestamped and logged — nothing falls through the cracks." data-ar="كل مهمة مُسندة ومؤقتة ومسجلة — لا يفوت شيئاً.">Every task is assigned, timestamped and logged — nothing falls through the cracks.</p></div>
-      <div class="benefit-card"><div class="benefit-icon"><i class="ri-flag-2-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Built for Saudi hospitality" data-ar="مصمم للضيافة السعودية">Built for Saudi hospitality</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Arabic-first, government-reporting ready, with 24/7 local support." data-ar="عربي أولاً، وجاهز للتقارير الحكومية، مع دعم محلي على مدار الساعة.">Arabic-first, government-reporting ready, with 24/7 local support.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-user-follow-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Clear accountability" data-ar="مساءلة واضحة">Clear accountability</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Every task is assigned, timestamped and logged — nothing falls through the cracks." data-ar="كل مهمة مُسندة ومؤرخة ومسجلة — فلا تضيع أي مهمة.">Every task is assigned, timestamped and logged — nothing falls through the cracks.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-flag-2-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Built for Saudi hospitality" data-ar="مصمم للضيافة السعودية">Built for Saudi hospitality</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Arabic-first, government-reporting ready, with 24/7 local support." data-ar="دعم كامل للعربية، وجاهزية للتقارير الحكومية، مع دعم محلي على مدار الساعة.">Arabic-first, government-reporting ready, with 24/7 local support.</p></div>
     </div>
   </div>
 </section>
@@ -318,10 +436,10 @@
     <div style="flex:1 1 380px;min-width:0;background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 20px 50px rgba(42,39,60,.12);">
       <form id="demoForm" novalidate style="display:grid;gap:14px;">
         <h3 style="font-size:19px;font-weight:700;margin:0;color:var(--navy);" class="t" data-en="Request your free demo" data-ar="اطلب عرضك المجاني">Request your free demo</h3>
-        <div><label for="f-name" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Full name" data-ar="الاسم الكامل">Full name</label><input id="f-name" class="input" type="text" autocomplete="name" placeholder="e.g. Mohammed Al-Saud"><div class="err-msg" id="e-name"><span class="t" data-en="Please enter your name" data-ar="الرجاء إدخال الاسم">Please enter your name</span></div></div>
-        <div><label for="f-email" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Work email" data-ar="البريد الإلكتروني للعمل">Work email</label><input id="f-email" class="input" type="email" autocomplete="email" placeholder="you@hotel.com"><div class="err-msg" id="e-email"><span class="t" data-en="Please enter a valid work email" data-ar="الرجاء إدخال بريد عمل صحيح">Please enter a valid work email</span></div></div>
-        <div><label for="f-hotel" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Hotel / company name" data-ar="اسم الفندق / الشركة">Hotel / company name</label><input id="f-hotel" class="input" type="text" placeholder="e.g. Riyadh Grand Hotel"><div class="err-msg" id="e-hotel"><span class="t" data-en="Please enter your hotel or company" data-ar="الرجاء إدخال اسم الفندق أو الشركة">Please enter your hotel or company</span></div></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label for="f-name" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Full name" data-ar="الاسم الكامل">Full name</label><input id="f-name" class="input" type="text" autocomplete="name" placeholder="e.g. Mohammed Al-Saud" data-placeholder-en="e.g. Mohammed Al-Saud" data-placeholder-ar="مثال: محمد السعود"><div class="err-msg" id="e-name"><span class="t" data-en="Please enter your name" data-ar="الرجاء إدخال الاسم">Please enter your name</span></div></div>
+        <div><label for="f-email" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Work email" data-ar="البريد الإلكتروني للعمل">Work email</label><input id="f-email" class="input" type="email" autocomplete="email" placeholder="you@hotel.com" data-placeholder-en="you@hotel.com" data-placeholder-ar="you@hotel.com"><div class="err-msg" id="e-email"><span class="t" data-en="Please enter a valid work email" data-ar="الرجاء إدخال بريد عمل صحيح">Please enter a valid work email</span></div></div>
+        <div><label for="f-hotel" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Hotel / company name" data-ar="اسم الفندق / الشركة">Hotel / company name</label><input id="f-hotel" class="input" type="text" placeholder="e.g. Riyadh Grand Hotel" data-placeholder-en="e.g. Riyadh Grand Hotel" data-placeholder-ar="مثال: فندق الرياض"><div class="err-msg" id="e-hotel"><span class="t" data-en="Please enter your hotel or company" data-ar="الرجاء إدخال اسم الفندق أو الشركة">Please enter your hotel or company</span></div></div>
+        <div class="responsive-form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div><label for="f-phone" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Phone" data-ar="رقم الجوال">Phone</label><input id="f-phone" class="input" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX"></div>
           <div><label for="f-feature" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Interested in" data-ar="أنا مهتم بـ">Interested in</label>
             <select id="f-feature" class="input" style="appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238f9793' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;">
@@ -386,7 +504,10 @@ function switchTab(name){
       var i=tabOrder.indexOf(tab.dataset.tab);
       if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
         e.preventDefault();
-        var next=tabOrder[(i+(e.key==='ArrowRight'?1:tabOrder.length-1))%tabOrder.length];
+        var rtl=document.documentElement.dir==='rtl';
+        var forward=(e.key==='ArrowRight');
+        if(rtl) forward=!forward;
+        var next=tabOrder[(i+(forward?1:tabOrder.length-1))%tabOrder.length];
         switchTab(next);document.getElementById('tab-'+next).focus();
       } else if(e.key==='Home'){e.preventDefault();switchTab('hk');document.getElementById('tab-hk').focus();}
         else if(e.key==='End'){e.preventDefault();switchTab('inv');document.getElementById('tab-inv').focus();}
@@ -396,16 +517,55 @@ function switchTab(name){
 
 /* ---------- i18n EN / AR ---------- */
 var currentLang='en';
-function toggleLang(){
-  currentLang=(currentLang==='en')?'ar':'en';
+function applyLanguage(lang){
+  currentLang=lang;
+  var isAr=(currentLang==='ar');
   document.documentElement.lang=currentLang;
-  document.documentElement.dir=(currentLang==='ar')?'rtl':'ltr';
-  document.getElementById('langToggle').textContent=(currentLang==='ar')?'English':'العربية';
+  document.documentElement.dir=isAr?'rtl':'ltr';
+  document.body.dir=isAr?'rtl':'ltr';
+  var toggle=document.getElementById('langToggle');
+  if(toggle){
+    toggle.textContent=isAr?'English':'العربية';
+    toggle.setAttribute('aria-label',isAr?'Switch to English':'التبديل إلى العربية');
+  }
   document.querySelectorAll('.t').forEach(function(el){
     var v=el.getAttribute('data-'+currentLang);
-    if(v)el.textContent=v;
+    if(v!==null)el.textContent=v;
   });
+  document.querySelectorAll('[data-placeholder-en]').forEach(function(el){
+    el.placeholder=el.getAttribute('data-placeholder-'+currentLang)||'';
+  });
+  var menuBtn=document.getElementById('mobileMenuBtn');
+  if(menuBtn){
+    menuBtn.setAttribute('aria-label',isAr?'فتح القائمة':'Open menu');
+  }
+  try{localStorage.setItem('fandaqah_lang',currentLang);}catch(e){}
 }
+function toggleLang(){ applyLanguage(currentLang==='en'?'ar':'en'); }
+
+function toggleMobileMenu(){
+  var nav=document.getElementById('mobileNav');
+  var btn=document.getElementById('mobileMenuBtn');
+  if(!nav||!btn)return;
+  var open=nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open?'true':'false');
+  btn.innerHTML=open?'<i class="ri-close-line"></i>':'<i class="ri-menu-3-line"></i>';
+}
+function closeMobileMenu(){
+  var nav=document.getElementById('mobileNav');
+  var btn=document.getElementById('mobileMenuBtn');
+  if(nav)nav.classList.remove('open');
+  if(btn){
+    btn.setAttribute('aria-expanded','false');
+    btn.innerHTML='<i class="ri-menu-3-line"></i>';
+  }
+}
+(function(){
+  var saved='en';
+  try{saved=localStorage.getItem('fandaqah_lang')||'en';}catch(e){}
+  applyLanguage(saved==='ar'?'ar':'en');
+  window.addEventListener('resize',function(){ if(window.innerWidth>900)closeMobileMenu(); });
+})();
 
 /* ---------- Tracking (no-op if GA/GTM absent) ---------- */
 window.dataLayer=window.dataLayer||[];
@@ -445,4 +605,5 @@ document.querySelectorAll('.track-cta').forEach(function(b){
   });
 })();
 </script>
+</body>
 </html>
