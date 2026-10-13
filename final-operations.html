@@ -1,0 +1,448 @@
+<html lang="en" dir="ltr" style="margin:0;padding:0;scroll-behavior:smooth;">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4/fonts/remixicon.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+(function(){
+  var s=document.createElement('style');
+  s.textContent=':root{--bg:#f2f0eb;--card:#ffffff;--text:#2a273c;--muted:#8f9793;--accent:#e95a54;--accent-soft:rgba(233,90,84,.13);--peach:#fbcdab;--peach-soft:rgba(251,205,171,.5);--green:#8f9793;--navy:#2a273c;--border:rgba(42,39,60,.10)}'
+  +'*{box-sizing:border-box}html,body{margin:0;padding:0}'
+  +'body{font-family:"IBM Plex Sans Arabic",sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}'
+  +'.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:600;border:none;cursor:pointer;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,opacity .18s;white-space:nowrap}'
+  +'.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}'
+  +'.btn-coral{background:var(--accent);color:#fff;box-shadow:0 6px 20px rgba(233,90,84,.35)}'
+  +'.btn-navy{background:var(--navy);color:#fff}'
+  +'.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border)}'
+  +'.btn-ghost:hover{border-color:var(--navy)}'
+  +'.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:999px}'
+  +'.tab-btn{flex:1;min-width:160px;padding:16px 20px;border-radius:14px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;background:transparent;border:1.5px solid transparent;display:flex;align-items:center;justify-content:center;gap:10px}'
+  +'.tab-btn .ar-sub{display:block;font-size:11px;font-weight:500;opacity:.75;margin-top:2px}'
+  +'.tab-btn.active{background:#fff;color:var(--navy);border-color:var(--border);box-shadow:0 4px 18px rgba(42,39,60,.08)}'
+  +'.tab-btn.active .tab-icon{background:var(--accent);color:#fff}'
+  +'.tab-icon{width:34px;height:34px;border-radius:9px;background:rgba(42,39,60,.07);color:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}'
+  +'.tab-panel{display:none;animation:fadeUp .45s ease}.tab-panel.active{display:block}'
+  +'@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}'
+  +'.reveal{opacity:0;transform:translateY(18px);animation:fadeUp .7s ease forwards}'
+  +'.mini-room{background:#fff;border-radius:8px;padding:8px 10px;border-left:3px solid #ccc;box-shadow:0 1px 2px rgba(42,39,60,.06)}'
+  +'.mini-card{background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:7px;box-shadow:0 1px 2px rgba(42,39,60,.07);font-size:10px}'
+  +'.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;white-space:nowrap}'
+  +'.pill-coral{background:var(--accent-soft);color:var(--accent)}.pill-green{background:rgba(143,151,147,.2);color:#6b7370}.pill-peach{background:var(--peach);color:var(--navy)}.pill-navy{background:rgba(42,39,60,.1);color:var(--navy)}'
+  +'.benefit-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s}'
+  +'.benefit-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(42,39,60,.1);border-color:var(--peach)}'
+  +'.benefit-icon{width:44px;height:44px;border-radius:12px;background:var(--peach-soft);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}'
+  +'.input{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:14px;color:var(--text);outline:none;transition:border-color .15s;font-family:inherit}'
+  +'.input:focus{border-color:var(--accent)}.input.err{border-color:var(--accent);background:rgba(233,90,84,.05)}'
+  +'.err-msg{color:var(--accent);font-size:11px;font-weight:600;margin-top:5px;display:none}'
+  +'.step-num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--peach);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}'
+  +'.stat-num{font-size:40px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1}'
+  +'.browser-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px;border-radius:14px 14px 0 0}'
+  +'.dot{width:10px;height:10px;border-radius:50%}'
+  +'.urlbar{flex:1;background:var(--bg);border-radius:7px;padding:5px 12px;font-size:11px;color:var(--muted);text-align:center}'
+  +'.spinner{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}'
+  +'@keyframes spin{to{transform:rotate(360deg)}}'
+  +'[dir="rtl"] .text-flip{text-align:right}'
+  +'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[role=tab]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}'
+  +'.float-badge{animation:bob 3s ease-in-out infinite}@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}';
+  document.head.appendChild(s);
+})();
+</script>
+<div style="background-color:transparent;box-sizing:border-box;">
+<div style="background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;overflow-x:hidden;">
+
+<!-- ============ NAV ============ -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(242,240,235,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:18px;">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="https://fandaqah.com/assets/images/fandaqah-simple.png" alt="Fandaqah" style="height:34px;max-width:150px;object-fit:contain;" onerror="this.style.display='none'">
+    </a>
+    <nav style="display:flex;gap:22px;margin-left:20px;" class="hidden md:flex">
+      <a href="#features" class="t" data-en="Features" data-ar="الميزات" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">Features</a>
+      <a href="#benefits" class="t" data-en="Benefits" data-ar="المزايا" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">Benefits</a>
+      <a href="#how" class="t" data-en="How it works" data-ar="كيف يعمل" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;">How it works</a>
+      <a href="#demo" class="t" data-en="Pricing" data-ar="الأسعار" style="color:var(--navy);text-decoration:none;font-size:14px;font-weight:500;display:none;">Pricing</a>
+    </nav>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+      <button id="langToggle" onclick="toggleLang()" style="background:#fff;border:1.5px solid var(--border);border-radius:9px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;">العربية</button>
+      <a href="#demo" class="btn btn-coral track-cta" data-cta="nav_book_demo" style="padding:9px 18px;font-size:13px;"><span class="t" data-en="Book a Demo" data-ar="احجز عرضاً">Book a Demo</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============ HERO ============ -->
+<section style="position:relative;padding:70px 24px 40px;overflow:hidden;">
+  <div style="position:absolute;top:-120px;right:-80px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(251,205,171,.55),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-100px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(233,90,84,.10),transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:1180px;margin:0 auto;position:relative;">
+    <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:center;">
+      <div style="flex:1 1 440px;min-width:0;" class="reveal">
+        <span class="eyebrow"><i class="ri-sparkling-line"></i><span class="t" data-en="Now available · Operations Suite" data-ar="متاح الآن · مجموعة العمليات">Now available · Operations Suite</span></span>
+        <h1 style="font-size:clamp(32px,4.6vw,52px);font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:20px 0 16px;color:var(--navy);">
+          <span class="t" data-en="Every room, every repair, every supply — " data-ar="كل غرفة، كل صيانة، كل مستلزم — ">Every room, every repair, every supply — </span><span style="background:linear-gradient(100deg,var(--accent),#c94a44);-webkit-background-clip:text;background-clip:text;color:transparent;" class="t" data-en="finally in one place." data-ar="في مكان واحد أخيراً.">finally in one place.</span>
+        </h1>
+        <p style="font-size:17px;line-height:1.7;color:#4a465c;max-width:520px;margin:0 0 28px;" class="t" data-en="Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains." data-ar="تحوّل وحدات التدبير الفندقي والصيانة والمخزون الجديدة من فندقة عمليات الفندق المتفرقة إلى مركز تحكم لحظي واحد هادئ — مصمم للفنادق وسلاسل الفنادق في السعودية.">Fandaqah's new Housekeeping, Maintenance and Inventory modules turn scattered hotel operations into one calm, real-time command center — built for Saudi hotels and hotel chains.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;">
+          <a href="#demo" class="btn btn-coral track-cta" data-cta="hero_book_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="Book a free demo" data-ar="احجز عرضاً مجانياً">Book a free demo</span></a>
+          <a href="#features" class="btn btn-ghost track-cta" data-cta="hero_see_it"><i class="ri-play-circle-line"></i><span class="t" data-en="See it in action" data-ar="شاهده يعمل">See it in action</span></a>
+        </div>
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);">
+          <span style="display:flex;align-items:center;gap:6px;"><i class="ri-shield-check-line" style="color:var(--green);"></i><span class="t" data-en="Government compliant" data-ar="متوافق مع الأنظمة الحكومية">Government compliant</span></span>
+          <span style="display:flex;align-items:center;gap:6px;"><i class="ri-customer-service-2-line" style="color:var(--green);"></i><span class="t" data-en="24/7 local support" data-ar="دعم محلي على مدار الساعة">24/7 local support</span></span>
+          <span style="display:flex;align-items:center;gap:6px;"><i class="ri-building-2-line" style="color:var(--green);"></i><span class="t" data-en="800+ hotels trust Fandaqah" data-ar="أكثر من 800 فندق يثق بفندقة">800+ hotels trust Fandaqah</span></span>
+        </div>
+      </div>
+
+      <!-- Dashboard preview mockup -->
+      <div style="flex:1 1 460px;min-width:0;position:relative;" class="reveal">
+        <div class="float-badge" style="position:absolute;top:-14px;right:14px;z-index:5;background:var(--navy);color:var(--peach);padding:8px 14px;border-radius:10px;font-size:12px;font-weight:700;box-shadow:0 8px 24px rgba(42,39,60,.3);"><i class="ri-flashlight-line"></i> <span class="t" data-en="3 modules · 1 platform" data-ar="٣ وحدات · منصة واحدة">3 modules · 1 platform</span></div>
+        <div style="background:#fff;border-radius:16px;box-shadow:0 30px 70px rgba(42,39,60,.22);overflow:hidden;border:1px solid var(--border);">
+          <div class="browser-bar">
+            <span class="dot" style="background:#e95a54;"></span><span class="dot" style="background:#fbcdab;"></span><span class="dot" style="background:#8f9793;"></span>
+            <span class="urlbar"><i class="ri-lock-line"></i> app.fandaqah.com/dashboard</span>
+          </div>
+          <div style="display:flex;min-height:300px;">
+            <div style="width:48px;background:var(--navy);flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:14px;padding:14px 0;">
+              <span style="color:#fbcdab;font-size:17px;"><i class="ri-brush-line"></i></span>
+              <span style="color:rgba(255,255,255,.5);font-size:17px;"><i class="ri-wrench-line"></i></span>
+              <span style="color:rgba(255,255,255,.5);font-size:17px;"><i class="ri-box-3-line"></i></span>
+            </div>
+            <div style="flex:1;background:var(--bg);padding:14px;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-size:12px;font-weight:700;color:var(--navy);" class="t" data-en="Today's Overview" data-ar="نظرة اليوم">Today's Overview</span>
+                <span class="pill pill-coral"><i class="ri-error-warning-line"></i> 4 <span class="t" data-en="urgent" data-ar="عاجلة">urgent</span></span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div>
+                  <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;" class="t" data-en="Room Board" data-ar="لوحة الغرف">Room Board</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                    <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:11px;font-weight:700;">1001</div><span class="pill pill-green">Ready</span></div>
+                    <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:11px;font-weight:700;">1002</div><span class="pill pill-coral">Dirty</span></div>
+                    <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:11px;font-weight:700;">1003</div><span class="pill pill-peach">Inspect</span></div>
+                    <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:11px;font-weight:700;">1004</div><span class="pill pill-navy">Occupied</span></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;" class="t" data-en="Work Orders" data-ar="أوامر العمل">Work Orders</div>
+                  <div class="mini-card"><span class="pill pill-coral" style="margin-bottom:4px;">Urgent</span><div style="font-weight:600;color:var(--navy);margin-top:4px;">AC not cooling · Rm 1207</div></div>
+                  <div class="mini-card"><span class="pill pill-peach" style="margin-bottom:4px;">High</span><div style="font-weight:600;color:var(--navy);margin-top:4px;">Heater leak · Rm 1102</div></div>
+                  <div style="font-size:9px;color:var(--muted);margin-top:8px;" class="t" data-en="Inventory: 5 items low stock" data-ar="المخزون: ٥ أصناف منخفضة">Inventory: 5 items low stock</div>
+                  <div style="height:6px;background:rgba(42,39,60,.08);border-radius:4px;margin-top:6px;overflow:hidden;"><div style="width:68%;height:100%;background:linear-gradient(90deg,#8f9793,#fbcdab);border-radius:4px;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE TABS ============ -->
+<section id="features" style="padding:70px 24px;">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div style="text-align:center;max-width:640px;margin:0 auto 36px;">
+      <span class="eyebrow"><i class="ri-stack-line"></i><span class="t" data-en="Three modules · one workflow" data-ar="ثلاث وحدات · سير عمل واحد">Three modules · one workflow</span></span>
+      <h2 style="font-size:clamp(26px,3.4vw,38px);font-weight:700;color:var(--navy);margin:18px 0 12px;letter-spacing:-.01em;" class="t" data-en="Everything your back-of-house needs, built to work together." data-ar="كل ما يحتاجه فريق التشغيل، مصمم للعمل معاً.">Everything your back-of-house needs, built to work together.</h2>
+      <p style="color:var(--muted);font-size:15px;line-height:1.7;margin:0;" class="t" data-en="Click any module to explore its live interface — or use arrow keys to switch." data-ar="انقر على أي وحدة لاستكشاف واجهتها — أو استخدم أسهم لوحة المفاتيح للتنقل.">Click any module to explore its live interface — or use arrow keys to switch.</p>
+    </div>
+
+    <div role="tablist" aria-label="Fandaqah modules" style="display:flex;gap:10px;flex-wrap:wrap;background:rgba(42,39,60,.04);padding:8px;border-radius:18px;margin-bottom:26px;">
+      <button role="tab" id="tab-hk" aria-selected="true" aria-controls="panel-hk" class="tab-btn active" data-tab="hk" onclick="switchTab('hk')"><span class="tab-icon"><i class="ri-brush-line"></i></span><span><span class="t" data-en="Housekeeping" data-ar="التدبير الفندقي">Housekeeping</span><span class="ar-sub t" data-en="Room board & tasks" data-ar="لوحة الغرف والمهام">Room board & tasks</span></span></button>
+      <button role="tab" id="tab-mt" aria-selected="false" aria-controls="panel-mt" class="tab-btn" data-tab="mt" onclick="switchTab('mt')" tabindex="-1"><span class="tab-icon"><i class="ri-wrench-line"></i></span><span><span class="t" data-en="Maintenance" data-ar="الصيانة">Maintenance</span><span class="ar-sub t" data-en="Work orders & uptime" data-ar="أوامر العمل والتشغيل">Work orders & uptime</span></span></button>
+      <button role="tab" id="tab-inv" aria-selected="false" aria-controls="panel-inv" class="tab-btn" data-tab="inv" onclick="switchTab('inv')" tabindex="-1"><span class="tab-icon"><i class="ri-box-3-line"></i></span><span><span class="t" data-en="Inventory" data-ar="المخزون">Inventory</span><span class="ar-sub t" data-en="Stock & cost control" data-ar="المخزون والتحكم بالتكلفة">Stock & cost control</span></span></button>
+    </div>
+
+    <!-- HK PANEL -->
+    <div role="tabpanel" id="panel-hk" aria-labelledby="tab-hk" class="tab-panel active">
+      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+        <div style="flex:1 1 360px;min-width:0;">
+          <span class="pill pill-green" style="margin-bottom:14px;"><i class="ri-checkbox-circle-line"></i> <span class="t" data-en="Real-time room board" data-ar="لوحة غرف لحظية">Real-time room board</span></span>
+          <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Housekeeping that runs at the speed of check-out." data-ar="تدبير فندقي يواكب سرعة تسجيل المغادرة.">Housekeeping that runs at the speed of check-out.</h3>
+          <p style="color:#4a465c;font-size:14px;line-height:1.7;margin:0 0 18px;" class="t" data-en="A live room board your whole team sees at once. Assign attendants, track dirty and ready rooms, manage inspections and flag discrepancies in real time — no more radio calls and paper boards." data-ar="لوحة غرف لحظية يراها فريقك كاملاً في آن واحد. وزّع العاملين، تابع الغرف المتسخة والجاهزة، وأدِر التفتيش وبلّغ عن الفروق فوراً — دون مكالمات لاسلكية أو لوحات ورقية.">A live room board your whole team sees at once. Assign attendants, track dirty and ready rooms, manage inspections and flag discrepancies in real time — no more radio calls and paper boards.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Live room-status board with attendant assignments" data-ar="لوحة حالة غرف لحظية مع توزيع العاملين">Live room-status board with attendant assignments</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Inspection checklists & discrepancy flags" data-ar="قوائم التفتيش وتنبيهات الفروق">Inspection checklists & discrepancy flags</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Cleaning progress tracked per shift" data-ar="متابعة تقدم التنظيف لكل وردية">Cleaning progress tracked per shift</span></li>
+          </ul>
+          <a href="#demo" class="btn btn-coral track-cta" data-cta="hk_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="See Housekeeping in a demo" data-ar="شاهد التدبير الفندقي في عرض">See Housekeeping in a demo</span></a>
+        </div>
+        <div style="flex:1 1 380px;min-width:0;background:var(--bg);border-radius:14px;padding:16px;border:1px solid var(--border);">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="pill pill-green">Ready · 54</span><span class="pill pill-coral">Dirty · 4</span><span class="pill pill-peach">Inspect · 1</span><span class="pill pill-navy">Occupied · 4</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;">
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1001</div><span class="pill pill-green">Ready</span></div>
+            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1002</div><span class="pill pill-coral">Dirty</span></div>
+            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1003</div><span class="pill pill-peach">Inspect</span></div>
+            <div class="mini-room" style="border-left-color:#2a273c;"><div style="font-size:12px;font-weight:700;">1004</div><span class="pill pill-navy">Occupied</span></div>
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1005</div><span class="pill pill-green">Ready</span></div>
+            <div class="mini-room" style="border-left-color:#e95a54;"><div style="font-size:12px;font-weight:700;">1006</div><span class="pill pill-coral">Dirty</span></div>
+            <div class="mini-room" style="border-left-color:#8f9793;"><div style="font-size:12px;font-weight:700;">1008</div><span class="pill pill-green">Ready</span></div>
+            <div class="mini-room" style="border-left-color:#fbcdab;"><div style="font-size:12px;font-weight:700;">1009</div><span class="pill pill-peach">Inspect</span></div>
+          </div>
+          <div style="margin-top:12px;padding:10px 12px;background:#fff;border-radius:10px;font-size:11px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;border-left:3px solid #e95a54;">
+            <span><strong>1002</strong> · <span class="t" data-en="Deep Clean · Abdullah A." data-ar="تنظيف عميق · عبدالله أ.">Deep Clean · Abdullah A.</span></span>
+            <span class="pill pill-coral"><span class="t" data-en="Overdue" data-ar="متأخر">Overdue</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MT PANEL -->
+    <div role="tabpanel" id="panel-mt" aria-labelledby="tab-mt" class="tab-panel">
+      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+        <div style="flex:1 1 360px;min-width:0;">
+          <span class="pill pill-peach" style="margin-bottom:14px;"><i class="ri-calendar-line"></i> <span class="t" data-en="Preventive + corrective" data-ar="وقائية + علاجية">Preventive + corrective</span></span>
+          <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Fix issues before guests notice them." data-ar="أصلح المشاكل قبل أن يلاحظها النزلاء.">Fix issues before guests notice them.</h3>
+          <p style="color:#4a465c;font-size:14px;line-height:1.7;margin:0 0 18px;" class="t" data-en="Every maintenance request becomes a tracked work order. Prioritize urgent jobs, assign technicians, schedule preventive maintenance on a calendar, and watch downtime by facility area shrink." data-ar="كل طلب صيانة يصبح أمر عمل متتبع. حدّد أولويات الأعمال العاجلة، وزّع الفنيين، وجدول الصيانة الوقائية على التقويم، وشاهد فترات التوقف في كل منطقة تتناقص.">Every maintenance request becomes a tracked work order. Prioritize urgent jobs, assign technicians, schedule preventive maintenance on a calendar, and watch downtime by facility area shrink.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Work-order Kanban with Urgent / High / Routine priorities" data-ar="كانبان أوامر العمل بأولويات عاجل / مرتفع / روتيني">Work-order Kanban with Urgent / High / Routine priorities</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Preventive maintenance calendar & reminders" data-ar="تقويم وتنبيهات الصيانة الوقائية">Preventive maintenance calendar & reminders</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Downtime tracking & mean-time-to-repair reporting" data-ar="متابعة فترات التوقف وتقارير متوسط وقت الإصلاح">Downtime tracking & mean-time-to-repair reporting</span></li>
+          </ul>
+          <a href="#demo" class="btn btn-coral track-cta" data-cta="mt_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="See Maintenance in a demo" data-ar="شاهد الصيانة في عرض">See Maintenance in a demo</span></a>
+        </div>
+        <div style="flex:1 1 380px;min-width:0;background:var(--bg);border-radius:14px;padding:16px;border:1px solid var(--border);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;" class="t" data-en="New Requests" data-ar="طلبات جديدة">New Requests</div>
+              <div class="mini-card"><span class="pill pill-coral">Urgent</span><div style="font-weight:600;margin-top:5px;">AC not cooling · Rm 1207</div></div>
+              <div class="mini-card"><span class="pill pill-green">Routine</span><div style="font-weight:600;margin-top:5px;">Lobby lamp · Lobby</div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;" class="t" data-en="In Progress" data-ar="قيد التنفيذ">In Progress</div>
+              <div class="mini-card"><span class="pill pill-peach">High</span><div style="font-weight:600;margin-top:5px;">Heater leak · Rm 1102</div><div style="color:var(--muted);font-size:9px;margin-top:4px;">Khalid M. · 40m</div></div>
+              <div class="mini-card"><span class="pill pill-green">Routine</span><div style="font-weight:600;margin-top:5px;">Oven thermostat · Kitchen</div></div>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
+            <i class="ri-calendar-2-line" style="color:#c98a55;font-size:18px;"></i>
+            <span style="font-size:11px;color:var(--navy);" class="t" data-en="Next PM: HVAC filter check · Today 16:00" data-ar="الصيانة الوقائية القادمة: فحص فلتر المكيف · اليوم ٤:٠٠ م">Next PM: HVAC filter check · Today 16:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INV PANEL -->
+    <div role="tabpanel" id="panel-inv" aria-labelledby="tab-inv" class="tab-panel">
+      <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(42,39,60,.07);">
+        <div style="flex:1 1 360px;min-width:0;">
+          <span class="pill pill-coral" style="margin-bottom:14px;"><i class="ri-error-warning-line"></i> <span class="t" data-en="Low-stock alerts" data-ar="تنبيهات النقص">Low-stock alerts</span></span>
+          <h3 style="font-size:24px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Never run out of the things guests expect." data-ar="لا تنفد أبداً من الأشياء التي يتوقعها النزلاء.">Never run out of the things guests expect.</h3>
+          <p style="color:#4a465c;font-size:14px;line-height:1.7;margin:0 0 18px;" class="t" data-en="Know exactly what's on every shelf. Track supplies, receive and issue stock, get alerted before you run low, and see the real cost of running your property at a glance." data-ar="اعرف بالضبط ما في كل رف. تابع المستلزمات، واستلم وصدر المخزون، واحصل على تنبيه قبل النقص، وشاهد التكلفة الحقيقية لتشغيل عقارك بنظرة واحدة.">Know exactly what's on every shelf. Track supplies, receive and issue stock, get alerted before you run low, and see the real cost of running your property at a glance.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;">
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Low-stock & reorder alerts before you run out" data-ar="تنبيهات النقص وإعادة الطلب قبل النفاد">Low-stock & reorder alerts before you run out</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Receive / issue stock logging with one click" data-ar="تسجيل الاستلام والإصدار بنقرة واحدة">Receive / issue stock logging with one click</span></li>
+            <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--navy);"><i class="ri-check-line" style="color:var(--green);font-weight:700;margin-top:2px;"></i><span class="t" data-en="Inventory value & consumption cost control" data-ar="قيمة المخزون والتحكم بتكلفة الاستهلاك">Inventory value & consumption cost control</span></li>
+          </ul>
+          <a href="#demo" class="btn btn-coral track-cta" data-cta="inv_demo"><i class="ri-calendar-check-line"></i><span class="t" data-en="See Inventory in a demo" data-ar="شاهد المخزون في عرض">See Inventory in a demo</span></a>
+        </div>
+        <div style="flex:1 1 380px;min-width:0;background:var(--bg);border-radius:14px;padding:16px;border:1px solid var(--border);">
+          <div style="background:var(--peach);color:var(--navy);border-radius:9px;padding:8px 12px;font-size:11px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;"><span><i class="ri-alert-line"></i> <span class="t" data-en="5 items below minimum stock" data-ar="٥ أصناف تحت الحد الأدنى">5 items below minimum stock</span></span><span style="color:var(--accent);font-weight:700;cursor:pointer;" class="t" data-en="View →" data-ar="عرض ←">View →</span></div>
+          <div style="background:#fff;border-radius:10px;overflow:hidden;font-size:11px;">
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--bg);color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:9px;">
+              <span style="padding:8px 10px;" class="t" data-en="Item" data-ar="الصنف">Item</span><span style="padding:8px;text-align:right;" class="t" data-en="Stock" data-ar="المخزون">Stock</span><span style="padding:8px 10px;text-align:right;" class="t" data-en="Status" data-ar="الحالة">Status</span>
+            </div>
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Mini Shampoo</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">4</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral">Low</span></span></div>
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Bath Towels</span><span style="padding:8px;text-align:right;color:var(--accent);font-weight:700;">12</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-coral">Low</span></span></div>
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);"><span style="padding:8px 10px;font-weight:600;">Coffee Pods</span><span style="padding:8px;text-align:right;">80</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-green">OK</span></span></div>
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg);"><span style="padding:8px 10px;font-weight:600;">Light Bulbs E27</span><span style="padding:8px;text-align:right;">18</span><span style="padding:8px 10px;text-align:right;"><span class="pill pill-peach">Reorder</span></span></div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;">
+            <button class="btn btn-coral" style="flex:1;justify-content:center;padding:9px;font-size:12px;"><i class="ri-inbox-line"></i><span class="t" data-en="Receive Stock" data-ar="استلام مخزون">Receive Stock</span></button>
+            <button class="btn btn-navy" style="flex:1;justify-content:center;padding:9px;font-size:12px;"><i class="ri-upload-line"></i><span class="t" data-en="Issue Stock" data-ar="إصدار مخزون">Issue Stock</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFITS ============ -->
+<section id="benefits" style="padding:60px 24px;background:linear-gradient(180deg,transparent,rgba(251,205,171,.18),transparent);">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div style="text-align:center;max-width:600px;margin:0 auto 36px;">
+      <span class="eyebrow"><i class="ri-medal-line"></i><span class="t" data-en="Why it matters" data-ar="لماذا يهم">Why it matters</span></span>
+      <h2 style="font-size:clamp(24px,3vw,34px);font-weight:700;color:var(--navy);margin:18px 0 10px;" class="t" data-en="Less chaos. More control. Happier guests." data-ar="فوضى أقل. تحكم أكبر. نزلاء أكثر سعادة.">Less chaos. More control. Happier guests.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-database-2-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="One source of truth" data-ar="مرجع واحد موثوق">One source of truth</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Every department works from the same live data — no more spreadsheets and whiteboards." data-ar="يعمل كل قسم من نفس البيانات اللحظية — دون جداول بيانات أو سبورات بيضاء.">Every department works from the same live data — no more spreadsheets and whiteboards.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-flashlight-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Faster coordination" data-ar="تنسيق أسرع">Faster coordination</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Tasks move between housekeeping, maintenance and the front desk without phone calls." data-ar="تنتقل المهام بين التدبير والصيانة والاستقبال دون مكالمات هاتفية.">Tasks move between housekeeping, maintenance and the front desk without phone calls.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-coins-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Cost control" data-ar="التحكم بالتكلفة">Cost control</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="See stock value and consumption trends before budgets slip." data-ar="شاهد قيمة المخزون وأنماط الاستهلاك قبل خروج الميزانية عن المسار.">See stock value and consumption trends before budgets slip.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-file-list-3-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Less manual work" data-ar="عمل يدوي أقل">Less manual work</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Automated alerts and logs replace paper checklists and end-of-shift reports." data-ar="تحل التنبيهات والسجلات الآلية محل القوائم الورقية وتقارير نهاية الوردية.">Automated alerts and logs replace paper checklists and end-of-shift reports.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-user-follow-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Clear accountability" data-ar="مساءلة واضحة">Clear accountability</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Every task is assigned, timestamped and logged — nothing falls through the cracks." data-ar="كل مهمة مُسندة ومؤقتة ومسجلة — لا يفوت شيئاً.">Every task is assigned, timestamped and logged — nothing falls through the cracks.</p></div>
+      <div class="benefit-card"><div class="benefit-icon"><i class="ri-flag-2-line"></i></div><h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Built for Saudi hospitality" data-ar="مصمم للضيافة السعودية">Built for Saudi hospitality</h3><p style="font-size:13px;line-height:1.7;color:var(--muted);margin:0;" class="t" data-en="Arabic-first, government-reporting ready, with 24/7 local support." data-ar="عربي أولاً، وجاهز للتقارير الحكومية، مع دعم محلي على مدار الساعة.">Arabic-first, government-reporting ready, with 24/7 local support.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS BAND (verified from live site) ============ -->
+<section style="padding:50px 24px;">
+  <div style="max-width:1000px;margin:0 auto;background:var(--navy);border-radius:20px;padding:40px 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;text-align:center;box-shadow:0 20px 50px rgba(42,39,60,.3);">
+    <div><div class="stat-num" style="color:var(--peach);">800+</div><div style="color:rgba(255,255,255,.6);font-size:13px;margin-top:8px;" class="t" data-en="hotels trust Fandaqah" data-ar="فندقاً يثق بفندقة">hotels trust Fandaqah</div></div>
+    <div><div class="stat-num" style="color:#fff;">500K+</div><div style="color:rgba(255,255,255,.6);font-size:13px;margin-top:8px;" class="t" data-en="guest check-ins processed" data-ar="تسجيل وصول نزيل معالج">guest check-ins processed</div></div>
+    <div><div class="stat-num" style="color:var(--green);">99.9%</div><div style="color:rgba(255,255,255,.6);font-size:13px;margin-top:8px;" class="t" data-en="operational uptime" data-ar="جاهزية تشغيلية">operational uptime</div></div>
+    <div><div class="stat-num" style="color:var(--accent);">24/7</div><div style="color:rgba(255,255,255,.6);font-size:13px;margin-top:8px;" class="t" data-en="local support" data-ar="دعم محلي">local support</div></div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" style="padding:50px 24px 70px;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:36px;">
+      <span class="eyebrow"><i class="ri-rocket-line"></i><span class="t" data-en="Go live in days, not months" data-ar="ابدأ العمل خلال أيام وليس أشهراً">Go live in days, not months</span></span>
+      <h2 style="font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--navy);margin:18px 0 0;" class="t" data-en="From first call to live dashboard in three steps." data-ar="من أول مكالمة إلى لوحة تحكم عاملة في ثلاث خطوات.">From first call to live dashboard in three steps.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;"><div class="step-num" style="margin-bottom:14px;">1</div><h3 style="font-size:16px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Talk to us" data-ar="تحدث معنا">Talk to us</h3><p style="font-size:13px;color:var(--muted);line-height:1.7;margin:0;" class="t" data-en="Tell us about your property, rooms and workflows in a free 20-minute call." data-ar="أخبرنا عن عقارك وغرفك وسير عملك في مكالمة مجانية مدتها ٢٠ دقيقة.">Tell us about your property, rooms and workflows in a free 20-minute call.</p></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;"><div class="step-num" style="margin-bottom:14px;background:var(--accent);color:#fff;">2</div><h3 style="font-size:16px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Get set up" data-ar="ابدأ التهيئة">Get set up</h3><p style="font-size:13px;color:var(--muted);line-height:1.7;margin:0;" class="t" data-en="We configure your modules, import your room list and train your team." data-ar="نجهّز وحداتك، ونستورد قائمة غرفك، وندرب فريقك.">We configure your modules, import your room list and train your team.</p></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;"><div class="step-num" style="margin-bottom:14px;background:var(--green);color:#fff;">3</div><h3 style="font-size:16px;font-weight:700;margin:0 0 8px;color:var(--navy);" class="t" data-en="Go live" data-ar="ابدأ العمل">Go live</h3><p style="font-size:13px;color:var(--muted);line-height:1.7;margin:0;" class="t" data-en="Run your entire operation from one calm dashboard — with support on call." data-ar="شغّل عملياتك بالكامل من لوحة واحدة هادئة — مع الدعم عند الحاجة.">Run your entire operation from one calm dashboard — with support on call.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO FORM ============ -->
+<section id="demo" style="padding:60px 24px;background:linear-gradient(180deg,transparent,rgba(251,205,171,.22));">
+  <div style="max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;">
+    <div style="flex:1 1 320px;min-width:0;">
+      <span class="eyebrow"><i class="ri-calendar-check-line"></i><span class="t" data-en="Free personalised demo" data-ar="عرض مجاني مخصص">Free personalised demo</span></span>
+      <h2 style="font-size:clamp(26px,3.4vw,38px);font-weight:700;color:var(--navy);margin:18px 0 14px;line-height:1.15;" class="t" data-en="See your hotel running on Fandaqah." data-ar="شاهد فندقك يعمل على فندقة.">See your hotel running on Fandaqah.</h2>
+      <p style="color:#4a465c;font-size:15px;line-height:1.7;margin:0 0 22px;" class="t" data-en="Book a 20-minute walkthrough with our team. We'll show you Housekeeping, Maintenance and Inventory live — configured around your property." data-ar="احجز جولة مدتها ٢٠ دقيقة مع فريقنا. سنريك التدبير الفندقي والصيانة والمخزون تعمل مباشرة — مهيأة لعقارك.">Book a 20-minute walkthrough with our team. We'll show you Housekeeping, Maintenance and Inventory live — configured around your property.</p>
+      <div style="display:grid;gap:12px;font-size:14px;color:var(--navy);">
+        <div style="display:flex;gap:10px;align-items:center;"><i class="ri-shield-check-line" style="color:var(--green);font-size:18px;"></i><span class="t" data-en="Compliant with Shumus, Saudi Tourism & ZATCA reporting" data-ar="متوافق مع تقارير شموس والسياحة السعودية وزاتكا">Compliant with Shumus, Saudi Tourism & ZATCA reporting</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><i class="ri-lock-2-line" style="color:var(--green);font-size:18px;"></i><span class="t" data-en="Your data is private — never shared" data-ar="بياناتك خاصة — لا تُشارك أبداً">Your data is private — never shared</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><i class="ri-time-line" style="color:var(--green);font-size:18px;"></i><span class="t" data-en="Response within one business day" data-ar="الرد خلال يوم عمل واحد">Response within one business day</span></div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 380px;min-width:0;background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 20px 50px rgba(42,39,60,.12);">
+      <form id="demoForm" novalidate style="display:grid;gap:14px;">
+        <h3 style="font-size:19px;font-weight:700;margin:0;color:var(--navy);" class="t" data-en="Request your free demo" data-ar="اطلب عرضك المجاني">Request your free demo</h3>
+        <div><label for="f-name" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Full name" data-ar="الاسم الكامل">Full name</label><input id="f-name" class="input" type="text" autocomplete="name" placeholder="e.g. Mohammed Al-Saud"><div class="err-msg" id="e-name"><span class="t" data-en="Please enter your name" data-ar="الرجاء إدخال الاسم">Please enter your name</span></div></div>
+        <div><label for="f-email" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Work email" data-ar="البريد الإلكتروني للعمل">Work email</label><input id="f-email" class="input" type="email" autocomplete="email" placeholder="you@hotel.com"><div class="err-msg" id="e-email"><span class="t" data-en="Please enter a valid work email" data-ar="الرجاء إدخال بريد عمل صحيح">Please enter a valid work email</span></div></div>
+        <div><label for="f-hotel" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Hotel / company name" data-ar="اسم الفندق / الشركة">Hotel / company name</label><input id="f-hotel" class="input" type="text" placeholder="e.g. Riyadh Grand Hotel"><div class="err-msg" id="e-hotel"><span class="t" data-en="Please enter your hotel or company" data-ar="الرجاء إدخال اسم الفندق أو الشركة">Please enter your hotel or company</span></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div><label for="f-phone" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Phone" data-ar="رقم الجوال">Phone</label><input id="f-phone" class="input" type="tel" autocomplete="tel" placeholder="+966 5X XXX XXXX"></div>
+          <div><label for="f-feature" style="display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;" class="t" data-en="Interested in" data-ar="أنا مهتم بـ">Interested in</label>
+            <select id="f-feature" class="input" style="appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238f9793' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;">
+              <option value="all" class="t" data-en="All three modules" data-ar="الوحدات الثلاثة">All three modules</option>
+              <option value="hk" class="t" data-en="Housekeeping" data-ar="التدبير الفندقي">Housekeeping</option>
+              <option value="mt" class="t" data-en="Maintenance" data-ar="الصيانة">Maintenance</option>
+              <option value="inv" class="t" data-en="Inventory" data-ar="المخزون">Inventory</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-coral" style="width:100%;justify-content:center;padding:14px;font-size:15px;"><span id="btnLabel"><span class="t" data-en="Send request" data-ar="إرسال الطلب">Send request</span></span></button>
+        <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="ri-lock-line"></i><span class="t" data-en="We'll respond within one business day. Your data is private and secure." data-ar="سنجيبك خلال يوم عمل واحد. بياناتك خاصة وآمنة.">We'll respond within one business day. Your data is private and secure.</span></p>
+      </form>
+      <div id="formSuccess" style="display:none;text-align:center;padding:30px 10px;">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(143,151,147,.18);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 18px;"><i class="ri-check-line"></i></div>
+        <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin:0 0 10px;" class="t" data-en="Thank you — your demo request is received." data-ar="شكراً لك — تم استلام طلب العرض.">Thank you — your demo request is received.</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.7;margin:0;" class="t" data-en="Our team will contact you shortly to schedule your personalised walkthrough." data-ar="سيتواصل معك فريقنا قريباً لجدولة جولة مخصصة.">Our team will contact you shortly to schedule your personalised walkthrough.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section style="padding:60px 24px 80px;">
+  <div style="max-width:900px;margin:0 auto;background:var(--navy);border-radius:24px;padding:50px 30px;text-align:center;position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(42,39,60,.35);">
+    <div style="position:absolute;top:-80px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(233,90,84,.35),transparent 70%);"></div>
+    <div style="position:absolute;bottom:-80px;left:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(251,205,171,.25),transparent 70%);"></div>
+    <div style="position:relative;">
+      <h2 style="font-size:clamp(24px,3.2vw,36px);font-weight:700;color:#fff;margin:0 0 14px;line-height:1.2;" class="t" data-en="Ready to run your hotel from one calm control center?" data-ar="مستعد لتشغيل فندقك من مركز تحكم واحد هادئ؟">Ready to run your hotel from one calm control center?</h2>
+      <p style="color:rgba(255,255,255,.65);font-size:15px;margin:0 0 26px;max-width:520px;margin-left:auto;margin-right:auto;" class="t" data-en="Join 800+ hotels already running on Fandaqah. Your free demo is one click away." data-ar="انضم إلى أكثر من ٨٠٠ فندق تعمل على فندقة. عرضك المجاني على بعد نقرة واحدة.">Join 800+ hotels already running on Fandaqah. Your free demo is one click away.</p>
+      <a href="#demo" class="btn track-cta" data-cta="final_book_demo" style="background:var(--accent);color:#fff;padding:14px 30px;font-size:15px;box-shadow:0 8px 26px rgba(233,90,84,.5);"><i class="ri-calendar-check-line"></i><span class="t" data-en="Book a free demo" data-ar="احجز عرضاً مجانياً">Book a free demo</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer style="background:var(--navy);color:rgba(255,255,255,.55);padding:30px 24px;text-align:center;font-size:12px;">
+  <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;">
+    <span>© 2026 Fandaqah · <span class="t" data-en="All rights reserved" data-ar="جميع الحقوق محفوظة">All rights reserved</span></span>
+    <span style="display:flex;gap:16px;"><span>Shumus</span><span>Saudi Tourism</span><span>ZATCA</span><span class="t" data-en="compliant" data-ar="متوافق">compliant</span></span>
+  </div>
+</footer>
+
+</div>
+</div>
+
+<script>
+/* ---------- Tabs (mouse + keyboard) ---------- */
+var tabOrder=['hk','mt','inv'];
+function switchTab(name){
+  tabOrder.forEach(function(t){
+    var btn=document.getElementById('tab-'+t), panel=document.getElementById('panel-'+t);
+    var active=(t===name);
+    if(btn){btn.classList.toggle('active',active);btn.setAttribute('aria-selected',active?'true':'false');btn.tabIndex=active?0:-1;}
+    if(panel)panel.classList.toggle('active',active);
+  });
+}
+(function(){
+  var tabs=document.querySelectorAll('[role=tab]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('keydown',function(e){
+      var i=tabOrder.indexOf(tab.dataset.tab);
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+        e.preventDefault();
+        var next=tabOrder[(i+(e.key==='ArrowRight'?1:tabOrder.length-1))%tabOrder.length];
+        switchTab(next);document.getElementById('tab-'+next).focus();
+      } else if(e.key==='Home'){e.preventDefault();switchTab('hk');document.getElementById('tab-hk').focus();}
+        else if(e.key==='End'){e.preventDefault();switchTab('inv');document.getElementById('tab-inv').focus();}
+    });
+  });
+})();
+
+/* ---------- i18n EN / AR ---------- */
+var currentLang='en';
+function toggleLang(){
+  currentLang=(currentLang==='en')?'ar':'en';
+  document.documentElement.lang=currentLang;
+  document.documentElement.dir=(currentLang==='ar')?'rtl':'ltr';
+  document.getElementById('langToggle').textContent=(currentLang==='ar')?'English':'العربية';
+  document.querySelectorAll('.t').forEach(function(el){
+    var v=el.getAttribute('data-'+currentLang);
+    if(v)el.textContent=v;
+  });
+}
+
+/* ---------- Tracking (no-op if GA/GTM absent) ---------- */
+window.dataLayer=window.dataLayer||[];
+function trackEvent(name,params){
+  try{window.dataLayer.push(Object.assign({event:name},params||{}));}catch(e){}
+  try{if(typeof gtag==='function')gtag('event',name,params||{});}catch(e){}
+}
+document.querySelectorAll('.track-cta').forEach(function(b){
+  b.addEventListener('click',function(){trackEvent('cta_click',{cta_id:b.dataset.cta||'unknown'});});
+});
+
+/* ---------- Demo form: validate → loading → success ---------- */
+(function(){
+  var form=document.getElementById('demoForm');
+  if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('f-name'), email=document.getElementById('f-email'), hotel=document.getElementById('f-hotel');
+    var ok=true;
+    function check(el,errId,cond){var bad=cond();el.classList.toggle('err',bad);document.getElementById(errId).style.display=bad?'block':'none';if(bad)ok=false;}
+    check(name,'e-name',function(){return !name.value.trim();});
+    check(email,'e-email',function(){return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());});
+    check(hotel,'e-hotel',function(){return !hotel.value.trim();});
+    if(!ok){trackEvent('form_error',{form:'demo_request'});return;}
+    var btn=document.getElementById('submitBtn'), label=document.getElementById('btnLabel');
+    btn.disabled=true;btn.style.opacity='.85';
+    label.innerHTML='<span class="spinner"></span>';
+    trackEvent('form_submit',{form:'demo_request',feature:document.getElementById('f-feature').value});
+    setTimeout(function(){
+      form.style.display='none';
+      document.getElementById('formSuccess').style.display='block';
+      trackEvent('generate_lead',{form:'demo_request'}); // conversion fires ONLY after successful submit
+    },1300);
+  });
+  ['f-name','f-email','f-hotel'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');var em=document.getElementById('e-'+id.split('-')[1]);if(em)em.style.display='none';});
+  });
+})();
+</script>
+</html>
