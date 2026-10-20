@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fandaqah PMS — Smart Hospitality Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — strictly the brand palette
+   ============================================================ */
+:root{
+  --coral:#e95a54;
+  --navy:#2a273c;
+  --beige:#f2f0eb;
+  --green:#8f9793;
+  --peach:#fbcdab;
+
+  --ease:cubic-bezier(.19,1,.22,1);
+  --r-sm:14px;
+  --r-md:22px;
+  --r-lg:32px;
+  --r-xl:44px;
+
+  --shadow-sm:0 6px 20px -10px rgba(42,39,60,.35);
+  --shadow-md:0 26px 60px -30px rgba(42,39,60,.55);
+  --shadow-lg:0 50px 110px -50px rgba(42,39,60,.75);
+
+  --pad-x:clamp(1.4rem,6vw,7rem);
+  --pad-y:clamp(5rem,9vh,8rem);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{
+  font-family:'Montserrat',system-ui,-apple-system,sans-serif;
+  background:var(--navy);
+  color:var(--beige);
+  overflow-x:hidden;
+  line-height:1.5;
+}
+body.lang-ar{font-family:'Almarai',sans-serif}
+img{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--coral);color:var(--beige)}
+
+/* ============================================================
+   CINEMATIC LAYERS
+   ============================================================ */
+#bg{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;display:block;
+  background:
+    radial-gradient(circle at 70% 0%, rgba(233,90,84,.16), transparent 55%),
+    radial-gradient(circle at 10% 100%, rgba(251,205,171,.10), transparent 50%),
+    var(--navy);
+}
+.grain{
+  position:fixed;inset:-100%;z-index:60;pointer-events:none;
+  opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 8s steps(6) infinite;
+}
+@keyframes grainShift{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-3%,2%)}
+  40%{transform:translate(2%,-3%)}
+  60%{transform:translate(-2%,-2%)}
+  80%{transform:translate(3%,1%)}
+}
+.vignette{
+  position:fixed;inset:0;z-index:55;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(42,39,60,.42) 100%);
+}
+.cursor{
+  position:fixed;top:0;left:0;width:26px;height:26px;border-radius:50%;
+  background:var(--coral);opacity:.45;filter:blur(6px);
+  pointer-events:none;z-index:70;transform:translate(-50%,-50%);
+  transition:width .3s var(--ease),height .3s var(--ease),opacity .3s;
+  display:none;
+}
+@media (pointer:fine){.cursor{display:block}}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:fixed;inset-block-start:0;inset-inline:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+  padding:.9rem var(--pad-x);
+  background:rgba(42,39,60,.55);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-block-end:1px solid rgba(242,240,235,.08);
+}
+.brand{display:inline-flex;align-items:center;gap:.65rem;font-weight:800;letter-spacing:-.02em;color:var(--beige)}
+.brand svg{width:22px;height:31px;flex:0 0 auto}
+.brand b{font-size:1.1rem;line-height:1}
+.brand small{font-size:.82rem;font-weight:500;color:var(--green);letter-spacing:.04em}
+.topbar-right{display:flex;align-items:center;gap:1.4rem}
+
+.lang{
+  display:inline-flex;align-items:center;gap:.15rem;
+  padding:.25rem;border-radius:999px;
+  background:rgba(242,240,235,.07);
+  border:1px solid rgba(242,240,235,.14);
+}
+.lang-btn{
+  border:0;cursor:pointer;background:transparent;color:rgba(242,240,235,.6);
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.08em;
+  padding:.42rem .95rem;border-radius:999px;transition:.35s var(--ease);
+}
+.lang-btn[data-lang="ar"]{font-family:'Almarai',sans-serif;font-size:.85rem;letter-spacing:0}
+.lang-btn:hover{color:var(--beige)}
+.lang-btn.on{background:var(--coral);color:var(--beige);box-shadow:0 8px 22px -10px rgba(233,90,84,.9)}
+
+.counter{
+  font-size:.72rem;font-weight:700;letter-spacing:.22em;color:rgba(242,240,235,.55);
+  font-variant-numeric:tabular-nums;
+}
+.counter b{color:var(--coral)}
+
+.progress{position:fixed;inset-block-start:0;inset-inline:0;height:2px;z-index:65;background:rgba(242,240,235,.07)}
+.progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--coral),var(--peach));transition:transform .1s linear}
+
+/* ============================================================
+   RAIL / DOTS
+   ============================================================ */
+.rail{
+  position:fixed;inset-block-start:50%;inset-inline-end:24px;transform:translateY(-50%);
+  z-index:50;display:flex;flex-direction:column;gap:11px;align-items:center;
+}
+.rail::before{content:"";position:absolute;inset-block:-18px;inset-inline-start:50%;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(242,240,235,.18),transparent);transform:translateX(-50%)}
+.dot{
+  width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(242,240,235,.28);transition:.45s var(--ease);position:relative;z-index:2;
+}
+.dot:hover{background:var(--peach);transform:scale(1.4)}
+.dot.on{background:var(--coral);height:26px;border-radius:5px;box-shadow:0 0 16px rgba(233,90,84,.8)}
+
+/* ============================================================
+   SLIDE SHELL
+   ============================================================ */
+.deck{position:relative;z-index:2}
+.slide{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--pad-y) var(--pad-x);
+  scroll-snap-align:start;
+  overflow:hidden;
+  isolation:isolate;
+}
+.wrap{width:100%;max-width:1300px;margin-inline:auto;position:relative;z-index:2}
+
+/* dark slides — the WebGL scene shows through */
+.slide.dark{background:transparent;color:var(--beige)}
+/* light slides */
+.slide.light{
+  background-color:var(--beige);
+  background-image:linear-gradient(180deg,transparent 0%,rgba(42,39,60,.055) 100%);
+  color:var(--navy);
+}
+.slide.light::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 88% -8%, rgba(251,205,171,.55), transparent 42%),
+    radial-gradient(circle at 2% 102%, rgba(233,90,84,.10), transparent 40%);
+}
+.slide.dark::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 92% -10%, rgba(233,90,84,.20), transparent 45%),
+    radial-gradient(circle at 4% 104%, rgba(251,205,171,.09), transparent 45%);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.75rem;
+  font-size:.7rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--coral);margin-block-end:1.15rem;
+}
+body.lang-ar .eyebrow{letter-spacing:.06em;font-size:.8rem}
+.eyebrow::before{content:"";width:34px;height:2px;border-radius:2px;background:var(--coral);flex:0 0 auto}
+.slide.dark .eyebrow{color:var(--peach)}
+.slide.dark .eyebrow::before{background:var(--peach)}
+
+.h1{
+  font-size:clamp(2.5rem,7vw,5.6rem);
+  font-weight:900;line-height:.96;letter-spacing:-.035em;
+}
+.h2{
+  font-size:clamp(1.9rem,4.3vw,3.5rem);
+  font-weight:800;line-height:1.05;letter-spacing:-.03em;
+}
+.h3{font-size:clamp(1.05rem,1.6vw,1.32rem);font-weight:800;line-height:1.25;letter-spacing:-.01em}
+body.lang-ar .h1,body.lang-ar .h2,body.lang-ar .h3{letter-spacing:0;line-height:1.22}
+
+em{font-style:normal;color:var(--coral)}
+.slide.dark em{color:var(--peach)}
+
+.lead{
+  font-size:clamp(.98rem,1.28vw,1.15rem);
+  line-height:1.75;font-weight:400;
+  color:rgba(42,39,60,.76);
+  max-width:62ch;
+}
+.slide.dark .lead{color:rgba(242,240,235,.72)}
+
+.sub{
+  font-size:.8rem;font-weight:600;margin-block-start:.5rem;
+  color:var(--green);display:block;line-height:1.55;
+}
+.slide.dark .sub{color:rgba(251,205,171,.8)}
+.sub.rtl{font-family:'Almarai',sans-serif;direction:rtl;unicode-bidi:isolate}
+.sub.ltr{font-family:'Montserrat',sans-serif;direction:ltr;unicode-bidi:isolate}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.rv{
+  opacity:0;transform:translateY(30px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease);
+  transition-delay:var(--d,0s);
+  will-change:opacity,transform;
+}
+.rv.in{opacity:1;transform:none}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+.sec-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:2rem;flex-wrap:wrap;margin-block-end:clamp(2.2rem,4.5vw,3.6rem);
+}
+.sec-head .lead{max-width:370px;font-size:1rem}
+.sec-head > div{max-width:760px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:0;justify-content:flex-end;min-height:100svh;color:var(--beige)}
+.hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero-bg img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(.72) contrast(1.06) brightness(.92);
+  animation:kenburns 26s ease-in-out infinite alternate;
+}
+@keyframes kenburns{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.14) translate3d(-1.5%,-1.5%,0)}}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(42,39,60,.82) 0%, rgba(42,39,60,.42) 38%, rgba(42,39,60,.96) 100%),
+    radial-gradient(circle at 15% 85%, rgba(233,90,84,.28), transparent 55%);
+}
+.hero-inner{
+  padding:0 var(--pad-x) clamp(4rem,10vh,7.5rem);
+  max-width:1300px;width:100%;margin-inline:auto;position:relative;z-index:2;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:.55rem 1.15rem;border-radius:999px;
+  border:1px solid rgba(242,240,235,.28);
+  background:rgba(242,240,235,.06);
+  backdrop-filter:blur(10px);
+  font-size:.68rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--peach);margin-block-end:1.8rem;
+}
+body.lang-ar .hero-tag{letter-spacing:.04em;font-size:.78rem}
+.hero-tag i{width:7px;height:7px;border-radius:50%;background:var(--coral);
+  box-shadow:0 0 0 4px rgba(233,90,84,.22);animation:blip 2.2s infinite}
+@keyframes blip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
+
+.hero .h1{color:var(--beige);text-shadow:0 40px 90px rgba(0,0,0,.45);max-width:16ch}
+.hero .h1 em{color:var(--peach)}
+.hero .lead{color:rgba(242,240,235,.86);margin-block-start:1.7rem;max-width:56ch}
+.hero-rule{width:96px;height:4px;border-radius:4px;background:var(--coral);margin-block-start:2.2rem}
+
+.hero-meta{
+  display:flex;gap:clamp(1.4rem,4vw,3.4rem);flex-wrap:wrap;
+  margin-block-start:clamp(2rem,5vh,3.2rem);
+  padding-block-start:1.6rem;border-block-start:1px solid rgba(242,240,235,.16);
+}
+.hero-meta div b{display:block;font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:800;color:var(--beige)}
+.hero-meta div span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,205,171,.78);font-weight:600}
+body.lang-ar .hero-meta div span{letter-spacing:.02em;font-size:.76rem}
+
+.scroll-hint{
+  position:absolute;inset-block-end:1.6rem;inset-inline-start:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;z-index:3;
+  font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(242,240,235,.55);
+}
+.scroll-hint i{width:1px;height:44px;background:linear-gradient(var(--coral),transparent);
+  animation:pulse 2.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.25;transform:scaleY(.55)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ============================================================
+   MARQUEE BAND
+   ============================================================ */
+.band{
+  position:relative;z-index:2;scroll-snap-align:none;
+  background:var(--navy);
+  border-block:1px solid rgba(242,240,235,.1);
+  overflow:hidden;padding-block:.95rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,var(--navy) 8%,var(--navy) 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,var(--navy) 8%,var(--navy) 92%,transparent);
+}
+.band-track{display:flex;width:max-content;animation:slideX 34s linear infinite}
+.band:hover .band-track{animation-play-state:paused}
+.band-track span{
+  display:inline-flex;align-items:center;gap:1.6rem;padding-inline-end:1.6rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(242,240,235,.55);white-space:nowrap;
+}
+.band-track span b{color:var(--coral);font-weight:700}
+.band-track span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--peach);opacity:.6}
+@keyframes slideX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.9rem,1.8vw,1.5rem)}
+.stat{
+  position:relative;overflow:hidden;
+  background:var(--beige);
+  border:1px solid rgba(42,39,60,.09);
+  border-radius:var(--r-xl);
+  padding:clamp(1.8rem,3.4vw,3rem);
+  box-shadow:var(--shadow-md);
+  transition:transform .6s var(--ease),box-shadow .6s var(--ease);
+}
+.stat:hover{transform:translateY(-9px);box-shadow:var(--shadow-lg)}
+.stat::after{
+  content:"";position:absolute;inset-block-start:-52px;inset-inline-end:-52px;
+  width:140px;height:140px;border-radius:50%;background:var(--peach);opacity:.5;
+  transition:transform .8s var(--ease);
+}
+.stat:hover::after{transform:scale(1.25)}
+.stat .num{
+  position:relative;z-index:1;
+  font-size:clamp(2.7rem,5.4vw,4.6rem);font-weight:900;line-height:1;
+  letter-spacing:-.05em;color:var(--coral);font-variant-numeric:tabular-nums;
+}
+.stat .lbl{position:relative;z-index:1;margin-block-start:.9rem;font-weight:800;font-size:1.02rem}
+.stat .sub{margin-block-start:.3rem}
+
+/* ============================================================
+   SPLIT / MEDIA
+   ============================================================ */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.media{
+  position:relative;border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--shadow-lg);aspect-ratio:4/3.3;
+  background:var(--navy);
+}
+.media img{width:100%;height:100%;object-fit:cover;filter:saturate(.76) contrast(1.05)}
+.media::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(42,39,60,.05), rgba(42,39,60,.35));
+}
+.media .float{
+  position:absolute;z-index:3;inset-block-end:1.2rem;inset-inline-start:1.2rem;
+  display:flex;align-items:center;gap:.85rem;
+  padding:.9rem 1.25rem;border-radius:var(--r-md);
+  background:rgba(242,240,235,.95);
+  backdrop-filter:blur(12px);
+  box-shadow:var(--shadow-sm);
+}
+.media .float b{font-size:1.55rem;line-height:1;color:var(--coral);font-weight:900}
+.media .float span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--navy);line-height:1.35}
+body.lang-ar .media .float span{letter-spacing:0;font-size:.76rem}
+
+.chip{
+  position:absolute;z-index:3;inset-block-start:1.1rem;inset-inline-start:1.1rem;
+  padding:.5rem 1rem;border-radius:999px;
+  background:rgba(242,240,235,.94);backdrop-filter:blur(10px);
+  font-size:.63rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);
+}
+body.lang-ar .chip{letter-spacing:0;font-size:.72rem}
+
+.pills{display:flex;gap:.7rem;flex-wrap:wrap;margin-block-start:2rem}
+.pill-tag{
+  padding:.6rem 1.15rem;border-radius:999px;
+  background:var(--beige);border:1px solid rgba(42,39,60,.12);
+  font-size:.76rem;font-weight:700;color:var(--navy);box-shadow:var(--shadow-sm);
+}
+.slide.dark .pill-tag{background:rgba(242,240,235,.06);border-color:rgba(242,240,235,.16);color:var(--beige);box-shadow:none}
+
+/* ============================================================
+   WHY CARDS (dark)
+   ============================================================ */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.9rem,1.8vw,1.4rem)}
+.why-card{
+  position:relative;overflow:hidden;
+  padding:clamp(1.8rem,3vw,2.7rem);
+  border-radius:var(--r-xl);
+  background:rgba(242,240,235,.045);
+  border:1px solid rgba(242,240,235,.1);
+  transition:.6s var(--ease);
+}
+.why-card:hover{background:rgba(242,240,235,.09);transform:translateY(-7px);border-color:rgba(233,90,84,.55)}
+.why-card .idx{
+  position:absolute;inset-block-start:1.35rem;inset-inline-end:1.6rem;
+  font-size:.7rem;font-weight:800;letter-spacing:.14em;color:var(--green);
+}
+.why-card .ico{
+  width:54px;height:54px;border-radius:17px;display:grid;place-items:center;
+  background:var(--coral);color:var(--beige);margin-block-end:1.55rem;
+  box-shadow:0 14px 34px -16px rgba(233,90,84,.9);
+}
+.why-card h3{color:var(--beige);margin-block-end:.7rem}
+.why-card p{font-size:.94rem;line-height:1.68;color:rgba(242,240,235,.68)}
+
+/* ============================================================
+   CHALLENGE / SOLUTION PANELS
+   ============================================================ */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.2vw,1.8rem)}
+.panel{border-radius:var(--r-xl);padding:clamp(1.7rem,3vw,2.7rem)}
+.panel.bad{background:var(--beige);border:1px solid rgba(42,39,60,.1);box-shadow:var(--shadow-md);color:var(--navy)}
+.panel.good{background:var(--navy);color:var(--beige);box-shadow:var(--shadow-lg);border:1px solid rgba(242,240,235,.1)}
+.panel h3{display:flex;align-items:center;gap:.75rem;margin-block-end:1.5rem;font-size:1.02rem}
+.panel .pill{
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;
+  padding:.35rem .8rem;border-radius:999px;
+}
+body.lang-ar .panel .pill{letter-spacing:0;font-size:.7rem}
+.panel.bad .pill{background:var(--peach);color:var(--navy)}
+.panel.good .pill{background:var(--coral);color:var(--beige)}
+.list{display:flex;flex-direction:column;gap:.95rem}
+.li{display:flex;gap:.85rem;align-items:flex-start;font-size:.95rem;line-height:1.5;font-weight:500}
+.li .tick{
+  flex:0 0 22px;width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;margin-block-start:1px;
+}
+.panel.bad .li .tick{background:rgba(42,39,60,.08);color:var(--green)}
+.panel.good .li .tick{background:rgba(233,90,84,.24);color:var(--coral)}
+.li small{display:block;font-size:.76rem;font-weight:600;color:var(--green);margin-block-start:.15rem}
+.panel.good .li small{color:rgba(251,205,171,.7)}
+
+/* ============================================================
+   FEATURE GRID
+   ============================================================ */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.7rem,1.3vw,1.05rem)}
+.feat{
+  background:var(--beige);border-radius:var(--r-md);padding:clamp(1.25rem,2vw,1.75rem);
+  border:1px solid rgba(42,39,60,.08);box-shadow:var(--shadow-sm);
+  transition:.5s var(--ease);position:relative;overflow:hidden;
+}
+.feat::before{
+  content:"";position:absolute;inset-block-start:0;inset-inline:0;height:3px;
+  background:linear-gradient(90deg,var(--coral),var(--peach));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease);
+}
+.feat:hover::before{transform:scaleX(1)}
+.feat:hover{transform:translateY(-7px);box-shadow:var(--shadow-md);border-color:rgba(233,90,84,.35)}
+.feat .ico{
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+  background:rgba(233,90,84,.12);color:var(--coral);margin-block-end:1.05rem;
+  transition:.45s var(--ease);
+}
+.feat:hover .ico{background:var(--coral);color:var(--beige);transform:rotate(-6deg) scale(1.06)}
+.feat h4{font-size:.95rem;font-weight:800;margin-block-end:.4rem}
+.feat p{font-size:.8rem;line-height:1.55;color:rgba(42,39,60,.65)}
+.feat .sub{font-size:.74rem;margin-block-start:.45rem}
+
+/* ============================================================
+   WORKFLOW
+   ============================================================ */
+.flow{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(.5rem,1.4vw,1.3rem);
+  margin-block-start:clamp(2.4rem,5vw,3.8rem);position:relative;
+}
+.flow::before{
+  content:"";position:absolute;inset-block-start:31px;inset-inline:9%;height:2px;
+  background:linear-gradient(90deg,var(--coral),var(--peach),var(--coral));opacity:.38;
+}
+.step{position:relative;text-align:center}
+.step .ball{
+  width:62px;height:62px;border-radius:50%;
+  background:var(--beige);border:2px solid var(--coral);
+  display:grid;place-items:center;margin-inline:auto;
+  margin-block-end:1.25rem;color:var(--coral);
+  font-weight:900;font-size:1.05rem;position:relative;z-index:2;
+  transition:.5s var(--ease);box-shadow:0 0 0 9px var(--beige);
+}
+.step:hover .ball{background:var(--coral);color:var(--beige);transform:scale(1.1)}
+.step h4{font-size:.88rem;font-weight:800;margin-block-end:.35rem}
+.step p{font-size:.76rem;line-height:1.5;color:rgba(42,39,60,.62)}
+
+/* ============================================================
+   GOVERNMENT
+   ============================================================ */
+.gov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.9rem,1.8vw,1.4rem)}
+.gov{
+  position:relative;overflow:hidden;text-align:center;
+  padding:clamp(1.8rem,3vw,2.7rem);
+  border-radius:var(--r-xl);
+  background:rgba(242,240,235,.05);
+  border:1px solid rgba(242,240,235,.1);
+  transition:.6s var(--ease);
+}
+.gov:hover{background:rgba(242,240,235,.09);transform:translateY(-7px)}
+.gov .seal{
+  width:76px;height:76px;border-radius:22px;margin-inline:auto;margin-block-end:1.35rem;
+  display:grid;place-items:center;background:var(--beige);color:var(--navy);
+  box-shadow:0 20px 44px -22px rgba(242,240,235,.7);
+  transition:.5s var(--ease);
+}
+.gov:hover .seal{background:var(--peach);transform:rotate(-5deg)}
+.gov h4{font-size:1rem;color:var(--beige);letter-spacing:.02em}
+.gov p{font-size:.8rem;line-height:1.6;color:rgba(242,240,235,.62);margin-block-start:.6rem}
+.gov .tag{
+  display:inline-block;margin-block-start:1.15rem;
+  font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800;
+  padding:.35rem .85rem;border-radius:999px;
+  background:rgba(233,90,84,.22);color:var(--peach);
+}
+body.lang-ar .gov .tag{letter-spacing:0;font-size:.68rem}
+
+/* ============================================================
+   FEATURE SPLIT (with benefits)
+   ============================================================ */
+.fs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.benefits{display:flex;flex-direction:column;gap:1.05rem;margin-block-start:1.9rem}
+.benefit{display:flex;gap:.9rem;align-items:flex-start}
+.benefit .tick{
+  flex:0 0 26px;width:26px;height:26px;border-radius:50%;
+  background:rgba(233,90,84,.14);color:var(--coral);
+  display:grid;place-items:center;margin-block-start:1px;
+}
+.benefit b{display:block;font-size:.94rem;font-weight:700}
+.benefit span{display:block;font-size:.82rem;color:var(--green);line-height:1.55}
+.slide.dark .benefit span{color:rgba(242,240,235,.6)}
+
+/* ============================================================
+   GUEST SUITE
+   ============================================================ */
+.suite{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.7rem,1.3vw,1.1rem)}
+.suite-card{
+  display:flex;flex-direction:column;overflow:hidden;
+  background:var(--beige);border-radius:var(--r-md);
+  border:1px solid rgba(42,39,60,.08);box-shadow:var(--shadow-sm);
+  transition:.55s var(--ease);
+}
+.suite-card:hover{transform:translateY(-9px);box-shadow:var(--shadow-md)}
+.suite-card .thumb{height:132px;overflow:hidden;position:relative;background:var(--navy)}
+.suite-card .thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.75);transition:transform .8s var(--ease)}
+.suite-card:hover .thumb img{transform:scale(1.09)}
+.suite-card .thumb .ic{
+  position:absolute;inset-block-end:-18px;inset-inline-start:1rem;
+  width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+  background:var(--coral);color:var(--beige);box-shadow:var(--shadow-sm);
+}
+.suite-card .body{padding:1.6rem 1.15rem 1.25rem}
+.suite-card h4{font-size:.93rem;font-weight:800;margin-block-end:.4rem}
+.suite-card p{font-size:.79rem;line-height:1.55;color:rgba(42,39,60,.64)}
+.suite-card .sub{font-size:.73rem;margin-block-start:.5rem}
+
+/* ============================================================
+   MODULES
+   ============================================================ */
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.7rem,1.5vw,1.2rem)}
+.mods.three{grid-template-columns:repeat(3,1fr)}
+.mod{
+  position:relative;overflow:hidden;
+  padding:clamp(1.4rem,2.3vw,2.1rem);
+  border-radius:var(--r-lg);
+  background:var(--beige);
+  border:1px solid rgba(42,39,60,.08);
+  box-shadow:var(--shadow-sm);
+  transition:.55s var(--ease);
+}
+.mod::before{
+  content:"";position:absolute;inset-block-start:0;inset-inline:0;height:3px;
+  background:var(--coral);transform:scaleX(0);transform-origin:0 50%;transition:.5s var(--ease);
+}
+.mod:hover::before{transform:scaleX(1)}
+.mod:hover{transform:translateY(-8px);box-shadow:var(--shadow-md)}
+.mod .ico{
+  width:50px;height:50px;border-radius:15px;display:grid;place-items:center;
+  background:var(--navy);color:var(--peach);margin-block-end:1.25rem;
+  transition:.5s var(--ease);
+}
+.mod:hover .ico{background:var(--coral);color:var(--beige)}
+.mod h4{font-size:.98rem;font-weight:800}
+.mod .sub{font-size:.76rem;margin-block-start:.15rem}
+.mod ul{list-style:none;margin-block-start:1rem;display:flex;flex-direction:column;gap:.5rem}
+.mod ul li{
+  position:relative;padding-inline-start:.9rem;
+  font-size:.79rem;line-height:1.45;color:rgba(42,39,60,.68);font-weight:500;
+}
+.mod ul li::before{
+  content:"";position:absolute;inset-inline-start:0;inset-block-start:.45rem;
+  width:5px;height:5px;border-radius:50%;background:var(--coral);
+}
+
+.slide.dark .mod{background:rgba(242,240,235,.05);border-color:rgba(242,240,235,.1);box-shadow:none}
+.slide.dark .mod h4{color:var(--beige)}
+.slide.dark .mod ul li{color:rgba(242,240,235,.64)}
+.slide.dark .mod .ico{background:var(--coral);color:var(--beige)}
+.slide.dark .mod:hover{background:rgba(242,240,235,.09)}
+
+/* ============================================================
+   WHO CARDS
+   ============================================================ */
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.9rem,1.8vw,1.4rem)}
+.who-card{
+  position:relative;overflow:hidden;border-radius:var(--r-xl);
+  aspect-ratio:3/3.5;box-shadow:var(--shadow-lg);background:var(--navy);
+}
+.who-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.78);transition:transform 1s var(--ease)}
+.who-card:hover img{transform:scale(1.08)}
+.who-card::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(42,39,60,0) 30%, rgba(42,39,60,.94) 100%);
+}
+.who-card .txt{position:absolute;inset-inline:0;inset-block-end:0;padding:1.8rem 1.5rem;z-index:2;color:var(--beige)}
+.who-card .n{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--peach)}
+body.lang-ar .who-card .n{letter-spacing:0;font-size:.7rem}
+.who-card h4{font-size:1.2rem;margin-block-start:.4rem;font-weight:800}
+.who-card p{font-size:.8rem;line-height:1.6;color:rgba(242,240,235,.74);margin-block-start:.5rem}
+
+/* ============================================================
+   VISION / MISSION
+   ============================================================ */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.9rem,2.2vw,1.8rem)}
+.vm-card{
+  padding:clamp(2rem,3.4vw,3rem);border-radius:var(--r-xl);
+  background:rgba(242,240,235,.05);border:1px solid rgba(242,240,235,.1);
+  transition:.55s var(--ease);
+}
+.vm-card:hover{background:rgba(242,240,235,.09);transform:translateY(-6px);border-color:rgba(233,90,84,.45)}
+.vm-card .ring{
+  width:58px;height:58px;border-radius:50%;border:2px solid var(--coral);
+  display:grid;place-items:center;color:var(--coral);margin-block-end:1.5rem;
+  transition:.5s var(--ease);
+}
+.vm-card:hover .ring{background:var(--coral);color:var(--beige);transform:rotate(-8deg)}
+.vm-card h3{font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--beige);letter-spacing:-.02em}
+.vm-card p{margin-block-start:1rem;font-size:.96rem;line-height:1.72;color:rgba(242,240,235,.72)}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.s-contact{justify-content:center}
+.s-contact::before{
+  background:
+    radial-gradient(circle at 84% 12%, rgba(233,90,84,.28), transparent 46%),
+    radial-gradient(circle at 8% 92%, rgba(251,205,171,.15), transparent 46%) !important;
+}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.7rem,1.5vw,1.1rem);
+  margin-block-start:clamp(2.4rem,4.6vw,3.4rem);
+}
+.cc{
+  padding:1.45rem;border-radius:var(--r-md);
+  background:rgba(242,240,235,.05);border:1px solid rgba(242,240,235,.1);
+  transition:.45s var(--ease);
+}
+.cc:hover{background:rgba(242,240,235,.1);transform:translateY(-5px);border-color:rgba(251,205,171,.4)}
+.cc .ico{
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:var(--coral);color:var(--beige);margin-block-end:1rem;
+}
+.cc small{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);font-weight:800;margin-block-end:.35rem}
+body.lang-ar .cc small{letter-spacing:0;font-size:.68rem}
+.cc b{font-size:.87rem;font-weight:600;line-height:1.5;word-break:break-word;color:var(--beige)}
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center;margin-block-start:2.6rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:1rem 1.9rem;border-radius:999px;
+  background:var(--coral);color:var(--beige);text-decoration:none;
+  font-weight:800;font-size:.88rem;letter-spacing:.01em;
+  transition:.45s var(--ease);
+  box-shadow:0 20px 44px -20px rgba(233,90,84,.95);
+}
+.btn:hover{transform:translateY(-4px);box-shadow:0 28px 56px -20px rgba(233,90,84,1)}
+.btn.ghost{
+  background:transparent;border:1px solid rgba(242,240,235,.3);box-shadow:none;color:var(--beige);
+}
+.btn.ghost:hover{border-color:var(--peach);background:rgba(242,240,235,.07)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1080px){
+  .features,.mods,.suite,.contact-grid{grid-template-columns:repeat(2,1fr)}
+  .who{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:repeat(5,1fr)}
+  .flow::before{display:none}
+}
+@media(max-width:880px){
+  .split,.fs,.duo,.vm{grid-template-columns:1fr}
+  .stats-grid,.why-grid,.gov-grid,.mods.three{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .who{grid-template-columns:1fr}
+  .rail{inset-inline-end:10px;gap:8px}
+  .dot{width:6px;height:6px}
+  .dot.on{height:18px}
+  .counter{display:none}
+  .topbar{padding-inline:1.1rem}
+  .brand small{display:none}
+  .media,.split .media{aspect-ratio:16/10}
+  .sec-head{gap:1rem}
+}
+@media(max-width:560px){
+  .features,.mods,.suite,.contact-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .hero-meta{gap:1.4rem}
+  .lang-btn{padding:.38rem .7rem;font-size:.72rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ CINEMATIC LAYERS ============ -->
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="progress"><i id="bar"></i></div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <a class="brand" href="#s1" aria-label="Fandaqah">
+    <svg viewBox="0 0 50 70" aria-hidden="true">
+      <rect x="7" y="5" width="36" height="60" rx="18" fill="#e95a54" transform="rotate(-7 25 35)"/>
+      <circle cx="26" cy="19" r="6.5" fill="#8f9793"/>
+    </svg>
+    <b>فندقة</b><small>fandaqah</small>
+  </a>
+
+  <div class="topbar-right">
+    <div class="lang" role="group" aria-label="Language">
+      <button class="lang-btn on" data-lang="en" type="button">EN</button>
+      <button class="lang-btn" data-lang="ar" type="button">ع</button>
+    </div>
+    <div class="counter"><b id="curNum">01</b> / 16</div>
+  </div>
+</header>
+
+<!-- ============ RAIL ============ -->
+<nav class="rail" id="rail" aria-label="Slide navigation"></nav>
+
+<main class="deck" id="deck">
+
+  <!-- ============ 01 · HERO ============ -->
+  <section class="slide dark hero" id="s1">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=2400&q=80" alt="Luxury hotel lobby">
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-tag rv">
+        <i></i>
+        <span data-en="Smart Hospitality · KSA" data-ar="ضيافة ذكية · السعودية">Smart Hospitality · KSA</span>
+      </div>
+
+      <h1 class="h1 rv" style="--d:.08s"
+        data-en="Smart Hospitality<br><em>Management</em> System"
+        data-ar="نظام إدارة <em>الضيافة</em> الذكي">
+        Smart Hospitality<br><em>Management</em> System
+      </h1>
+
+      <p class="lead rv" style="--d:.18s"
+        data-en="The heartbeat of hotel operations — smart management, an exceptional guest experience, and sustainable growth. Built for the Saudi market, trusted across the region."
+        data-ar="القلب النابض للعمليات الفندقية: إدارة ذكية، تجربة نزلاء متميزة، ونمو مستدام. مصمم للسوق السعودي وموثوق في كل المنطقة.">
+        The heartbeat of hotel operations — smart management, an exceptional guest experience, and sustainable growth. Built for the Saudi market, trusted across the region.
+      </p>
+
+      <div class="hero-rule rv" style="--d:.26s"></div>
+
+      <div class="hero-meta rv" style="--d:.34s">
+        <div>
+          <b>800+</b>
+          <span data-en="Properties" data-ar="منشأة">Properties</span>
+        </div>
+        <div>
+          <b>3</b>
+          <span data-en="Countries" data-ar="دول">Countries</span>
+        </div>
+        <div>
+          <b>24/7</b>
+          <span data-en="Local support" data-ar="دعم محلي">Local support</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span data-en="Scroll" data-ar="مرر">Scroll</span><i></i>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="band" aria-hidden="true">
+    <div class="band-track" id="bandTrack"></div>
+  </div>
+
+  <!-- ============ 02 · STATS ============ -->
+  <section class="slide light" id="s2">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Trusted across the region" data-ar="ثقة في كل أنحاء المنطقة">Trusted across the region</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Numbers that speak<br><em>hospitality.</em>"
+            data-ar="أرقام تتحدث<br>بلغة <em>الضيافة.</em>">
+            Numbers that speak<br><em>hospitality.</em>
+          </h2>
+        </div>
+        <p class="lead rv" style="--d:.14s"
+          data-en="More than 800 properties rely on Fandaqah to run their front desk, operations and finances — from small hotels to coastal resorts."
+          data-ar="أكثر من 800 منشأة تعتمد على فندقة في إدارة الاستقبال والعمليات والمالية — من الفنادق الصغيرة إلى المنتجعات الساحلية.">
+          More than 800 properties rely on Fandaqah to run their front desk, operations and finances — from small hotels to coastal resorts.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat rv" style="--d:.06s">
+          <div class="num"><span data-count="800">0</span>+</div>
+          <div class="lbl" data-en="Properties trust us" data-ar="منشأة تثق بنا">Properties trust us</div>
+          <span class="sub" data-en="منشأة تثق بنا" data-ar="Properties trust us">منشأة تثق بنا</span>
+        </div>
+        <div class="stat rv" style="--d:.14s">
+          <div class="num"><span data-count="3">0</span></div>
+          <div class="lbl" data-en="Countries served" data-ar="دول نخدمها">Countries served</div>
+          <span class="sub" data-en="السعودية · الأردن · مصر" data-ar="KSA · Jordan · Egypt">السعودية · الأردن · مصر</span>
+        </div>
+        <div class="stat rv" style="--d:.22s">
+          <div class="num">24/7</div>
+          <div class="lbl" data-en="Local technical support" data-ar="دعم فني محلي">Local technical support</div>
+          <span class="sub" data-en="دعم فني محلي" data-ar="Local technical support">دعم فني محلي</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · ABOUT ============ -->
+  <section class="slide light" id="s3">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow rv" data-en="About Fandaqah" data-ar="عن فندقة">About Fandaqah</div>
+        <h2 class="h2 rv" style="--d:.06s"
+          data-en="Property management<br>should be <em>simple.</em>"
+          data-ar="إدارة المنشأة<br>يجب أن تكون <em>بسيطة.</em>">
+          Property management<br>should be <em>simple.</em>
+        </h2>
+
+        <p class="lead rv" style="--d:.14s;margin-block-start:1.4rem"
+          data-en="At Fandaqah PMS we build smart hospitality technology for hotels, serviced apartments, resorts and chalets — one intuitive platform that connects reservations, operations, sales and finance in a single shared data model."
+          data-ar="في فندقة PMS نبتكر تقنيات ضيافة ذكية للفنادق والشقق الفندقية والمنتجعات والشاليهات — منصة سهلة تربط الحجوزات والعمليات والمبيعات والمالية في نموذج بيانات واحد.">
+          At Fandaqah PMS we build smart hospitality technology for hotels, serviced apartments, resorts and chalets — one intuitive platform that connects reservations, operations, sales and finance in a single shared data model.
+        </p>
+
+        <p class="lead rv" style="--d:.2s;margin-block-start:1rem;font-size:.95rem"
+          data-en="Serving more than 800 properties across Saudi Arabia, Jordan and Egypt — with Arabic-first design and local expertise."
+          data-ar="نخدم أكثر من 800 منشأة في السعودية والأردن ومصر — بتصميم عربي أولاً وخبرة محلية.">
+          Serving more than 800 properties across Saudi Arabia, Jordan and Egypt — with Arabic-first design and local expertise.
+        </p>
+
+        <div class="pills rv" style="--d:.28s">
+          <span class="pill-tag" data-en="Saudi-ready" data-ar="جاهز للسوق السعودي">Saudi-ready</span>
+          <span class="pill-tag" data-en="Cloud-based" data-ar="سحابي بالكامل">Cloud-based</span>
+          <span class="pill-tag" data-en="Arabic &amp; English" data-ar="عربي وإنجليزي">Arabic &amp; English</span>
+        </div>
+      </div>
+
+      <div class="media rv" style="--d:.12s">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Fandaqah analytics dashboard">
+        <div class="float">
+          <b>98%</b>
+          <span data-en="Guest data<br>accuracy" data-ar="دقة بيانات<br>النزلاء">Guest data<br>accuracy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · WHY ============ -->
+  <section class="slide dark" id="s4">
+    <div class="wrap">
+      <div class="eyebrow rv" data-en="Why Fandaqah" data-ar="لماذا فندقة">Why Fandaqah</div>
+      <h2 class="h2 rv" style="--d:.06s;max-width:16ch"
+        data-en="Three reasons hoteliers choose <em>us.</em>"
+        data-ar="ثلاثة أسباب تجعل الفنادق تختار<em>نا.</em>">
+        Three reasons hoteliers choose <em>us.</em>
+      </h2>
+
+      <div class="why-grid" style="margin-block-start:clamp(2.2rem,4.5vw,3.4rem)">
+        <div class="why-card rv" style="--d:.06s">
+          <div class="idx">01</div>
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+          </div>
+          <h3 data-en="Built for the Saudi Market" data-ar="مصمم للسوق السعودي">Built for the Saudi Market</h3>
+          <p data-en="Technology designed to meet Saudi market requirements and local regulations — Shomoos, ZATCA and the Ministry of Tourism."
+             data-ar="تقنية تلبي متطلبات السوق السعودي واللوائح المحلية — شموس، هيئة الزكاة والجمارك، ووزارة السياحة.">
+            Technology designed to meet Saudi market requirements and local regulations — Shomoos, ZATCA and the Ministry of Tourism.
+          </p>
+        </div>
+
+        <div class="why-card rv" style="--d:.14s">
+          <div class="idx">02</div>
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/><path d="M9 15l2 2 4-4"/></svg>
+          </div>
+          <h3 data-en="Simple &amp; Easy to Operate" data-ar="سهل التشغيل والاستخدام">Simple &amp; Easy to Operate</h3>
+          <p data-en="An intuitive system that removes complexity and cuts training time for your front-desk team."
+             data-ar="نظام بديهي يقلل التعقيد ويختصر وقت تدريب فريق الاستقبال.">
+            An intuitive system that removes complexity and cuts training time for your front-desk team.
+          </p>
+        </div>
+
+        <div class="why-card rv" style="--d:.22s">
+          <div class="idx">03</div>
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0118 0v2"/><path d="M21 14v3a2 2 0 01-2 2h-1v-5h3zM3 14v3a2 2 0 002 2h1v-5H3z"/></svg>
+          </div>
+          <h3 data-en="Immediate 24/7 Support" data-ar="دعم فوري 24/7">Immediate 24/7 Support</h3>
+          <p data-en="Fast, knowledgeable support from a team that understands the local hospitality market."
+             data-ar="دعم سريع من فريق يفهم سوق الضيافة المحلي جيداً.">
+            Fast, knowledgeable support from a team that understands the local hospitality market.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · CHALLENGES ============ -->
+  <section class="slide light" id="s5">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Challenges &amp; Solutions" data-ar="التحديات والحلول">Challenges &amp; Solutions</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Facing these issues in your<br>property management?"
+            data-ar="هل تواجه هذه التحديات<br>في إدارة منشأتك؟">
+            Facing these issues in your<br>property management?
+          </h2>
+        </div>
+      </div>
+
+      <div class="duo">
+        <div class="panel bad rv" style="--d:.08s">
+          <h3><span class="pill" data-en="Today" data-ar="الوضع الحالي">Today</span>
+            <span data-en="The challenges" data-ar="التحديات">The challenges</span>
+          </h3>
+          <div class="list">
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+              <div>
+                <span data-en="Manual, exhausting operations" data-ar="إدارة يدوية مرهقة">Manual, exhausting operations</span>
+                <small data-en="إدارة يدوية مرهقة تستهلك وقت الفريق" data-ar="Time-consuming manual work">إدارة يدوية مرهقة تستهلك وقت الفريق</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+              <div>
+                <span data-en="Delayed invoicing &amp; collections" data-ar="تأخير في الفوترة والتحصيل">Delayed invoicing &amp; collections</span>
+                <small data-en="تأخير في الفوترة وتحصيل المستحقات" data-ar="Late invoices and slow cash collection">تأخير في الفوترة وتحصيل المستحقات</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+              <div>
+                <span data-en="Weak government compliance" data-ar="ضعف الامتثال للمتطلبات الحكومية">Weak government compliance</span>
+                <small data-en="ضعف في الامتثال للمتطلبات الحكومية" data-ar="Compliance gaps and manual reporting">ضعف في الامتثال للمتطلبات الحكومية</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+              <div>
+                <span data-en="Fragmented guest experience" data-ar="تجربة ضيف غير متكاملة">Fragmented guest experience</span>
+                <small data-en="تجربة ضيف غير متكاملة وغير احترافية" data-ar="Inconsistent, unpolished guest journey">تجربة ضيف غير متكاملة وغير احترافية</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel good rv" style="--d:.16s">
+          <h3><span class="pill" data-en="Fandaqah" data-ar="فندقة">Fandaqah</span>
+            <span data-en="How we solve them" data-ar="كيف نحلها">How we solve them</span>
+          </h3>
+          <div class="list">
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div>
+                <span data-en="Smart bookings — 70% less staff time" data-ar="حجوزات ذكية توفر 70% من وقت الفريق">Smart bookings — 70% less staff time</span>
+                <small data-en="نظام حجوزات ذكي يوفر 70% من وقت الفريق" data-ar="Automated booking engine saves 70% of staff time">نظام حجوزات ذكي يوفر 70% من وقت الفريق</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div>
+                <span data-en="Automated invoices &amp; instant collection" data-ar="فواتير تلقائية وتحصيل فوري">Automated invoices &amp; instant collection</span>
+                <small data-en="فواتير تلقائية وتحصيل فوري للمدفوعات" data-ar="E-invoices issued automatically, payments collected instantly">فواتير تلقائية وتحصيل فوري للمدفوعات</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div>
+                <span data-en="Direct integration with all authorities" data-ar="تكامل مباشر مع الجهات الحكومية">Direct integration with all authorities</span>
+                <small data-en="تكامل حكومي مباشر مع الجهات المعنية" data-ar="Direct government integration, zero manual filing">تكامل حكومي مباشر مع الجهات المعنية</small>
+              </div>
+            </div>
+            <div class="li">
+              <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div>
+                <span data-en="A fast, friendly guest interface" data-ar="واجهة ضيوف سريعة وودودة">A fast, friendly guest interface</span>
+                <small data-en="واجهة سهلة وسريعة تحسن تجربة الضيوف" data-ar="An easy, fast interface guests genuinely enjoy">واجهة سهلة وسريعة تحسن تجربة الضيوف</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · FEATURES ============ -->
+  <section class="slide light" id="s6">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="What we offer" data-ar="ما نقدمه">What we offer</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Everything your property needs, <em>connected.</em>"
+            data-ar="كل ما تحتاجه منشأتك، <em>مترابطاً.</em>">
+            Everything your property needs, <em>connected.</em>
+          </h2>
+        </div>
+        <p class="lead rv" style="--d:.14s"
+          data-en="Eight core capabilities that turn daily hotel operations into one smooth, automated flow."
+          data-ar="ثماني قدرات أساسية تحول العمليات الفندقية اليومية إلى تدفق واحد سلس ومؤتمت.">
+          Eight core capabilities that turn daily hotel operations into one smooth, automated flow.
+        </p>
+      </div>
+
+      <div class="features">
+        <div class="feat rv" style="--d:.04s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></div>
+          <h4 data-en="Channel Manager" data-ar="مدير القنوات">Channel Manager</h4>
+          <p data-en="Multi-channel bookings from one platform." data-ar="حجوزات من كل القنوات عبر منصة واحدة.">Multi-channel bookings from one platform.</p>
+          <span class="sub" data-en="حجوزات من كل القنوات" data-ar="Bookings from every channel">حجوزات من كل القنوات</span>
+        </div>
+
+        <div class="feat rv" style="--d:.09s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <h4 data-en="One-Click Check-In/Out" data-ar="تسجيل دخول وخروج بضغطة">One-Click Check-In/Out</h4>
+          <p data-en="Fast, efficient guest processing." data-ar="معالجة سريعة وفعّالة للنزلاء.">Fast, efficient guest processing.</p>
+          <span class="sub" data-en="تسجيل دخول وخروج بضغطة" data-ar="Check-in and out in one click">تسجيل دخول وخروج بضغطة</span>
+        </div>
+
+        <div class="feat rv" style="--d:.14s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+          <h4 data-en="Compliant E-Invoicing" data-ar="فواتير إلكترونية متوافقة">Compliant E-Invoicing</h4>
+          <p data-en="Invoices that meet ZATCA requirements." data-ar="فواتير تلبي متطلبات هيئة الزكاة والجمارك.">Invoices that meet ZATCA requirements.</p>
+          <span class="sub" data-en="فواتير إلكترونية متوافقة" data-ar="ZATCA-compliant e-invoices">فواتير إلكترونية متوافقة</span>
+        </div>
+
+        <div class="feat rv" style="--d:.19s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <h4 data-en="Real-Time Reports" data-ar="تقارير لحظية">Real-Time Reports</h4>
+          <p data-en="Instant analytics for informed decisions." data-ar="تحليلات فورية لقرارات مدروسة.">Instant analytics for informed decisions.</p>
+          <span class="sub" data-en="تقارير لحظية" data-ar="Live reporting dashboards">تقارير لحظية</span>
+        </div>
+
+        <div class="feat rv" style="--d:.04s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h4 data-en="Built-In Compliance" data-ar="امتثال مدمج">Built-In Compliance</h4>
+          <p data-en="Automatic sync with Shomoos &amp; MOT." data-ar="مزامنة تلقائية مع شموس ووزارة السياحة.">Automatic sync with Shomoos &amp; MOT.</p>
+          <span class="sub" data-en="امتثال تلقائي" data-ar="Automatic compliance">امتثال تلقائي</span>
+        </div>
+
+        <div class="feat rv" style="--d:.09s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+          <h4 data-en="Mobile Control" data-ar="تحكم من الجوال">Mobile Control</h4>
+          <p data-en="Manage your property from anywhere." data-ar="أدر منشأتك من أي مكان.">Manage your property from anywhere.</p>
+          <span class="sub" data-en="تحكم من جوالك" data-ar="Full control on mobile">تحكم من جوالك</span>
+        </div>
+
+        <div class="feat rv" style="--d:.14s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg></div>
+          <h4 data-en="SMS Notifications" data-ar="إشعارات الرسائل النصية">SMS Notifications</h4>
+          <p data-en="Automated messages for every milestone." data-ar="رسائل تلقائية في كل مرحلة.">Automated messages for every milestone.</p>
+          <span class="sub" data-en="الرسائل النصية" data-ar="Automated SMS messaging">الرسائل النصية</span>
+        </div>
+
+        <div class="feat rv" style="--d:.19s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h4 data-en="Booking Website" data-ar="موقع حجز إلكتروني">Booking Website</h4>
+          <p data-en="Commission-free direct bookings." data-ar="حجوزات مباشرة بدون عمولة.">Commission-free direct bookings.</p>
+          <span class="sub" data-en="موقع حجز إلكتروني" data-ar="Direct, commission-free bookings">موقع حجز إلكتروني</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · WORKFLOW ============ -->
+  <section class="slide light" id="s7">
+    <div class="wrap">
+      <div class="eyebrow rv" data-en="One operating cycle" data-ar="دورة تشغيل واحدة">One operating cycle</div>
+      <h2 class="h2 rv" style="--d:.06s"
+        data-en="From setup to insight,<br>in <em>five moves.</em>"
+        data-ar="من التهيئة إلى التحليل،<br>في <em>خمس خطوات.</em>">
+        From setup to insight,<br>in <em>five moves.</em>
+      </h2>
+      <p class="lead rv" style="--d:.14s;max-width:56ch;margin-block-start:1rem"
+        data-en="A single workflow connects every stage — no duplicated entry, no disconnected systems."
+        data-ar="سير عمل واحد يربط كل المراحل — بدون إدخال مكرر أو أنظمة منفصلة.">
+        A single workflow connects every stage — no duplicated entry, no disconnected systems.
+      </p>
+
+      <div class="flow">
+        <div class="step rv" style="--d:.04s">
+          <div class="ball">01</div>
+          <h4 data-en="Fast Setup" data-ar="تهيئة سريعة">Fast Setup</h4>
+          <p data-en="Ready the system and start operations immediately." data-ar="جهّز النظام وابدأ التشغيل فوراً.">Ready the system and start operations immediately.</p>
+        </div>
+        <div class="step rv" style="--d:.1s">
+          <div class="ball">02</div>
+          <h4 data-en="Central Bookings" data-ar="حجوزات مركزية">Central Bookings</h4>
+          <p data-en="Manage every booking channel from one place." data-ar="أدر كل قنوات الحجز من مكان واحد.">Manage every booking channel from one place.</p>
+        </div>
+        <div class="step rv" style="--d:.16s">
+          <div class="ball">03</div>
+          <h4 data-en="Seamless Check-In/Out" data-ar="دخول وخروج سلس">Seamless Check-In/Out</h4>
+          <p data-en="A fast, smooth experience for your guests." data-ar="تجربة سريعة وسلسة لضيوفك.">A fast, smooth experience for your guests.</p>
+        </div>
+        <div class="step rv" style="--d:.22s">
+          <div class="ball">04</div>
+          <h4 data-en="Automated Invoicing" data-ar="فوترة تلقائية">Automated Invoicing</h4>
+          <p data-en="Issue and send invoices automatically." data-ar="أصدر الفواتير وأرسلها تلقائياً.">Issue and send invoices automatically.</p>
+        </div>
+        <div class="step rv" style="--d:.28s">
+          <div class="ball">05</div>
+          <h4 data-en="Instant Reports" data-ar="تقارير فورية">Instant Reports</h4>
+          <p data-en="Accurate, real-time reports to monitor performance." data-ar="تقارير دقيقة وفورية لمتابعة الأداء.">Accurate, real-time reports to monitor performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · GOVERNMENT ============ -->
+  <section class="slide dark" id="s8">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Government integrations" data-ar="التكامل الحكومي">Government integrations</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="One platform,<br>every authority <em>connected.</em>"
+            data-ar="منصة واحدة،<br>وكل جهة <em>مرتبطة.</em>">
+            One platform,<br>every authority <em>connected.</em>
+          </h2>
+        </div>
+        <p class="lead rv" style="--d:.14s"
+          data-en="Official integration partners — data flows automatically, without manual intervention or compliance risk."
+          data-ar="شركاء تكامل رسميون — تتدفق البيانات تلقائياً دون تدخل يدوي أو مخاطر امتثال.">
+          Official integration partners — data flows automatically, without manual intervention or compliance risk.
+        </p>
+      </div>
+
+      <div class="gov-grid">
+        <div class="gov rv" style="--d:.06s">
+          <div class="seal">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h4>SHOMOOS</h4>
+          <p data-en="Guest data transmitted automatically to the national security platform at check-in."
+             data-ar="إرسال بيانات النزلاء تلقائياً إلى منصة الأمن الوطني عند تسجيل الدخول.">
+            Guest data transmitted automatically to the national security platform at check-in.
+          </p>
+          <div class="tag" data-en="Official partner" data-ar="شريك رسمي">Official partner</div>
+        </div>
+
+        <div class="gov rv" style="--d:.14s">
+          <div class="seal">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+          </div>
+          <h4>ZATCA</h4>
+          <p data-en="Electronic invoices fully compliant with Zakat, Tax and Customs Authority requirements."
+             data-ar="فواتير إلكترونية متوافقة بالكامل مع متطلبات هيئة الزكاة والضريبة والجمارك.">
+            Electronic invoices fully compliant with Zakat, Tax and Customs Authority requirements.
+          </p>
+          <div class="tag" data-en="Official partner" data-ar="شريك رسمي">Official partner</div>
+        </div>
+
+        <div class="gov rv" style="--d:.22s">
+          <div class="seal">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <h4 data-en="Ministry of Tourism" data-ar="وزارة السياحة">Ministry of Tourism</h4>
+          <p data-en="Occupancy reports submitted automatically — no manual intervention."
+             data-ar="رفع تقارير الإشغال تلقائياً — دون أي تدخل يدوي.">
+            Occupancy reports submitted automatically — no manual intervention.
+          </p>
+          <div class="tag" data-en="Official partner" data-ar="شريك رسمي">Official partner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 · CHANNEL MANAGER ============ -->
+  <section class="slide light" id="s9">
+    <div class="wrap fs">
+      <div>
+        <div class="eyebrow rv" data-en="Channel Manager" data-ar="مدير القنوات">Channel Manager</div>
+        <h2 class="h2 rv" style="--d:.06s"
+          data-en="Every booking channel,<br><em>one brain.</em>"
+          data-ar="كل قنوات الحجز،<br><em>بعقل واحد.</em>">
+          Every booking channel,<br><em>one brain.</em>
+        </h2>
+        <p class="lead rv" style="--d:.14s;margin-block-start:1.2rem"
+          data-en="A smart integration that connects Fandaqah PMS with global booking platforms — automatically syncing rates, availability and reservations 24/7."
+          data-ar="تكامل ذكي يربط نظام فندقة بمنصات الحجز العالمية — مع مزامنة تلقائية للأسعار والتوافر والحجوزات على مدار الساعة.">
+          A smart integration that connects Fandaqah PMS with global booking platforms — automatically syncing rates, availability and reservations 24/7.
+        </p>
+
+        <div class="benefits">
+          <div class="benefit rv" style="--d:.2s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="24/7 automatic synchronization" data-ar="مزامنة تلقائية 24/7">24/7 automatic synchronization</b>
+              <span data-en="Rates, availability and reservations stay in perfect sync." data-ar="الأسعار والتوافر والحجوزات دائماً متزامنة.">Rates, availability and reservations stay in perfect sync.</span>
+            </div>
+          </div>
+          <div class="benefit rv" style="--d:.26s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="Centralized control of all channels" data-ar="تحكم مركزي بكل القنوات">Centralized control of all channels</b>
+              <span data-en="No more jumping between extranets." data-ar="لا حاجة للتنقل بين الأنظمة المختلفة.">No more jumping between extranets.</span>
+            </div>
+          </div>
+          <div class="benefit rv" style="--d:.32s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="Fewer errors, more bookings" data-ar="أخطاء أقل وحجوزات أكثر">Fewer errors, more bookings</b>
+              <span data-en="Zero overbooking, zero missed opportunities." data-ar="لا حجز مزدوج ولا فرصة ضائعة.">Zero overbooking, zero missed opportunities.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="media rv" style="--d:.12s">
+        <span class="chip">Booking.com · Expedia · Agoda · Airbnb</span>
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1600&q=80" alt="Booking channels">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 · GUEST SUITE ============ -->
+  <section class="slide light" id="s10">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Guest experience suite" data-ar="حزمة تجربة النزيل">Guest experience suite</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Four touchpoints that make a stay feel <em>effortless.</em>"
+            data-ar="أربع نقاط تجعل الإقامة <em>سهلة جداً.</em>">
+            Four touchpoints that make a stay feel <em>effortless.</em>
+          </h2>
+        </div>
+      </div>
+
+      <div class="suite">
+        <div class="suite-card rv" style="--d:.05s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=80" alt="Booking website">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></div>
+          </div>
+          <div class="body">
+            <h4 data-en="Booking Website" data-ar="موقع الحجز">Booking Website</h4>
+            <p data-en="Commission-free direct bookings, fully synced with your PMS." data-ar="حجوزات مباشرة بدون عمولة، متزامنة بالكامل مع نظامك.">Commission-free direct bookings, fully synced with your PMS.</p>
+            <span class="sub" data-en="موقع إلكتروني" data-ar="Your own booking site">موقع إلكتروني</span>
+          </div>
+        </div>
+
+        <div class="suite-card rv" style="--d:.11s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Payment terminal">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          </div>
+          <div class="body">
+            <h4 data-en="Payment Gateways" data-ar="بوابات الدفع">Payment Gateways</h4>
+            <p data-en="Instant, secure collection — in property or online. Geidea · HyperPay." data-ar="تحصيل فوري وآمن — في المنشأة أو أونلاين. جيديا · هايبر باي.">Instant, secure collection — in property or online. Geidea · HyperPay.</p>
+            <span class="sub" data-en="بوابات الدفع الإلكترونية" data-ar="Secure online payments">بوابات الدفع الإلكترونية</span>
+          </div>
+        </div>
+
+        <div class="suite-card rv" style="--d:.17s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=900&q=80" alt="SMS messaging">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg></div>
+          </div>
+          <div class="body">
+            <h4 data-en="SMS Notifications" data-ar="إشعارات نصية">SMS Notifications</h4>
+            <p data-en="Automated messages for check-in, invoices and e-contracts." data-ar="رسائل تلقائية لتسجيل الدخول والفواتير والعقود الإلكترونية.">Automated messages for check-in, invoices and e-contracts.</p>
+            <span class="sub" data-en="الرسائل النصية" data-ar="Automated guest messaging">الرسائل النصية</span>
+          </div>
+        </div>
+
+        <div class="suite-card rv" style="--d:.23s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt="E-signature">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+          </div>
+          <div class="body">
+            <h4 data-en="Sign Stay — E-Signature" data-ar="توقيع الإقامة الإلكتروني">Sign Stay — E-Signature</h4>
+            <p data-en="Secure digital contracts, stored and accessible anytime." data-ar="عقود رقمية آمنة، محفوظة ومتاحة في أي وقت.">Secure digital contracts, stored and accessible anytime.</p>
+            <span class="sub" data-en="التوقيع الإلكتروني" data-ar="Paperless digital signing">التوقيع الإلكتروني</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 · FAST PASS ============ -->
+  <section class="slide dark" id="s11">
+    <div class="wrap fs">
+      <div class="media rv" style="--d:.06s;order:2">
+        <span class="chip" data-en="Swift Check-In" data-ar="تسجيل دخول سريع">Swift Check-In</span>
+        <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80" alt="Front desk check-in">
+      </div>
+
+      <div style="order:1">
+        <div class="eyebrow rv" data-en="FAST PASS · Swift Check-In" data-ar="فاست باس · تسجيل دخول سريع">FAST PASS · Swift Check-In</div>
+        <h2 class="h2 rv" style="--d:.06s"
+          data-en="Check-in in<br><em>under 2 seconds.</em>"
+          data-ar="تسجيل الدخول في<br><em>أقل من ثانيتين.</em>">
+          Check-in in<br><em>under 2 seconds.</em>
+        </h2>
+        <p class="lead rv" style="--d:.14s;margin-block-start:1.2rem"
+          data-en="A modern device that scans all Saudi passports, IDs and residences — auto-filling guest data instantly, with zero images stored."
+          data-ar="جهاز حديث يمسح جميع الجوازات والهويات والإقامات السعودية — ويعبئ بيانات النزيل تلقائياً دون حفظ أي صور.">
+          A modern device that scans all Saudi passports, IDs and residences — auto-filling guest data instantly, with zero images stored.
+        </p>
+
+        <div class="benefits">
+          <div class="benefit rv" style="--d:.2s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="Auto-filled guest data in under 2 seconds" data-ar="تعبئة بيانات النزيل في أقل من ثانيتين">Auto-filled guest data in under 2 seconds</b>
+              <span data-en="No typing, no queues at peak times." data-ar="لا كتابة يدوية ولا طوابير في أوقات الذروة.">No typing, no queues at peak times.</span>
+            </div>
+          </div>
+          <div class="benefit rv" style="--d:.26s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="High privacy — no images stored" data-ar="خصوصية عالية — لا يتم حفظ أي صور">High privacy — no images stored</b>
+              <span data-en="Full compliance with data protection standards." data-ar="امتثال كامل لمعايير حماية البيانات.">Full compliance with data protection standards.</span>
+            </div>
+          </div>
+          <div class="benefit rv" style="--d:.32s">
+            <span class="tick"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <b data-en="Faster desk, better guest experience" data-ar="استقبال أسرع وتجربة ضيف أفضل">Faster desk, better guest experience</b>
+              <span data-en="More time for hospitality, less for admin." data-ar="وقت أطول للضيافة ووقت أقل للإدارة.">More time for hospitality, less for admin.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 12 · OPERATIONS ============ -->
+  <section class="slide light" id="s12">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Operations modules" data-ar="وحدات التشغيل">Operations modules</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Back-of-house,<br><em>front-of-mind.</em>"
+            data-ar="العمليات الخلفية،<br><em>في مقدمة الاهتمام.</em>">
+            Back-of-house,<br><em>front-of-mind.</em>
+          </h2>
+        </div>
+        <p class="lead rv" style="--d:.14s"
+          data-en="Housekeeping, maintenance, inventory and purchasing — connected to your PMS, not running in spreadsheets."
+          data-ar="التدبير الفندقي والصيانة والمخزون والمشتريات — مرتبطة بنظامك، لا تعمل في جداول منفصلة.">
+          Housekeeping, maintenance, inventory and purchasing — connected to your PMS, not running in spreadsheets.
+        </p>
+      </div>
+
+      <div class="mods">
+        <div class="mod rv" style="--d:.05s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5L4 20l1 1 5.5-5.5"/><path d="M15 3l6 6-6 6-6-6 6-6z"/><path d="M9 9l-5 5"/></svg></div>
+          <h4 data-en="Housekeeping" data-ar="التدبير الفندقي">Housekeeping</h4>
+          <span class="sub" data-en="إدارة التدبير الفندقي" data-ar="Room readiness management">إدارة التدبير الفندقي</span>
+          <ul>
+            <li data-en="Real-time room status" data-ar="حالة الغرف في الوقت الفعلي">Real-time room status</li>
+            <li data-en="Staff task assignment" data-ar="توزيع المهام على الفريق">Staff task assignment</li>
+            <li data-en="Faster room readiness" data-ar="جاهزية أسرع للغرف">Faster room readiness</li>
+          </ul>
+        </div>
+
+        <div class="mod rv" style="--d:.11s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+          <h4 data-en="Maintenance" data-ar="الصيانة">Maintenance</h4>
+          <span class="sub" data-en="إدارة الصيانة" data-ar="Preventive maintenance">إدارة الصيانة</span>
+          <ul>
+            <li data-en="Track maintenance requests" data-ar="تتبع طلبات الصيانة">Track maintenance requests</li>
+            <li data-en="Schedule recurring maintenance" data-ar="جدولة الصيانة الدورية">Schedule recurring maintenance</li>
+            <li data-en="Reduce downtime" data-ar="تقليل فترات التوقف">Reduce downtime</li>
+          </ul>
+        </div>
+
+        <div class="mod rv" style="--d:.17s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+          <h4 data-en="Inventory" data-ar="المخزون">Inventory</h4>
+          <span class="sub" data-en="إدارة المخزون" data-ar="Stock control">إدارة المخزون</span>
+          <ul>
+            <li data-en="Accurate inventory tracking" data-ar="تتبع دقيق للمخزون">Accurate inventory tracking</li>
+            <li data-en="Low-stock alerts" data-ar="تنبيهات نقص المخزون">Low-stock alerts</li>
+            <li data-en="Receiving &amp; issuing" data-ar="الاستلام والصرف">Receiving &amp; issuing</li>
+          </ul>
+        </div>
+
+        <div class="mod rv" style="--d:.23s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+          <h4 data-en="Purchasing" data-ar="المشتريات">Purchasing</h4>
+          <span class="sub" data-en="إدارة المشتريات" data-ar="Procurement control">إدارة المشتريات</span>
+          <ul>
+            <li data-en="Organized approvals" data-ar="موافقات منظمة">Organized approvals</li>
+            <li data-en="Control expenses" data-ar="ضبط المصروفات">Control expenses</li>
+            <li data-en="Fewer purchasing errors" data-ar="أخطاء شراء أقل">Fewer purchasing errors</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 13 · BUSINESS MODULES ============ -->
+  <section class="slide dark" id="s13">
+    <div class="wrap">
+      <div class="eyebrow rv" data-en="Business modules" data-ar="وحدات الأعمال">Business modules</div>
+      <h2 class="h2 rv" style="--d:.06s"
+        data-en="From guest to staff,<br><em>one data model.</em>"
+        data-ar="من النزيل إلى الموظف،<br><em>نموذج بيانات واحد.</em>">
+        From guest to staff,<br><em>one data model.</em>
+      </h2>
+
+      <div class="mods three" style="margin-block-start:clamp(2.2rem,4vw,3.2rem)">
+        <div class="mod rv" style="--d:.06s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h4 data-en="Fandaqah CRM" data-ar="فندقة CRM">Fandaqah CRM</h4>
+          <span class="sub" data-en="إدارة علاقات العملاء" data-ar="Guest relationship management">إدارة علاقات العملاء</span>
+          <ul>
+            <li data-en="SMS, WhatsApp &amp; email communication" data-ar="تواصل عبر الرسائل والواتساب والبريد">SMS, WhatsApp &amp; email communication</li>
+            <li data-en="Unified guest &amp; customer data" data-ar="بيانات موحدة للنزلاء والعملاء">Unified guest &amp; customer data</li>
+            <li data-en="Targeted marketing campaigns" data-ar="حملات تسويقية مستهدفة">Targeted marketing campaigns</li>
+          </ul>
+        </div>
+
+        <div class="mod rv" style="--d:.14s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20M6 14h4"/></svg></div>
+          <h4 data-en="Fandaqah POS" data-ar="فندقة POS">Fandaqah POS</h4>
+          <span class="sub" data-en="نظام نقاط البيع" data-ar="Point of sale">نظام نقاط البيع</span>
+          <ul>
+            <li data-en="Faster sales &amp; service" data-ar="بيع وخدمة أسرع">Faster sales &amp; service</li>
+            <li data-en="Easy order &amp; invoice management" data-ar="إدارة سهلة للطلبات والفواتير">Easy order &amp; invoice management</li>
+            <li data-en="Charged directly to guest folio" data-ar="يُقيّد مباشرة على حساب النزيل">Charged directly to guest folio</li>
+          </ul>
+        </div>
+
+        <div class="mod rv" style="--d:.22s">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M3 13h18"/></svg></div>
+          <h4 data-en="Fandaqah HRM" data-ar="فندقة HRM">Fandaqah HRM</h4>
+          <span class="sub" data-en="الموارد البشرية" data-ar="Human resources">الموارد البشرية</span>
+          <ul>
+            <li data-en="Live attendance &amp; shift tracking" data-ar="حضور ومتابعة ورديات فورية">Live attendance &amp; shift tracking</li>
+            <li data-en="Unified staff records" data-ar="سجلات موظفين موحدة">Unified staff records</li>
+            <li data-en="Simplified payroll &amp; HR reports" data-ar="رواتب وتقارير موارد بشرية مبسطة">Simplified payroll &amp; HR reports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 14 · WHO ============ -->
+  <section class="slide light" id="s14">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow rv" data-en="Who is it for" data-ar="لمن هذا النظام">Who is it for</div>
+          <h2 class="h2 rv" style="--d:.06s"
+            data-en="Purpose-built for every type<br>of hospitality <em>property.</em>"
+            data-ar="مصمم خصيصاً لكل أنواع<br><em>منشآت الضيافة.</em>">
+            Purpose-built for every type<br>of hospitality <em>property.</em>
+          </h2>
+        </div>
+      </div>
+
+      <div class="who">
+        <div class="who-card rv" style="--d:.06s">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1100&q=80" alt="Hotels">
+          <div class="txt">
+            <div class="n" data-en="01 · Hotels" data-ar="٠١ · فنادق">01 · Hotels</div>
+            <h4 data-en="Independent Hotels" data-ar="الفنادق المستقلة">Independent Hotels</h4>
+            <p data-en="Small and mid-sized hotels looking for comprehensive, simple management."
+               data-ar="فنادق صغيرة ومتوسطة تبحث عن إدارة شاملة وبسيطة.">
+              Small and mid-sized hotels looking for comprehensive, simple management.
+            </p>
+          </div>
+        </div>
+
+        <div class="who-card rv" style="--d:.14s">
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1100&q=80" alt="Serviced apartments">
+          <div class="txt">
+            <div class="n" data-en="02 · Serviced Apartments" data-ar="٠٢ · شقق فندقية">02 · Serviced Apartments</div>
+            <h4 data-en="Serviced Apartments" data-ar="الشقق الفندقية">Serviced Apartments</h4>
+            <p data-en="Operational efficiency and a better guest experience, in one cycle."
+               data-ar="كفاءة تشغيلية وتجربة ضيف أفضل في دورة واحدة.">
+              Operational efficiency and a better guest experience, in one cycle.
+            </p>
+          </div>
+        </div>
+
+        <div class="who-card rv" style="--d:.22s">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1100&q=80" alt="Chalets and resorts">
+          <div class="txt">
+            <div class="n" data-en="03 · Chalets &amp; Resorts" data-ar="٠٣ · شاليهات ومنتجعات">03 · Chalets &amp; Resorts</div>
+            <h4 data-en="Chalets &amp; Resorts" data-ar="الشاليهات والمنتجعات">Chalets &amp; Resorts</h4>
+            <p data-en="Coastal and mountain resorts with specialized operational requirements."
+               data-ar="منتجعات ساحلية وجبلية بمتطلبات تشغيلية متخصصة.">
+              Coastal and mountain resorts with specialized operational requirements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 15 · VISION ============ -->
+  <section class="slide dark" id="s15">
+    <div class="wrap">
+      <div class="eyebrow rv" data-en="Vision &amp; Mission" data-ar="الرؤية والرسالة">Vision &amp; Mission</div>
+      <h2 class="h2 rv" style="--d:.06s"
+        data-en="Where we are going,<br>and how we <em>get there.</em>"
+        data-ar="إلى أين نتجه،<br>وكيف <em>نصل.</em>">
+        Where we are going,<br>and how we <em>get there.</em>
+      </h2>
+
+      <div class="vm" style="margin-block-start:clamp(2.2rem,4vw,3.2rem)">
+        <div class="vm-card rv" style="--d:.08s">
+          <div class="ring">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 data-en="Vision" data-ar="الرؤية">Vision</h3>
+          <p data-en="To be the leading hospitality management solution in the Middle East."
+             data-ar="أن نكون الحل الرائد لإدارة الضيافة في الشرق الأوسط.">
+            To be the leading hospitality management solution in the Middle East.
+          </p>
+        </div>
+
+        <div class="vm-card rv" style="--d:.16s">
+          <div class="ring">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+          </div>
+          <h3 data-en="Mission" data-ar="الرسالة">Mission</h3>
+          <p data-en="Deliver smart, simple and secure technology for small and mid-sized hotels."
+             data-ar="تقديم تقنية ذكية وبسيطة وآمنة للفنادق الصغيرة والمتوسطة.">
+            Deliver smart, simple and secure technology for small and mid-sized hotels.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 16 · CONTACT ============ -->
+  <section class="slide dark s-contact" id="s16">
+    <div class="wrap">
+      <div class="eyebrow rv" data-en="Contact us" data-ar="تواصل معنا">Contact us</div>
+      <h2 class="h2 rv" style="--d:.06s"
+        data-en="Book your free demo<br>and see it <em>live.</em>"
+        data-ar="احجز عرضك التجريبي المجاني<br>وشاهده <em>مباشرة.</em>">
+        Book your free demo<br>and see it <em>live.</em>
+      </h2>
+      <p class="lead rv" style="--d:.14s;margin-block-start:1.2rem"
+        data-en="Our team of hospitality, technology and support experts will walk you through the platform — tailored to your property."
+        data-ar="فريقنا من خبراء الضيافة والتقنية والدعم سيرشدك خلال المنصة — بما يتناسب مع منشأتك.">
+        Our team of hospitality, technology and support experts will walk you through the platform — tailored to your property.
+      </p>
+
+      <div class="contact-grid">
+        <div class="cc rv" style="--d:.08s">
+          <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg></div>
+          <small data-en="Email" data-ar="البريد الإلكتروني">Email</small>
+          <b>Service@fandaqah.com</b>
+        </div>
+        <div class="cc rv" style="--d:.14s">
+          <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.2 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <small data-en="Phone" data-ar="الهاتف">Phone</small>
+          <b>+966 55 594 7522<br>920066456</b>
+        </div>
+        <div class="cc rv" style="--d:.2s">
+          <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></div>
+          <small data-en="Website" data-ar="الموقع الإلكتروني">Website</small>
+          <b>www.fandaqah.com</b>
+        </div>
+        <div class="cc rv" style="--d:.26s">
+          <div class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <small data-en="Address" data-ar="العنوان">Address</small>
+          <b data-en="Prince Turkey Street, Aldugheither Village, Al Khobar 34422"
+             data-ar="شارع الأمير تركي، قرية الدغيثر، الخبر 34422">
+            Prince Turkey Street, Aldugheither Village, Al Khobar 34422
+          </b>
+        </div>
+      </div>
+
+      <div class="cta-row rv" style="--d:.32s">
+        <a href="mailto:Service@fandaqah.com" class="btn">
+          <span data-en="Book a free demo →" data-ar="احجز عرضاً مجانياً ←">Book a free demo →</span>
+        </a>
+        <a href="https://www.fandaqah.com" class="btn ghost" target="_blank" rel="noopener">
+          <span data-en="Visit fandaqah.com" data-ar="زيارة fandaqah.com">Visit fandaqah.com</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     THREE.JS — CDN (graceful fallback if unavailable)
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ==========================================================
+     1 · LANGUAGE SYSTEM
+     ========================================================== */
+  var currentLang = 'en';
+
+  function setLang(lang){
+    currentLang = lang;
+    var isAr = lang === 'ar';
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    document.body.classList.toggle('lang-ar', isAr);
+
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var v = el.getAttribute('data-' + lang);
+      if(v !== null) el.innerHTML = v;
+    });
+
+    /* secondary labels swap direction */
+    document.querySelectorAll('.sub').forEach(function(el){
+      el.classList.toggle('rtl', !isAr);
+      el.classList.toggle('ltr', isAr);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('on', b.dataset.lang === lang);
+    });
+
+    try{ localStorage.setItem('fandaqah-lang', lang); }catch(e){}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.dataset.lang); });
+  });
+
+  var saved = null;
+  try{ saved = localStorage.getItem('fandaqah-lang'); }catch(e){}
+  if(saved === 'ar') setLang('ar');
+
+  /* ==========================================================
+     2 · MARQUEE CONTENT
+     ========================================================== */
+  var brands = ['SHOMOOS','ZATCA','MINISTRY OF TOURISM','BOOKING.COM','EXPEDIA','AGODA','AIRBNB','GEIDEA','HYPERPAY'];
+  var track  = document.getElementById('bandTrack');
+  if(track){
+    var html = '';
+    for(var rep = 0; rep < 2; rep++){
+      brands.forEach(function(b){ html += '<span><b>◆</b>' + b + '</span>'; });
+    }
+    track.innerHTML = html;
+  }
+
+  /* ==========================================================
+     3 · REVEAL ON SCROLL
+     ========================================================== */
+  var revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        revealIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll('.rv').forEach(function(el){ revealIO.observe(el); });
+
+  /* ==========================================================
+     4 · ANIMATED COUNTERS
+     ========================================================== */
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var dur = 1600, start = null;
+    function tick(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var countIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        animateCount(e.target);
+        countIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(function(el){ countIO.observe(el); });
+
+  /* ==========================================================
+     5 · NAVIGATION
+     ========================================================== */
+  var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var rail    = document.getElementById('rail');
+  var bar     = document.getElementById('bar');
+  var curNum  = document.getElementById('curNum');
+  var dots    = [];
+
+  slides.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.className = 'dot' + (i === 0 ? ' on' : '');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Slide ' + (i + 1));
+    b.addEventListener('click', function(){ goTo(i); });
+    rail.appendChild(b);
+    dots.push(b);
+  });
+
+  function goTo(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    var y = slides[i].getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  var activeIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && e.intersectionRatio > 0.4){
+        var i = slides.indexOf(e.target);
+        dots.forEach(function(d, j){ d.classList.toggle('on', j === i); });
+        if(curNum) curNum.textContent = ('0' + (i + 1)).slice(-2);
+      }
+    });
+  }, { threshold: [0.4, 0.7] });
+  slides.forEach(function(s){ activeIO.observe(s); });
+
+  /* progress bar */
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? window.pageYOffset / max : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* keyboard */
+  window.addEventListener('keydown', function(e){
+    var current = dots.findIndex(function(d){ return d.classList.contains('on'); });
+    if(['ArrowDown','ArrowRight','PageDown',' '].indexOf(e.key) > -1){
+      e.preventDefault(); goTo(current + 1);
+    } else if(['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key) > -1){
+      e.preventDefault(); goTo(current - 1);
+    } else if(e.key === 'Home'){
+      e.preventDefault(); goTo(0);
+    } else if(e.key === 'End'){
+      e.preventDefault(); goTo(slides.length - 1);
+    }
+  });
+
+  /* touch swipe */
+  var startY = null;
+  document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', function(e){
+    if(startY === null) return;
+    var dy = startY - e.changedTouches[0].clientY;
+    if(Math.abs(dy) > 80){
+      var current = dots.findIndex(function(d){ return d.classList.contains('on'); });
+      goTo(dy > 0 ? current + 1 : current - 1);
+    }
+    startY = null;
+  }, { passive: true });
+
+  /* ==========================================================
+     6 · CURSOR GLOW (desktop only)
+     ========================================================== */
+  var cur = document.getElementById('cursor');
+  var cx = 0, cy = 0, tx = 0, ty = 0;
+  if(cur && window.matchMedia('(pointer:fine)').matches){
+    window.addEventListener('mousemove', function(e){ tx = e.clientX; ty = e.clientY; }, { passive: true });
+    (function loop(){
+      cx += (tx - cx) * 0.16;
+      cy += (ty - cy) * 0.16;
+      cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* ==========================================================
+     7 · THREE.JS — CINEMATIC PARTICLE FIELD
+     ========================================================== */
+  function initThree(){
+    if(typeof THREE === 'undefined') return;
+
+    var canvas = document.getElementById('bg');
+    var renderer;
+    try{
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    }catch(err){ return; }
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x2a273c, 0.0032);
+
+    var camera = new THREE.PerspectiveCamera(68, window.innerWidth / window.innerHeight, 1, 900);
+    camera.position.set(0, 0, 140);
+
+    /* soft round sprite */
+    function makeSprite(){
+      var c = document.createElement('canvas');
+      c.width = c.height = 64;
+      var ctx = c.getContext('2d');
+      var g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      g.addColorStop(0,    'rgba(255,255,255,1)');
+      g.addColorStop(0.28, 'rgba(255,255,255,0.65)');
+      g.addColorStop(0.62, 'rgba(255,255,255,0.16)');
+      g.addColorStop(1,    'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 64, 64);
+      var tex = new THREE.CanvasTexture(c);
+      tex.needsUpdate = true;
+      return tex;
+    }
+    var sprite = makeSprite();
+
+    var palette = [new THREE.Color('#e95a54'), new THREE.Color('#fbcdab'), new THREE.Color('#8f9793')];
+
+    var COUNT = 1500;
+    var positions = new Float32Array(COUNT * 3);
+    var colors    = new Float32Array(COUNT * 3);
+
+    for(var i = 0; i < COUNT; i++){
+      positions[i * 3]     = (Math.random() - 0.5) * 520;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 360;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 420 - 80;
+
+      var pick = Math.random();
+      var col  = pick < 0.16 ? palette[0] : (pick < 0.78 ? palette[1] : palette[2]);
+
+      var dim = 0.55 + Math.random() * 0.45;
+      colors[i * 3]     = col.r * dim;
+      colors[i * 3 + 1] = col.g * dim;
+      colors[i * 3 + 2] = col.b * dim;
+    }
+
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+    var mat = new THREE.PointsMaterial({
+      size: 3.4,
+      map: sprite,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.92,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
+    });
+
+    var points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    /* a second, larger & fainter layer for depth */
+    var mat2 = mat.clone();
+    mat2.size = 8;
+    mat2.opacity = 0.22;
+    var points2 = new THREE.Points(geo, mat2);
+    points2.scale.set(1.7, 1.7, 1.7);
+    scene.add(points2);
+
+    /* interaction */
+    var mx = 0, my = 0, cX = 0, cY = 0;
+    window.addEventListener('mousemove', function(e){
+      mx = (e.clientX / window.innerWidth) - 0.5;
+      my = (e.clientY / window.innerHeight) - 0.5;
+    }, { passive: true });
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var clock = new THREE.Clock();
+
+    function render(){
+      requestAnimationFrame(render);
+
+      var t = clock.getElapsedTime();
+      var sy = window.pageYOffset || 0;
+
+      if(!reduce){
+        points.rotation.y  = t * 0.018;
+        points.rotation.x  = Math.sin(t * 0.12) * 0.055;
+        points2.rotation.y = -t * 0.011;
+        points2.rotation.x = Math.cos(t * 0.09) * 0.04;
+      }
+
+      cX += (mx * 26 - cX) * 0.045;
+      cY += (-my * 18 - cY) * 0.045;
+
+      camera.position.x = cX;
+      camera.position.y = cY - sy * 0.012;
+      camera.lookAt(0, sy * 0.004, 0);
+
+      renderer.render(scene, camera);
+    }
+    render();
+
+    window.addEventListener('resize', function(){
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+
+  initThree();
+
+})();
+</script>
+</body>
+</html>
