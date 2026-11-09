@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2A273C">
+<title>Fandaqah Owner App — Now Live | Your Hotel in Your Pocket</title>
+<meta name="description" content="The Fandaqah Owner App is now live on iPhone and Android. Follow occupancy, reservations, revenue and purchase approvals across your hotels from your phone.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fandaqah Owner App — Now Live">
+<meta property="og:description" content="Occupancy, reservations, revenue and approvals across every property — on your phone.">
+<meta property="og:image" content="assets/images/editorial/refresh/owner-app.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/images/editorial/refresh/city-riyadh.webp">
+<style>
+:root{--coral:#E9625C;--coral-2:#F08A72;--navy:#2A273C;--navy-2:#1F1C2E;--ink:#2A273C;--muted:#6B6878;--sage:#7E948A;--sage-d:#4F6559;--peach:#F6C7A6;--cream:#FBF6F2;--blush:#F7E4DC;--line:rgba(42,39,60,.09);--r:20px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.6 'DM Sans',system-ui,-apple-system,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html[lang=ar] body{font-family:Tajawal,'Noto Sans Arabic',Tahoma,sans-serif}
+h1,h2,h3,p{margin:0}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}img,svg{display:block;max-width:100%}
+ul{list-style:none;margin:0;padding:0}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{width:min(1240px,100% - 48px);margin-inline:auto;position:relative}
+.eyebrow{display:flex;align-items:center;gap:14px;font-weight:800;font-size:clamp(20px,2vw,26px);color:var(--navy);letter-spacing:-.01em}
+.eyebrow:before{content:"";width:44px;height:3px;border-radius:3px;background:var(--coral);flex:none}
+.h2{font-size:clamp(28px,3.3vw,44px);line-height:1.12;font-weight:800;letter-spacing:-.03em}
+html[lang=ar] .h2,html[lang=ar] .eyebrow{letter-spacing:0;line-height:1.35}
+.lead{color:var(--muted);font-size:clamp(15px,1.3vw,17px);line-height:1.75}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--d,0) * 70ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* header (ads page: no outbound navigation) */
+.top{position:absolute;inset:0 0 auto;z-index:20;padding:22px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo img{height:56px;width:auto}
+.top-r{display:flex;align-items:center;gap:10px}
+.lang{display:inline-flex;padding:4px;border-radius:40px;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border:1px solid var(--line);direction:ltr}
+.lang button{border:0;background:none;padding:7px 13px;border-radius:30px;font-weight:800;font-size:13px;color:var(--navy)}
+.lang button[aria-pressed=true]{background:var(--navy);color:#fff}
+.btn-sm{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:40px;background:var(--coral);color:#fff;font-weight:800;font-size:14px;box-shadow:0 10px 22px -12px var(--coral)}
+.btn-sm .ico{width:18px;height:18px}
+
+/* store badges */
+.stores{display:flex;flex-wrap:wrap;gap:12px}
+.store{display:inline-flex;align-items:center;gap:11px;height:60px;padding:0 20px 0 16px;border-radius:14px;background:#0F0E15;color:#fff;direction:ltr;text-align:left;box-shadow:0 14px 26px -16px rgba(15,14,21,.8);transition:transform .25s var(--ease),box-shadow .25s}
+.store:hover{transform:translateY(-3px);box-shadow:0 20px 34px -16px rgba(15,14,21,.85)}
+.store svg{width:28px;height:30px}
+.store span{display:flex;flex-direction:column;line-height:1.05;font-weight:700;font-size:21px;letter-spacing:-.01em;white-space:nowrap}
+.store small{font-size:10.5px;font-weight:500;letter-spacing:.02em;opacity:.85;margin-bottom:2px}
+.store--light{background:#fff;color:var(--navy)}
+.qr{flex:none;width:128px;padding:10px;border-radius:18px;background:#fff;box-shadow:0 16px 32px -20px rgba(42,39,60,.55);text-align:center}
+.qr-box{aspect-ratio:1;display:grid;place-items:center}
+.qr-box svg{width:100%;height:100%}
+.qr small{display:block;margin-top:4px;font-size:11px;font-weight:700;color:var(--muted);line-height:1.3}
+
+/* HERO */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:120px 0 40px;min-height:720px;background:linear-gradient(115deg,#FDF9F6 0%,#FAEDE6 50%,#F6DDD2 100%)}
+.hero-sky{position:absolute;z-index:-2;inset:0 0 auto auto;width:62%;height:100%;background:url(assets/images/editorial/refresh/city-riyadh.webp) 70% 30%/cover no-repeat;
+ -webkit-mask:linear-gradient(90deg,transparent,#000 38%) ;mask:linear-gradient(90deg,transparent,#000 38%);opacity:.9}
+.hero-sky:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(253,249,246,0) 40%,rgba(250,237,230,.95) 92%)}
+html[dir=rtl] .hero-sky{inset:0 auto auto 0;transform:scaleX(-1)}
+.hero-wave{position:absolute;z-index:-1;right:-12%;bottom:-22%;width:78%;height:62%;border-radius:50%;background:linear-gradient(105deg,rgba(233,98,92,0) 10%,rgba(233,98,92,.92) 55%,var(--coral));transform:rotate(-8deg)}
+html[dir=rtl] .hero-wave{right:auto;left:-12%;transform:rotate(8deg) scaleX(-1)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:24px;align-items:center}
+.live{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 10px;border-radius:40px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px;color:var(--sage-d);box-shadow:0 8px 20px -14px rgba(42,39,60,.4)}
+.live i{width:9px;height:9px;border-radius:50%;background:#22A06B;box-shadow:0 0 0 0 rgba(34,160,107,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(34,160,107,0)}100%{box-shadow:0 0 0 0 rgba(34,160,107,0)}}
+.hero-kicker{margin-top:22px;font-size:clamp(20px,2.1vw,28px);font-weight:700;color:var(--sage-d);display:flex;align-items:center;gap:14px}
+.hero-kicker:after{content:"";width:56px;height:3px;border-radius:3px;background:var(--coral)}
+.hero h1{margin-top:6px;font-size:clamp(64px,9vw,128px);line-height:.95;font-weight:800;letter-spacing:-.055em;color:var(--coral);
+ background:linear-gradient(100deg,#E9625C 0%,#F08A72 45%,#E9625C 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 100%;animation:sheen 6s ease-in-out infinite}
+@keyframes sheen{50%{background-position:100% 0}}
+html[lang=ar] .hero h1{letter-spacing:0;line-height:1.2;font-size:clamp(56px,8vw,112px)}
+.hero-lead{margin-top:20px;max-width:34em;font-size:clamp(16px,1.45vw,19px);line-height:1.7;color:#4B4858}
+.hero-sub{margin-top:8px;max-width:36em;font-size:14px;color:var(--muted)}
+.hero-cta{display:flex;align-items:center;gap:18px;margin-top:30px}
+.hero-cta .stores{flex-direction:column;align-items:stretch}
+.hero-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.hero-note b{color:var(--navy)}
+
+/* phones */
+.stage{position:relative;height:600px;direction:ltr}
+.plinth{position:absolute;left:50%;bottom:18px;width:470px;height:86px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at 45% 35%,#FBF7F4,#E7DCD4 62%,#CDBCB0);box-shadow:0 30px 50px -22px rgba(42,39,60,.5),inset 0 -10px 16px rgba(0,0,0,.07)}
+.plinth:before{content:"";position:absolute;inset:-16px 0 auto;height:86px;border-radius:50%;background:radial-gradient(ellipse at 40% 40%,#fff,#ECE3DC 72%)}
+.phone{position:absolute;width:262px;height:540px;padding:8px;border-radius:46px;background:linear-gradient(145deg,#F3D7C7,#C29079 42%,#EBC8B3 68%,#A87661);box-shadow:0 46px 70px -30px rgba(31,28,46,.7),inset 0 0 0 1px rgba(255,255,255,.4)}
+.phone--front{right:44px;bottom:62px;z-index:2;animation:floatA 7s ease-in-out infinite}
+.phone--back{left:30px;bottom:92px;transform:rotate(-7deg) scale(.86);transform-origin:bottom;animation:floatB 8s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(-3deg) translateY(-12px)}}
+@keyframes floatB{0%,100%{transform:rotate(-7deg) scale(.86)}50%{transform:rotate(-7deg) scale(.86) translateY(-9px)}}
+.scr{height:100%;border-radius:38px;overflow:hidden;background:linear-gradient(180deg,#2E2B42,#211E31);color:#fff;padding:12px 13px;display:flex;flex-direction:column;gap:9px;font-size:11px;line-height:1.25;text-align:start}
+html[dir=rtl] .scr{direction:rtl}
+.st{display:flex;align-items:center;justify-content:space-between;padding:1px 10px 0;font-size:10px;font-weight:700;direction:ltr}
+.st i{width:76px;height:21px;border-radius:20px;background:#000}
+.st b{width:22px;height:10px;border-radius:3px;border:1.5px solid rgba(255,255,255,.85)}
+.tb{display:flex;align-items:center;justify-content:space-between;min-height:30px}
+.tb img{height:26px;width:auto;margin-inline:auto}
+.tb .ico{width:17px;height:17px}
+.dot{position:relative}.dot:after{content:"";position:absolute;top:-1px;inset-inline-end:-1px;width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.hi b{display:block;font-size:15px}.hi small{opacity:.7;font-size:10.5px}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.k{border-radius:15px;padding:10px;display:flex;flex-direction:column;gap:2px}
+.k .ico{width:18px;height:18px;margin-bottom:4px}
+.k small{font-size:9px;opacity:.85}.k b{font-size:14.5px;white-space:nowrap;font-variant-numeric:tabular-nums}.k em{font-style:normal;font-size:9px;font-weight:700}
+.k--sage{background:linear-gradient(160deg,#869F92,#4F6559)}.k--sage em{color:#CFF3DC}
+.k--peach{background:linear-gradient(160deg,#FAD7BA,#EFAD86);color:var(--navy)}.k--peach em{color:#237A48}
+.k--coral{background:linear-gradient(160deg,#F08A72,#E25A55)}
+.k--light{background:#F7F2EE;color:var(--navy)}
+.card{border-radius:15px;padding:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06)}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:10.5px}
+.card-h b{display:flex;align-items:center;gap:5px}.card-h .ico{width:13px;height:13px;color:var(--coral)}
+.card-h small{font-size:8.5px;opacity:.65}
+.chart{position:relative;direction:ltr;height:82px;margin-top:9px;display:flex;align-items:flex-end;gap:3px;background:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 20px)}
+.chart span{flex:1;height:var(--h);border-radius:3px 3px 0 0;background:linear-gradient(180deg,#93B5A2,#4F6559);transform-origin:bottom;transition:transform .9s var(--ease) calc(var(--i) * 45ms)}
+.chart svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.chart polyline{fill:none;stroke:var(--coral);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.8s ease .4s;filter:drop-shadow(0 2px 4px rgba(233,98,92,.55))}
+.js .phone:not(.live-on) .chart span{transform:scaleY(0)}
+.js .phone:not(.live-on) .chart polyline{stroke-dashoffset:1}
+.acts{display:flex;justify-content:space-between;margin-top:8px}
+.acts span{display:flex;align-items:center;gap:4px}.acts span+span{border-inline-start:1px solid rgba(255,255,255,.14);padding-inline-start:7px}
+.acts .ico{width:14px;height:14px;color:var(--coral)}.acts b{font-size:14px}.acts small{font-size:8px;opacity:.7}
+.nav{margin-top:auto;display:flex;gap:2px;padding:5px;border-radius:19px;background:rgba(255,255,255,.07)}
+.nav span{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:14px;font-size:8.5px;opacity:.7}
+.nav .ico{width:15px;height:15px}.nav .on{background:var(--coral);opacity:1;box-shadow:0 6px 12px -6px var(--coral)}
+.h{font-size:15px;font-weight:800}
+.prop{border-radius:13px;overflow:hidden;background:#F7F2EE;color:var(--navy)}
+.prop i{display:block;height:78px;background:#C9B8A6 center/cover}
+.prop div{display:flex;justify-content:space-between;align-items:center;padding:6px 9px}
+.prop b{display:block;font-size:11px}.prop small{font-size:9px;color:var(--muted)}.prop .ico{width:12px;height:12px}
+html[dir=rtl] .prop .ico{transform:scaleX(-1)}
+.row{display:flex;align-items:center;gap:8px;padding:8px;border-radius:12px;background:#F7F2EE;color:var(--navy)}
+.row .ri{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#fff;color:var(--coral)}.row .ri .ico{width:15px;height:15px}
+.row b{display:block;font-size:10.5px}.row small{font-size:8.5px;color:var(--muted)}
+.row em{margin-inline-start:auto;font-style:normal;font-size:8.5px;font-weight:800;padding:3px 7px;border-radius:20px;background:#FCE3DC;color:#C2433E}
+.row em.ok{background:#DDF1E5;color:#237A48}
+.ring{display:grid;place-items:center;margin:4px auto 0;width:118px;height:118px;border-radius:50%;background:conic-gradient(var(--coral) 0 86%,rgba(255,255,255,.1) 0)}
+.ring b{display:grid;place-items:center;width:92px;height:92px;border-radius:50%;background:#262338;font-size:22px}
+
+.scr--shot{padding:0;background:#F5F3F0;display:block}
+.scr--shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+a.qr{display:block;color:inherit;transition:transform .25s var(--ease)}a.qr:hover{transform:translateY(-3px)}
+.qr-box{position:relative}
+.qr-logo{position:absolute;left:50%;top:50%;width:20%;height:20%;transform:translate(-50%,-50%);display:grid;place-items:center;background:#fff;border-radius:22%}
+.qr-logo svg{width:62%;height:62%;color:#1F1C2E}
+/* real-screens marquee */
+.mq{padding:70px 0 40px;overflow:hidden}
+.mq-track{display:flex;gap:28px;width:max-content;margin-top:30px;padding:10px 0 20px;direction:ltr;animation:mq 60s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq-item{margin:0;width:190px;flex:none;display:flex;flex-direction:column;align-items:center;gap:12px}
+.mq-item .phone{position:relative;inset:auto;width:190px;height:auto;aspect-ratio:262/540;padding:6px;border-radius:34px;animation:none;transform:none;box-shadow:0 26px 40px -24px rgba(31,28,46,.55)}
+.mq-item .scr{border-radius:28px}
+.mq-item:nth-child(even){margin-top:34px}
+.mq-item figcaption{font-size:13px;font-weight:800;text-align:center}
+html[dir=rtl] .mq-item figcaption{direction:rtl}
+
+/* FEATURES */
+.feat{padding:56px 0 64px}
+.fgrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px;margin-top:28px}
+.fcard{display:flex;flex-direction:column;align-items:center;gap:12px;padding:22px 10px 18px;border-radius:var(--r);background:#fff;border:1px solid var(--line);box-shadow:0 12px 28px -22px rgba(42,39,60,.45);text-align:center;transition:transform .3s var(--ease),box-shadow .3s}
+.fcard:hover{transform:translateY(-6px);box-shadow:0 22px 38px -22px rgba(233,98,92,.55)}
+.fcard .fi{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;color:var(--coral);background:linear-gradient(160deg,#FFF3EE,#FBE1D8)}
+.fcard .fi .ico{width:30px;height:30px}
+.fcard b{font-size:14px;line-height:1.3}
+.fcard small{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* GALLERY */
+.gallery{position:relative;isolation:isolate;overflow:hidden;padding:70px 0}
+.gallery-bg{position:absolute;inset:0;z-index:-2;background:url(assets/images/editorial/lobby-wide.webp) 30% 60%/cover}
+.gallery-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(251,246,242,.35) 0%,rgba(251,246,242,.55) 50%,rgba(251,246,242,.97) 70%)}
+html[dir=rtl] .gallery-bg{transform:scaleX(-1)}
+.gallery-wave{position:absolute;z-index:-1;right:-15%;bottom:-40%;width:55%;height:70%;border-radius:50%;background:linear-gradient(120deg,rgba(233,98,92,0),rgba(233,98,92,.85))}
+html[dir=rtl] .gallery-wave{right:auto;left:-15%;transform:scaleX(-1)}
+.ggrid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:36px;align-items:center}
+.minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;direction:ltr}
+.mini{display:flex;flex-direction:column;align-items:center;gap:12px}
+.mini .phone{position:relative;inset:auto;width:100%;max-width:200px;height:auto;aspect-ratio:262/540;animation:none;transform:none;padding:6px;border-radius:34px}
+.mini .scr{border-radius:28px;font-size:9px;padding:9px 9px;gap:7px}
+.mini .k b{font-size:11px}.mini .k{padding:7px}.mini .kp{gap:5px}
+.mini:nth-child(even) .phone{transform:translateY(26px)}
+.mini h3{font-size:13.5px;font-weight:800;text-align:center;padding:6px 12px;border-radius:30px;background:rgba(255,255,255,.85);backdrop-filter:blur(6px)}
+.mini:nth-child(even) h3{margin-top:26px}
+.gcopy img{height:72px;width:auto;margin-bottom:22px}
+.gcopy .h2{font-size:clamp(26px,2.6vw,36px)}
+.gcopy p{margin-top:14px}
+.gcopy small{display:block;margin-top:14px;font-size:12px;color:var(--muted)}
+
+/* ECOSYSTEM */
+.eco{padding:84px 0;background:linear-gradient(180deg,var(--cream),#F8EEE8)}
+.egrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
+.elist{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px;margin-top:34px}
+.eitem{display:flex;gap:14px}
+.eitem .ei{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;background:#fff;color:var(--sage-d);border:1px solid var(--line);box-shadow:0 10px 20px -16px rgba(42,39,60,.5)}
+.eitem b{display:block;font-size:15.5px}.eitem p{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:2px}
+.orbit{direction:ltr;position:relative;aspect-ratio:1;max-width:520px;width:100%;margin-inline:auto}
+.orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%;border:1.5px dashed rgba(42,39,60,.16)}
+.orbit:before{inset:9%;animation:spin 60s linear infinite}
+.orbit:after{inset:27%;border-style:solid;border-color:rgba(233,98,92,.18)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.core{position:absolute;inset:32%;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 30px 60px -30px rgba(42,39,60,.55),0 0 0 14px rgba(255,255,255,.55)}
+.core img{width:70%}
+.node{position:absolute;left:50%;top:50%;width:0;height:0;transform:rotate(var(--a)) translate(min(41vw,213px)) rotate(calc(-1 * var(--a)))}
+.node span{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;width:110px;text-align:center;font-size:12.5px;font-weight:800}
+.node .bub{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(160deg,#F08A72,#E25A55);box-shadow:0 14px 26px -12px rgba(233,98,92,.8);animation:bob 4s ease-in-out infinite;animation-delay:calc(var(--n) * -.6s)}
+.node:nth-child(even) .bub{background:linear-gradient(160deg,#93AA9E,#5D7467);box-shadow:0 14px 26px -12px rgba(79,101,89,.8)}
+.node .bub .ico{width:30px;height:30px}
+@keyframes bob{50%{transform:translateY(-6px)}}
+
+/* START (photo) */
+.start{padding:84px 0}
+.sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) minmax(0,1fr);gap:36px;align-items:center}
+.steps{display:grid;gap:16px;margin-top:26px}
+.step{display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:var(--r);background:#fff;border:1px solid var(--line)}
+.step .n{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(160deg,#F08A72,#E25A55)}
+.step b{display:block;font-size:15.5px}.step p{font-size:13.5px;color:var(--muted);margin-top:2px}
+.photo{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 70px -40px rgba(42,39,60,.7)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:35% 50%}
+.photo figcaption{position:absolute;inset:auto 14px 14px;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);font-size:13px;font-weight:700}
+.photo figcaption i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#DDF1E5;color:#237A48;flex:none}
+.photo figcaption i .ico{width:20px;height:20px}
+.paths{display:grid;gap:16px}
+.path{padding:24px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:0 16px 34px -26px rgba(42,39,60,.5)}
+.path .pi{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:#fff;background:linear-gradient(160deg,#F08A72,#E25A55);margin-bottom:14px}
+.path:nth-child(2) .pi{background:linear-gradient(160deg,#3A3652,var(--navy))}
+.path h3{font-size:18px;font-weight:800}.path p{margin-top:6px;font-size:14px;color:var(--muted)}
+.path a{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;color:var(--coral)}
+.path a .ico{width:18px;height:18px;transition:transform .2s}.path a:hover .ico{transform:translateX(4px)}
+html[dir=rtl] .path a .ico{transform:scaleX(-1)}html[dir=rtl] .path a:hover .ico{transform:scaleX(-1) translateX(4px)}
+
+/* 360 + FAQ */
+.faqsec{padding:20px 0 90px}
+.fqgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.c360{position:relative;overflow:hidden;padding:36px;border-radius:28px;background:var(--navy);color:#fff}
+.c360:after{content:"360";position:absolute;inset-inline-end:-10px;bottom:-40px;font-size:170px;font-weight:800;letter-spacing:-.06em;color:rgba(255,255,255,.05);line-height:1}
+.c360 .eyebrow{color:#fff;font-size:15px}
+.c360 h2{margin-top:14px;font-size:clamp(26px,2.6vw,36px);line-height:1.15;font-weight:800;letter-spacing:-.03em}
+.c360 p{margin-top:14px;color:rgba(255,255,255,.78);font-size:15px;line-height:1.7}
+.c360 ul{display:grid;gap:10px;margin-top:22px}
+.c360 li{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:600}
+.c360 li .ico{width:20px;height:20px;color:var(--coral-2)}
+.c360 .btn{margin-top:26px;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:40px;background:var(--coral);font-weight:800;color:#fff;position:relative;z-index:1}
+.faq{display:grid;gap:10px;margin-top:22px}
+.faq details{border-radius:16px;background:#fff;border:1px solid var(--line);transition:box-shadow .25s}
+.faq details[open]{box-shadow:0 16px 34px -26px rgba(42,39,60,.55)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 20px;font-weight:800;font-size:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;background:#FCE7E0;color:var(--coral);transition:transform .3s var(--ease)}
+.faq summary i .ico{width:16px;height:16px}
+.faq details[open] summary i{transform:rotate(45deg)}
+.faq p{padding:0 20px 18px;color:var(--muted);font-size:14px;line-height:1.7}
+
+/* FINAL CTA */
+.final{position:relative;isolation:isolate;overflow:hidden;background:var(--navy-2);color:#fff}
+.final-bg{position:absolute;inset:0 auto 0 0;width:42%;z-index:-1;background:url(assets/images/editorial/lobby-wide.webp) 85% 60%/cover;-webkit-mask:linear-gradient(90deg,#000 35%,transparent);mask:linear-gradient(90deg,#000 35%,transparent);opacity:.75}
+html[dir=rtl] .final-bg{inset:0 0 0 auto;transform:scaleX(-1)}
+.final-wave{position:absolute;z-index:-1;right:-10%;bottom:-60%;width:50%;height:120%;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(240,138,114,.55),rgba(233,98,92,0) 65%)}
+.final .wrap{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr) auto;gap:36px;align-items:center;padding:64px 0}
+.final h2{font-size:clamp(28px,3.2vw,44px);line-height:1.12;font-weight:800;letter-spacing:-.03em}
+html[lang=ar] .final h2{letter-spacing:0;line-height:1.35}
+.final p{margin-top:10px;color:rgba(255,255,255,.75)}
+.final .stores{margin-top:24px}
+.final .qr{width:150px}
+.legal{padding:22px 0 calc(22px + env(safe-area-inset-bottom));background:#17151F;color:rgba(255,255,255,.6);font-size:12.5px}
+.legal .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.legal a{color:#fff;font-weight:700}
+
+/* mobile sticky download bar */
+.dock{position:fixed;z-index:40;inset:auto 12px calc(12px + env(safe-area-inset-bottom));display:none;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:20px;background:rgba(31,28,46,.94);backdrop-filter:blur(12px);color:#fff;box-shadow:0 20px 40px -16px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .45s var(--ease)}
+.dock.show{transform:none}
+.dock b{font-size:14px;line-height:1.25}.dock small{display:block;font-size:11.5px;opacity:.7;font-weight:500}
+.dock a{margin-inline-start:auto;flex:none;padding:12px 18px;border-radius:14px;background:var(--coral);font-weight:800;font-size:14px}
+
+/* responsive */
+@media (max-width:1180px){
+ .fgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .sgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .sgrid .paths{grid-column:1/-1;grid-template-columns:1fr 1fr}
+ .final .wrap{grid-template-columns:minmax(0,1fr) auto}
+ .final .final-pad{display:none}
+}
+@media (max-width:980px){
+ .hero{padding-top:104px;min-height:0}
+ .hero-grid,.ggrid,.egrid,.fqgrid{grid-template-columns:minmax(0,1fr)}
+ .hero-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+ .hero-kicker{justify-content:center}
+ .hero-cta{justify-content:center}
+ .hero-sky{width:100%;height:58%;inset:auto 0 0 0;-webkit-mask:linear-gradient(180deg,transparent,#000 40%);mask:linear-gradient(180deg,transparent,#000 40%)}
+ html[dir=rtl] .hero-sky{inset:auto 0 0 0}
+ .hero-wave{width:130%;height:40%;bottom:-12%}
+ .stage{width:540px;margin-inline:auto;margin-top:-10px}
+ .gallery-bg:after{background:rgba(251,246,242,.82)}
+ .gcopy{text-align:center;order:-1}.gcopy img{margin-inline:auto}
+ .orbit{max-width:460px}
+ .sgrid{grid-template-columns:minmax(0,1fr)}
+ .photo{aspect-ratio:16/10;max-height:440px}
+ .final .wrap{grid-template-columns:minmax(0,1fr);text-align:center;justify-items:center}
+ .final .stores{justify-content:center}
+ .final-bg{width:100%;-webkit-mask:linear-gradient(180deg,#000,transparent 70%);mask:linear-gradient(180deg,#000,transparent 70%);opacity:.35}
+}
+@media (max-width:760px){
+ .top .btn-sm{display:none}
+ .logo img{height:46px}
+ .stage{transform:scale(.72);transform-origin:top center;margin-bottom:-168px;margin-inline:calc((100% - 540px)/2)}
+ .fgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .minis{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}
+ .mini .phone{max-width:170px}
+ .elist{grid-template-columns:minmax(0,1fr)}
+ .sgrid .paths{grid-template-columns:minmax(0,1fr)}
+ .dock{display:flex}
+ .legal{padding-bottom:110px}
+ .hero-cta{flex-direction:column}
+ .hero-cta .qr{display:none}
+ .hero-cta .stores{flex-direction:row;justify-content:center}
+}
+@media (max-width:520px){
+ .wrap{width:calc(100% - 32px)}
+ .hero h1{font-size:clamp(58px,17vw,80px)}
+ .hero-kicker{font-size:18px}.hero-kicker:after{width:30px}
+ .eyebrow{font-size:19px}.eyebrow:before{width:26px}
+ .stores{width:100%}
+ .store{flex:1 1 0;min-width:0;justify-content:center;height:56px;padding:0 10px}
+ .store span{font-size:17px}
+ .stage{transform:scale(.6);margin-bottom:-240px}
+ .node span{width:84px;font-size:11px}.node .bub{width:52px;height:52px}.node .bub .ico{width:24px;height:24px}
+ .c360{padding:28px 22px}
+ .fcard{padding:18px 8px 14px}
+}
+@media (max-width:380px){ .stage{transform:scale(.52);margin-bottom:-288px} .hero-cta .stores{flex-direction:column} }
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/><path d="M15 7h5v5"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6M2 17h20"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.9 15.5A2 2 0 0 0 8.5 14l-6.1-1.6a.5.5 0 0 1 0-1L8.5 10A2 2 0 0 0 9.9 8.5l1.6-6.1a.5.5 0 0 1 1 0L14 8.5A2 2 0 0 0 15.5 10l6.1 1.5a.5.5 0 0 1 0 1L15.5 14a2 2 0 0 0-1.5 1.5l-1.6 6.1a.5.5 0 0 1-1 0z"/><path d="M20 3v4M22 5h-4"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.1 10.4A6 6 0 1 1 10.3 18M7 6h1v4M16.7 13.9l.7.7-2.8 2.8"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.8 2.2a2 2 0 0 0-1.7 0L2.6 6.1a1 1 0 0 0 0 1.8l8.6 3.9a2 2 0 0 0 1.7 0l8.6-3.9a1 1 0 0 0 0-1.8z"/><path d="m2 12 9.2 4.2a2 2 0 0 0 1.6 0L22 12M2 17l9.2 4.2a2 2 0 0 0 1.6 0L22 17"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L21.7 7H5.1"/></symbol>
+<symbol id="i-apple" viewBox="0 0 384 512"><path fill="currentColor" stroke="none" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 26"><path stroke="none" fill="#00D7FE" d="M.6.5C.2.9 0 1.5 0 2.3v21.4c0 .8.2 1.4.6 1.8l.1.1L12.7 13.6v-.3L.7.4z"/><path stroke="none" fill="#FFCE00" d="m16.7 17.6-4-4v-.3l4-4 .1.1 4.7 2.7c1.4.8 1.4 2 0 2.8l-4.7 2.7z"/><path stroke="none" fill="#FF3A44" d="M16.8 17.5 12.7 13.4.6 25.5c.4.5 1.2.5 2 .1l14.2-8.1"/><path stroke="none" fill="#00F076" d="M16.8 9.4 2.6 1.3C1.8.8 1 .9.6 1.4l12.1 12z"/></symbol>
+</defs></svg>
+
+<header class="top">
+ <div class="wrap">
+  <span class="logo"><img src="assets/images/fandaqah-simple.png" width="350" height="150" alt="Fandaqah | فندقة"></span>
+  <div class="top-r">
+   <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ar" aria-pressed="false">عربي</button></div>
+   <a class="btn-sm" href="#download" data-ev="header_download"><svg class="ico"><use href="#i-download"/></svg><span data-t="nav.download"></span></a>
+  </div>
+ </div>
+</header>
+
+<main>
+ <!-- HERO -->
+ <section class="hero" aria-labelledby="hero-title">
+  <div class="hero-sky" aria-hidden="true"></div>
+  <div class="hero-wave" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+   <div class="hero-copy">
+    <span class="live"><i aria-hidden="true"></i><span data-t="hero.badge"></span></span>
+    <p class="hero-kicker" data-t="hero.kicker"></p>
+    <h1 id="hero-title" data-t="hero.title"></h1>
+    <p class="hero-lead" data-t="hero.lead"></p>
+    <p class="hero-sub" data-t="hero.sub"></p>
+    <div class="hero-cta">
+     <a class="qr" href="https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249" target="_blank" rel="noopener" data-ev="qr_click" data-store="ios"><span class="qr-box"><svg role="img" aria-label="QR code: Fandaqah on the App Store" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45"><path stroke="#1f1c2e" d="M0 0.5h7m1 0h2m3 0h7m2 0h6m1 0h4m3 0h1m1 0h7m-45 1h1m5 0h1m2 0h1m2 0h2m1 0h4m2 0h1m4 0h1m3 0h1m4 0h1m2 0h1m5 0h1m-45 1h1m1 0h3m1 0h1m1 0h6m1 0h2m2 0h2m7 0h1m2 0h2m2 0h1m2 0h1m1 0h3m1 0h1m-45 1h1m1 0h3m1 0h1m1 0h4m2 0h3m2 0h1m1 0h1m2 0h1m5 0h2m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-45 1h1m1 0h3m1 0h1m2 0h1m2 0h2m2 0h2m2 0h8m1 0h8m1 0h1m1 0h3m1 0h1m-45 1h1m5 0h1m1 0h4m1 0h2m3 0h1m1 0h1m3 0h1m1 0h1m2 0h2m1 0h2m4 0h1m5 0h1m-45 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-37 1h1m2 0h1m1 0h1m2 0h2m1 0h2m3 0h2m1 0h3m2 0h5m-36 1h1m1 0h1m1 0h10m1 0h9m2 0h2m1 0h1m4 0h1m1 0h3m1 0h2m1 0h1m-44 1h1m2 0h2m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m2 0h2m2 0h1m5 0h1m1 0h1m5 0h1m4 0h1m-45 1h5m1 0h1m1 0h1m3 0h1m1 0h4m1 0h2m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m4 0h1m1 0h2m1 0h1m-45 1h6m2 0h8m1 0h1m2 0h2m1 0h1m1 0h5m1 0h1m1 0h1m1 0h2m3 0h1m2 0h2m-42 1h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h2m2 0h3m1 0h7m1 0h1m5 0h1m1 0h2m2 0h1m-45 1h1m2 0h1m4 0h2m5 0h2m1 0h2m1 0h2m1 0h2m6 0h3m2 0h1m5 0h2m-44 1h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m-43 1h1m2 0h2m2 0h1m1 0h3m1 0h1m1 0h1m3 0h3m2 0h4m2 0h4m1 0h1m2 0h2m-40 1h2m1 0h3m1 0h2m3 0h1m2 0h6m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m4 0h3m-45 1h4m4 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h2m2 0h2m4 0h1m2 0h1m1 0h1m-44 1h1m4 0h2m2 0h1m1 0h1m1 0h2m2 0h3m1 0h2m1 0h1m3 0h1m1 0h1m1 0h1m2 0h1m7 0h2m-45 1h2m1 0h2m2 0h1m1 0h6m1 0h2m2 0h2m1 0h8m1 0h4m1 0h1m1 0h1m1 0h1m2 0h1m-44 1h1m1 0h6m1 0h4m2 0h2m1 0h6m1 0h2m2 0h1m2 0h1m2 0h5m-41 1h3m1 0h1m3 0h6m2 0h3m1 0h1m3 0h1m1 0h4m6 0h1m3 0h3m1 0h1m-44 1h1m1 0h2m1 0h1m1 0h1m2 0h2m1 0h3m2 0h2m1 0h1m1 0h5m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h3m-45 1h1m3 0h1m3 0h2m3 0h1m1 0h2m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m4 0h1m3 0h2m1 0h2m-43 1h8m1 0h1m2 0h3m1 0h1m1 0h7m1 0h1m1 0h3m1 0h8m1 0h2m-45 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m1 0h1m2 0h2m1 0h1m4 0h1m2 0h2m1 0h2m1 0h1m1 0h3m2 0h1m-43 1h2m2 0h1m4 0h1m3 0h2m1 0h1m1 0h1m1 0h4m5 0h2m2 0h1m1 0h1m1 0h4m-42 1h1m5 0h3m2 0h4m1 0h1m2 0h2m2 0h1m2 0h3m2 0h1m4 0h1m1 0h1m3 0h2m-45 1h1m1 0h2m2 0h1m3 0h1m1 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h3m2 0h1m1 0h1m1 0h2m2 0h1m-45 1h1m3 0h2m2 0h4m1 0h1m1 0h1m2 0h1m1 0h1m4 0h1m1 0h1m1 0h1m1 0h1m1 0h1m4 0h1m4 0h1m-44 1h3m1 0h1m1 0h1m1 0h3m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m5 0h2m1 0h1m2 0h2m2 0h1m1 0h1m-44 1h1m1 0h3m2 0h2m4 0h2m5 0h3m1 0h3m1 0h4m1 0h1m2 0h2m2 0h1m1 0h1m-42 1h1m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h1m1 0h3m1 0h1m2 0h3m2 0h4m4 0h1m2 0h1m-45 1h2m2 0h2m2 0h3m2 0h2m1 0h1m1 0h1m4 0h3m3 0h1m1 0h1m3 0h3m3 0h2m1 0h1m-41 1h1m1 0h1m7 0h1m1 0h2m1 0h1m3 0h1m3 0h2m3 0h1m3 0h3m3 0h1m1 0h1m-44 1h4m2 0h1m3 0h2m1 0h3m3 0h2m2 0h1m2 0h3m5 0h2m2 0h1m4 0h1m-45 1h1m2 0h2m1 0h2m1 0h3m1 0h1m1 0h10m1 0h1m1 0h1m1 0h1m1 0h2m2 0h6m2 0h1m-37 1h1m2 0h2m1 0h1m2 0h1m1 0h2m3 0h3m1 0h2m3 0h2m1 0h1m3 0h1m3 0h1m-45 1h7m1 0h1m3 0h1m4 0h1m2 0h1m1 0h1m1 0h2m2 0h1m3 0h2m1 0h2m1 0h1m1 0h4m-44 1h1m5 0h1m1 0h2m3 0h3m4 0h1m3 0h1m3 0h2m2 0h1m1 0h3m3 0h2m1 0h2m-45 1h1m1 0h3m1 0h1m3 0h6m2 0h1m1 0h5m1 0h2m1 0h2m1 0h3m1 0h6m-42 1h1m1 0h3m1 0h1m1 0h1m2 0h3m2 0h1m4 0h1m3 0h1m1 0h1m4 0h2m2 0h3m1 0h1m1 0h1m1 0h1m-45 1h1m1 0h3m1 0h1m6 0h4m1 0h4m1 0h1m2 0h1m1 0h2m2 0h1m3 0h1m1 0h3m1 0h3m-45 1h1m5 0h1m1 0h2m1 0h3m2 0h1m2 0h2m1 0h1m1 0h2m1 0h3m2 0h1m4 0h1m1 0h3m-42 1h7m5 0h1m2 0h2m1 0h4m4 0h1m1 0h4m1 0h1m2 0h5m2 0h1"/></svg></span><small data-t="qr"></small></a>
+     <div class="stores" data-stores="hero"><a class="store" href="https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249" target="_blank" rel="noopener" data-ev="store_hero" data-store="ios" aria-label="Download Fandaqah on the App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><use href="#i-apple"/></svg><span><small data-t="store.ios">Download on the</small>App Store</span></a><a class="store" href="https://play.google.com/store/apps/dev?id=6291616345161026018" target="_blank" rel="noopener" data-ev="store_hero" data-store="android" data-link="android" aria-label="Find Fandaqah on Google Play"><svg viewBox="0 0 24 26" aria-hidden="true"><use href="#i-play"/></svg><span><small data-t="store.android">Get it on</small>Google Play</span></a></div>
+    </div>
+    <p class="hero-note"><b data-t="hero.avail"></b> · <span data-t="hero.req"></span></p>
+   </div>
+   <div class="stage" aria-hidden="true">
+    <div class="plinth"></div>
+    <div class="phone phone--back" data-shot="property-home"></div>
+    <div class="phone phone--front" data-shot="all-properties"></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- FEATURES -->
+ <section class="feat" aria-labelledby="feat-title">
+  <div class="wrap">
+   <h2 class="eyebrow reveal" id="feat-title" data-t="feat.title"></h2>
+   <ul class="fgrid" data-list="features"></ul>
+  </div>
+ </section>
+
+ <!-- GALLERY -->
+ <section class="gallery" aria-labelledby="gal-title">
+  <div class="gallery-bg" aria-hidden="true"></div><div class="gallery-wave" aria-hidden="true"></div>
+  <div class="wrap ggrid">
+   <div class="minis" data-list="screens"></div>
+   <div class="gcopy reveal">
+    <img src="assets/images/fandaqah-simple.png" width="350" height="150" alt="">
+    <h2 class="h2" id="gal-title" data-t="screens.title"></h2>
+    <p class="lead" data-t="screens.desc"></p>
+    <small data-t="screens.note"></small>
+   </div>
+  </div>
+ </section>
+
+ <!-- REAL SCREENS MARQUEE -->
+ <section class="mq" aria-labelledby="mq-title">
+  <h2 class="eyebrow wrap" id="mq-title" data-t="marquee.title"></h2>
+  <div class="mq-track" data-list="marquee"></div>
+ </section>
+
+ <!-- ECOSYSTEM -->
+ <section class="eco" aria-labelledby="eco-title">
+  <div class="wrap egrid">
+   <div>
+    <h2 class="eyebrow reveal" data-t="eco.eyebrow"></h2>
+    <p class="h2 reveal" id="eco-title" style="margin-top:14px" data-t="eco.title"></p>
+    <p class="lead reveal" style="margin-top:12px" data-t="eco.desc"></p>
+    <ul class="elist" data-list="benefits"></ul>
+   </div>
+   <div class="orbit reveal" aria-hidden="true">
+    <div data-list="orbit"></div>
+    <div class="core"><img src="assets/images/fandaqah-simple.png" width="350" height="150" alt=""></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- START -->
+ <section class="start" aria-labelledby="start-title">
+  <div class="wrap sgrid">
+   <div>
+    <h2 class="eyebrow reveal" id="start-title" data-t="how.title"></h2>
+    <p class="lead reveal" style="margin-top:12px" data-t="how.desc"></p>
+    <ol class="steps" data-list="steps" style="padding:0;margin-block:26px 0"></ol>
+   </div>
+   <figure class="photo reveal" style="margin:0">
+    <img src="assets/images/editorial/refresh/owner-app.webp" width="1672" height="941" loading="lazy" alt="" data-alt="photo.alt">
+    <figcaption><i><svg class="ico"><use href="#i-check"/></svg></i><span data-t="photo.cap"></span></figcaption>
+   </figure>
+   <div class="paths">
+    <article class="path reveal"><span class="pi"><svg class="ico"><use href="#i-phone"/></svg></span><h3 data-t="paths.existingTitle"></h3><p data-t="paths.existingDesc"></p><a href="#download" data-ev="path_existing"><span data-t="paths.existingCTA"></span><svg class="ico"><use href="#i-arrow"/></svg></a></article>
+    <article class="path reveal" style="--d:1"><span class="pi"><svg class="ico"><use href="#i-layers"/></svg></span><h3 data-t="paths.newTitle"></h3><p data-t="paths.newDesc"></p><a data-link="demo" data-ev="path_demo"><span data-t="paths.newCTA"></span><svg class="ico"><use href="#i-arrow"/></svg></a></article>
+   </div>
+  </div>
+ </section>
+
+ <!-- 360 + FAQ -->
+ <section class="faqsec" aria-labelledby="faq-title">
+  <div class="wrap fqgrid">
+   <div class="c360 reveal">
+    <p class="eyebrow" data-t="c360.eyebrow"></p>
+    <h2 data-t="c360.title"></h2>
+    <p data-t="c360.desc"></p>
+    <ul data-list="c360"></ul>
+    <a class="btn" data-link="demo" data-ev="c360_demo"><span data-t="paths.newCTA"></span><svg class="ico"><use href="#i-arrow"/></svg></a>
+   </div>
+   <div>
+    <h2 class="eyebrow reveal" id="faq-title" data-t="faq.title"></h2>
+    <div class="faq" data-list="faq"></div>
+   </div>
+  </div>
+ </section>
+
+ <!-- FINAL CTA -->
+ <section class="final" id="download" aria-labelledby="final-title">
+  <div class="final-bg" aria-hidden="true"></div><div class="final-wave" aria-hidden="true"></div>
+  <div class="wrap">
+   <div class="final-pad"></div>
+   <div>
+    <h2 id="final-title" data-t="cta.title"></h2>
+    <p data-t="cta.desc"></p>
+    <div class="stores" data-stores="final"><a class="store" href="https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249" target="_blank" rel="noopener" data-ev="store_final" data-store="ios" aria-label="Download Fandaqah on the App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><use href="#i-apple"/></svg><span><small data-t="store.ios">Download on the</small>App Store</span></a><a class="store" href="https://play.google.com/store/apps/dev?id=6291616345161026018" target="_blank" rel="noopener" data-ev="store_final" data-store="android" data-link="android" aria-label="Find Fandaqah on Google Play"><svg viewBox="0 0 24 26" aria-hidden="true"><use href="#i-play"/></svg><span><small data-t="store.android">Get it on</small>Google Play</span></a></div>
+   </div>
+   <a class="qr" href="https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249" target="_blank" rel="noopener" data-ev="qr_click" data-store="ios"><span class="qr-box"><svg role="img" aria-label="QR code: Fandaqah on the App Store" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45"><path stroke="#1f1c2e" d="M0 0.5h7m1 0h2m3 0h7m2 0h6m1 0h4m3 0h1m1 0h7m-45 1h1m5 0h1m2 0h1m2 0h2m1 0h4m2 0h1m4 0h1m3 0h1m4 0h1m2 0h1m5 0h1m-45 1h1m1 0h3m1 0h1m1 0h6m1 0h2m2 0h2m7 0h1m2 0h2m2 0h1m2 0h1m1 0h3m1 0h1m-45 1h1m1 0h3m1 0h1m1 0h4m2 0h3m2 0h1m1 0h1m2 0h1m5 0h2m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-45 1h1m1 0h3m1 0h1m2 0h1m2 0h2m2 0h2m2 0h8m1 0h8m1 0h1m1 0h3m1 0h1m-45 1h1m5 0h1m1 0h4m1 0h2m3 0h1m1 0h1m3 0h1m1 0h1m2 0h2m1 0h2m4 0h1m5 0h1m-45 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-37 1h1m2 0h1m1 0h1m2 0h2m1 0h2m3 0h2m1 0h3m2 0h5m-36 1h1m1 0h1m1 0h10m1 0h9m2 0h2m1 0h1m4 0h1m1 0h3m1 0h2m1 0h1m-44 1h1m2 0h2m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m2 0h2m2 0h1m5 0h1m1 0h1m5 0h1m4 0h1m-45 1h5m1 0h1m1 0h1m3 0h1m1 0h4m1 0h2m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m4 0h1m1 0h2m1 0h1m-45 1h6m2 0h8m1 0h1m2 0h2m1 0h1m1 0h5m1 0h1m1 0h1m1 0h2m3 0h1m2 0h2m-42 1h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h2m2 0h3m1 0h7m1 0h1m5 0h1m1 0h2m2 0h1m-45 1h1m2 0h1m4 0h2m5 0h2m1 0h2m1 0h2m1 0h2m6 0h3m2 0h1m5 0h2m-44 1h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m-43 1h1m2 0h2m2 0h1m1 0h3m1 0h1m1 0h1m3 0h3m2 0h4m2 0h4m1 0h1m2 0h2m-40 1h2m1 0h3m1 0h2m3 0h1m2 0h6m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m4 0h3m-45 1h4m4 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h2m2 0h2m4 0h1m2 0h1m1 0h1m-44 1h1m4 0h2m2 0h1m1 0h1m1 0h2m2 0h3m1 0h2m1 0h1m3 0h1m1 0h1m1 0h1m2 0h1m7 0h2m-45 1h2m1 0h2m2 0h1m1 0h6m1 0h2m2 0h2m1 0h8m1 0h4m1 0h1m1 0h1m1 0h1m2 0h1m-44 1h1m1 0h6m1 0h4m2 0h2m1 0h6m1 0h2m2 0h1m2 0h1m2 0h5m-41 1h3m1 0h1m3 0h6m2 0h3m1 0h1m3 0h1m1 0h4m6 0h1m3 0h3m1 0h1m-44 1h1m1 0h2m1 0h1m1 0h1m2 0h2m1 0h3m2 0h2m1 0h1m1 0h5m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m1 0h3m-45 1h1m3 0h1m3 0h2m3 0h1m1 0h2m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m4 0h1m3 0h2m1 0h2m-43 1h8m1 0h1m2 0h3m1 0h1m1 0h7m1 0h1m1 0h3m1 0h8m1 0h2m-45 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m2 0h2m1 0h1m2 0h2m1 0h1m4 0h1m2 0h2m1 0h2m1 0h1m1 0h3m2 0h1m-43 1h2m2 0h1m4 0h1m3 0h2m1 0h1m1 0h1m1 0h4m5 0h2m2 0h1m1 0h1m1 0h4m-42 1h1m5 0h3m2 0h4m1 0h1m2 0h2m2 0h1m2 0h3m2 0h1m4 0h1m1 0h1m3 0h2m-45 1h1m1 0h2m2 0h1m3 0h1m1 0h1m1 0h2m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h3m2 0h1m1 0h1m1 0h2m2 0h1m-45 1h1m3 0h2m2 0h4m1 0h1m1 0h1m2 0h1m1 0h1m4 0h1m1 0h1m1 0h1m1 0h1m1 0h1m4 0h1m4 0h1m-44 1h3m1 0h1m1 0h1m1 0h3m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m5 0h2m1 0h1m2 0h2m2 0h1m1 0h1m-44 1h1m1 0h3m2 0h2m4 0h2m5 0h3m1 0h3m1 0h4m1 0h1m2 0h2m2 0h1m1 0h1m-42 1h1m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h1m1 0h3m1 0h1m2 0h3m2 0h4m4 0h1m2 0h1m-45 1h2m2 0h2m2 0h3m2 0h2m1 0h1m1 0h1m4 0h3m3 0h1m1 0h1m3 0h3m3 0h2m1 0h1m-41 1h1m1 0h1m7 0h1m1 0h2m1 0h1m3 0h1m3 0h2m3 0h1m3 0h3m3 0h1m1 0h1m-44 1h4m2 0h1m3 0h2m1 0h3m3 0h2m2 0h1m2 0h3m5 0h2m2 0h1m4 0h1m-45 1h1m2 0h2m1 0h2m1 0h3m1 0h1m1 0h10m1 0h1m1 0h1m1 0h1m1 0h2m2 0h6m2 0h1m-37 1h1m2 0h2m1 0h1m2 0h1m1 0h2m3 0h3m1 0h2m3 0h2m1 0h1m3 0h1m3 0h1m-45 1h7m1 0h1m3 0h1m4 0h1m2 0h1m1 0h1m1 0h2m2 0h1m3 0h2m1 0h2m1 0h1m1 0h4m-44 1h1m5 0h1m1 0h2m3 0h3m4 0h1m3 0h1m3 0h2m2 0h1m1 0h3m3 0h2m1 0h2m-45 1h1m1 0h3m1 0h1m3 0h6m2 0h1m1 0h5m1 0h2m1 0h2m1 0h3m1 0h6m-42 1h1m1 0h3m1 0h1m1 0h1m2 0h3m2 0h1m4 0h1m3 0h1m1 0h1m4 0h2m2 0h3m1 0h1m1 0h1m1 0h1m-45 1h1m1 0h3m1 0h1m6 0h4m1 0h4m1 0h1m2 0h1m1 0h2m2 0h1m3 0h1m1 0h3m1 0h3m-45 1h1m5 0h1m1 0h2m1 0h3m2 0h1m2 0h2m1 0h1m1 0h2m1 0h3m2 0h1m4 0h1m1 0h3m-42 1h7m5 0h1m2 0h2m1 0h4m4 0h1m1 0h4m1 0h1m2 0h5m2 0h1"/></svg></span><small data-t="qr"></small></a>
+  </div>
+ </section>
+</main>
+
+<footer class="legal"><div class="wrap"><span data-t="legal.req"></span><span>© <span data-year></span> Fandaqah · <a data-link="website" data-ev="footer_site">fandaqah.com</a></span></div></footer>
+
+<div class="dock" aria-hidden="true"><div><b data-t="dock.title"></b><small data-t="dock.sub"></small></div><a data-dock data-ev="dock" data-store="ios" href="https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249" target="_blank" rel="noopener"><span data-t="nav.download"></span></a></div>
+
+<script>
+(function(){
+'use strict';
+/* ---- Links (edit here) ---- */
+var LINKS={
+ ios:'https://apps.apple.com/sa/app/fandaqah-%D9%81%D9%86%D8%AF%D9%82%D8%A9/id6830127249',
+ android:'https://play.google.com/store/apps/dev?id=6291616345161026018',
+ demo:'https://fandaqah.com/landing/fandaqah-360/fandaqah-360-landing-v2/',
+ website:'https://fandaqah.com/'
+};
+var BOOT=window.FQ_APP||{};if(BOOT.links)for(var k in BOOT.links)if(BOOT.links[k])LINKS[k]=BOOT.links[k];
+
+var T={en:{
+ meta:{title:'Fandaqah Owner App — Now Live | Your Hotel in Your Pocket'},
+ nav:{download:'Download app'},
+ hero:{badge:'Officially launched · Saudi Arabia',kicker:'Fandaqah Owner App',title:'Now Live',lead:'Real-time occupancy, reservations, revenue and purchase approvals across every property — right from your phone.',sub:'Built for hotel owners and managers on Fandaqah PMS. Sign in with your existing authorized account.',avail:'iPhone & Android',req:'Active Fandaqah PMS account required.'},
+ store:{ios:'Download on the',android:'Get it on'},
+ qr:'Scan with your iPhone camera',
+ feat:{title:'Manage Your Hotel, Anytime, Anywhere'},
+ features:[['chart','Occupancy & Arrivals','Know how your day is shaping up.'],['bed','Reservations & Guests','Review key reservation details.'],['sparkles','Housekeeping','Visibility across your team.'],['wrench','Maintenance','Monitor department activity.'],['coins','Financial Overview','Revenue and collections.'],['bars','Reports & Analytics','Trends and performance.'],['building','Multi-Property','Switch between your hotels.'],['check','Purchase Approvals','Review and act on requests.']],
+ screens:{title:'A closer look at your hotel.',desc:'A focused experience for owners and managers that turns complex operations into a simple, clear mobile view.',note:'Real screens from the Fandaqah Owner App. What you see depends on your account and permissions.',names:['Secure sign-in','Revenue vs last month','Housekeeping','Reservations']},
+ shots:{'sign-in':'Secure sign-in','all-properties':'All properties','property-home':'Property home','finance':'Revenue vs last month','receipts':'Receipts & expenses','housekeeping':'Housekeeping','reservations':'Reservations','reports':'Performance reports','occupancy-revenue':'Occupancy & revenue by source','reviews':'Guest reviews'},
+ marquee:{title:'Every screen, from the real app'},
+ eco:{eyebrow:'Connected to Fandaqah 360',title:'Keep the bigger picture close.',desc:'More than a dashboard — a familiar view of the property information you rely on, backed by the Fandaqah platform.'},
+ benefits:[['eye','See the full picture','Occupancy, arrivals and departures at a glance.'],['building','Move between properties','Review a portfolio or focus on one hotel.'],['bars','Stay close to performance','Revenue, collections and useful reports.'],['layers','Keep departments in view','Housekeeping, maintenance and operations.'],['check','Decide on the move','Approve or reject permitted purchase requests.'],['shield','Your access, your permissions','Visibility follows your authorized PMS role.']],
+ orbit:[['bed','Reservations'],['sparkles','Housekeeping'],['coins','Finance'],['bars','Reports'],['cart','Purchasing'],['building','Properties'],['wrench','Maintenance'],['users','Team']],
+ how:{title:'Start in three simple steps',desc:'Existing customers can get started with an eligible, authorized account.',steps:[['Download the app','Open the App Store or Google Play on your phone.'],['Sign in securely','Use your authorized Fandaqah PMS credentials.'],['Choose your property','See the information and actions available to your role.']]},
+ photo:{cap:'Approvals, revenue and occupancy — wherever you are.',alt:'Hotel owner reviewing the Fandaqah Owner App on his phone'},
+ paths:{existingTitle:'Already a Fandaqah customer?',existingDesc:'Get mobile visibility for the platform you already use. Your account manager can confirm access.',existingCTA:'Download the Owner App',newTitle:'Exploring Fandaqah 360?',newDesc:'See how reservations, operations and reporting connect across your hospitality business.',newCTA:'Book a product demo'},
+ c360:{eyebrow:'Fandaqah 360',title:'One connected platform. Now in your pocket.',desc:'The Owner App complements Fandaqah PMS — it doesn’t replace it. Your desk and your phone stay in sync.',items:['PMS, channel manager and booking engine','Finance, ZATCA e-invoicing and reports','Saudi-ready: NTMP & Shomoos integrations','Arabic & English, 24/7 support']},
+ faq:{title:'Questions, answered',items:[['Who can use the Fandaqah Owner App?','Hotel owners and managers with an active Fandaqah PMS account and the appropriate user permissions. Your hotel or the Fandaqah team can confirm eligibility.'],['Do I need a separate account?','No. Sign in with your authorized Fandaqah PMS credentials. The properties and functions you see depend on your permissions.'],['Can I monitor more than one hotel?','Yes. Eligible users get an All Properties overview and can switch to any property their permissions include.'],['Can I approve purchase requests?','Yes — you can approve or reject purchase requests and purchase orders, subject to your authorization and enabled features.'],['Does the app replace Fandaqah PMS?','No. It complements your PMS with owner-focused monitoring and selected approvals on mobile.'],['Is it included in every Fandaqah 360 package?','App access and enabled modules depend on your plan, role and agreement. Please confirm with the Fandaqah team.']]},
+ cta:{title:'Your next decision is within reach.',desc:'Download the Fandaqah Owner App and stay connected to every property, wherever you are.'},
+ legal:{req:'An active Fandaqah PMS account and appropriate permissions are required.'},
+ dock:{title:'Fandaqah Owner App',sub:'Free for Fandaqah PMS customers'},
+ ui:{time:'10:24',hello:'Good morning,',owner:'Hotel Owner',rev:'Total Revenue',cur:'SAR',occ:'Occupancy',pp:'+6 pp',trend:'Occupancy Trend',last:'Last 30 days',today:'Today’s Activity',bk:'Bookings',ci:'Check-ins',co:'Check-outs',tabs:['Home','Properties','Reports','More'],props:'My Properties',rooms:'Rooms',hotels:['Riyadh Hotel','Jeddah Hotel','Khobar Hotel'],appr:'Purchase Approvals',po:'PO',pend:'Pending',done:'Approved',items:['Linen restock','Kitchen supplies','AC maintenance','Amenities'],fin:'Finance',coll:'Collections',month:'This month',occAll:'All properties'}
+},ar:{
+ meta:{title:'تطبيق فندقة للملاك — متوفر الآن | فندقك في جيبك'},
+ nav:{download:'حمّل التطبيق'},
+ hero:{badge:'الإطلاق الرسمي · المملكة العربية السعودية',kicker:'تطبيق فندقة للملاك',title:'متوفر الآن',lead:'الإشغال والحجوزات والإيرادات واعتماد المشتريات لجميع منشآتك، لحظة بلحظة ومن جوالك مباشرة.',sub:'مصمم لملاك ومديري الفنادق على نظام فندقة. سجّل الدخول بحسابك المصرّح له.',avail:'آيفون وأندرويد',req:'يتطلب حساباً فعالاً في نظام فندقة.'},
+ store:{ios:'حمّله من',android:'احصل عليه من'},
+ qr:'امسح الرمز بكاميرا الآيفون',
+ feat:{title:'أدر فندقك في أي وقت ومن أي مكان'},
+ features:[['chart','الإشغال والوصول','تابع مؤشرات يومك بسهولة.'],['bed','الحجوزات والنزلاء','اطّلع على تفاصيل الحجوزات.'],['sparkles','التدبير الفندقي','تابع أعمال فريق التشغيل.'],['wrench','الصيانة','رؤية واضحة لأنشطة القسم.'],['coins','الأداء المالي','الإيرادات والتحصيلات.'],['bars','التقارير والتحليلات','الاتجاهات والأداء.'],['building','متابعة عدة منشآت','تنقّل بين فنادقك بسهولة.'],['check','اعتماد المشتريات','راجع الطلبات واتخذ الإجراء.']],
+ screens:{title:'صورة أوضح عن أداء فندقك.',desc:'تجربة سهلة للملاك والمديرين، تنقل تفاصيل التشغيل إلى واجهة جوال منظمة وواضحة.',note:'شاشات حقيقية من تطبيق فندقة للملاك، ويختلف المعروض حسب حسابك وصلاحياتك.',names:['تسجيل دخول آمن','الإيرادات مقارنة بالشهر الماضي','التدبير الفندقي','الحجوزات']},
+ shots:{'sign-in':'تسجيل دخول آمن','all-properties':'جميع المنشآت','property-home':'الصفحة الرئيسية للمنشأة','finance':'الإيرادات مقارنة بالشهر الماضي','receipts':'المقبوضات والمصروفات','housekeeping':'التدبير الفندقي','reservations':'الحجوزات','reports':'تقارير الأداء','occupancy-revenue':'الإشغال والإيرادات حسب المصدر','reviews':'تقييمات النزلاء'},
+ marquee:{title:'شاشات حقيقية من التطبيق'},
+ eco:{eyebrow:'متصل بمنظومة فندقة 360',title:'الصورة الكبيرة دائماً أمامك.',desc:'ليست مجرد لوحة معلومات، بل متابعة منظمة لأهم بيانات منشآتك عبر منظومة فندقة.'},
+ benefits:[['eye','رؤية شاملة','الإشغال والوصول والمغادرة في لمحة.'],['building','التنقل بين المنشآت','تابع جميع فنادقك أو منشأة محددة.'],['bars','متابعة الأداء','الإيرادات والتحصيلات والتقارير.'],['layers','متابعة الأقسام','التدبير الفندقي والصيانة والتشغيل.'],['check','القرارات من أي مكان','اعتماد طلبات الشراء المصرّح بها.'],['shield','صلاحيات واضحة','تُحدد بياناتك بحسب دورك في النظام.']],
+ orbit:[['bed','الحجوزات'],['sparkles','التدبير'],['coins','المالية'],['bars','التقارير'],['cart','المشتريات'],['building','المنشآت'],['wrench','الصيانة'],['users','الفريق']],
+ how:{title:'ابدأ في ثلاث خطوات',desc:'يمكن للعملاء الحاليين البدء باستخدام حساب مصرّح له ومؤهل للتطبيق.',steps:[['حمّل التطبيق','افتح App Store أو Google Play على جوالك.'],['سجّل الدخول بأمان','استخدم بيانات حسابك المصرّح له في نظام فندقة.'],['اختر منشأتك','اطّلع على المعلومات والإجراءات المتاحة لصلاحياتك.']]},
+ photo:{cap:'الاعتمادات والإيرادات والإشغال — أينما كنت.',alt:'مالك فندق يتابع تطبيق فندقة للملاك على جواله'},
+ paths:{existingTitle:'هل أنت من عملاء فندقة؟',existingDesc:'استفد من رؤية أوسع للمنصة التي تستخدمها اليوم. يمكن لمدير حسابك تأكيد الصلاحية.',existingCTA:'حمّل تطبيق الملاك',newTitle:'هل تبحث عن فندقة 360؟',newDesc:'شاهد كيف ترتبط الحجوزات والتشغيل والتقارير ضمن منظومة ضيافة واحدة.',newCTA:'احجز عرضاً تعريفياً'},
+ c360:{eyebrow:'فندقة 360',title:'منصة واحدة متكاملة، الآن في جيبك.',desc:'تطبيق الملاك مكمّل لنظام فندقة وليس بديلاً عنه، فيبقى مكتبك وجوالك على تزامن دائم.',items:['نظام إدارة المنشأة ومدير القنوات ومحرك الحجز','المالية والفوترة الإلكترونية (زاتكا) والتقارير','جاهز للسوق السعودي: منصة الرصد السياحي وشموس','عربي وإنجليزي ودعم على مدار الساعة']},
+ faq:{title:'الأسئلة الشائعة',items:[['من يمكنه استخدام تطبيق فندقة للملاك؟','ملاك الفنادق ومديروها ممن لديهم حساب فعال في نظام فندقة وصلاحيات مناسبة. يمكن لفريق الفندق أو فندقة تأكيد أهلية الحساب.'],['هل أحتاج إلى حساب جديد؟','لا، سجّل الدخول ببيانات حسابك المصرّح له في نظام فندقة. تتحدد المنشآت والمميزات المتاحة حسب صلاحياتك.'],['هل يمكنني متابعة أكثر من فندق؟','نعم، يمكن للمستخدمين المؤهلين استعراض جميع المنشآت والتبديل إلى أي منشأة تشملها صلاحياتهم.'],['هل يمكن اعتماد طلبات المشتريات؟','نعم، يمكنك الموافقة على طلبات وأوامر الشراء أو رفضها وفقاً لصلاحياتك والمميزات المفعلة.'],['هل التطبيق بديل عن نظام فندقة؟','لا، التطبيق مكمل لنظام إدارة المنشأة ويوفر متابعة مخصصة للملاك مع إجراءات اعتماد محددة عبر الجوال.'],['هل التطبيق مشمول في جميع باقات فندقة 360؟','يعتمد توفر التطبيق ووحداته على الباقة والصلاحيات والاتفاقية. يُرجى التأكيد مع فريق فندقة.']]},
+ cta:{title:'قراراتك أقرب إليك الآن.',desc:'حمّل تطبيق فندقة للملاك وابقَ على اتصال بجميع منشآتك أينما كنت.'},
+ legal:{req:'يشترط وجود حساب فعال في نظام فندقة وصلاحيات مناسبة.'},
+ dock:{title:'تطبيق فندقة للملاك',sub:'مجاني لعملاء نظام فندقة'},
+ ui:{time:'10:24',hello:'صباح الخير،',owner:'مالك الفندق',rev:'إجمالي الإيرادات',cur:'ر.س',occ:'الإشغال',pp:'+6 نقاط',trend:'اتجاه الإشغال',last:'آخر 30 يوماً',today:'نشاط اليوم',bk:'حجوزات',ci:'وصول',co:'مغادرة',tabs:['الرئيسية','المنشآت','التقارير','المزيد'],props:'منشآتي',rooms:'غرفة',hotels:['فندق الرياض','فندق جدة','فندق الخبر'],appr:'اعتماد المشتريات',po:'طلب',pend:'معلّق',done:'معتمد',items:['تزويد المفروشات','مستلزمات المطبخ','صيانة التكييف','مستلزمات الضيافة'],fin:'المالية',coll:'التحصيلات',month:'هذا الشهر',occAll:'جميع المنشآت'}
+}};
+
+var $=function(q,c){return (c||document).querySelector(q)},$$=function(q,c){return Array.prototype.slice.call((c||document).querySelectorAll(q))};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var ic=function(id){return '<svg class="ico" aria-hidden="true"><use href="#i-'+id+'"/></svg>'};
+var get=function(o,p){return p.split('.').reduce(function(v,k){return v==null?v:v[k]},o)};
+var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isAnd=/Android/i.test(ua);
+var params=new URLSearchParams(location.search);
+var lang='en';
+
+/* Pass ad attribution (gclid / utm_*) through to the demo page. */
+function withAttribution(url){try{var u=new URL(url);['gclid','gbraid','wbraid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=params.get(k);if(v&&!u.searchParams.has(k))u.searchParams.set(k,v)});return u.href}catch(e){return url}}
+function track(name,data){try{window.dataLayer=window.dataLayer||[];window.dataLayer.push(Object.assign({event:name,language:lang},data||{}));if(typeof window.gtag==='function')window.gtag('event',name,data||{})}catch(e){}}
+
+/* QR scans land here with ?go=store: phones jump straight to their store. */
+if(params.get('go')==='store'&&(isIOS||isAnd)){track('owner_app_qr_redirect',{store:isIOS?'ios':'android'});location.replace(isIOS?LINKS.ios:LINKS.android);}
+
+function storeBtn(kind,place,d){
+ var ios=kind==='ios';
+ return '<a class="store" href="'+esc(LINKS[kind])+'" target="_blank" rel="noopener" data-ev="store_'+place+'" data-store="'+kind+'" aria-label="'+esc((ios?'App Store':'Google Play'))+'">'+(ios?'<svg viewBox="0 0 384 512" aria-hidden="true"><use href="#i-apple"/></svg>':'<svg viewBox="0 0 24 26" aria-hidden="true"><use href="#i-play"/></svg>')+'<span><small>'+esc(ios?d.store.ios:d.store.android)+'</small>'+(ios?'App Store':'Google Play')+'</span></a>';
+}
+function bars(){var b=[38,46,41,55,50,62,58,66,61,72,70,78,84,90],l=[30,44,36,52,47,58,54,63,60,70,66,76,80,92],p=l.map(function(v,i){return (4+i*192/13).toFixed(1)+','+(62-v*.58).toFixed(1)}).join(' ');
+ return '<div class="chart">'+b.map(function(h,i){return '<span style="--h:'+h+'%;--i:'+i+'"></span>'}).join('')+'<svg viewBox="0 0 200 64" preserveAspectRatio="none"><polyline points="'+p+'" pathLength="1"/></svg></div>'}
+function screen(kind,u){
+ var top='<div class="st"><span>'+u.time+'</span><i></i><b></b></div>';
+ var brand='<div class="tb">'+(kind==='overview'?ic('menu'):ic('chev'))+'<img src="assets/images/fandaqah-hotel-white.png" width="516" height="219" alt="">'+'<span class="dot">'+ic('bell')+'</span></div>';
+ var nav='<nav class="nav">'+[['home',0],['building',1],['bars',2],['more',3]].map(function(t){return '<span class="'+((kind==='overview'&&t[1]===0)||(kind==='properties'&&t[1]===1)||(kind==='finance'&&t[1]===2)?'on':'')+'">'+ic(t[0])+esc(u.tabs[t[1]])+'</span>'}).join('')+'</nav>';
+ var body='';
+ if(kind==='overview')body='<div class="hi"><b>'+esc(u.hello)+'</b><small>'+esc(u.owner)+'</small></div><div class="kp"><div class="k k--sage">'+ic('coins')+'<small>'+esc(u.rev)+'</small><b><bdi>'+u.cur+' <span data-count="482600">482,600</span></bdi></b><em>↗ +12%</em></div><div class="k k--peach">'+ic('bed')+'<small>'+esc(u.occ)+'</small><b><bdi><span data-count="86">86</span>%</bdi></b><em>↗ '+esc(u.pp)+'</em></div></div><div class="card"><div class="card-h"><b>'+esc(u.trend)+'</b><small>'+esc(u.last)+' ▾</small></div>'+bars()+'</div><div class="card"><div class="card-h"><b>'+ic('cal')+esc(u.today)+'</b></div><div class="acts"><span>'+ic('bed')+'<b data-count="24">24</b><small>'+esc(u.bk)+'</small></span><span>'+ic('arrow')+'<b data-count="18">18</b><small>'+esc(u.ci)+'</small></span><span>'+ic('arrow')+'<b data-count="6">6</b><small>'+esc(u.co)+'</small></span></div></div>';
+ else if(kind==='properties')body='<p class="h">'+esc(u.props)+'</p>'+['riyadh','jeddah','al-khobar'].map(function(c,i){return '<div class="prop"><i style="background-image:url(assets/images/editorial/refresh/city-'+c+'-800.webp)"></i><div><span><b>'+esc(u.hotels[i])+'</b><small><bdi>'+[120,200,160][i]+'</bdi> '+esc(u.rooms)+'</small></span>'+ic('chev')+'</div></div>'}).join('');
+ else if(kind==='approvals')body='<p class="h">'+esc(u.appr)+'</p>'+u.items.map(function(t,i){return '<div class="row"><span class="ri">'+ic(i===2?'wrench':'cart')+'</span><span><b>'+esc(t)+'</b><small>'+esc(u.po)+' #'+(1042+i)+' · <bdi>SAR '+[4200,2850,6100,1300][i].toLocaleString('en-US')+'</bdi></small></span><em class="'+(i%3===1?'ok':'')+'">'+esc(i%3===1?u.done:u.pend)+'</em></div>'}).join('');
+ else body='<p class="h">'+esc(u.fin)+'</p><div class="kp"><div class="k k--coral"><small>'+esc(u.rev)+'</small><b><bdi>SAR 482k</bdi></b><em>'+esc(u.month)+'</em></div><div class="k k--light"><small>'+esc(u.coll)+'</small><b><bdi>SAR 391k</bdi></b><em style="color:#237A48">81%</em></div></div><div class="card"><div class="card-h"><b>'+esc(u.occAll)+'</b></div><div class="ring"><b>86%</b></div></div><div class="card"><div class="card-h"><b>'+esc(u.trend)+'</b></div>'+bars()+'</div>';
+ return '<div class="scr">'+top+brand+body+(kind==='approvals'?'':nav)+'</div>';
+}
+
+function render(){
+ var d=T[lang],ar=lang==='ar';
+ document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';document.title=d.meta.title;
+ $$('[data-t]').forEach(function(el){var v=get(d,el.getAttribute('data-t'));if(typeof v==='string')el.textContent=v});
+ $$('[data-alt]').forEach(function(el){el.alt=get(d,el.getAttribute('data-alt'))||''});
+ $$('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===lang))});
+ $$('[data-link]').forEach(function(a){var k=a.getAttribute('data-link');a.href=k==='demo'?withAttribution(LINKS.demo):LINKS[k];a.target='_blank';a.rel='noopener'});
+ $$('[data-store=ios]').forEach(function(a){a.href=LINKS.ios});
+  $('[data-list=features]').innerHTML=d.features.map(function(f,i){return '<li class="fcard reveal" style="--d:'+i+'"><span class="fi">'+ic(f[0])+'</span><b>'+esc(f[1])+'</b><small>'+esc(f[2])+'</small></li>'}).join('');
+ $('[data-list=screens]').innerHTML=['sign-in','finance','housekeeping','reservations'].map(function(k,i){return '<div class="mini reveal" style="--d:'+i+'"><div class="phone" data-shot="'+k+'"></div><h3>'+esc(d.screens.names[i])+'</h3></div>'}).join('');
+ $('[data-list=benefits]').innerHTML=d.benefits.map(function(b,i){return '<li class="eitem reveal" style="--d:'+i+'"><span class="ei">'+ic(b[0])+'</span><div><b>'+esc(b[1])+'</b><p>'+esc(b[2])+'</p></div></li>'}).join('');
+ $('[data-list=orbit]').innerHTML=d.orbit.map(function(o,i){return '<div class="node" style="--a:'+(-90+i*45)+'deg;--n:'+i+'"><span><i class="bub">'+ic(o[0])+'</i>'+esc(o[1])+'</span></div>'}).join('');
+ $('[data-list=steps]').innerHTML=d.how.steps.map(function(s,i){return '<li class="step reveal" style="--d:'+i+'"><span class="n">0'+(i+1)+'</span><div><b>'+esc(s[0])+'</b><p>'+esc(s[1])+'</p></div></li>'}).join('');
+ $('[data-list=c360]').innerHTML=d.c360.items.map(function(t){return '<li>'+ic('check')+esc(t)+'</li>'}).join('');
+ $('[data-list=faq]').innerHTML=d.faq.items.map(function(q,i){return '<details class="reveal" style="--d:'+i+'"'+(i===0?' open':'')+'><summary>'+esc(q[0])+'<i>'+ic('plus')+'</i></summary><p>'+esc(q[1])+'</p></details>'}).join('');
+ $$('[data-phone]').forEach(function(p){p.innerHTML=screen(p.getAttribute('data-phone'),d.ui)});
+ $$('[data-shot]').forEach(function(p){var k=p.getAttribute('data-shot');p.innerHTML='<div class="scr scr--shot"><img src="assets/images/owner-app/'+k+'.webp" width="588" height="1280" alt="'+esc(d.shots[k]||'')+'" decoding="async"'+(p.closest('.hero')?' fetchpriority="high"':' loading="lazy"')+'></div>'});
+ $('[data-list=marquee]').innerHTML=(function(){var ks=['sign-in','all-properties','property-home','finance','receipts','housekeeping','reservations','reports','occupancy-revenue','reviews'];var one=ks.map(function(k){return '<figure class="mq-item"><div class="phone"><div class="scr scr--shot"><img src="assets/images/owner-app/'+k+'.webp" width="588" height="1280" loading="lazy" decoding="async" alt="'+esc(d.shots[k])+'"></div></div><figcaption>'+esc(d.shots[k])+'</figcaption></figure>'}).join('');return one+one.replace(/alt="[^"]*"/g,'alt=""').replace(/<figure /g,'<figure aria-hidden="true" ')})();
+ reveal();
+}
+
+/* reveal + live dashboard */
+var io;
+function reveal(){
+ var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(io)io.disconnect();
+ if(reduce||!('IntersectionObserver' in window)){$$('.reveal').forEach(function(e){e.classList.add('in')});$$('.phone').forEach(function(p){p.classList.add('live-on')});return}
+ document.documentElement.classList.add('js');
+ io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;io.unobserve(t);
+  if(t.classList.contains('phone')){t.classList.add('live-on');$$('[data-count]',t).forEach(function(el){var to=+el.getAttribute('data-count'),t0=performance.now();(function step(n){var p=Math.min(1,(n-t0)/1400);p=1-Math.pow(1-p,3);el.textContent=Math.round(to*p).toLocaleString('en-US');if(p<1)requestAnimationFrame(step)})(t0)})}
+  else t.classList.add('in')})},{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+ $$('.reveal,.phone').forEach(function(e){io.observe(e)});
+}
+
+/* language: ?lang= → server hint → saved → browser */
+try{var q=params.get('lang'),saved=localStorage.getItem('fandaqah_app_lang');lang=['en','ar'].indexOf(q)>-1?q:['en','ar'].indexOf(BOOT.lang)>-1?BOOT.lang:['en','ar'].indexOf(saved)>-1?saved:(/^ar/i.test(navigator.language||'')?'ar':'en')}catch(e){}
+$$('[data-lang]').forEach(function(b){b.addEventListener('click',function(){lang=b.getAttribute('data-lang');try{localStorage.setItem('fandaqah_app_lang',lang)}catch(e){}try{var u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)}catch(e){}render();track('owner_app_language',{to:lang})})});
+document.addEventListener('click',function(e){var a=e.target.closest('[data-ev]');if(!a)return;var st=a.getAttribute('data-store');track(st?'owner_app_store_click':'owner_app_click',{placement:a.getAttribute('data-ev'),store:st||undefined})});
+var y=$('[data-year]');if(y)y.textContent=new Date().getFullYear();
+render();
+/* mobile dock appears after the hero buttons scroll away */
+var heroStores=$('[data-stores=hero]'),dk=$('.dock');
+if('IntersectionObserver' in window&&heroStores)new IntersectionObserver(function(es){var show=!es[0].isIntersecting&&es[0].boundingClientRect.top<0;dk.classList.toggle('show',show);dk.setAttribute('aria-hidden',String(!show))}).observe(heroStores);
+})();
+</script>
+</body>
+</html>
